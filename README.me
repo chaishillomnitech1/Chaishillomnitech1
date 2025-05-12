@@ -16,4 +16,25 @@ Here are some ideas to get you started:
 - 📫 How to reach me: ...
 - 😄 Pronouns: ...
 - ⚡ Fun fact: ...
--->
+-->.github/workflows/trigger-listener.yml
+name: Omnitech1 Dispatcher Listener
+
+on:
+  repository_dispatch:
+    types: [trigger-all-workflows]
+
+jobs:
+  run-all-workflows:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Trigger Nuxt Build
+        run: echo "Simulate Nuxt deployment step"
+
+      - name: Trigger iOS CI
+        run: echo "Simulate iOS CI step"
+
+      - name: Trigger Terraform Validator
+        run: echo "Simulate Terraform validation"
