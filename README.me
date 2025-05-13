@@ -26,7 +26,18 @@ on:
   push:
     branches:
       - main
+# Step 1: Initialize Git Repo
+git init
 
+# Step 2: Add GitHub or Azure Repo Remote (pick one or both)
+git remote add origin https://github.com/YOUR_ORG/Omnitech1-Deploy.git
+# OR for Azure DevOps
+git remote add origin https://YOUR_ORG@dev.azure.com/YOUR_ORG/Omnitech1-Deploy/_git/Omnitech1-Deploy
+
+# Step 3: Push Code
+git add .
+git commit -m "Initial commit: Omnitech1 Deployment Engine"
+git push -u origin main
 jobs:
   deploy:
     runs-on: ubuntu-latest
