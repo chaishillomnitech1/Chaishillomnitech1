@@ -78,7 +78,15 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
-
+[
+  {
+    "title": "Goat You Just Met",
+    "spotify": "https://open.spotify.com/track/xxxxxx",
+    "frequency": "963Hz",
+    "scrollNode": "B3"
+  },
+  ...
+]
       - name: Deploy to Vercel
         run: |
           curl -X POST "https://api.vercel.com/v1/deployments" \
