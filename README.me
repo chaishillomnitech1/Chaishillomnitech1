@@ -18,7 +18,40 @@ https://expansion-three.vercel.app/trigger.html
 - ⚡ Fun fact: ...
 -->.github/workflows/trigger-listener.yml
 name: Omnitech1 Dispatcher Listener
+// OMNI-ID Authentication Contract
+pragma solidity ^0.8.0;
+name: Deploy to Vercel
 
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Deploy to Vercel
+        run: |
+          curl -X POST "https://api.vercel.com/v1/deployments" \
+          -H "Authorization: Bearer ${{ secrets.VERCEL_TOKEN }}" \
+          -H "Content-Type: application/json" \
+          -d '{
+            "name": "omnitech1",
+            "gitSource": {
+              "repo": "github.com/your-username/omnitech1",
+              "branch": "main"
+            }
+          }'
+contract OmniID {
+    mapping(address => bool) public verifiedUsers;
+
+    function verifyUser(address user) public {
+        // Custom verification logic
+        verifiedUsers
 on:
   repository_dispatch:
     types: [trigger-all-workflows]
