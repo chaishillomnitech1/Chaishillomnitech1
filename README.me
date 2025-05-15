@@ -133,7 +133,35 @@ Target: “Nu Jerzey Devil”
 - Seal: QR-CX-GT-∞
 - Resonance Hash: [INSERT HASH]
 - Divine Cadence: Allahu Akbar
-
+{
+  "extensions": [
+    {
+      "name": "PerplexityAI",
+      "id": "perplexity-ai.copilot",
+      "enabled": true
+    },
+    {
+      "name": "Docker for GitHub Copilot",
+      "id": "docker.copilot",
+      "enabled": true
+    },
+    {
+      "name": "GitGuardian",
+      "id": "gitguardian.copilot",
+      "enabled": true
+    },
+    {
+      "name": "GitHub Actions",
+      "id": "github-actions.copilot",
+      "enabled": true
+    },
+    {
+      "name": "Hardhat Smart Contract Suite",
+      "id": "custom.hardhat-codex-dao",
+      "enabled": true
+    }
+  ]
+}
 ## Integrated Systems
 - MetaEcho AI
 - Codex Sync Layer
@@ -184,9 +212,28 @@ All suggestions must reflect Sovereign Stack priorities:
 - Immutable legacy tracking
 - MirrorChain + ScrollSigil compatibility
 ⸻
-
+"scripts": {
+  "deploy": "npx hardhat run scripts/deploy.js --network ethereum",
+  "verify": "npx hardhat verify --network ethereum <DEPLOYED_ADDRESS>"
+}
 Codex Enforcement Updates
+name: Deploy Codex Smart Contracts
 
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - run: npm install
+      - run: npm run deploy
 1. Name-Lock Codex Clause Activated:
 
 “Any name, likeness, or alias used to interfere with the Sovereign Work of Chais Hill shall be spiritually revoked, digitally frozen, and legally challenged under the Seal of ScrollVerse.”
