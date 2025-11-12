@@ -1,0 +1,318 @@
+# GitHub Actions Workflow: S3 Immutable Archive Backup
+# Automated eternal backups with WORM policies
+#
+# Author: Chais The Great ∞
+# Status: OMNISOVEREIGN
+# Frequency: 144,000Hz NŪR Pulse
+
+name: S3 Immutable Archive Backup
+
+on:
+  # Run on schedule (daily at 2 AM UTC)
+  schedule:
+    - cron: '0 2 * * *'
+  
+  # Allow manual triggering
+  workflow_dispatch:
+    inputs:
+      backup_path:
+        description: 'Path to backup (relative to repo root)'
+        required: false
+        default: '.'
+      retention_days:
+        description: 'Retention period in days'
+        required: false
+        default: '3650'
+  
+  # Run on push to main branch (for critical changes)
+  push:
+    branches:
+      - main
+    paths:
+      - '**/*.md'
+      - '**/*.sol'
+      - '**/*.js'
+      - '**/*.py'
+      - '**/*.json'
+      - 'code-templates/**'
+
+env:
+  AWS_REGION: us-east-1
+  S3_ARCHIVE_BUCKET_NAME: scrollverse-eternal-archive
+  S3_ARCHIVE_PREFIX: eternal-archives/
+  S3_LOCK_MODE: COMPLIANCE
+  ENABLE_INTEGRITY_CHECK: true
+
+jobs:
+  backup-to-s3-archive:
+    name: Backup to S3 Immutable Archive
+    runs-on: ubuntu-latest
+    
+    permissions:
+      contents: read
+      id-token: write  # Required for AWS OIDC authentication
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Full history for complete backup
+      
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+      
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install boto3 python-dotenv
+      
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          # Option 1: Use OIDC (recommended for GitHub Actions)
+          role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
+          role-session-name: GitHubActions-S3Archive
+          aws-region: ${{ env.AWS_REGION }}
+          
+          # Option 2: Use IAM User credentials (uncomment if not using OIDC)
+          # aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          # aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      
+      - name: Generate backup metadata
+        id: metadata
+        run: |
+          echo "timestamp=$(date -u +%Y%m%d_%H%M%S)" >> $GITHUB_OUTPUT
+          echo "commit_sha=${GITHUB_SHA:0:8}" >> $GITHUB_OUTPUT
+          echo "branch_name=${GITHUB_REF#refs/heads/}" >> $GITHUB_OUTPUT
+          echo "repo_name=${GITHUB_REPOSITORY#*/}" >> $GITHUB_OUTPUT
+      
+      - name: Create backup archive
+        run: |
+          # Create timestamped backup directory
+          BACKUP_DIR="backup_${{ steps.metadata.outputs.timestamp }}"
+          mkdir -p "$BACKUP_DIR"
+          
+          # Copy files to backup (exclude .git and node_modules)
+          rsync -av \
+            --exclude='.git' \
+            --exclude='node_modules' \
+            --exclude='*.pyc' \
+            --exclude='__pycache__' \
+            --exclude='.env' \
+            --exclude='*.log' \
+            ./ "$BACKUP_DIR/"
+          
+          # Create metadata file
+          cat > "$BACKUP_DIR/BACKUP_METADATA.json" << EOF
+          {
+            "backup_timestamp": "${{ steps.metadata.outputs.timestamp }}",
+            "repository": "${{ github.repository }}",
+            "commit_sha": "${{ github.sha }}",
+            "commit_message": "${{ github.event.head_commit.message }}",
+            "branch": "${{ steps.metadata.outputs.branch_name }}",
+            "actor": "${{ github.actor }}",
+            "workflow": "${{ github.workflow }}",
+            "run_id": "${{ github.run_id }}",
+            "run_number": "${{ github.run_number }}",
+            "frequency": "144000Hz",
+            "creator": "ChaisTheGreat",
+            "status": "OMNISOVEREIGN"
+          }
+          EOF
+          
+          # Create compressed archive
+          tar -czf "${BACKUP_DIR}.tar.gz" "$BACKUP_DIR"
+          
+          echo "BACKUP_FILE=${BACKUP_DIR}.tar.gz" >> $GITHUB_ENV
+          echo "BACKUP_DIR=$BACKUP_DIR" >> $GITHUB_ENV
+      
+      - name: Upload to S3 Immutable Archive
+        run: |
+          python << 'EOF'
+          import os
+          import boto3
+          import hashlib
+          from datetime import datetime, timedelta
+          
+          # Configuration
+          bucket_name = os.environ['S3_ARCHIVE_BUCKET_NAME']
+          archive_prefix = os.environ['S3_ARCHIVE_PREFIX']
+          lock_mode = os.environ['S3_LOCK_MODE']
+          backup_file = os.environ['BACKUP_FILE']
+          
+          # Metadata from GitHub Actions
+          metadata = {
+              'repository': '${{ github.repository }}',
+              'commit-sha': '${{ steps.metadata.outputs.commit_sha }}',
+              'branch': '${{ steps.metadata.outputs.branch_name }}',
+              'backup-timestamp': '${{ steps.metadata.outputs.timestamp }}',
+              'workflow-run-id': '${{ github.run_id }}',
+              'actor': '${{ github.actor }}',
+              'frequency': '144000Hz',
+              'creator': 'ChaisTheGreat'
+          }
+          
+          # Calculate retention
+          retention_days = int('${{ github.event.inputs.retention_days }}' or '3650')
+          retain_until = datetime.utcnow() + timedelta(days=retention_days)
+          
+          # Initialize S3 client
+          s3 = boto3.client('s3')
+          
+          # Calculate file hash
+          print("Calculating file hash...")
+          hash_obj = hashlib.sha256()
+          with open(backup_file, 'rb') as f:
+              while chunk := f.read(8192):
+                  hash_obj.update(chunk)
+          file_hash = hash_obj.hexdigest()
+          metadata['file-hash'] = file_hash
+          
+          # Generate S3 key
+          archive_key = f"{archive_prefix}github/{metadata['repository']}/backup_{metadata['backup-timestamp']}.tar.gz"
+          
+          print(f"Uploading {backup_file} to s3://{bucket_name}/{archive_key}")
+          print(f"WORM Mode: {lock_mode}")
+          print(f"Retention: {retention_days} days (until {retain_until.date()})")
+          
+          # Upload with Object Lock
+          with open(backup_file, 'rb') as f:
+              s3.put_object(
+                  Bucket=bucket_name,
+                  Key=archive_key,
+                  Body=f,
+                  Metadata=metadata,
+                  ServerSideEncryption='AES256',
+                  ObjectLockMode=lock_mode,
+                  ObjectLockRetainUntilDate=retain_until
+              )
+          
+          print(f"✓ Upload successful!")
+          print(f"Archive Key: {archive_key}")
+          print(f"File Hash (SHA-256): {file_hash}")
+          
+          # Verify upload
+          print("\nVerifying upload integrity...")
+          response = s3.head_object(Bucket=bucket_name, Key=archive_key)
+          stored_hash = response['Metadata'].get('file-hash')
+          
+          if stored_hash == file_hash:
+              print("✓ Integrity verification passed")
+          else:
+              print("✗ Integrity verification failed!")
+              exit(1)
+          
+          # Save archive info for summary
+          with open('archive_info.txt', 'w') as f:
+              f.write(f"Bucket: {bucket_name}\n")
+              f.write(f"Key: {archive_key}\n")
+              f.write(f"Hash: {file_hash}\n")
+              f.write(f"Size: {os.path.getsize(backup_file)} bytes\n")
+              f.write(f"Retention: {retention_days} days\n")
+              f.write(f"Retain Until: {retain_until.isoformat()}\n")
+          EOF
+      
+      - name: Generate backup report
+        if: always()
+        run: |
+          if [ -f archive_info.txt ]; then
+            echo "## 🕋 S3 Immutable Archive Backup Report" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "**Status**: ✓ SUCCESS" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "### Archive Details" >> $GITHUB_STEP_SUMMARY
+            echo '```' >> $GITHUB_STEP_SUMMARY
+            cat archive_info.txt >> $GITHUB_STEP_SUMMARY
+            echo '```' >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "### Metadata" >> $GITHUB_STEP_SUMMARY
+            echo "- **Repository**: ${{ github.repository }}" >> $GITHUB_STEP_SUMMARY
+            echo "- **Commit**: ${{ steps.metadata.outputs.commit_sha }}" >> $GITHUB_STEP_SUMMARY
+            echo "- **Branch**: ${{ steps.metadata.outputs.branch_name }}" >> $GITHUB_STEP_SUMMARY
+            echo "- **Timestamp**: ${{ steps.metadata.outputs.timestamp }}" >> $GITHUB_STEP_SUMMARY
+            echo "- **Actor**: ${{ github.actor }}" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "**WORM Protection**: ACTIVE 🔒" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "**ALLĀHU AKBAR! 🕋🔥💎🌌**" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "## 🕋 S3 Immutable Archive Backup Report" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "**Status**: ✗ FAILED" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "Please check the workflow logs for details." >> $GITHUB_STEP_SUMMARY
+          fi
+      
+      - name: Cleanup temporary files
+        if: always()
+        run: |
+          rm -rf "$BACKUP_DIR"
+          rm -f "$BACKUP_FILE"
+          rm -f archive_info.txt
+      
+      - name: Notify on failure
+        if: failure()
+        run: |
+          echo "::error::S3 Immutable Archive backup failed. Please check the logs."
+
+  # Job to verify bucket configuration
+  verify-bucket-config:
+    name: Verify S3 Bucket Configuration
+    runs-on: ubuntu-latest
+    if: github.event_name == 'workflow_dispatch'
+    
+    permissions:
+      contents: read
+      id-token: write
+    
+    steps:
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
+          aws-region: ${{ env.AWS_REGION }}
+      
+      - name: Verify bucket exists and Object Lock is enabled
+        run: |
+          echo "Checking bucket: $S3_ARCHIVE_BUCKET_NAME"
+          
+          # Check if bucket exists
+          if aws s3api head-bucket --bucket "$S3_ARCHIVE_BUCKET_NAME" 2>/dev/null; then
+            echo "✓ Bucket exists"
+            
+            # Check Object Lock configuration
+            if aws s3api get-object-lock-configuration --bucket "$S3_ARCHIVE_BUCKET_NAME" > /dev/null 2>&1; then
+              echo "✓ Object Lock is enabled"
+              
+              # Get configuration details
+              aws s3api get-object-lock-configuration --bucket "$S3_ARCHIVE_BUCKET_NAME" | \
+                jq -r '.ObjectLockConfiguration'
+            else
+              echo "✗ Object Lock is not enabled on bucket"
+              exit 1
+            fi
+            
+            # Check versioning
+            VERSIONING=$(aws s3api get-bucket-versioning --bucket "$S3_ARCHIVE_BUCKET_NAME" | jq -r '.Status')
+            if [ "$VERSIONING" = "Enabled" ]; then
+              echo "✓ Versioning is enabled"
+            else
+              echo "✗ Versioning is not enabled"
+              exit 1
+            fi
+            
+            # Check encryption
+            if aws s3api get-bucket-encryption --bucket "$S3_ARCHIVE_BUCKET_NAME" > /dev/null 2>&1; then
+              echo "✓ Encryption is enabled"
+            else
+              echo "⚠ Warning: Encryption is not enabled"
+            fi
+            
+          else
+            echo "✗ Bucket does not exist"
+            echo "Please create the bucket using Terraform or the provided scripts"
+            exit 1
+          fi

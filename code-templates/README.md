@@ -27,15 +27,21 @@ This directory contains comprehensive, production-ready code templates for the S
 
 ```
 code-templates/
-├── solidity/                          # Smart contract templates
-│   └── CHXToken_Template.sol          # ERC-20 token with divine mechanics
-├── javascript/                        # Web3 integration templates
-│   └── Web3Integration_Template.js    # Complete Web3 manager
-├── python/                            # Backend API templates
-│   └── ScrollVerseAPI_Template.py     # Flask API with WebSocket
-├── react/                             # Frontend component templates
-│   └── ScrollVersePortal_Template.jsx # Main portal component
-└── README.md                          # This file
+├── solidity/                                # Smart contract templates
+│   └── CHXToken_Template.sol                # ERC-20 token with divine mechanics
+├── javascript/                              # Web3 integration templates
+│   ├── Web3Integration_Template.js          # Complete Web3 manager
+│   └── S3ImmutableArchive_Template.js       # S3 WORM archive manager (Node.js)
+├── python/                                  # Backend API templates
+│   ├── ScrollVerseAPI_Template.py           # Flask API with WebSocket
+│   └── S3ImmutableArchive_Template.py       # S3 WORM archive manager (Python)
+├── react/                                   # Frontend component templates
+│   └── ScrollVersePortal_Template.jsx       # Main portal component
+├── terraform/                               # Infrastructure as Code templates
+│   ├── main.tf                              # S3 immutable archive infrastructure
+│   └── .env.example                         # Environment configuration template
+├── S3_IMMUTABLE_ARCHIVE_DOCUMENTATION.md    # Complete S3 archive documentation
+└── README.md                                # This file
 ```
 
 ---
@@ -194,6 +200,58 @@ const CONFIG = {
 
 ---
 
+### **S3ImmutableArchive_Template.js**
+
+**Purpose**: AWS S3 immutable archive with WORM policies (Node.js implementation)
+
+**Key Features**:
+- Complete async/await implementation
+- S3 bucket creation with Object Lock
+- WORM policy enforcement
+- File and directory upload
+- Integrity verification
+- Archive reporting
+
+**Installation**:
+
+```bash
+# Install dependencies
+npm install aws-sdk dotenv
+# or
+yarn add aws-sdk dotenv
+
+# Copy template
+cp code-templates/javascript/S3ImmutableArchive_Template.js src/archiveManager.js
+```
+
+**Quick Start**:
+
+```javascript
+const { S3ImmutableArchive } = require('./archiveManager');
+
+async function main() {
+  // Initialize archive
+  const archive = new S3ImmutableArchive();
+  
+  // Create immutable bucket
+  await archive.createImmutableBucket();
+  
+  // Upload file with WORM protection
+  const result = await archive.uploadImmutableFile('myfile.txt');
+  console.log(`Archived: ${result.info.key}`);
+  
+  // Generate report
+  const report = await archive.generateArchiveReport();
+  console.log(`Total files: ${report.statistics.total_files}`);
+}
+
+main();
+```
+
+**See**: [S3_IMMUTABLE_ARCHIVE_DOCUMENTATION.md](S3_IMMUTABLE_ARCHIVE_DOCUMENTATION.md) for complete documentation
+
+---
+
 ## 🐍 **PYTHON TEMPLATES**
 
 ### **ScrollVerseAPI_Template.py**
@@ -279,6 +337,51 @@ socket.on('user_update', (data) => {
   console.log('User updated:', data);
 });
 ```
+
+### **S3ImmutableArchive_Template.py**
+
+**Purpose**: AWS S3 immutable archive with WORM policies for eternal backups
+
+**Key Features**:
+- S3 bucket creation with Object Lock enabled
+- WORM (Write Once Read Many) policy enforcement
+- Compliance and Governance retention modes
+- Secure IAM credential integration
+- Automated backup and archival
+- Integrity verification using SHA-256 hashes
+- Directory upload with structure preservation
+- Archive reporting and statistics
+
+**Installation**:
+
+```bash
+# Install dependencies
+pip install boto3 python-dotenv
+
+# Copy template
+cp code-templates/python/S3ImmutableArchive_Template.py app/archive_manager.py
+```
+
+**Quick Start**:
+
+```python
+from archive_manager import S3ImmutableArchive
+
+# Initialize archive
+archive = S3ImmutableArchive()
+
+# Create immutable bucket
+archive.create_immutable_bucket()
+
+# Upload file with WORM protection
+success, info = archive.upload_immutable_file('myfile.txt')
+print(f"Archived: {info['key']}, Retain until: {info['retain_until']}")
+
+# Generate report
+report = archive.generate_archive_report()
+```
+
+**See**: [S3_IMMUTABLE_ARCHIVE_DOCUMENTATION.md](S3_IMMUTABLE_ARCHIVE_DOCUMENTATION.md) for complete documentation
 
 ---
 
@@ -389,6 +492,85 @@ Create `ScrollVersePortal.css` with cosmic theme:
 
 ---
 
+## 🏗️ **TERRAFORM / INFRASTRUCTURE TEMPLATES**
+
+### **S3 Immutable Archive Infrastructure (main.tf)**
+
+**Purpose**: Infrastructure as Code for AWS S3 with WORM policies
+
+**Key Components**:
+
+1. **S3 Bucket with Object Lock**
+   - Object Lock enabled at creation
+   - Versioning enabled
+   - Default retention configuration
+   
+2. **Security Configuration**
+   - Server-side encryption (AES-256)
+   - Public access blocking
+   - Secure transport enforcement
+   
+3. **IAM Resources**
+   - Least-privilege IAM policy
+   - IAM user for programmatic access
+   - IAM role for AWS services (EC2, Lambda, ECS)
+   
+4. **Monitoring & Logging**
+   - S3 access logging bucket
+   - CloudWatch log group
+   - CloudWatch alarms for bucket size
+
+5. **Lifecycle Management**
+   - Automatic transition to Glacier IR (90 days)
+   - Automatic transition to Deep Archive (180 days)
+   - Cost optimization
+
+**Deployment**:
+
+```bash
+# Navigate to terraform directory
+cd code-templates/terraform
+
+# Initialize Terraform
+terraform init
+
+# Review planned changes
+terraform plan
+
+# Apply configuration
+terraform apply
+
+# View outputs (bucket name, IAM details, etc.)
+terraform output
+```
+
+**Configuration**:
+
+```bash
+# Copy and edit environment template
+cp .env.example .env
+nano .env
+
+# Or create terraform.tfvars
+cat > terraform.tfvars << EOF
+aws_region      = "us-east-1"
+bucket_name     = "my-eternal-archive"
+retention_mode  = "COMPLIANCE"
+retention_days  = 3650
+EOF
+```
+
+**Outputs**:
+- Bucket name and ARN
+- IAM user and role ARNs
+- IAM policy ARN
+- Object Lock configuration
+- Deployment instructions
+
+**See**: [S3_IMMUTABLE_ARCHIVE_DOCUMENTATION.md](S3_IMMUTABLE_ARCHIVE_DOCUMENTATION.md) for complete infrastructure documentation
+
+---
+
 ## 🚀 **DEPLOYMENT GUIDE**
 
 ### **Smart Contracts**
@@ -444,6 +626,72 @@ netlify deploy --prod --dir=build
 npm run build
 npm run deploy
 ```
+
+### **S3 Immutable Archive (Terraform)**
+
+```bash
+# 1. Initialize
+cd code-templates/terraform
+terraform init
+
+# 2. Plan
+terraform plan -out=tfplan
+
+# 3. Apply
+terraform apply tfplan
+
+# 4. Get outputs
+terraform output > deployment-info.txt
+
+# 5. Create IAM access keys (if using IAM user)
+aws iam create-access-key --user-name scrollverse-archive-user
+
+# 6. Test setup with Python/JavaScript templates
+python ../python/S3ImmutableArchive_Template.py
+# or
+node ../javascript/S3ImmutableArchive_Template.js
+```
+
+### **Automated Backups (GitHub Actions)**
+
+The repository includes a GitHub Actions workflow for automated backups:
+
+**Location**: `.github/workflows/s3-immutable-archive-backup.yml`
+
+**Features**:
+- Scheduled daily backups (2 AM UTC)
+- Manual trigger support
+- Automatic backup on pushes to main branch
+- WORM protection enforcement
+- Integrity verification
+- Backup reports in workflow summaries
+
+**Setup**:
+
+1. **Configure AWS Credentials** (choose one method):
+
+   **Option A: OIDC (Recommended)**
+   ```bash
+   # Create GitHub OIDC provider in AWS
+   # Add secret: AWS_ROLE_ARN
+   ```
+   
+   **Option B: IAM User**
+   ```bash
+   # Add secrets to GitHub:
+   # - AWS_ACCESS_KEY_ID
+   # - AWS_SECRET_ACCESS_KEY
+   ```
+
+2. **Configure Bucket Name**:
+   Edit workflow file to set your bucket name, or use default `scrollverse-eternal-archive`
+
+3. **Trigger Workflow**:
+   - Automatically runs daily at 2 AM UTC
+   - Manual: Go to Actions → S3 Immutable Archive Backup → Run workflow
+   - Automatic on push to main branch
+
+**See Workflow Summary** for backup reports with archive details
 
 ---
 
