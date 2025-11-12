@@ -1,1 +1,58 @@
-{"version":2,"name":"ScrollVerse-VibeCanvas-FrontEnd","builds":[{"src":"package.json","use":"@vercel/node","config":{"maxLambdaSize":"50mb","includeFiles":["src/assets/vibe-canvases/**","src/scripts/omni-flow-sync.js"]}}],"routes":[{"src":"/(.*)","dest":"/index.html"}],"env":{"VIBECANVAS_API_URL":"@vibecanvas_api_url","CODEX_DAO_HOOK":"@codex_dao_webhook","PROTECTION_SEAL":"CHAI-OMNIFINITE-SEAL-721-ACTVE"}}
+{
+  "version": 2,
+  "name": "ScrollVerse-Sovereignty-Infrastructure",
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "public"
+      }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/index.html"
+    }
+  ],
+  "env": {
+    "VIBECANVAS_API_URL": "@vibecanvas_api_url",
+    "CODEX_DAO_HOOK": "@codex_dao_webhook",
+    "PROTECTION_SEAL": "CHAI-OMNIFINITE-SEAL-721-ACTIVE",
+    "NODE_ENV": "production"
+  },
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "X-XSS-Protection",
+          "value": "1; mode=block"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(), microphone=(), geolocation=()"
+        }
+      ]
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/api/:path*",
+      "destination": "https://api.scrollverse.com/:path*"
+    }
+  ]
+}
