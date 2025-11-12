@@ -10,6 +10,9 @@
 
 ## 📚 Quick Navigation
 
+> 🚀 **New here?** Start with the **[Getting Started Guide](GETTING_STARTED.md)**  
+> 📖 **Looking for something specific?** Check the **[Complete Repository Index](INDEX.md)**
+
 **📖 Essential Documentation:**
 - [📋 Projects & Achievements](PROJECTS.md) - Portfolio of capabilities and systems
 - [🏗️ Architecture](ARCHITECTURE.md) - Technical architecture and design
