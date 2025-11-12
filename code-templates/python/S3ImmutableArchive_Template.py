@@ -358,10 +358,10 @@ class S3ImmutableArchive:
                 upload_params['ObjectLockRetainUntilDate'] = custom_retention['RetainUntilDate']
             else:
                 # Use default retention
-                retain_until = datetime.utcnow() + timedelta(
-                    days=self.config.RETENTION_DAYS,
-                    days=self.config.RETENTION_YEARS * 365
-                )
+                if self.config.RETENTION_YEARS > 0:
+                    retain_until = datetime.utcnow() + timedelta(days=self.config.RETENTION_YEARS * 365)
+                else:
+                    retain_until = datetime.utcnow() + timedelta(days=self.config.RETENTION_DAYS)
                 upload_params['ObjectLockMode'] = self.config.LOCK_MODE
                 upload_params['ObjectLockRetainUntilDate'] = retain_until
             
