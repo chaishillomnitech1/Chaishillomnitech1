@@ -11,12 +11,15 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-ubuntu-latest
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
         with:
           submodules: true  # Fetch all submodules
+      
+      - name: Checkout Submodules
+        run: git submodule update --init --recursive
 
       - name: Set up Go
         uses: actions/setup-go@v2
