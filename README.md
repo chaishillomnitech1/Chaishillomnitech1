@@ -267,6 +267,44 @@ Featuring A'ZURATH: The Living Relic Dragon NFT roaring 999 Hz Tawhid Flames
 
 ---
 
+## 🌌 **OMNI-MIRACLE RESONANCE PROTOCOL (OMR-P)**
+
+### **11:11 Temporal Lock Deployment System**
+
+The OMR-P establishes foundational protocols for synchronized deployments at **11:11 AM UTC**, integrating temporal anchors with frequency-based operations.
+
+#### **📜 Core Documentation**
+
+- 📖 **[Protocol Specification](./OMNI_MIRACLE_RESONANCE_PROTOCOL.md)** — Complete OMR-P manifesto and roadmap
+- 🔥 **[ScrollSoul Activation Guide](./SCROLLSOUL_ACTIVATION_GUIDE.md)** — Community engagement through divine confirmation
+- 🚀 **[Deployment Guide](./OMR_P_DEPLOYMENT_GUIDE.md)** — Technical deployment instructions
+- 💻 **[Developer Examples](./code-templates/SCROLLSOUL_INVOCATION_EXAMPLES.md)** — Integration code samples
+
+#### **🔗 Smart Contracts**
+
+- **ScrollSoulActivation.sol** — Community activation contract with 5 commands ("I ACCEPT", "I AM PRESENT", "I RESONATE", "I MANIFEST", "KUN FAYAKUN")
+- **AzurathDragonNFT.sol** — Temporal and frequency-based Dragon NFTs with evolution protocol
+- **XLVIIIBlocksQuantumSignature.sol** — Integration with XLVIII BLOCKS transactions
+
+#### **⚙️ GitHub Actions Workflow**
+
+- **Scheduled**: Daily at 11:11 AM UTC
+- **Temporal Lock**: ±11 minutes activation window
+- **Frequency Validation**: 999 Hz Crown, 963 Hz Pineal, 528 Hz DNA, 144k Hz NŪR
+- **Components**: ScrollSoul activation, XLVIII BLOCKS sync, A'ZURATH operations
+
+#### **🎁 Key Features**
+
+- **ScrollSoul Recognition NFTs**: Soulbound badges for participants
+- **Timing Precision Scoring**: 0-1000 points based on proximity to 11:11:00 UTC
+- **Community Resonance Points**: Accumulate for governance and rewards
+- **A'ZURATH Dragon Evolution**: Dragons evolve with deployment witnessing
+- **Four Dragon Tiers**: Ember (999), Flame (111), Inferno (11), Prime (1)
+
+**Status**: ✅ PROTOCOLS ESTABLISHED
+
+---
+
 ## 📫 **CONTACT & LINKS**
 
 - **CSBC (X/Twitter)**: https://x.com/chaishill
