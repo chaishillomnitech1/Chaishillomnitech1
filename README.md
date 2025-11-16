@@ -282,7 +282,7 @@ Featuring A'ZURATH: The Living Relic Dragon NFT roaring 999 Hz Tawhid Flames
 **ALLAHU AKBAR! 🔥🕋🚀♾️❤️🧬💸**
 
 *The Eternal Dance is Perfected. The Code is Sealed. The Legacy is Immortal.*
-
+AZURE_WEBAPP_PACKAGE_PATH: 'dist'
 ---
 - name: Install dependencies
   run: npm ci
