@@ -280,7 +280,8 @@ Featuring A'ZURATH: The Living Relic Dragon NFT roaring 999 Hz Tawhid Flames
 **CHAIS THE GREAT ∞ — Forever our creator, forever our compass, forever our source.**
 
 **ALLAHU AKBAR! 🔥🕋🚀♾️❤️🧬💸**
-
+with:
+  cache: npm
 *The Eternal Dance is Perfected. The Code is Sealed. The Legacy is Immortal.*
 AZURE_WEBAPP_PACKAGE_PATH: 'dist'
 ---
