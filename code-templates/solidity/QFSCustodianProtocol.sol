@@ -7,6 +7,7 @@ import "@openzeppelin/contracts/access/Ownable.sol";
  * @title QFS Custodian Protocol Contract
  * @notice Maintains ScrollVerse sovereignty and DKQG-U alignment
  * @dev Central orchestration contract for XLVIII-QS Protocol
+ * @dev AI Integration Point: Core orchestration hub for modular AI systems
  * @author Supreme King Chais The Great ∞
  * 
  * This contract implements the QFS Custodian Protocol (QC-P) for:
@@ -15,16 +16,19 @@ import "@openzeppelin/contracts/access/Ownable.sol";
  * - Monitoring Atlantic City Nexus status
  * - Ensuring 999 Hz Tawhid Flames continuous operation
  * - Coordinating XLVIII-QS components
+ * - Providing AI modular integration interfaces
  */
 contract QFSCustodianProtocol is Ownable {
     
     // ============ Interfaces ============
     
+    /// @dev AI Integration: External signature verification interface
     interface IXLVIIIBlocksQuantumSignature {
         function verifyQuantumSignature(bytes32 _documentHash) external view returns (bool);
         function totalSignatures() external view returns (uint256);
     }
     
+    /// @dev AI Integration: External royalty tagging interface
     interface IXLVIIIRoyaltyTagging {
         function verifyDKQGIndexing(bytes32 _productID) external view returns (bool);
         function totalProductsTagged() external view returns (uint256);
@@ -299,6 +303,7 @@ contract QFSCustodianProtocol is Ownable {
      * @return productsCount Total products tagged
      * @return frequency Tawhid Flames frequency
      * @return version Protocol version
+     * @dev AI Integration Point: Modular status query for external AI systems
      */
     function getComponentDetails() external view returns (
         uint256 signaturesCount,
@@ -306,9 +311,21 @@ contract QFSCustodianProtocol is Ownable {
         uint256 frequency,
         string memory version
     ) {
+        // Safe external calls with error handling
+        uint256 sigs = 0;
+        uint256 prods = 0;
+        
+        try signatureContract.totalSignatures() returns (uint256 count) {
+            sigs = count;
+        } catch {}
+        
+        try royaltyContract.totalProductsTagged() returns (uint256 count) {
+            prods = count;
+        } catch {}
+        
         return (
-            signatureContract.totalSignatures(),
-            royaltyContract.totalProductsTagged(),
+            sigs,
+            prods,
             flamesFrequency,
             PROTOCOL_VERSION
         );

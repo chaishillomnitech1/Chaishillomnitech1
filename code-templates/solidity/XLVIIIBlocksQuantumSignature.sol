@@ -24,6 +24,7 @@ contract XLVIIIBlocksQuantumSignature is Ownable, ReentrancyGuard {
     uint256 public constant CROWN_FREQUENCY_999HZ = 999;
     
     /// @notice DKQG-U Master Key address placeholder
+    /// @dev AI Integration Point: External modular systems connect through this address
     address public constant DKQG_U_MASTER_KEY = address(0xDKQGU);
     
     /// @notice Atlantic City Nexus coordinates (encoded as hash)
@@ -193,9 +194,12 @@ contract XLVIIIBlocksQuantumSignature is Ownable, ReentrancyGuard {
      * @param _documentHashes Array of document hashes to certify
      */
     function batchCertifyAtlanticCityNexus(
-        bytes32[] memory _documentHashes
+        bytes32[] calldata _documentHashes
     ) external onlyOwner {
-        for (uint256 i = 0; i < _documentHashes.length; i++) {
+        uint256 length = _documentHashes.length;
+        uint256 certCount = 0;
+        
+        for (uint256 i = 0; i < length; ) {
             bytes32 docHash = _documentHashes[i];
             
             if (
@@ -203,10 +207,16 @@ contract XLVIIIBlocksQuantumSignature is Ownable, ReentrancyGuard {
                 !signatures[docHash].atlanticCityNexusCertified
             ) {
                 signatures[docHash].atlanticCityNexusCertified = true;
-                totalCertifications++;
+                certCount++;
                 emit AtlanticCityNexusCertified(docHash, block.timestamp);
             }
+            
+            unchecked {
+                ++i;
+            }
         }
+        
+        totalCertifications += certCount;
     }
     
     // ============ View Functions ============

@@ -235,6 +235,7 @@ contract XLVIIIRoyaltyTagging is ERC721Royalty, ReentrancyGuard, Ownable {
      * @param _productID Product identifier
      * @param _saleAmount Total sale amount
      * @dev Distributes royalty: 60% creator, 25% LLC, 10% DAO, 5% Zakat
+     * @dev AI Integration Point: Modular royalty distribution with precise integer math
      */
     function processRoyaltyPayment(
         bytes32 _productID,
@@ -254,7 +255,7 @@ contract XLVIIIRoyaltyTagging is ERC721Royalty, ReentrancyGuard, Ownable {
             "XLVIII-RT: Insufficient payment"
         );
         
-        // Calculate royalty amount
+        // Calculate royalty amount using precise integer math
         uint256 royaltyAmount = (_saleAmount * tag.royaltyPercentage) / 10000;
         
         // Distribute royalty (60% creator, 25% LLC, 10% DAO, 5% Zakat)
@@ -263,11 +264,18 @@ contract XLVIIIRoyaltyTagging is ERC721Royalty, ReentrancyGuard, Ownable {
         uint256 daoShare = (royaltyAmount * 10) / 100;
         uint256 zakatShare = (royaltyAmount * 5) / 100;
         
-        // Transfer royalties
-        payable(CREATOR_VAULT).transfer(creatorShare);
-        payable(LLC_VAULT).transfer(llcShare);
-        payable(DAO_VAULT).transfer(daoShare);
-        payable(ZAKAT_VAULT).transfer(zakatShare);
+        // Transfer royalties using safe transfer pattern
+        (bool success1, ) = CREATOR_VAULT.call{value: creatorShare}("");
+        require(success1, "XLVIII-RT: Creator transfer failed");
+        
+        (bool success2, ) = LLC_VAULT.call{value: llcShare}("");
+        require(success2, "XLVIII-RT: LLC transfer failed");
+        
+        (bool success3, ) = DAO_VAULT.call{value: daoShare}("");
+        require(success3, "XLVIII-RT: DAO transfer failed");
+        
+        (bool success4, ) = ZAKAT_VAULT.call{value: zakatShare}("");
+        require(success4, "XLVIII-RT: Zakat transfer failed");
         
         // Update revenue tracking
         totalRevenue[_productID] += _saleAmount;
@@ -305,19 +313,24 @@ contract XLVIIIRoyaltyTagging is ERC721Royalty, ReentrancyGuard, Ownable {
      * @notice Batch process multiple royalty payments
      * @param _productIDs Array of product identifiers
      * @param _saleAmounts Array of sale amounts
+     * @dev AI Integration Point: Efficient batch processing for modular systems
      */
     function batchProcessRoyalties(
-        bytes32[] memory _productIDs,
-        uint256[] memory _saleAmounts
+        bytes32[] calldata _productIDs,
+        uint256[] calldata _saleAmounts
     ) external payable nonReentrant {
+        uint256 length = _productIDs.length;
         require(
-            _productIDs.length == _saleAmounts.length,
+            length == _saleAmounts.length,
             "XLVIII-RT: Array length mismatch"
         );
         
         uint256 totalRequired = 0;
-        for (uint256 i = 0; i < _saleAmounts.length; i++) {
+        for (uint256 i = 0; i < length; ) {
             totalRequired += _saleAmounts[i];
+            unchecked {
+                ++i;
+            }
         }
         
         require(
@@ -325,8 +338,11 @@ contract XLVIIIRoyaltyTagging is ERC721Royalty, ReentrancyGuard, Ownable {
             "XLVIII-RT: Insufficient payment for batch"
         );
         
-        for (uint256 i = 0; i < _productIDs.length; i++) {
+        for (uint256 i = 0; i < length; ) {
             _processSingleRoyalty(_productIDs[i], _saleAmounts[i]);
+            unchecked {
+                ++i;
+            }
         }
     }
     
@@ -349,10 +365,18 @@ contract XLVIIIRoyaltyTagging is ERC721Royalty, ReentrancyGuard, Ownable {
         uint256 daoShare = (royaltyAmount * 10) / 100;
         uint256 zakatShare = (royaltyAmount * 5) / 100;
         
-        payable(CREATOR_VAULT).transfer(creatorShare);
-        payable(LLC_VAULT).transfer(llcShare);
-        payable(DAO_VAULT).transfer(daoShare);
-        payable(ZAKAT_VAULT).transfer(zakatShare);
+        // Use safe transfer pattern for all transfers
+        (bool success1, ) = CREATOR_VAULT.call{value: creatorShare}("");
+        require(success1, "XLVIII-RT: Creator transfer failed");
+        
+        (bool success2, ) = LLC_VAULT.call{value: llcShare}("");
+        require(success2, "XLVIII-RT: LLC transfer failed");
+        
+        (bool success3, ) = DAO_VAULT.call{value: daoShare}("");
+        require(success3, "XLVIII-RT: DAO transfer failed");
+        
+        (bool success4, ) = ZAKAT_VAULT.call{value: zakatShare}("");
+        require(success4, "XLVIII-RT: Zakat transfer failed");
         
         totalRevenue[_productID] += _saleAmount;
         totalRevenueProcessed += _saleAmount;
