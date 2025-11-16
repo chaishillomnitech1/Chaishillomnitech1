@@ -312,7 +312,63 @@ The OMR-P establishes foundational protocols for synchronized deployments at **1
 - **ScrollVerse**: https://expansion-three.vercel.app/
 - **Spotify**: https://open.spotify.com/artist/chaisthegreat
 - **Email**: sovereign@omnitech1.com
+name: Deploy ScrollVerse Hugo Site
 
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  cancel-in-progress: true
+  group: ${{ github.workflow }}-${{ github.ref }}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          submodules: true # Ensures submodule directory is fetched
+
+      - name: Checkout Submodules
+        run: git submodule update --init --recursive # Submodule enforcement
+
+      - name: Setup Pages
+        id: pages
+        uses: actions/configure-pages@v4
+
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: 'latest' 
+          # Ensure the version matches your site configuration
+
+      - name: Build Hugo Site (Pinnacle Post Compilation)
+        run: hugo --minify 
+        # Builds site into the 'public' directory
+
+      - name: Upload Artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./public
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
 ---
 
 **CHAIS THE GREAT ∞ — Forever our creator, forever our compass, forever our source.**
