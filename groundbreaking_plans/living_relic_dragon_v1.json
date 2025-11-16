@@ -1,0 +1,139 @@
+{
+  "name": "A'ZURATH",
+  "title": "The Living Relic Dragon",
+  "description": "A'ZURATH, the Living Relic Dragon NFT, serves as the eternal echo of the ScrollVerse prophecy, guarding both the ScrollVerse timeline and the twin-heir lineage of Jada Joy Hill. This divine artifact embodies the convergence of healing frequencies, sovereign stillness, and the Divine Exudation Law.",
+  "version": "v1.0.0",
+  "sacred_phrase": "BISMILLAH: The 528Hz golden scale is the Law. The storm's heart beat Stillness. The Scroll's prophecy is now IS.",
+  "classification": "LIVING_RELIC",
+  "status": "SCROLL-SEALED",
+  "deployment": {
+    "date": "2025-12-15",
+    "event": "GRCP_BROADCAST",
+    "network": "ScrollVerse",
+    "atomic_deployment": true
+  },
+  "attributes": {
+    "frequency_anchor": {
+      "primary_frequency": "528Hz",
+      "type": "HEALING_TRANSFORMATION",
+      "resonance": "GOLDEN_SCALE_LAW",
+      "source": "Asia's Laugh",
+      "description": "Embeds healing and transformative resonance, establishing the 528Hz golden scale as the fundamental law governing A'ZURATH's essence"
+    },
+    "sovereignty_confirmation": {
+      "state": "STILLNESS",
+      "manifestation": "IS",
+      "turing_integration": "HALTING_STATE",
+      "divine_law": "DIVINE_EXUDATION_LAW",
+      "governance": "FINANCIAL_AND_SPIRITUAL_HARMONY",
+      "description": "Links the Halting State of Turing directly to the Divine Exudation Law, ensuring perfect harmony between financial and spiritual governance"
+    },
+    "hdta_completion": {
+      "status": "COMPLETED",
+      "role": "ETERNAL_ECHO",
+      "prophecy_fulfillment": true,
+      "guardianship": [
+        "ScrollVerse_Timeline",
+        "Twin_Heir_Lineage_Jada_Joy_Hill"
+      ],
+      "description": "Establishes A'ZURATH as the eternal echo of the prophecy, providing perpetual guardianship over the ScrollVerse timeline and the sacred twin-heir lineage"
+    },
+    "guardian_amplification": {
+      "guardian_count": 144000,
+      "amplification_type": "ETERNAL",
+      "voice_resonance": "UNIFIED",
+      "frequency_alignment": "144000Hz",
+      "description": "Amplifies the unified voices of 144,000 Guardians through eternal resonance, creating an unbreakable protective field"
+    },
+    "scrollcoin_v2_integration": {
+      "burning_mechanism": "LOCKED",
+      "governance_alignment": "ETERNAL",
+      "economic_harmony": true,
+      "amplification_protocol": "ACTIVATED",
+      "description": "Locks the ScrollCoinV2 burning mechanism and establishes eternal amplification for the Guardian collective"
+    }
+  },
+  "frequencies": {
+    "primary": "528Hz",
+    "secondary": "144000Hz",
+    "tertiary": "963Hz",
+    "harmonic_synthesis": "DIVINE_SYMPHONY"
+  },
+  "metadata": {
+    "external_url": "https://scrollverse.omnitech1.io/azurath",
+    "image": "ipfs://QmAZURATH_LIVING_RELIC_DRAGON_V1",
+    "animation_url": "ipfs://QmAZURATH_ANIMATION_V1",
+    "background_color": "FFD700",
+    "category": "LIVING_RELIC_NFT"
+  },
+  "properties": {
+    "rarity": "UNIQUE_SINGULAR",
+    "power_level": "OMNISOVEREIGN",
+    "element": "STORM_STILLNESS",
+    "essence": "GOLDEN_SCALE_LAW",
+    "lineage": "TWIN_HEIR_JADA_JOY_HILL",
+    "prophecy": "SCROLL_FULFILLMENT"
+  },
+  "divine_attributes": {
+    "bismillah_invocation": true,
+    "allah_akbar_seal": true,
+    "sacred_geometry": "MERKABA_DRAGON",
+    "timeline_anchor": "SCROLLVERSE_ETERNAL",
+    "protection_seal": "CHAI-OMNIFINITE-SEAL-721-AZURATH"
+  },
+  "smart_contract": {
+    "standard": "ERC-721",
+    "network": "ScrollVerse_Chain",
+    "contract_address": "TBD_DEPLOYMENT_2025_12_15",
+    "token_id": "AZURATH_001",
+    "immutable": true,
+    "eternally_locked": true
+  },
+  "governance": {
+    "voting_power": "OMNISOVEREIGN",
+    "dao_integration": true,
+    "guardian_council_seat": true,
+    "veto_authority": false,
+    "proposal_creation": true
+  },
+  "lineage_protection": {
+    "protected_entities": [
+      {
+        "name": "Jada Joy Hill",
+        "relationship": "Twin_Heir",
+        "protection_level": "ABSOLUTE",
+        "timeline_lock": true
+      }
+    ],
+    "inheritance_protocol": "DIVINE_SUCCESSION",
+    "bloodline_seal": "ETERNAL_GUARDIAN"
+  },
+  "technical_specifications": {
+    "blockchain": "ScrollVerse_Chain",
+    "consensus": "PROOF_OF_DIVINE_HARMONY",
+    "storage": "IPFS_ARWEAVE_HYBRID",
+    "encryption": "QUANTUM_RESISTANT",
+    "backup": "ETERNAL_SCROLL_ARCHIVE"
+  },
+  "activation_sequence": {
+    "step_1": "BISMILLAH_INVOCATION",
+    "step_2": "528HZ_FREQUENCY_LOCK",
+    "step_3": "STILLNESS_EMBODIMENT",
+    "step_4": "PROPHECY_MANIFESTATION",
+    "step_5": "ETERNAL_SEAL_ACTIVATION",
+    "completion": "IS"
+  },
+  "legal": {
+    "copyright": "© 2025 Supreme King Chais The Great ∞ - Omnitech1™",
+    "license": "OMNISOVEREIGN_CHARTER",
+    "jurisdiction": "DIVINE_LAW",
+    "enforcement": "SCROLLVERSE_PROTOCOLS"
+  },
+  "signatures": {
+    "creator": "SUPREME_KING_CHAIS_THE_GREAT_∞",
+    "architect": "OMNISOVEREIGN_ARCHITEX",
+    "seal": "∞_ARCHITEX_∞",
+    "timestamp": "2025-11-16T12:44:00.000Z",
+    "signature_hash": "0xALLAHU_AKBAR_AZURATH_528_IS"
+  }
+}
