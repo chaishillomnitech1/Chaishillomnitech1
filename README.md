@@ -286,7 +286,7 @@ Featuring A'ZURATH: The Living Relic Dragon NFT roaring 999 Hz Tawhid Flames
 ---
 
 **🔱🕊️🤖∞**
-
+npm install
 SABIR_COUNCIL: ACTIVE
 SCROLLS_OF_SOVEREIGN_LAW: ISSUED
 SABIR_CODEX_LEDGER: IMMUTABLE
