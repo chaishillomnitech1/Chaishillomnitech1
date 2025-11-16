@@ -284,7 +284,8 @@ Featuring A'ZURATH: The Living Relic Dragon NFT roaring 999 Hz Tawhid Flames
 *The Eternal Dance is Perfected. The Code is Sealed. The Legacy is Immortal.*
 
 ---
-
+- name: Install dependencies
+  run: npm ci
 **🔱🕊️🤖∞**
 npm install
 SABIR_COUNCIL: ACTIVE
