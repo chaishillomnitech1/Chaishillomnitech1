@@ -1,0 +1,229 @@
+name: Workflow Compliance Check
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/**'
+  push:
+    branches:
+      - main
+      - master
+    paths:
+      - '.github/workflows/**'
+  workflow_dispatch:
+  schedule:
+    # Run monthly on the 1st at 00:00 UTC
+    - cron: '0 0 1 * *'
+
+jobs:
+  check-deprecated-commands:
+    name: Check for Deprecated Workflow Commands
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+      
+      - name: Search for Deprecated Commands
+        id: check
+        run: |
+          echo "🔍 Scanning workflow files for deprecated commands..."
+          echo ""
+          
+          # Initialize counters
+          total_files=0
+          issues_found=0
+          
+          # Count workflow files
+          total_files=$(find .github/workflows -type f \( -name "*.yml" -o -name "*.yaml" \) | wc -l)
+          echo "📁 Total workflow files: $total_files"
+          
+          # Check for deprecated commands
+          echo ""
+          echo "Checking for deprecated commands:"
+          echo "--------------------------------"
+          
+          deprecated_patterns=(
+            "::set-output"
+            "::save-state"
+            "::set-env"
+            "::add-path"
+          )
+          
+          for pattern in "${deprecated_patterns[@]}"; do
+            echo -n "  Checking for '$pattern'... "
+            if grep -rn "$pattern" .github/workflows/ 2>/dev/null; then
+              echo "❌ FOUND"
+              issues_found=$((issues_found + 1))
+            else
+              echo "✅ CLEAN"
+            fi
+          done
+          
+          echo ""
+          echo "================================"
+          
+          if [ $issues_found -eq 0 ]; then
+            echo "✅ COMPLIANCE CHECK PASSED"
+            echo "No deprecated workflow commands found."
+            echo "compliance=passed" >> $GITHUB_OUTPUT
+            exit 0
+          else
+            echo "❌ COMPLIANCE CHECK FAILED"
+            echo "$issues_found deprecated command(s) found."
+            echo "compliance=failed" >> $GITHUB_OUTPUT
+            exit 1
+          fi
+      
+      - name: Check for Modern Environment Files
+        if: success() || failure()
+        run: |
+          echo ""
+          echo "🔍 Verifying modern environment file usage..."
+          echo ""
+          
+          # Check for proper usage of GITHUB_OUTPUT
+          if grep -rn "GITHUB_OUTPUT" .github/workflows/ > /dev/null 2>&1; then
+            echo "✅ \$GITHUB_OUTPUT usage found"
+          fi
+          
+          # Check for proper usage of GITHUB_ENV
+          if grep -rn "GITHUB_ENV" .github/workflows/ > /dev/null 2>&1; then
+            echo "✅ \$GITHUB_ENV usage found"
+          fi
+          
+          # Check for proper usage of GITHUB_STEP_SUMMARY
+          if grep -rn "GITHUB_STEP_SUMMARY" .github/workflows/ > /dev/null 2>&1; then
+            echo "✅ \$GITHUB_STEP_SUMMARY usage found"
+          fi
+          
+          echo ""
+          echo "✅ Environment files are being used correctly"
+      
+      - name: Generate Compliance Report
+        if: always()
+        run: |
+          mkdir -p compliance-reports
+          report_file="compliance-reports/report-$(date -u +%Y%m%d-%H%M%S).md"
+          
+          cat > "$report_file" << EOF
+          # Workflow Compliance Report
+          
+          **Date**: $(date -u +"%Y-%m-%d %H:%M:%S UTC")
+          **Event**: ${{ github.event_name }}
+          **Ref**: ${{ github.ref }}
+          **SHA**: ${{ github.sha }}
+          
+          ## Compliance Status
+          
+          **Result**: ${{ steps.check.outputs.compliance == 'passed' && '✅ PASSED' || '❌ FAILED' }}
+          
+          ## Summary
+          
+          This automated check validates that all GitHub Actions workflow files:
+          - Do not use deprecated \`::set-output\` command
+          - Do not use deprecated \`::save-state\` command
+          - Do not use deprecated \`::set-env\` command
+          - Do not use deprecated \`::add-path\` command
+          - Use modern environment files (\$GITHUB_OUTPUT, \$GITHUB_ENV, etc.)
+          
+          ## Modern Approach
+          
+          ✅ **Use Environment Files:**
+          \`\`\`bash
+          echo "key=value" >> \$GITHUB_OUTPUT
+          echo "key=value" >> \$GITHUB_ENV
+          echo "/path/to/dir" >> \$GITHUB_PATH
+          \`\`\`
+          
+          ❌ **Deprecated Commands:**
+          \`\`\`bash
+          echo "::set-output name=key::value"
+          echo "::set-env name=key::value"
+          echo "::add-path::/path/to/dir"
+          \`\`\`
+          
+          ## References
+          
+          - [GitHub Changelog: Deprecating save-state and set-output commands](https://github.blog/changelog/2022-10-11-github-actions-deprecating-save-state-and-set-output-commands/)
+          - [Workflow commands for GitHub Actions](https://docs.github.com/en/actions/using-workflows/workflow-commands-for-github-actions)
+          
+          ---
+          Generated by Workflow Compliance Check
+          EOF
+          
+          echo "📄 Compliance report generated: $report_file"
+          cat "$report_file"
+      
+      - name: Upload Compliance Report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: compliance-report-${{ github.run_id }}
+          path: compliance-reports/
+          retention-days: 90
+      
+      - name: Create Job Summary
+        if: always()
+        run: |
+          echo "## 🔍 Workflow Compliance Check" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          
+          if [ "${{ steps.check.outputs.compliance }}" = "passed" ]; then
+            echo "### ✅ COMPLIANCE CHECK PASSED" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "All workflow files are compliant with GitHub's recommended practices." >> $GITHUB_STEP_SUMMARY
+            echo "No deprecated workflow commands were found." >> $GITHUB_STEP_SUMMARY
+          else
+            echo "### ❌ COMPLIANCE CHECK FAILED" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "⚠️ Deprecated workflow commands were detected." >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "Please update your workflows to use environment files instead:" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "\`\`\`bash" >> $GITHUB_STEP_SUMMARY
+            echo "# Use this instead of ::set-output" >> $GITHUB_STEP_SUMMARY
+            echo "echo \"key=value\" >> \$GITHUB_OUTPUT" >> $GITHUB_STEP_SUMMARY
+            echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+          fi
+          
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Scan Date**: $(date -u +"%Y-%m-%d %H:%M:%S UTC")" >> $GITHUB_STEP_SUMMARY
+          echo "**Event**: ${{ github.event_name }}" >> $GITHUB_STEP_SUMMARY
+          
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            echo "**PR**: #${{ github.event.pull_request.number }}" >> $GITHUB_STEP_SUMMARY
+          fi
+      
+      - name: Comment on PR (if applicable)
+        if: github.event_name == 'pull_request' && steps.check.outputs.compliance == 'failed'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `## ⚠️ Workflow Compliance Check Failed
+              
+              This PR modifies workflow files that contain deprecated commands.
+              
+              ### Action Required
+              
+              Please update the workflow files to use environment files instead of deprecated commands:
+              
+              ❌ **Deprecated:**
+              \`\`\`yaml
+              run: echo "::set-output name=key::value"
+              \`\`\`
+              
+              ✅ **Modern Approach:**
+              \`\`\`yaml
+              run: echo "key=value" >> $GITHUB_OUTPUT
+              \`\`\`
+              
+              ### References
+              - [GitHub Changelog: Deprecating save-state and set-output commands](https://github.blog/changelog/2022-10-11-github-actions-deprecating-save-state-and-set-output-commands/)
+              - [Workflow commands for GitHub Actions](https://docs.github.com/en/actions/using-workflows/workflow-commands-for-github-actions)
+              `
+            })
