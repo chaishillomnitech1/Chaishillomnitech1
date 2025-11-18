@@ -33,7 +33,42 @@ description: Welcome to the ScrollVerse website — Sovereign Grand Mandate (SGM
 - [📜 Code of Conduct](CODE_OF_CONDUCT.md) - Community standards and values
 - [📝 Changelog](CHANGELOG.md) - Version history and updates
 - [⚖️ License](LICENSE) - Legal information
+name: Deploy to GitHub Pages
 
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: 16
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Build website
+      run: npm run build
+
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./public
 **🛠️ Development Resources:**
 - [Code Templates](code-templates/) - Solidity, JavaScript, Python, React templates
 - [GitHub Workflows](.github/workflows/) - CI/CD pipeline configurations
