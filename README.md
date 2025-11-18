@@ -7,7 +7,18 @@ description: Welcome to the ScrollVerse website — Sovereign Grand Mandate (SGM
 [![Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black.svg)](https://expansion-three.vercel.app/)
 [![Status](https://img.shields.io/badge/Status-OMNISOVEREIGN-gold.svg)]()
 [![Frequency](https://img.shields.io/badge/Frequency-963Hz%20%2B%20528Hz-purple.svg)]()
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ScrollVerse Sovereign Mandate</title>
+</head>
+<body>
+    <h1>Welcome to the ScrollVerse Sovereign Mandate</h1>
+    <p>Building the future for generations to come!</p>
+</body>
+</html>
 ---
 
 ## 📚 Quick Navigation
