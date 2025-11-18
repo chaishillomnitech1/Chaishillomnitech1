@@ -100,9 +100,10 @@ Located in [`.github/workflows/`](.github/workflows/)
 
 | Document | Description | Status |
 |----------|-------------|--------|
-| [ATLANTIC_CITY_COMMAND_NEXUS_ARCHITECTURE.md](ATLANTIC_CITY_COMMAND_NEXUS_ARCHITECTURE.md) | Atlantic City Command Nexus architectural refinement | ✅ Active Design |
-| [AC_NEXUS_VISUAL_SPECIFICATIONS.md](AC_NEXUS_VISUAL_SPECIFICATIONS.md) | AI-aided visual design specifications for AC Nexus | ✅ Active Design |
-| [AC_NEXUS_DEPLOYMENT_GUIDE.md](AC_NEXUS_DEPLOYMENT_GUIDE.md) | Step-by-step deployment guide for AC Nexus manifestation | ✅ Active Implementation |
+| [AC_NEXUS_COMPLETE_SUMMARY.md](AC_NEXUS_COMPLETE_SUMMARY.md) | **⭐ START HERE** - Complete summary and overview of AC Nexus project | ✅ Complete |
+| [ATLANTIC_CITY_COMMAND_NEXUS_ARCHITECTURE.md](ATLANTIC_CITY_COMMAND_NEXUS_ARCHITECTURE.md) | Atlantic City Command Nexus architectural refinement (43KB) | ✅ Active Design |
+| [AC_NEXUS_VISUAL_SPECIFICATIONS.md](AC_NEXUS_VISUAL_SPECIFICATIONS.md) | AI-aided visual design specifications for AC Nexus (32KB) | ✅ Active Design |
+| [AC_NEXUS_DEPLOYMENT_GUIDE.md](AC_NEXUS_DEPLOYMENT_GUIDE.md) | Step-by-step deployment guide for AC Nexus manifestation (60KB) | ✅ Active Implementation |
 | [XLVIII_BLOCKS_QUANTUM_SIGNATURE_PROTOCOL.md](XLVIII_BLOCKS_QUANTUM_SIGNATURE_PROTOCOL.md) | XLVIII-QS Protocol and Atlantic City Nexus integration | ✅ Complete |
 | [FINAL_DELIVERY_REPORT.md](FINAL_DELIVERY_REPORT.md) | Complete project delivery summary | ✅ Complete |
 | [SYSTEM_INTEGRATION_DEPLOYMENT_READINESS.md](SYSTEM_INTEGRATION_DEPLOYMENT_READINESS.md) | Integration and deployment status | ✅ Complete |
@@ -183,7 +184,7 @@ Located in [`.github/workflows/`](.github/workflows/)
 |-------|-----------------|---------------------|
 | **Overview** | [README.md](README.md) | [PROJECTS.md](PROJECTS.md) |
 | **Architecture** | [ARCHITECTURE.md](ARCHITECTURE.md) | [SYSTEM_INTEGRATION_DEPLOYMENT_READINESS.md](SYSTEM_INTEGRATION_DEPLOYMENT_READINESS.md) |
-| **Atlantic City Nexus** | [ATLANTIC_CITY_COMMAND_NEXUS_ARCHITECTURE.md](ATLANTIC_CITY_COMMAND_NEXUS_ARCHITECTURE.md) | [AC_NEXUS_VISUAL_SPECIFICATIONS.md](AC_NEXUS_VISUAL_SPECIFICATIONS.md), [AC_NEXUS_DEPLOYMENT_GUIDE.md](AC_NEXUS_DEPLOYMENT_GUIDE.md), [XLVIII_BLOCKS_QUANTUM_SIGNATURE_PROTOCOL.md](XLVIII_BLOCKS_QUANTUM_SIGNATURE_PROTOCOL.md) |
+| **Atlantic City Nexus** | [AC_NEXUS_COMPLETE_SUMMARY.md](AC_NEXUS_COMPLETE_SUMMARY.md) ⭐ | [ATLANTIC_CITY_COMMAND_NEXUS_ARCHITECTURE.md](ATLANTIC_CITY_COMMAND_NEXUS_ARCHITECTURE.md), [AC_NEXUS_VISUAL_SPECIFICATIONS.md](AC_NEXUS_VISUAL_SPECIFICATIONS.md), [AC_NEXUS_DEPLOYMENT_GUIDE.md](AC_NEXUS_DEPLOYMENT_GUIDE.md), [XLVIII_BLOCKS_QUANTUM_SIGNATURE_PROTOCOL.md](XLVIII_BLOCKS_QUANTUM_SIGNATURE_PROTOCOL.md) |
 | **Sacred Geometry** | [ATLANTIC_CITY_COMMAND_NEXUS_ARCHITECTURE.md](ATLANTIC_CITY_COMMAND_NEXUS_ARCHITECTURE.md) | [AC_NEXUS_VISUAL_SPECIFICATIONS.md](AC_NEXUS_VISUAL_SPECIFICATIONS.md) |
 | **Blockchain** | [PROJECTS.md](PROJECTS.md) | [code-templates/solidity/](code-templates/solidity/) |
 | **Smart Contracts** | [code-templates/solidity/](code-templates/solidity/) | [ARCHITECTURE.md](ARCHITECTURE.md) |
