@@ -34,9 +34,9 @@ jobs:
           total_files=0
           issues_found=0
           
-          # Count workflow files
-          total_files=$(find .github/workflows -type f \( -name "*.yml" -o -name "*.yaml" \) | wc -l)
-          echo "📁 Total workflow files: $total_files"
+          # Count workflow files (exclude documentation and this checker itself)
+          total_files=$(find .github/workflows -type f \( -name "*.yml" -o -name "*.yaml" \) -not -name "workflow-compliance-check.yml" | wc -l)
+          echo "📁 Total workflow files checked: $total_files"
           
           # Check for deprecated commands
           echo ""
@@ -52,8 +52,11 @@ jobs:
           
           for pattern in "${deprecated_patterns[@]}"; do
             echo -n "  Checking for '$pattern'... "
-            if grep -rn "$pattern" .github/workflows/ 2>/dev/null; then
+            # Only check .yml and .yaml files, exclude .md documentation and this checker
+            found_files=$(find .github/workflows -type f \( -name "*.yml" -o -name "*.yaml" \) -not -name "workflow-compliance-check.yml" -exec grep -l "$pattern" {} \; 2>/dev/null)
+            if [ -n "$found_files" ]; then
               echo "❌ FOUND"
+              echo "$found_files" | sed 's/^/      /'
               issues_found=$((issues_found + 1))
             else
               echo "✅ CLEAN"
