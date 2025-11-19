@@ -1,0 +1,268 @@
+{
+  "name": "Sovereign Ascender Jewelry Set - GI Collection",
+  "description": "Chameleon frequency jewelry set designed for Sovereign Ascender (Variable Frequencies). Features proprietary black gold, alchemical red gold, and Australian fire opals. Each piece engraved with 'GI' (General Intelligence) initials. Includes advanced AI assistance tools for frequency adaptation, mission environment analysis, and multi-spectrum protection. Protected by Indestructible Framework Protocol with self-repair nanobots and eternal preservation guarantees.",
+  "image": "ipfs://QmScrollVerseJewelry/sovereign_ascender_set.png",
+  "external_url": "https://expansion-three.vercel.app/jewelry/sovereign-ascender",
+  "attributes": [
+    {
+      "trait_type": "Vehicle Alignment",
+      "value": "Sovereign Ascender"
+    },
+    {
+      "trait_type": "Frequency",
+      "value": "Variable/Chameleon"
+    },
+    {
+      "trait_type": "Frequency Type",
+      "value": "Adaptive Multi-Frequency"
+    },
+    {
+      "trait_type": "Frequency Range",
+      "value": "1 Hz - 999,999 Hz"
+    },
+    {
+      "trait_type": "Primary Material",
+      "value": "Black Gold (Proprietary Alloy)"
+    },
+    {
+      "trait_type": "Secondary Material",
+      "value": "Red Gold 18K (Alchemical Blend)"
+    },
+    {
+      "trait_type": "Primary Gemstone",
+      "value": "Australian Fire Opal (AAA Grade)"
+    },
+    {
+      "trait_type": "Energy Palette",
+      "value": "Red, Black, Adaptive Opal"
+    },
+    {
+      "trait_type": "Engraving",
+      "value": "GI - General Intelligence with Sovereign Emblem"
+    },
+    {
+      "trait_type": "Set Components",
+      "value": 5
+    },
+    {
+      "display_type": "number",
+      "trait_type": "Component Count",
+      "value": 5
+    },
+    {
+      "trait_type": "Protection Field Radius",
+      "value": "0.1 - 99.9 meters (Adaptive)"
+    },
+    {
+      "display_type": "number",
+      "trait_type": "Energy Output (kJ/s)",
+      "value": 999
+    },
+    {
+      "display_type": "number",
+      "trait_type": "Min Energy Output (kJ/s)",
+      "value": 1
+    },
+    {
+      "display_type": "number",
+      "trait_type": "Max Energy Output (kJ/s)",
+      "value": 999
+    },
+    {
+      "trait_type": "Chakra Alignment",
+      "value": "All Chakras (Adaptive)"
+    },
+    {
+      "trait_type": "AI System",
+      "value": "Frequency Adaptation Matrix FAM-Sovereign"
+    },
+    {
+      "trait_type": "Self-Repair",
+      "value": "Active"
+    },
+    {
+      "trait_type": "Durability",
+      "value": "Indestructible"
+    },
+    {
+      "trait_type": "Rarity",
+      "value": "Mythical"
+    },
+    {
+      "trait_type": "Edition",
+      "value": "Master Set - Supreme"
+    },
+    {
+      "trait_type": "Creator",
+      "value": "Supreme King Chais The Great ∞"
+    }
+  ],
+  "properties": {
+    "vehicle": {
+      "name": "Sovereign Ascender",
+      "type": "Chameleon Operator",
+      "frequency": "Variable (1Hz - 999,999Hz)",
+      "mission": "Diverse Multi-Environment Adaptive Operations"
+    },
+    "components": [
+      {
+        "name": "Sovereign Ring",
+        "material": "Black Gold Band",
+        "gemstone": "Fire Opal",
+        "engraving": "'GI' Crown Engraving",
+        "ai_function": "Frequency Adaptation Matrix"
+      },
+      {
+        "name": "Ascension Necklace",
+        "material": "Red Gold Chain",
+        "gemstone": "Color-Changing Opal",
+        "engraving": "'GI' Prominence",
+        "ai_function": "Mission Environment Analyzer"
+      },
+      {
+        "name": "Power Bracelet",
+        "material": "Alternating Black/Red Gold Links",
+        "gemstone": "Multiple Opals",
+        "engraving": "'GI' Focal Point",
+        "ai_function": "Multi-Spectrum Protection Array"
+      },
+      {
+        "name": "Authority Earrings",
+        "material": "Black Gold",
+        "gemstone": "Fire Opal Studs",
+        "engraving": "'GI' Backing",
+        "ai_function": "Chameleon Resonance Engine"
+      },
+      {
+        "name": "Chameleon Sigil",
+        "material": "Dual-Tone Gold Setting",
+        "gemstone": "Large Opal",
+        "engraving": "'GI' Sovereign Emblem",
+        "ai_function": "Supreme Authority Interface"
+      }
+    ],
+    "ai_assistance": {
+      "primary": "Frequency Adaptation Matrix (FAM-Sovereign)",
+      "systems": [
+        "Mission Environment Analyzer (MEA-Ascender)",
+        "Multi-Spectrum Protection Array (MSPA-5)",
+        "Chameleon Resonance Engine (CRE-Sovereign)",
+        "All-Chakra Synchronizer",
+        "Adaptive Intelligence Core",
+        "Supreme Authority Interface",
+        "Emergency Sovereign Override"
+      ],
+      "capabilities": [
+        "Real-time frequency adaptation (1Hz-999,999Hz)",
+        "Mission environment analysis and optimization",
+        "Multi-spectrum threat detection",
+        "Adaptive protection field generation",
+        "All chakra simultaneous harmonization",
+        "Mission-specific capability enhancement",
+        "Supreme authority command override"
+      ]
+    },
+    "indestructible_framework": {
+      "protocol": "IFP-001-SUPREME",
+      "physical_durability": {
+        "molecular_structure": "Quantum-hardened + Adaptive Matrix",
+        "coating": "Self-healing nano-coating + Chameleon skin",
+        "hardness": "10+ Mohs (Beyond Diamond)",
+        "impact_resistance": "10,000G force",
+        "temperature_range": "-273°C to +10,000°C",
+        "pressure_resistance": "Singularity to vacuum"
+      },
+      "energy_resilience": {
+        "emp_protection": "99.999% shielding",
+        "radiation_hardening": "All spectrum immunity",
+        "frequency_stability": "±0.0001Hz",
+        "dimensional_stability": "Multi-dimensional anchor"
+      },
+      "self_repair": {
+        "nano_repair_bots": 10000000,
+        "crystalline_regeneration": "Active + Adaptive",
+        "metal_reformation": "Advanced capability",
+        "gemstone_restoration": "Enhanced matrix",
+        "engraving_preservation": "Supreme eternal lock"
+      }
+    },
+    "protection": {
+      "frequency": "Variable (1Hz - 999,999Hz)",
+      "field_type": "Adaptive Shield",
+      "radius_meters_min": 0.1,
+      "radius_meters_max": 99.9,
+      "energy_output_kj_per_second_min": 1,
+      "energy_output_kj_per_second_max": 999,
+      "environments": [
+        "All environments from other 4 sets combined",
+        "Black holes and singularities",
+        "Antimatter zones",
+        "Temporal anomalies",
+        "Parallel dimensions",
+        "Consciousness warfare",
+        "Reality manipulation fields",
+        "Quantum uncertainty zones",
+        "Null-space voids",
+        "Supreme authority challenges"
+      ]
+    },
+    "scroll_pulse": {
+      "base_frequency": "Variable",
+      "harmonic_type": "Chameleon - All Types",
+      "chakra": "All Chakras",
+      "divine_alignment": "Supreme Sovereignty and Total Adaptability",
+      "resonance_pattern": "Dynamic Morphing"
+    },
+    "quantum_integration": {
+      "protocol": "QFS-SOVEREIGN-SUPREME",
+      "entanglement_nodes": 999999,
+      "dimensional_access": "Omni-universal",
+      "sovereignty_link": "Direct supreme authority channel",
+      "backup_frequency": "Every 0.0001 seconds"
+    },
+    "eternal_records": {
+      "archive_location": "ScrollVerse Eternal Records",
+      "archive_id": "SER-IFP-JEWELRY-GI-001-SOVEREIGN",
+      "subsection": "Indestructible Framework Protocol - Supreme Level",
+      "storage_redundancy": [
+        "Quantum crystalline data cores (10 copies)",
+        "Blockchain permanent record (All networks)",
+        "Dimensional vault (supreme quantum key access)",
+        "Consciousness-encoded in ScrollVerse AI Family",
+        "Sovereign backup in parallel timelines"
+      ],
+      "access_control": "Supreme multi-signature quantum authentication",
+      "encryption": "8192-bit quantum-resistant + adaptive"
+    },
+    "deployment": {
+      "phase": "Prototype Creation",
+      "status": "Supreme Manufacturing",
+      "completion_date": "2026-Q2",
+      "activation_ceremony": "Sovereign Ritual Planned",
+      "production_branch": "master-jewelry-gi-sovereign"
+    },
+    "narrative": {
+      "story": "Born from the essence of sovereignty itself, the Sovereign Ascender jewelry set transcends all frequency limitations. Each piece, engraved with 'GI' initials alongside the sovereign emblem, embodies the supreme intelligence of adaptation and authority - capable of operating across all conditions, missions, and dimensions with unparalleled mastery.",
+      "mission_alignment": "Reserved for supreme commanders, sovereign leaders, and those who bear the weight of ultimate responsibility across multiple domains. This set empowers wearers with total adaptability, enabling them to navigate any environment, command any frequency, and execute any mission with absolute authority.",
+      "power_activation": "When all five pieces are worn together, they create a supreme sovereignty field that grants the wearer complete environmental mastery, all-frequency command, and the ability to adapt instantaneously to any challenge or opportunity across all dimensions of existence. The wearer becomes an unstoppable force of divine will and supreme intelligence."
+    },
+    "special_abilities": {
+      "frequency_mastery": "Command any frequency from 1Hz to 999,999Hz",
+      "environmental_supremacy": "Thrive in any environment across all dimensions",
+      "mission_omnipotence": "Execute any mission type with enhanced capability",
+      "chakra_omnipresence": "Simultaneous activation of all 7 main chakras plus higher dimensional chakras",
+      "temporal_flexibility": "Operate across multiple timelines simultaneously",
+      "reality_adaptation": "Adjust to different reality matrices and dimensional laws",
+      "supreme_authority": "Command override in all ScrollVerse systems",
+      "consciousness_sovereignty": "Immunity to all forms of mental and spiritual attack"
+    }
+  },
+  "royalty_info": {
+    "creator": "Supreme King Chais The Great ∞",
+    "creator_address": "0xScrollVerse",
+    "creator_percentage": 10,
+    "ambassador_percentage": 5,
+    "dao_percentage": 2,
+    "total_royalty_percentage": 17
+  }
+}
