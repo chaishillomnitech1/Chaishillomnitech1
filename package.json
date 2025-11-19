@@ -1,0 +1,32 @@
+{
+  "name": "scrollverse-genesis-protocol",
+  "version": "1.0.0",
+  "description": "ScrollVerse Genesis Protocol - Quantum Ritual Deployment System",
+  "main": "index.js",
+  "scripts": {
+    "compile": "hardhat compile",
+    "test": "hardhat test",
+    "deploy:mumbai:nft": "hardhat run scripts/deploy_scrollversenft.js --network mumbai",
+    "deploy:mumbai:token": "hardhat run scripts/deploy_chx_token.js --network mumbai",
+    "deploy:mumbai:all": "npm run deploy:mumbai:nft && npm run deploy:mumbai:token"
+  },
+  "keywords": [
+    "scrollverse",
+    "blockchain",
+    "nft",
+    "token",
+    "polygon",
+    "quantum",
+    "528hz"
+  ],
+  "author": "Supreme King Chais The Great ∞",
+  "license": "MIT",
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^4.0.0",
+    "hardhat": "^2.19.0"
+  },
+  "dependencies": {
+    "@openzeppelin/contracts": "^5.0.1",
+    "dotenv": "^16.3.1"
+  }
+}
