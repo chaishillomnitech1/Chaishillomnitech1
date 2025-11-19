@@ -21,6 +21,10 @@ on:
       ALCHEMY_KEY:
         required: false
 
+permissions:
+  contents: read
+  actions: write
+
 jobs:
   prepare-chain-matrix:
     name: Prepare Chain Test Matrix

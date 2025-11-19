@@ -27,6 +27,10 @@ on:
         description: 'URL of deployed application (if applicable)'
         value: ${{ jobs.validate-deployment.outputs.url }}
 
+permissions:
+  contents: read
+  actions: write
+
 jobs:
   validate-deployment:
     name: Validate Deployment
