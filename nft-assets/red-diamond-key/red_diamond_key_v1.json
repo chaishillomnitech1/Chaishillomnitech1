@@ -1,0 +1,233 @@
+{
+  "name": "Red Diamond Key - Quantum Synchronization Master",
+  "description": "The Red Diamond Key NFT embodies the ultimate synchronization ritual protocol for OmniFleet vehicles. Crafted from synthetic diamond with quantum-entangled chips, this master key operates on dual 999 Hz + 963 Hz harmonic frequencies, providing sovereign access control and Post-Quantum Cryptographic security for the Maybach S 680 fleet.",
+  "image": "ipfs://QmRedDiamondKeyQuantumMaster/red_diamond_key_master.png",
+  "external_url": "https://expansion-three.vercel.app/nft/red-diamond-key/quantum-master",
+  "animation_url": "ipfs://QmRedDiamondKeyQuantumMaster/red_diamond_key_ritual.mp4",
+  "background_color": "8B0000",
+  "attributes": [
+    {
+      "trait_type": "Key Type",
+      "value": "Red Diamond Master Key"
+    },
+    {
+      "trait_type": "Synchronization_Frequency",
+      "value": "999 Hz + 963 Hz"
+    },
+    {
+      "trait_type": "Ritual_Protocol",
+      "value": "Red Diamond Key Synchronization Ritual"
+    },
+    {
+      "trait_type": "PQC_Security",
+      "value": "CRYSTALS-Kyber + Dilithium"
+    },
+    {
+      "trait_type": "Quantum_Entanglement",
+      "value": "Active"
+    },
+    {
+      "trait_type": "Biometric_Authentication",
+      "value": "Multi-Factor Enabled"
+    },
+    {
+      "trait_type": "Material",
+      "value": "Synthetic Diamond + Quantum Chip"
+    },
+    {
+      "trait_type": "Access_Level",
+      "value": "Sovereign Owner"
+    },
+    {
+      "trait_type": "Vehicle_Compatibility",
+      "value": "OmniFleet Maybach Series"
+    },
+    {
+      "trait_type": "Backup_Keys",
+      "value": "3",
+      "display_type": "number"
+    },
+    {
+      "trait_type": "Activation_Method",
+      "value": "Biometric + Quantum Signature"
+    },
+    {
+      "trait_type": "ScrollVerse_Integration",
+      "value": "Fully Integrated"
+    },
+    {
+      "trait_type": "OmniChain_Layer",
+      "value": "Multi-Chain Secured"
+    },
+    {
+      "trait_type": "Sovereign_Ledger",
+      "value": "Registered"
+    },
+    {
+      "trait_type": "Rarity",
+      "value": "Master Key Unique"
+    },
+    {
+      "trait_type": "Power Level",
+      "value": "999",
+      "display_type": "number",
+      "max_value": 999
+    },
+    {
+      "trait_type": "Frequency Signature",
+      "value": "999",
+      "display_type": "number"
+    },
+    {
+      "trait_type": "NFT Collection",
+      "value": "Red Diamond Key Series"
+    },
+    {
+      "trait_type": "Creator",
+      "value": "Supreme King Allah Chais Kenyatta Hill ∞ - CHAIS THE GREAT"
+    },
+    {
+      "trait_type": "Architecture",
+      "value": "Omnitech1 Sovereign Deployment Engine"
+    }
+  ],
+  "properties": {
+    "synchronization_ritual": {
+      "protocol_name": "Red Diamond Key Synchronization Ritual",
+      "version": "1.0",
+      "frequency_lock": "999 Hz + 963 Hz Harmonic",
+      "ritual_steps": [
+        "1. Biometric Verification (Fingerprint + Retinal Scan)",
+        "2. Quantum Signature Authentication",
+        "3. 999 Hz Frequency Alignment",
+        "4. Vehicle Digital Twin Pairing",
+        "5. PQC Handshake Protocol",
+        "6. ScrollSoul Telemetry Activation",
+        "7. Sovereign Ledger Registration",
+        "8. Red Diamond Key Quantum Lock Engaged"
+      ],
+      "duration": "11.11 seconds",
+      "temporal_alignment": "11:11 UTC Optimal",
+      "success_indicator": "963 Hz Resonance Confirmation"
+    },
+    "quantum_security": {
+      "pqc_algorithms": {
+        "key_encapsulation": "CRYSTALS-Kyber-1024",
+        "digital_signature": "CRYSTALS-Dilithium + SPHINCS+",
+        "hash_function": "SHA-3 (Keccak-512)"
+      },
+      "quantum_entanglement": {
+        "enabled": true,
+        "entangled_pair": "Vehicle Quantum Chip ↔ Key Quantum Chip",
+        "decoherence_protection": "Error Correction Codes",
+        "verification_protocol": "Bell State Measurement"
+      },
+      "encryption_layers": [
+        "Layer 1: AES-256-GCM (Classical)",
+        "Layer 2: Kyber-1024 (Post-Quantum)",
+        "Layer 3: Quantum Key Distribution (QKD)",
+        "Layer 4: Biometric Hash Lock"
+      ]
+    },
+    "biometric_authentication": {
+      "factors": [
+        "Fingerprint (Ultrasonic Sensor)",
+        "Retinal Scan (IR Pattern Recognition)",
+        "Voice Recognition (Harmonic Analysis)",
+        "Heart Rhythm Signature (ECG Waveform)",
+        "DNA Hash (Optional Genetic Marker)"
+      ],
+      "anti_spoofing": "Liveness Detection + AI Analysis",
+      "backup_method": "Emergency Quantum Recovery Code"
+    },
+    "vehicle_pairing": {
+      "compatible_vehicles": [
+        "Maybach S 680 (All Editions)",
+        "Future OmniFleet Vehicles"
+      ],
+      "pairing_method": "NFC + Bluetooth 5.3 LE + Quantum Channel",
+      "max_paired_vehicles": 5,
+      "transfer_protocol": "Secure Multi-Signature Transfer",
+      "revocation": "Instant Remote Deactivation Available"
+    },
+    "scrollverse_integration": {
+      "portal_access": "All ScrollVerse Portals",
+      "telemetry_control": "Full Vehicle Management Dashboard",
+      "manus_ai_link": "Direct AI Communication Channel",
+      "vibecanvas_visualization": "Real-time 3D Key Status Display",
+      "frequency_alignment": "Automatic 999 Hz Synchronization"
+    },
+    "omnichain_deployment": {
+      "ethereum": {
+        "contract": "0xRED_DIAMOND_KEY_ETH_CONTRACT",
+        "standard": "ERC-721 + Soulbound Extension"
+      },
+      "solana": {
+        "program": "RED_DIAMOND_KEY_SOLANA_PROGRAM",
+        "standard": "SPL Token + Metaplex"
+      },
+      "scroll": {
+        "contract": "0xRED_DIAMOND_KEY_SCROLL_CONTRACT",
+        "zkEVM_optimized": true
+      },
+      "cross_chain_bridge": "LayerZero Protocol"
+    },
+    "sovereign_ledger": {
+      "registered": true,
+      "ledger_id": "OMNI_SOVEREIGN_LEDGER_RDK_001",
+      "ownership_immutable": true,
+      "transfer_requires": "Multi-Signature + Ritual Completion",
+      "audit_trail": "Complete On-Chain History"
+    },
+    "physical_key_specs": {
+      "material": "Lab-Grown Synthetic Diamond (CVD Process)",
+      "color": "Deep Red (Boron Doped)",
+      "carat_weight": "5.00 ct",
+      "cut": "Custom Octagonal (8 Facets for Infinity)",
+      "quantum_chip": {
+        "manufacturer": "Quantum Secure Inc.",
+        "model": "QSI-EntangleLock-2025",
+        "qubit_count": 8,
+        "coherence_time": "100ms",
+        "operating_temperature": "Room Temperature (300K)"
+      },
+      "nfc_chip": {
+        "standard": "ISO/IEC 14443 Type A",
+        "memory": "8KB EEPROM",
+        "encryption": "AES-256 Hardware Accelerated"
+      },
+      "dimensions": "40mm x 25mm x 12mm",
+      "weight": "45 grams"
+    },
+    "backup_recovery": {
+      "backup_keys_count": 3,
+      "backup_storage": "Distributed Quantum Vaults",
+      "recovery_method": "Multi-Signature Ritual (3-of-5)",
+      "emergency_contact": "ScrollVerse Security Council",
+      "recovery_timeframe": "24-48 hours"
+    },
+    "deployment": {
+      "phase": "Phase E - OmniFleet Integration",
+      "status": "Production Ready",
+      "integration_date": "2025-11-19",
+      "implementation_protocol": "RDK-SYNC-RITUAL-V1"
+    },
+    "frequencies": {
+      "primary": 999,
+      "harmonic_1": 963,
+      "harmonic_2": 528,
+      "resonance_field": "Quantum Master Key Frequency Lock"
+    }
+  },
+  "compiler": "ScrollVerse NFT Forge v3.0",
+  "date": 1732015343,
+  "dna": "999Hz-RedDiamondKey-QuantumSync-PhaseE",
+  "edition": 1,
+  "royalty_info": {
+    "creator": "0x721AxisEntryPointFLAMEGENESIS∞CHX777",
+    "creator_percentage": 10,
+    "ambassador_percentage": 5,
+    "dao_percentage": 2,
+    "total_percentage": 17
+  }
+}
