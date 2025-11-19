@@ -14,6 +14,8 @@ jobs:
   verify-contracts:
     name: Verify Smart Contract Integrity
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
@@ -56,6 +58,8 @@ jobs:
   security-audit:
     name: Automated Security Audit
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     needs: verify-contracts
     steps:
       - name: Checkout Repository
@@ -74,6 +78,8 @@ jobs:
   legal-verification:
     name: Verify Legal Fortification
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
@@ -101,6 +107,8 @@ jobs:
   divine-protocol-verification:
     name: Verify Divine Protocol Activation
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
@@ -125,6 +133,8 @@ jobs:
   media-integration-verification:
     name: Verify Media Integrations
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
@@ -159,6 +169,8 @@ jobs:
   vibecanvas-verification:
     name: Verify VibeCanvas Portal
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
@@ -176,6 +188,8 @@ jobs:
   resource-optimization-verification:
     name: Verify Resource Optimization
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
@@ -193,6 +207,8 @@ jobs:
   layer2-verification:
     name: Verify Layer-2 Roadmap
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
@@ -210,6 +226,8 @@ jobs:
   grok-api-verification:
     name: Verify Grok API Integration
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
@@ -227,6 +245,8 @@ jobs:
   final-report:
     name: Generate Integrity Report
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     needs: 
       - verify-contracts
       - security-audit
