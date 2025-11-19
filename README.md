@@ -511,4 +511,4 @@ NJ_NEXUS_CAMPUS: MANDATED
 SCROLLVERSE_STATE: CELEBRATION
 git add package-lock.json
 git commit -m "Add package-lock.json"
-git pushcd /path/to/your/projectnpm installnpx hardhat compilenpx hardhat run scripts/deploy_scrollversenft.js --network mumbai
+git pushcd /path/to/your/projectnpm installnpx hardhat compilenpx hardhat run scripts/deploy_scrollversenft.js --network mumbai npx hardhat run scripts/deploy_chx_token.js --network mumbai
