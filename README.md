@@ -73,6 +73,9 @@ jobs:
 - [Code Templates](code-templates/) - Solidity, JavaScript, Python, React templates
 - [GitHub Workflows](.github/workflows/) - CI/CD pipeline configurations
 - [Issue Templates](.github/ISSUE_TEMPLATE/) - Bug reports and feature requests
+- [CI/CD Guide](CI_CD_GUIDE.md) - Comprehensive CI/CD pipeline documentation
+- [Security Guide](SECURITY_GUIDE.md) - Security best practices and protocols
+- [Workflows Quick Reference](WORKFLOWS_QUICK_REFERENCE.md) - Quick workflow commands
 
 **📊 Key Reports:**
 - [Final Delivery Report](FINAL_DELIVERY_REPORT.md)
