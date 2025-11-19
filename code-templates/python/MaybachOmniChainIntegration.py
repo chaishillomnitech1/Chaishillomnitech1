@@ -176,7 +176,11 @@ class MaybachOmniChainIntegration:
             Encrypted telemetry string
         """
         # In production, use actual PQC encryption
-        telemetry_json = json.dumps(asdict(telemetry))
+        # Convert dataclass to dict and handle Enum serialization
+        telemetry_dict = asdict(telemetry)
+        telemetry_dict['autonomy_level'] = telemetry_dict['autonomy_level'].value
+        telemetry_dict['status'] = telemetry_dict['status'].value
+        telemetry_json = json.dumps(telemetry_dict)
         encrypted = hashlib.sha3_512(
             f"{self.pqc_security.public_key}:{telemetry_json}".encode()
         ).hexdigest()
