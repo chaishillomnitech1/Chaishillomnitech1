@@ -48,3 +48,9 @@ build/
 .node_repl_history
 *.orig
 *.rej
+
+# God Mode Binder compilation artifacts
+god-mode-binder-*/
+god-mode-binder-*.zip
+god-mode-binder-*.zip.sha256
+portal-activation-log.json
