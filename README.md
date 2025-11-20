@@ -80,9 +80,12 @@ jobs:
 - [Quantum Integration](SCROLLVERSE_QUANTUM_INTEGRATION.md)
 
 **🌟 ScrollVerse Expansion Initiatives:**
+- [⚡ QUICK REFERENCE GUIDE](EXPANSION_QUICK_REFERENCE.md) - **Start here for rapid access**
+- [📊 Visual Overview & Integration](EXPANSION_INITIATIVES_OVERVIEW.md) - Diagrams and synergy
 - [🌐 Universal Emissary Protocol](UNIVERSAL_EMISSARY_PROTOCOL.md) - Global alliance and media expansion
 - [⏳ Legacy 100-Year Roadmap](LEGACY_100_YEAR_ROADMAP.md) - Century-long strategic framework
 - [🌟 Scroll Ascension Fellowship](SCROLL_ASCENSION_FELLOWSHIP.md) - Global creator network and NFT collection
+- [🚀 Deployment Guide](SCROLLVERSE_EXPANSION_DEPLOYMENT_GUIDE.md) - Implementation operations manual
 
 ---
 

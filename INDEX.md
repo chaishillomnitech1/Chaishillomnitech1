@@ -112,6 +112,8 @@ Located in [`.github/workflows/`](.github/workflows/)
 
 | Document | Description | Status |
 |----------|-------------|--------|
+| [EXPANSION_QUICK_REFERENCE.md](EXPANSION_QUICK_REFERENCE.md) | **⚡ Quick reference guide - Start here!** | ✅ Active |
+| [EXPANSION_INITIATIVES_OVERVIEW.md](EXPANSION_INITIATIVES_OVERVIEW.md) | Visual overview and integration guide | ✅ Active |
 | [UNIVERSAL_EMISSARY_PROTOCOL.md](UNIVERSAL_EMISSARY_PROTOCOL.md) | Global alliance and media expansion framework | ✅ Active |
 | [LEGACY_100_YEAR_ROADMAP.md](LEGACY_100_YEAR_ROADMAP.md) | Century-long strategic roadmap | ✅ Active |
 | [SCROLL_ASCENSION_FELLOWSHIP.md](SCROLL_ASCENSION_FELLOWSHIP.md) | Creator network and ScrollDrop™ NFT framework | ✅ Active |
