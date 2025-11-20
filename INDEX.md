@@ -108,6 +108,15 @@ Located in [`.github/workflows/`](.github/workflows/)
 | [COSMIC_GENESIS_COUNTDOWN_ACTIVATION.md](COSMIC_GENESIS_COUNTDOWN_ACTIVATION.md) | Genesis countdown documentation | ✅ Complete |
 | [AC_BATMAN_PROTOCOL_VAULTBOOK_XCIX.md](AC_BATMAN_PROTOCOL_VAULTBOOK_XCIX.md) | Protocol documentation | ✅ Complete |
 
+### **Expansion Initiatives** 🚀
+
+| Document | Description | Status |
+|----------|-------------|--------|
+| [UNIVERSAL_EMISSARY_PROTOCOL.md](UNIVERSAL_EMISSARY_PROTOCOL.md) | Global alliance and media expansion framework | ✅ Active |
+| [LEGACY_100_YEAR_ROADMAP.md](LEGACY_100_YEAR_ROADMAP.md) | Century-long strategic roadmap | ✅ Active |
+| [SCROLL_ASCENSION_FELLOWSHIP.md](SCROLL_ASCENSION_FELLOWSHIP.md) | Creator network and ScrollDrop™ NFT framework | ✅ Active |
+| [SCROLLVERSE_EXPANSION_DEPLOYMENT_GUIDE.md](SCROLLVERSE_EXPANSION_DEPLOYMENT_GUIDE.md) | Comprehensive deployment operations manual | ✅ Active |
+
 ### **Reference Files**
 
 | File | Description |
