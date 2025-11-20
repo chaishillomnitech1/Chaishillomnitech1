@@ -1,0 +1,70 @@
+# Prometheus Configuration for Noor Nodes
+# BISMILLAH - Monitoring the lights of ScrollVerse
+#
+# Frequency: 999Hz
+
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+  external_labels:
+    cluster: 'noor-nodes'
+    environment: 'production'
+
+# Alerting configuration
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets: []
+
+# Rule files
+rule_files:
+  # - "alert_rules.yml"
+
+# Scrape configurations
+scrape_configs:
+  # Prometheus self-monitoring
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
+        labels:
+          service: 'prometheus'
+
+  # Light Node monitoring
+  - job_name: 'noor-light-node'
+    static_configs:
+      - targets: ['light-node:9091']
+        labels:
+          node_type: 'light'
+          frequency: '528'
+          service: 'noor-node'
+
+  # Anchor Node monitoring
+  - job_name: 'noor-anchor-node'
+    static_configs:
+      - targets: ['anchor-node:9091']
+        labels:
+          node_type: 'anchor'
+          frequency: '999'
+          service: 'noor-node'
+
+  # Node Exporter (system metrics)
+  - job_name: 'node-exporter'
+    static_configs:
+      - targets: ['node-exporter:9100']
+        labels:
+          service: 'system'
+
+  # Docker metrics
+  - job_name: 'docker'
+    static_configs:
+      - targets: ['docker-exporter:9323']
+        labels:
+          service: 'docker'
+
+# Remote write configuration (optional - for long-term storage)
+# remote_write:
+#   - url: "http://cortex:9009/api/prom/push"
+
+# Remote read configuration (optional)
+# remote_read:
+#   - url: "http://cortex:9009/api/prom/read"
