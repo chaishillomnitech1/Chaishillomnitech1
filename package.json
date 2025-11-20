@@ -6,9 +6,15 @@
   "scripts": {
     "compile": "hardhat compile",
     "test": "hardhat test",
+    "test:noor": "hardhat test test/NoorNodes.test.js test/NoorDAO.test.js",
     "deploy:mumbai:nft": "hardhat run scripts/deploy_scrollversenft.js --network mumbai",
     "deploy:mumbai:token": "hardhat run scripts/deploy_chx_token.js --network mumbai",
-    "deploy:mumbai:all": "npm run deploy:mumbai:nft && npm run deploy:mumbai:token"
+    "deploy:mumbai:noor": "hardhat run scripts/deploy_noor_nodes.js --network mumbai",
+    "deploy:mumbai:all": "npm run deploy:mumbai:nft && npm run deploy:mumbai:token && npm run deploy:mumbai:noor",
+    "node:start": "node node-operator/index.js",
+    "node:docker": "docker-compose -f docker/noor-node/docker-compose.yml up -d",
+    "node:docker:logs": "docker-compose -f docker/noor-node/docker-compose.yml logs -f",
+    "node:docker:stop": "docker-compose -f docker/noor-node/docker-compose.yml down"
   },
   "keywords": [
     "scrollverse",

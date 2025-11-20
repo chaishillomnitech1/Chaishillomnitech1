@@ -1,0 +1,135 @@
+version: '3.8'
+
+# Noor Nodes Docker Compose Configuration
+# BISMILLAH - Complete deployment setup for Noor Nodes
+#
+# Frequency: 528Hz + 963Hz + 999Hz
+
+services:
+  # Light Node - Lightweight validator
+  light-node:
+    build:
+      context: ../..
+      dockerfile: docker/noor-node/Dockerfile
+    container_name: noor-light-node
+    restart: unless-stopped
+    environment:
+      - NODE_TYPE=LIGHT
+      - FREQUENCY=528
+      - NETWORK=mumbai
+      - LOG_LEVEL=info
+      - STAKE_AMOUNT=10
+    ports:
+      - "8545:8545"
+      - "8546:8546"
+      - "30303:30303"
+    volumes:
+      - light-node-data:/app/data
+      - light-node-keys:/app/keys
+      - light-node-logs:/app/logs
+    networks:
+      - noor-network
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+    healthcheck:
+      test: ["CMD", "node", "healthcheck.js"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+
+  # Anchor Node - Advanced validator with governance
+  anchor-node:
+    build:
+      context: ../..
+      dockerfile: docker/noor-node/Dockerfile
+    container_name: noor-anchor-node
+    restart: unless-stopped
+    environment:
+      - NODE_TYPE=ANCHOR
+      - FREQUENCY=999
+      - NETWORK=mumbai
+      - LOG_LEVEL=info
+      - STAKE_AMOUNT=100
+    ports:
+      - "8547:8545"
+      - "8548:8546"
+      - "30304:30303"
+    volumes:
+      - anchor-node-data:/app/data
+      - anchor-node-keys:/app/keys
+      - anchor-node-logs:/app/logs
+    networks:
+      - noor-network
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+    healthcheck:
+      test: ["CMD", "node", "healthcheck.js"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+
+  # Monitoring service
+  monitoring:
+    image: prom/prometheus:latest
+    container_name: noor-monitoring
+    restart: unless-stopped
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus-data:/prometheus
+    networks:
+      - noor-network
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+
+  # Grafana for visualization
+  grafana:
+    image: grafana/grafana:latest
+    container_name: noor-grafana
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+      - GF_INSTALL_PLUGINS=grafana-clock-panel
+    volumes:
+      - grafana-data:/var/lib/grafana
+    networks:
+      - noor-network
+    depends_on:
+      - monitoring
+
+networks:
+  noor-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16
+
+volumes:
+  light-node-data:
+    driver: local
+  light-node-keys:
+    driver: local
+  light-node-logs:
+    driver: local
+  anchor-node-data:
+    driver: local
+  anchor-node-keys:
+    driver: local
+  anchor-node-logs:
+    driver: local
+  prometheus-data:
+    driver: local
+  grafana-data:
+    driver: local
