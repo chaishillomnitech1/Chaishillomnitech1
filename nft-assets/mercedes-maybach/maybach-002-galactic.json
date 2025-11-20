@@ -1,0 +1,178 @@
+{
+  "name": "2026 Mercedes-Maybach S 680 - Galactic Shadow",
+  "description": "Second vehicle in the ScrollVerse Sovereign Fleet. Galactic Shadow blue metallic exterior representing diplomatic elegance, integrated with post-quantum cryptography and Manus AI control. This AgentBound Token (ABT) represents digital ownership with real-time telemetry and Halal yield generation.",
+  "image": "ipfs://QmRedDiamond002/galactic-shadow.png",
+  "animation_url": "ipfs://QmRedDiamond002/galactic-shadow-3d.glb",
+  "external_url": "https://scrollverse.omnitech1.com/vehicles/maybach-002",
+  "attributes": [
+    {
+      "trait_type": "Vehicle ID",
+      "value": "MAYBACH-002-GALACTIC"
+    },
+    {
+      "trait_type": "Model Year",
+      "value": 2026
+    },
+    {
+      "trait_type": "Make",
+      "value": "Mercedes-Benz"
+    },
+    {
+      "trait_type": "Model",
+      "value": "Maybach S 680"
+    },
+    {
+      "trait_type": "Exterior Color",
+      "value": "Galactic Shadow Blue Metallic"
+    },
+    {
+      "trait_type": "Interior",
+      "value": "Silk Beige with Silver Accents"
+    },
+    {
+      "trait_type": "Wheels",
+      "value": "21\" Silver Diamond-Cut Alloy"
+    },
+    {
+      "trait_type": "License Plate",
+      "value": "GALACTIC"
+    },
+    {
+      "trait_type": "Purpose",
+      "value": "Diplomatic Elegance Transport"
+    },
+    {
+      "trait_type": "Frequency Alignment",
+      "value": "528Hz Love Frequency"
+    },
+    {
+      "trait_type": "ScrollSoul ID",
+      "value": "SCROLL-SOUL-002-GS"
+    },
+    {
+      "trait_type": "ABT Token ID",
+      "value": "ABT-GAL-002"
+    },
+    {
+      "trait_type": "PQC Security",
+      "value": "CRYSTALS-Kyber"
+    },
+    {
+      "trait_type": "PQC Signature",
+      "value": "CRYSTALS-Dilithium"
+    },
+    {
+      "trait_type": "Manus AI Control",
+      "value": "Level 4 - Full Integration"
+    },
+    {
+      "trait_type": "OmniChain",
+      "value": "Solana + Scroll zkEVM"
+    },
+    {
+      "trait_type": "Telemetry",
+      "value": "Real-time Streaming"
+    },
+    {
+      "trait_type": "Halal Yield Rate",
+      "value": "7.5% APY"
+    },
+    {
+      "trait_type": "Purchase Date",
+      "value": "2026-01-01"
+    },
+    {
+      "trait_type": "Estimated Value",
+      "value": "$300,000 USD"
+    },
+    {
+      "trait_type": "Chrome Finish",
+      "value": "Polished Silver"
+    },
+    {
+      "trait_type": "Special Insignia",
+      "value": "Silver Moon Emblem"
+    },
+    {
+      "trait_type": "Edition",
+      "value": "2 of 3"
+    },
+    {
+      "trait_type": "Rarity",
+      "value": "Legendary"
+    }
+  ],
+  "properties": {
+    "vehicle_id": "MAYBACH-002-GALACTIC",
+    "vin_encrypted": true,
+    "pqc_key_hash": "0x...",
+    "abt_token_id": "ABT-GAL-002",
+    "scroll_chain_contract": "0x...",
+    "solana_program": "...",
+    "telemetry_stream": "wss://telemetry.scrollverse.io/maybach-002",
+    "key_generation": 1,
+    "deployment_ritual": "Red Diamond Key Synchronization",
+    "sovereign_framework": "ScrollVerse Attachment Protocol",
+    "frequency": [528, 963, 777, 144000],
+    "halal_certified": true,
+    "zakat_rate": "2.5%",
+    "yield_enabled": true
+  },
+  "specifications": {
+    "engine": "4.0L V8 Biturbo",
+    "horsepower": 621,
+    "torque": "664 lb-ft",
+    "transmission": "9-Speed Automatic",
+    "drivetrain": "4MATIC All-Wheel Drive",
+    "acceleration_0_60": "4.4 seconds",
+    "top_speed": "130 mph (electronically limited)",
+    "fuel_economy": "15 mpg city / 23 mpg highway",
+    "seating": "4-5 passengers",
+    "cargo_capacity": "12.3 cubic feet"
+  },
+  "features": {
+    "autonomous_driving": "Level 2+ with Manus AI enhancement",
+    "infotainment": "MBUX with dual 12.3-inch displays",
+    "sound_system": "Burmester High-End 3D Surround",
+    "massage_seats": "Multi-contour with hot stone effect",
+    "ambient_lighting": "64-color customizable",
+    "air_suspension": "AIRMATIC with adaptive damping",
+    "night_vision": "Active Night View Assist Plus",
+    "heads_up_display": "Augmented Reality",
+    "refrigerator": "Rear compartment champagne cooler"
+  },
+  "security": {
+    "post_quantum_cryptography": true,
+    "manus_ai_control": true,
+    "immobilization_capable": true,
+    "geofencing": true,
+    "theft_prevention": "Advanced with PQC",
+    "biometric_access": true,
+    "quantum_resistant_until": 2050
+  },
+  "blockchain": {
+    "primary_chain": "Scroll zkEVM",
+    "secondary_chain": "Solana Mainnet",
+    "cross_chain_bridge": "Wormhole/LayerZero",
+    "smart_contract_audited": true,
+    "nft_standard": "ERC-721 (ABT Enhanced)"
+  },
+  "yield_system": {
+    "type": "Halal Asset Appreciation",
+    "rate": "7.5% APY",
+    "compound_frequency": "Continuous",
+    "zakat_deduction": "2.5% annually",
+    "yield_token": "CHX (ChaisHalo eXchangeable)",
+    "last_calculated": "Real-time",
+    "shariah_compliant": true
+  },
+  "telemetry": {
+    "update_frequency": "1 second",
+    "data_encrypted": true,
+    "location_tracking": "GPS + GLONASS + Galileo",
+    "diagnostics": "Real-time OBD-II",
+    "maintenance_alerts": "Predictive AI",
+    "battery_monitoring": true,
+    "fuel_tracking": true
+  }
+}
