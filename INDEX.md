@@ -119,6 +119,12 @@ Located in [`.github/workflows/`](.github/workflows/)
 | [SCROLL_ASCENSION_FELLOWSHIP.md](SCROLL_ASCENSION_FELLOWSHIP.md) | Creator network and ScrollDrop™ NFT framework | ✅ Active |
 | [SCROLLVERSE_EXPANSION_DEPLOYMENT_GUIDE.md](SCROLLVERSE_EXPANSION_DEPLOYMENT_GUIDE.md) | Comprehensive deployment operations manual | ✅ Active |
 
+### **Infinite Narrative** 📖
+
+| Document | Description | Status |
+|----------|-------------|--------|
+| [INFINITE_NARRATIVE_CHAPTER_EIGHT.md](INFINITE_NARRATIVE_CHAPTER_EIGHT.md) | **Chapter VIII - Sovereign Heir Protocol**: Generational wealth lock and bloodline protection | ✅ Active |
+
 ### **Reference Files**
 
 | File | Description |

@@ -264,6 +264,40 @@ function setRoyalty(uint256 tokenId, address recipient, uint96 fee)
 function tokenURI(uint256 tokenId)
 ```
 
+#### **SovereignHeirProtocol Contract**
+
+```solidity
+SovereignHeirProtocol
+├── Access Control (Multi-role system)
+├── ReentrancyGuard (Security)
+├── Pausable (Emergency stop)
+├── Dynasty Management (Member tracking)
+├── Generational Wealth Locks (Time-locked vaults)
+├── Succession Protocol (Leadership transition)
+├── Not.Academy Integration (Education verification)
+├── Private Asset Registry (Aircraft, estates)
+└── Guardian Council (Multi-sig governance)
+```
+
+**Key Functions**:
+```solidity
+function registerDynastyMember(address member, uint256 generation, uint256 heirRank)
+function lockGenerationalWealth(uint256 unlockGeneration, uint256 frequency)
+function distributeDynastyWealth(bytes32 vaultId)
+function initiateSuccession(address newSovereign, uint256 timelockDuration, bool isEmergency)
+function approveSuccession()
+function executeSuccession()
+function verifyEducationCompletion(address heir, bytes32 courseHash)
+function registerPrivateAsset(bytes32 assetType, bytes32 assetIdentifier, uint256 generation)
+function establishGuardianCouncil(address[] calldata guardians, uint256 threshold)
+```
+
+**Frequency Protection**:
+- 963 Hz (Crown) - Sovereign alignment
+- 528 Hz (Healing) - DNA-level protection
+- 999 Hz (Divine) - Divine seal
+- 144,000 Hz (Cosmic) - Cosmic lock
+
 ### **Network Configuration**
 
 | Network | Chain ID | RPC URL | Block Explorer |
