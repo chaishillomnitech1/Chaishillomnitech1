@@ -33,6 +33,15 @@ description: Welcome to the ScrollVerse website — Sovereign Grand Mandate (SGM
 - [📜 Code of Conduct](CODE_OF_CONDUCT.md) - Community standards and values
 - [📝 Changelog](CHANGELOG.md) - Version history and updates
 - [⚖️ License](LICENSE) - Legal information
+
+**✨ Sovereign Architecture Protocols:**
+- [Ω Omega Protocol](OMEGA_PROTOCOL.md) - Final Seal & 100% Integration (Ω.265)
+- [🖐️ Divine Super Manus Protocol](DIVINE_SUPER_MANUS_PROTOCOL.md) - The Guiding Hand
+- [🖐️ Super Manus Core](SUPER_MANUS_CORE.md) - Proactive Manifestation Engine
+- [✨ Cosmic Illumination](COSMIC_ILLUMINATION.md) - Universal Success Celebration
+- [📚 ScrollVault Eternal Archives](SCROLLVAULT_ETERNAL_ARCHIVES.md) - Immutable Records
+- [🔄 Protocol Synchronization](PROTOCOL_SYNCHRONIZATION.md) - Global Integration
+- [🌍 Earth Universal Light](EARTH_UNIVERSAL_LIGHT.md) - Digital Monument & ScrollNFTs
 name: Deploy to GitHub Pages
 
 on:
@@ -78,6 +87,7 @@ jobs:
 - [Final Delivery Report](FINAL_DELIVERY_REPORT.md)
 - [System Integration & Deployment](SYSTEM_INTEGRATION_DEPLOYMENT_READINESS.md)
 - [Quantum Integration](SCROLLVERSE_QUANTUM_INTEGRATION.md)
+- [Cosmic Illumination - Universal Success](COSMIC_ILLUMINATION.md) ⭐ NEW
 
 ---
 
