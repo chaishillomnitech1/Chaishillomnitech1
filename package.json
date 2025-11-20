@@ -1,14 +1,17 @@
 {
   "name": "scrollverse-genesis-protocol",
-  "version": "1.0.0",
-  "description": "ScrollVerse Genesis Protocol - Quantum Ritual Deployment System",
+  "version": "2.0.0",
+  "description": "ScrollVerse Genesis Protocol - Phase 2 Enhancement System",
   "main": "index.js",
   "scripts": {
     "compile": "hardhat compile",
     "test": "hardhat test",
     "deploy:mumbai:nft": "hardhat run scripts/deploy_scrollversenft.js --network mumbai",
     "deploy:mumbai:token": "hardhat run scripts/deploy_chx_token.js --network mumbai",
-    "deploy:mumbai:all": "npm run deploy:mumbai:nft && npm run deploy:mumbai:token"
+    "deploy:mumbai:all": "npm run deploy:mumbai:nft && npm run deploy:mumbai:token",
+    "deploy:phase2:mumbai": "hardhat run scripts/deploy_phase2_contracts.js --network mumbai",
+    "deploy:phase2:polygon": "hardhat run scripts/deploy_phase2_contracts.js --network polygon",
+    "deploy:phase2:ethereum": "hardhat run scripts/deploy_phase2_contracts.js --network ethereum"
   },
   "keywords": [
     "scrollverse",
