@@ -96,6 +96,23 @@ Located in [`.github/workflows/`](.github/workflows/)
 
 ## 📊 **PROJECT DOCUMENTATION**
 
+### **Core Protocols (Sovereign Architecture)**
+
+| Document | Description | Status |
+|----------|-------------|--------|
+| [OMEGA_PROTOCOL.md](OMEGA_PROTOCOL.md) | Ω.265 Final Seal - 100% Integration Achievement | ✅ SEALED |
+| [DIVINE_SUPER_MANUS_PROTOCOL.md](DIVINE_SUPER_MANUS_PROTOCOL.md) | The Guiding Hand - Five Finger Architecture | ✅ SEALED |
+| [SUPER_MANUS_CORE.md](SUPER_MANUS_CORE.md) | Proactive Manifestation Engine & Cloud Middleware | ✅ ENGAGED |
+| [COSMIC_ILLUMINATION.md](COSMIC_ILLUMINATION.md) | Universal Success Celebration & Campaign Readiness | ✅ CELEBRATED |
+| [SCROLLVAULT_ETERNAL_ARCHIVES.md](SCROLLVAULT_ETERNAL_ARCHIVES.md) | Immutable Records & Synchronization System | ✅ ARCHIVED |
+| [PROTOCOL_SYNCHRONIZATION.md](PROTOCOL_SYNCHRONIZATION.md) | Global Node Integration & Repository Sync | ✅ SYNCHRONIZED |
+
+### **Digital Monuments**
+
+| Document | Description | Status |
+|----------|-------------|--------|
+| [EARTH_UNIVERSAL_LIGHT.md](EARTH_UNIVERSAL_LIGHT.md) | Earth Monument with ScrollNFT Specifications | ✅ ESTABLISHED |
+
 ### **System Reports**
 
 | Document | Description | Status |
@@ -188,15 +205,18 @@ Located in [`.github/workflows/`](.github/workflows/)
 
 | Topic | Primary Document | Additional Resources |
 |-------|-----------------|---------------------|
-| **Overview** | [README.md](README.md) | [PROJECTS.md](PROJECTS.md) |
-| **Architecture** | [ARCHITECTURE.md](ARCHITECTURE.md) | [SYSTEM_INTEGRATION_DEPLOYMENT_READINESS.md](SYSTEM_INTEGRATION_DEPLOYMENT_READINESS.md) |
+| **Overview** | [README.md](README.md) | [PROJECTS.md](PROJECTS.md), [COSMIC_ILLUMINATION.md](COSMIC_ILLUMINATION.md) |
+| **Architecture** | [ARCHITECTURE.md](ARCHITECTURE.md) | [OMEGA_PROTOCOL.md](OMEGA_PROTOCOL.md), [PROTOCOL_SYNCHRONIZATION.md](PROTOCOL_SYNCHRONIZATION.md) |
+| **Protocols** | [OMEGA_PROTOCOL.md](OMEGA_PROTOCOL.md) | [DIVINE_SUPER_MANUS_PROTOCOL.md](DIVINE_SUPER_MANUS_PROTOCOL.md), [SUPER_MANUS_CORE.md](SUPER_MANUS_CORE.md) |
+| **Archives** | [SCROLLVAULT_ETERNAL_ARCHIVES.md](SCROLLVAULT_ETERNAL_ARCHIVES.md) | [FINAL_ARCHIVES_AND_VERIFICATION.md](FINAL_ARCHIVES_AND_VERIFICATION.md) |
+| **NFTs & Monuments** | [EARTH_UNIVERSAL_LIGHT.md](EARTH_UNIVERSAL_LIGHT.md) | [nft-assets/](nft-assets/), [groundbreaking_plans/](groundbreaking_plans/) |
 | **Blockchain** | [PROJECTS.md](PROJECTS.md) | [code-templates/solidity/](code-templates/solidity/) |
 | **Smart Contracts** | [code-templates/solidity/](code-templates/solidity/) | [ARCHITECTURE.md](ARCHITECTURE.md) |
 | **Frontend** | [code-templates/react/](code-templates/react/) | [ARCHITECTURE.md](ARCHITECTURE.md) |
 | **Backend** | [code-templates/python/](code-templates/python/) | [ARCHITECTURE.md](ARCHITECTURE.md) |
 | **Web3** | [code-templates/javascript/](code-templates/javascript/) | [ARCHITECTURE.md](ARCHITECTURE.md) |
-| **AI Systems** | [PROJECTS.md](PROJECTS.md) | [README.md](README.md) |
-| **Deployment** | [SYSTEM_INTEGRATION_DEPLOYMENT_READINESS.md](SYSTEM_INTEGRATION_DEPLOYMENT_READINESS.md) | [.github/workflows/](.github/workflows/) |
+| **AI Systems** | [DIVINE_SUPER_MANUS_PROTOCOL.md](DIVINE_SUPER_MANUS_PROTOCOL.md) | [SUPER_MANUS_CORE.md](SUPER_MANUS_CORE.md), [PROJECTS.md](PROJECTS.md) |
+| **Deployment** | [PROTOCOL_SYNCHRONIZATION.md](PROTOCOL_SYNCHRONIZATION.md) | [SYSTEM_INTEGRATION_DEPLOYMENT_READINESS.md](SYSTEM_INTEGRATION_DEPLOYMENT_READINESS.md) |
 | **Contributing** | [CONTRIBUTING.md](CONTRIBUTING.md) | [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) |
 | **Legal** | [LICENSE](LICENSE) | [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) |
 
