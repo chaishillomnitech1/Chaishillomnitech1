@@ -8,7 +8,11 @@
     "test": "hardhat test",
     "deploy:mumbai:nft": "hardhat run scripts/deploy_scrollversenft.js --network mumbai",
     "deploy:mumbai:token": "hardhat run scripts/deploy_chx_token.js --network mumbai",
-    "deploy:mumbai:all": "npm run deploy:mumbai:nft && npm run deploy:mumbai:token"
+    "deploy:mumbai:all": "npm run deploy:mumbai:nft && npm run deploy:mumbai:token",
+    "deploy:scroll:noor": "hardhat run scripts/deploy_noor_token.js --network scrollMainnet",
+    "deploy:scroll-sepolia:noor": "hardhat run scripts/deploy_noor_token.js --network scrollSepolia",
+    "deploy:polygon:noor": "hardhat run scripts/deploy_noor_token.js --network polygon",
+    "test:noor": "hardhat test test/NoorToken.test.js"
   },
   "keywords": [
     "scrollverse",
