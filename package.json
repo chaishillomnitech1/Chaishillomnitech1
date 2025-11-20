@@ -6,9 +6,11 @@
   "scripts": {
     "compile": "hardhat compile",
     "test": "hardhat test",
+    "test:scrollcommand": "hardhat test test/ScrollCommandLogic.test.js",
     "deploy:mumbai:nft": "hardhat run scripts/deploy_scrollversenft.js --network mumbai",
     "deploy:mumbai:token": "hardhat run scripts/deploy_chx_token.js --network mumbai",
-    "deploy:mumbai:all": "npm run deploy:mumbai:nft && npm run deploy:mumbai:token"
+    "deploy:mumbai:scrollcommand": "hardhat run scripts/deploy_scrollcommandlogic.js --network mumbai",
+    "deploy:mumbai:all": "npm run deploy:mumbai:nft && npm run deploy:mumbai:token && npm run deploy:mumbai:scrollcommand"
   },
   "keywords": [
     "scrollverse",
