@@ -298,9 +298,14 @@ contract NoorToken is ERC20, ERC20Burnable, Ownable, Pausable, ReentrancyGuard {
         require(nodeRewardsPool > 0, "No rewards available");
         
         uint256 rewardPerOperator = nodeRewardsPool / nodeOperators.length;
+        uint256 remainder = nodeRewardsPool % nodeOperators.length;
         
         for (uint256 i = 0; i < nodeOperators.length; i++) {
-            _update(address(this), nodeOperators[i], rewardPerOperator);
+            uint256 reward = rewardPerOperator;
+            if (i < remainder) {
+                reward += 1;
+            }
+            _update(address(this), nodeOperators[i], reward);
         }
         
         nodeRewardsPool = 0;
