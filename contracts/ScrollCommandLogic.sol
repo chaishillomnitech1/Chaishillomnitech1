@@ -119,7 +119,7 @@ contract ScrollCommandLogic is Ownable, ReentrancyGuard {
     /// @notice Mapping: Dragon ID => Dragon governance data
     mapping(uint256 => DragonGovernance) public dragons;
     
-    /// @notice Mapping: Command execution counter
+    /// @notice Command execution counter
     Counters.Counter private _commandExecutionCounter;
     
     /// @notice Mapping: Execution ID => Command execution
