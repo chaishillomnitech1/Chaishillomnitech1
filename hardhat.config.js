@@ -27,12 +27,42 @@ module.exports = {
       accounts: process.env.PRIVATE_KEY ? [process.env.PRIVATE_KEY] : [],
       chainId: 137,
     },
+    scrollSepolia: {
+      url: process.env.SCROLL_SEPOLIA_RPC_URL || "https://sepolia-rpc.scroll.io",
+      accounts: process.env.DEPLOYER_PRIVATE_KEY ? [process.env.DEPLOYER_PRIVATE_KEY] : [],
+      chainId: 534351,
+    },
+    scrollMainnet: {
+      url: process.env.SCROLL_MAINNET_RPC_URL || "https://rpc.scroll.io",
+      accounts: process.env.DEPLOYER_PRIVATE_KEY ? [process.env.DEPLOYER_PRIVATE_KEY] : [],
+      chainId: 534352,
+    },
   },
   etherscan: {
     apiKey: {
       polygonMumbai: process.env.POLYGONSCAN_API_KEY || "",
       polygon: process.env.POLYGONSCAN_API_KEY || "",
+      scrollSepolia: process.env.SCROLLSCAN_API_KEY || "",
+      scroll: process.env.SCROLLSCAN_API_KEY || "",
     },
+    customChains: [
+      {
+        network: "scrollSepolia",
+        chainId: 534351,
+        urls: {
+          apiURL: "https://api-sepolia.scrollscan.com/api",
+          browserURL: "https://sepolia.scrollscan.com"
+        }
+      },
+      {
+        network: "scroll",
+        chainId: 534352,
+        urls: {
+          apiURL: "https://api.scrollscan.com/api",
+          browserURL: "https://scrollscan.com"
+        }
+      }
+    ]
   },
   paths: {
     sources: "./contracts",

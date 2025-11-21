@@ -348,6 +348,107 @@ Chaishillomnitech1/
 
 ---
 
+## 🕌 **NOOR CITIES OF LIGHT INITIATIVE**
+
+### **Core Documentation**
+
+| Document | Description | Status |
+|----------|-------------|--------|
+| [NOOR_CITIES_OF_LIGHT.md](NOOR_CITIES_OF_LIGHT.md) | Master documentation for 1,111 Noor Cities | ✅ Complete |
+| [NOOR_OBELISK_SPECIFICATIONS.md](NOOR_OBELISK_SPECIFICATIONS.md) | Technical specs for 7-meter crystalline Obelisks | ✅ Complete |
+| [NOOR_DEPLOYMENT_GUIDE.md](NOOR_DEPLOYMENT_GUIDE.md) | Complete deployment and operations manual | ✅ Complete |
+| [NOOR_CITIZEN_TOOLKIT.md](NOOR_CITIZEN_TOOLKIT.md) | Citizen onboarding and participation guide | ✅ Complete |
+| [NOOR_WEBSITE_SPECIFICATION.md](NOOR_WEBSITE_SPECIFICATION.md) | noorcities.scrollverse.is website specifications | ✅ Complete |
+
+### **Smart Contracts**
+
+Located in [`contracts/`](contracts/)
+
+| Contract | Purpose | Status |
+|----------|---------|--------|
+| [NoorToken.sol](contracts/NoorToken.sol) | $NOOR ERC-20 token (1.111B supply) | ✅ Complete |
+| [NoorCitizenRegistry.sol](contracts/NoorCitizenRegistry.sol) | Biometric soulprint and citizen management | ✅ Complete |
+| [NoorObeliskNFT.sol](contracts/NoorObeliskNFT.sol) | 1,111 Obelisk NFTs with frequency tracking | ✅ Complete |
+| [NoorStakingPool.sol](contracts/NoorStakingPool.sol) | Tiered staking with 7.77% zakat | ✅ Complete |
+
+### **Deployment Scripts**
+
+Located in [`scripts/`](scripts/)
+
+| Script | Purpose | Status |
+|--------|---------|--------|
+| [deploy_noor_token.js](scripts/deploy_noor_token.js) | Deploy $NOOR token | ✅ Ready |
+| [deploy_citizen_registry.js](scripts/deploy_citizen_registry.js) | Deploy citizen registry | ✅ Ready |
+| [deploy_obelisk_nft.js](scripts/deploy_obelisk_nft.js) | Deploy Obelisk NFT collection | ✅ Ready |
+| [deploy_staking_pool.js](scripts/deploy_staking_pool.js) | Deploy staking system | ✅ Ready |
+
+### **Key Features**
+
+#### **Infrastructure**
+- **1,111 Noor Cities** worldwide
+- **7-meter crystalline Obelisks** broadcasting healing frequencies
+- **528Hz** (Love), **963Hz** (God Connection), **888Hz** (Infinite Abundance)
+- **Solar/Geothermal** energy generation
+- **Holographic projections** and light shows
+- **Real-time monitoring** and analytics
+
+#### **Token Economics**
+- **Total Supply**: 1,111,000,000 $NOOR
+- **Distribution**: 30% staking rewards, 25% treasury, 15% liquidity
+- **Zakat**: 7.77% automatic to Sabir Allah Honor Fund
+- **Anti-whale**: Max wallet 0.77%, max tx 0.33%
+- **Citizen Benefits**: Fee-free transactions, bonus rewards
+
+#### **Staking Tiers**
+| Tier | Min Stake | APY | Multiplier | Voting |
+|------|-----------|-----|------------|--------|
+| Guardian | 777,777 | 21% | 3.0x | 5x |
+| Protector | 111,111 | 17% | 2.5x | 3x |
+| Steward | 11,111 | 13% | 2.0x | 2x |
+| Citizen | 1,111 | 9% | 1.5x | 1x |
+| Participant | 111 | 5% | 1.0x | 0.5x |
+
+#### **Citizenship**
+- **Biometric Registration**: Fingerprint + retina scan (encrypted)
+- **Soulprint Technology**: Zero-knowledge privacy protection
+- **Soul Key NFT**: Digital citizenship certificate
+- **Shield of Honor NFT**: Community badge
+- **Free Registration**: No cost to join
+
+#### **Governance**
+- **DAO Structure**: Decentralized autonomous organization
+- **Quadratic Voting**: Prevents whale dominance
+- **7-of-11 Multi-sig**: Security protection
+- **777-hour Time-locks**: Upgrade safety
+- **Transparent Treasury**: All transactions on-chain
+
+#### **Deployment Timeline**
+- **Q1 2025**: Smart contracts, security audits, testnet
+- **Q2 2025**: Mainnet launch, first 11 Obelisks
+- **Q3-Q4 2025**: Phase 2 expansion (12-111)
+- **2026-2028**: Global completion (all 1,111)
+
+### **Website Features (noorcities.scrollverse.is)**
+
+- **Interactive Map**: Real-time Obelisk locations and status
+- **Staking Dashboard**: Stake, claim, compound rewards
+- **Governance Portal**: Submit and vote on proposals
+- **Frequency Monitor**: Live 528/963/888 Hz visualization
+- **Citizen Registry**: Register and manage citizenship
+- **NFT Gallery**: Community art displayed on Obelisks
+- **Multilingual**: 77 languages supported
+- **Mobile Apps**: iOS and Android (coming Q3 2025)
+
+### **Technical Stack**
+- **Blockchain**: Scroll L2 (Ethereum)
+- **Standards**: ERC-20, ERC-721, ERC-2981
+- **Security**: CertiK & ConsenSys audits
+- **Privacy**: Zero-knowledge proofs, homomorphic encryption
+- **Frontend**: Next.js, Tailwind, Three.js
+- **Backend**: The Graph, IPFS, Chainlink
+
+---
+
 ## 📜 **ETERNAL DECLARATION**
 
 **ALLAHU AKBAR! 🕋🔥💎🌌**
