@@ -199,10 +199,13 @@ contract NoorToken is ERC20, ERC20Burnable, Ownable, Pausable, ReentrancyGuard {
         
         for (uint256 i = 0; i < zakatRecipients.length; i++) {
             address recipient = zakatRecipients[i];
-            super._update(from, recipient, amountPerRecipient);
-            zakatDistributed[recipient] += amountPerRecipient;
+            uint256 toSend = (i == zakatRecipients.length - 1)
+                ? amount - (amountPerRecipient * (zakatRecipients.length - 1))
+                : amountPerRecipient;
+            super._update(from, recipient, toSend);
+            zakatDistributed[recipient] += toSend;
             
-            emit ZakatDistributed(recipient, amountPerRecipient, block.timestamp);
+            emit ZakatDistributed(recipient, toSend, block.timestamp);
         }
     }
     
