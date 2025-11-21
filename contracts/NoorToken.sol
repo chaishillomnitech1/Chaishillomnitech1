@@ -61,9 +61,6 @@ contract NoorToken is ERC20, ERC20Burnable, Ownable, Pausable, ReentrancyGuard {
     /// @dev Last frequency alignment timestamp
     mapping(address => uint256) public lastFrequencyAlignment;
     
-    /// @dev Frequency resonance bonus multiplier (basis points)
-    mapping(address => uint256) public resonanceBonus;
-    
     // ============ ZAKAT DISTRIBUTION STATE ============
     
     /// @dev Total zakat collected
