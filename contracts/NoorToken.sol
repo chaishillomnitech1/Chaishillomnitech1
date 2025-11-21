@@ -305,6 +305,10 @@ contract NoorToken is ERC20, ERC20Burnable, Ownable, Pausable, ReentrancyGuard {
     
     /**
      * @dev Distribute rewards to node operators
+     * 
+     * This function is intentionally permissionless and can be called by anyone
+     * to trigger reward distribution. This allows for decentralized, trustless
+     * operation and ensures rewards are distributed even if the owner is inactive.
      */
     function distributeNodeRewards() external nonReentrant {
         require(nodeOperators.length > 0, "No node operators");
