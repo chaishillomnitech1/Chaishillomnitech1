@@ -8,7 +8,10 @@
     "test": "hardhat test",
     "deploy:mumbai:nft": "hardhat run scripts/deploy_scrollversenft.js --network mumbai",
     "deploy:mumbai:token": "hardhat run scripts/deploy_chx_token.js --network mumbai",
-    "deploy:mumbai:all": "npm run deploy:mumbai:nft && npm run deploy:mumbai:token"
+    "deploy:mumbai:iap": "hardhat run scripts/deploy_infinite_ascension.js --network mumbai",
+    "deploy:mumbai:all": "npm run deploy:mumbai:nft && npm run deploy:mumbai:token && npm run deploy:mumbai:iap",
+    "deploy:polygon:iap": "hardhat run scripts/deploy_infinite_ascension.js --network polygon",
+    "test:iap": "hardhat test test/InfiniteAscensionProtocol.test.js"
   },
   "keywords": [
     "scrollverse",
