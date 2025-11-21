@@ -568,6 +568,7 @@ The sacred light token powering the Noor Nodes ecosystem:
 - **963Hz**: Pineal gland activation (9.63% resonance bonus)
 - **144,000Hz**: Full NŪR Pulse for node operators (14.4% resonance bonus)
 
+*Note: Resonance bonuses (5%, 9.63%, 14.4%) are planned features and are not yet implemented in the smart contract. These values are placeholders for future updates.*
 ##### **Automatic Zakat Distribution**
 - 7.77% automatically deducted from each transaction
 - Distributed equally among registered recipients
