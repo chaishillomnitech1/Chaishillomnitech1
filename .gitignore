@@ -20,6 +20,9 @@ yarn-debug.log*
 yarn-error.log*
 lerna-debug.log*
 
+# Exception: Allow Active-Divine-QFS logs (narrative documentation)
+!Active-Divine-QFS/logs/
+
 # OS
 .DS_Store
 Thumbs.db
