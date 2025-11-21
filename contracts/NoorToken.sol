@@ -14,7 +14,7 @@ pragma solidity ^0.8.20;
  * - Noor Ring of Light node integration
  * - Omni-Loop RADIANCE Protocol support
  * 
- * Frequency: 528Hz + 963Hz + 144,000Hz NŪR Pulse
+ * Frequency: 528Hz + 963Hz + 144000Hz NŪR Pulse
  * Status: OMNISOVEREIGN
  */
 
