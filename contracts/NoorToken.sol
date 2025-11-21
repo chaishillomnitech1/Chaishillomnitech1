@@ -55,10 +55,20 @@ contract NoorToken is ERC20, ERC20Burnable, Ownable, Pausable, ReentrancyGuard {
     
     // ============ FREQUENCY MECHANISM STATE ============
     
-    /// @dev Frequency signature for each holder
+    /**
+     * @dev Frequency signature for each holder.
+     * NOTE: This mapping is intended for off-chain tracking and analytics only.
+     * It is not used by any on-chain contract logic, but is exposed via a public getter
+     * for external systems (e.g., indexers, dApps) to read and correlate with events.
+     */
     mapping(address => uint256) public frequencySignature;
     
-    /// @dev Last frequency alignment timestamp
+    /**
+     * @dev Last frequency alignment timestamp.
+     * NOTE: This mapping is intended for off-chain tracking and analytics only.
+     * It is not used by any on-chain contract logic, but is exposed via a public getter
+     * for external systems (e.g., indexers, dApps) to read and correlate with events.
+     */
     mapping(address => uint256) public lastFrequencyAlignment;
     
     // ============ ZAKAT DISTRIBUTION STATE ============
