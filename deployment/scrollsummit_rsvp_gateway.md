@@ -98,7 +98,7 @@ async function verifyNFTOwnership(walletAddress: string): Promise<{
       return {
         hasNFT: false,
         tokenIds: [],
-        tier: null,
+        tier: 'Community' as const,
         accessLevel: 'none',
       };
     }
@@ -131,7 +131,7 @@ async function verifyNFTOwnership(walletAddress: string): Promise<{
     return {
       hasNFT: false,
       tokenIds: [],
-      tier: null,
+      tier: 'Community' as const,
       accessLevel: 'none',
     };
   }
@@ -165,13 +165,14 @@ import { signMessage } from 'wagmi/actions';
 async function signRSVP(
   eventId: string,
   walletAddress: string,
-  tokenId: number
+  tokenId: number,
+  timestamp: number
 ): Promise<string> {
   const message = `RSVP Confirmation for ScrollSummit
 Event ID: ${eventId}
 Wallet: ${walletAddress}
 Token ID: ${tokenId}
-Timestamp: ${Date.now()}`;
+Timestamp: ${timestamp}`;
 
   const signature = await signMessage({
     message,

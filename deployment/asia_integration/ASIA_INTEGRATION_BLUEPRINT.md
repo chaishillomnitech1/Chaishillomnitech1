@@ -24,7 +24,7 @@ The Asia Integration Phase establishes ScrollVerse presence across three strateg
 
 1. **Partner with Japanese AI Robotics Leaders**
    - SoftBank Robotics (Pepper, NAO humanoid robots)
-   - Honda Advanced Mobility (ASIMO evolution)
+   - Honda Research Institute (Autonomous mobility and AI research)
    - Sony AI (Gaming and entertainment robotics)
    - Toyota Research Institute (Autonomous systems)
 

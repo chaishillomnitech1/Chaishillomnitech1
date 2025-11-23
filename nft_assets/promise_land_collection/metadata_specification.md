@@ -200,7 +200,7 @@ Each Promise Land NFT includes zkProof metadata for verification:
       "token_id": "{tokenId}",
       "owner_address": "{owner}",
       "mint_timestamp": "{timestamp}",
-      "authenticity_seal": "SCROLL_VERIFIED"
+      "authenticity_seal": "Scroll_VERIFIED"
     }
   }
 }

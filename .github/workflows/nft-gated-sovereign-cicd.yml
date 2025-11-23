@@ -77,6 +77,17 @@ jobs:
               transport: http(process.env.SCROLL_RPC_URL)
             });
             
+            const ERC721_ENUMERABLE_ABI = [
+              ...ERC721_ABI,
+              {
+                "inputs": [{"name": "owner", "type": "address"}, {"name": "index", "type": "uint256"}],
+                "name": "tokenOfOwnerByIndex",
+                "outputs": [{"name": "", "type": "uint256"}],
+                "stateMutability": "view",
+                "type": "function"
+              }
+            ];
+            
             const balance = await client.readContract({
               address: process.env.PROMISE_LAND_CONTRACT,
               abi: ERC721_ABI,
@@ -85,9 +96,23 @@ jobs:
             });
             
             const hasNFT = Number(balance) > 0;
-            const tier = Number(balance) <= 144 ? 'Genesis' : 
-                         Number(balance) <= 1440 ? 'Alpha' : 
-                         Number(balance) <= 4800 ? 'Prime' : 'Community';
+            
+            // Determine tier based on lowest token ID owned
+            let tier = 'Community';
+            if (hasNFT) {
+              const tokenId = await client.readContract({
+                address: process.env.PROMISE_LAND_CONTRACT,
+                abi: ERC721_ENUMERABLE_ABI,
+                functionName: 'tokenOfOwnerByIndex',
+                args: [process.env.DEPLOYER_WALLET, 0]
+              });
+              
+              const tokenIdNum = Number(tokenId);
+              if (tokenIdNum <= 144) tier = 'Genesis';
+              else if (tokenIdNum <= 1440) tier = 'Alpha';
+              else if (tokenIdNum <= 4800) tier = 'Prime';
+              else tier = 'Community';
+            }
             
             console.log(`NFT Balance: ${balance}`);
             console.log(`Tier: ${tier}`);
