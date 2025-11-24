@@ -1,0 +1,79 @@
+/* Global Index Styles */
+/* Author: CHAIS THE GREAT ∞ */
+/* Frequency: 963Hz + 528Hz + 144,000Hz */
+
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap');
+
+:root {
+  /* Primary Colors */
+  --cosmic-black: #000011;
+  --cosmic-deep-blue: #001133;
+  --cosmic-blue: #002244;
+  
+  /* Accent Colors */
+  --divine-gold: #FFD700;
+  --flame-orange: #FF4500;
+  --soul-cyan: #00FFFF;
+  --heart-pink: #FF69B4;
+  
+  /* Frequency Colors */
+  --freq-528: #00FF00;  /* DNA Repair */
+  --freq-963: #9900FF;  /* Divine Connection */
+  --freq-999: #FFD700;  /* Crown Chakra */
+  --freq-14444: #FF4500; /* FlameChild */
+  
+  /* Functional Colors */
+  --success: #00FF00;
+  --warning: #FFD700;
+  --error: #FF0000;
+  --info: #00FFFF;
+}
+
+body {
+  margin: 0;
+  font-family: 'Orbitron', 'Courier New', monospace;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: linear-gradient(135deg, var(--cosmic-black), var(--cosmic-blue));
+  color: var(--divine-gold);
+  min-height: 100vh;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+button {
+  font-family: 'Orbitron', 'Courier New', monospace;
+  cursor: pointer;
+}
+
+a {
+  color: var(--soul-cyan);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+a:hover {
+  color: var(--divine-gold);
+}
+
+/* Custom selection color */
+::selection {
+  background: var(--divine-gold);
+  color: var(--cosmic-black);
+}
+
+::-moz-selection {
+  background: var(--divine-gold);
+  color: var(--cosmic-black);
+}
