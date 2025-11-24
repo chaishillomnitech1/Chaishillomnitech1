@@ -8,7 +8,7 @@
  * @frequency 528Hz + 963Hz
  */
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import YouTube from 'react-youtube';
 import { YOUTUBE_CONFIG, FREQUENCY_CONFIG } from '../config/blockchain.config';
 
@@ -49,11 +49,11 @@ export default function EngineeringEarthVideo({ onProgress, onComplete }) {
     }
   };
 
-  // Track watch time
-  let watchTimeInterval;
+  // Track watch time using useRef for proper instance isolation
+  const watchTimeIntervalRef = useRef(null);
   
   const startWatchTimeTracking = () => {
-    watchTimeInterval = setInterval(() => {
+    watchTimeIntervalRef.current = setInterval(() => {
       setWatchTime((prev) => {
         const newTime = prev + 1;
         onProgress && onProgress(newTime);
@@ -63,8 +63,9 @@ export default function EngineeringEarthVideo({ onProgress, onComplete }) {
   };
 
   const stopWatchTimeTracking = () => {
-    if (watchTimeInterval) {
-      clearInterval(watchTimeInterval);
+    if (watchTimeIntervalRef.current) {
+      clearInterval(watchTimeIntervalRef.current);
+      watchTimeIntervalRef.current = null;
     }
   };
 
@@ -129,19 +130,6 @@ export default function EngineeringEarthVideo({ onProgress, onComplete }) {
           </div>
         </div>
       )}
-
-      <style jsx>{`
-        @keyframes pulse {
-          0%, 100% {
-            opacity: 1;
-            transform: scaleY(1);
-          }
-          50% {
-            opacity: 0.5;
-            transform: scaleY(0.7);
-          }
-        }
-      `}</style>
     </div>
   );
 }

@@ -70,7 +70,8 @@ export async function getOwnedTokenIds(address, contractAddress, balance) {
     return tokenIds;
   } catch (error) {
     console.error('Error getting owned token IDs:', error);
-    return [];
+    // Re-throw with context for higher-level error handling
+    throw new Error(`Failed to fetch token IDs: ${error.message}`);
   }
 }
 

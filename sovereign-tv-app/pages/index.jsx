@@ -56,8 +56,12 @@ export default function Home() {
 
   // Handle video completion
   const handleVideoComplete = (totalTime) => {
-    console.log('Video completed. Total watch time:', totalTime);
-    // TODO: Reward user with ScrollCoin or NFT badge
+    // Reward system will be implemented in future update
+    // User will receive ScrollCoin rewards and NFT badges for watch milestones
+    setUserMetrics((prev) => ({
+      ...prev,
+      communityEngagement: prev.communityEngagement + 10,
+    }));
   };
 
   // Get tier level number

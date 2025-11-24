@@ -72,10 +72,21 @@ export class SovereignHarmonyDevice {
    * Disconnect from harmony device
    */
   async disconnect() {
-    // TODO: Implement disconnect logic
-    this.status = 'disconnected';
-    this.sessionId = null;
-    this.emit('disconnected');
+    if (!this.sessionId) {
+      return { success: true, message: 'Device already disconnected' };
+    }
+
+    try {
+      // Future implementation will call API to close device connection
+      // For now, just clear local state
+      this.status = 'disconnected';
+      this.sessionId = null;
+      this.emit('disconnected');
+      return { success: true, message: 'Device disconnected successfully' };
+    } catch (error) {
+      console.error('Error disconnecting device:', error);
+      throw error;
+    }
   }
 
   /**

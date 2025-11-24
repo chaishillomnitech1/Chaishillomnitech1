@@ -13,7 +13,7 @@ import { scroll } from 'viem/chains';
 // Scroll zkEVM Chain Configuration
 export const scrollChain = {
   ...scroll,
-  id: parseInt(process.env.NEXT_PUBLIC_SCROLL_CHAIN_ID || '534352'),
+  id: parseInt(process.env.NEXT_PUBLIC_SCROLL_CHAIN_ID || '534352', 10),
   name: 'Scroll',
   network: 'scroll',
   nativeCurrency: {
