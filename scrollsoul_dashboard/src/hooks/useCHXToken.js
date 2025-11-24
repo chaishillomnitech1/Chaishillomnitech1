@@ -12,7 +12,7 @@ import { CHX_TOKEN_ADDRESS, CHX_TOKEN_ABI } from '../config/contracts';
  * @returns {Object} CHXToken methods and state
  */
 export const useCHXToken = () => {
-  const { provider, signer, connected } = useWeb3();
+  const { provider, signer } = useWeb3();
   const [contract, setContract] = useState(null);
   const [contractWithSigner, setContractWithSigner] = useState(null);
 
