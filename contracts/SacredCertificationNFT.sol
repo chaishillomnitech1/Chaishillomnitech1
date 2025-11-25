@@ -126,8 +126,8 @@ contract SacredCertificationNFT is
 
     // ============ STATE VARIABLES ============
 
-    /// @dev Token ID counter
-    uint256 private _tokenIdCounter;
+    /// @dev Token ID counter - starts at 1 to avoid ambiguity with 0 as "not found"
+    uint256 private _tokenIdCounter = 1;
 
     /// @dev Base URI for token metadata
     string private _baseTokenURI;
@@ -319,7 +319,7 @@ contract SacredCertificationNFT is
     // ============ MINTING FUNCTIONS ============
 
     /**
-     * @dev Mint a new Sacred Certification NFT with IPFS integration
+     * @dev Internal function to mint a Sacred Certification NFT
      * @param to Address to receive the NFT
      * @param ipfsHash IPFS CID for the artifact
      * @param artifactHash SHA-256 hash of artifact content
@@ -329,7 +329,7 @@ contract SacredCertificationNFT is
      * @param primaryFrequency Primary frequency alignment
      * @return tokenId The minted token ID
      */
-    function mintSacredCertification(
+    function _mintCertificationInternal(
         address to,
         string memory ipfsHash,
         bytes32 artifactHash,
@@ -337,19 +337,23 @@ contract SacredCertificationNFT is
         ArtifactType artifactType,
         string memory artifactName,
         uint256 primaryFrequency
-    )
-        external
-        onlyAuthorizedCertifier
-        nonReentrant
-        validGeometryPattern(geometryPattern)
-        validFrequency(primaryFrequency)
-        returns (uint256)
-    {
-        require(_tokenIdCounter < MAX_SUPPLY, "Max supply reached");
+    ) internal returns (uint256) {
+        require(_tokenIdCounter <= MAX_SUPPLY, "Max supply reached");
         require(to != address(0), "Invalid recipient");
         require(bytes(ipfsHash).length > 0, "IPFS hash required");
         require(artifactHash != bytes32(0), "Artifact hash required");
         require(bytes(artifactName).length > 0, "Artifact name required");
+        require(
+            uint8(geometryPattern) <= uint8(SacredGeometryPattern.MERKABA),
+            "Invalid geometry pattern"
+        );
+        require(
+            primaryFrequency == FREQUENCY_528HZ ||
+            primaryFrequency == FREQUENCY_963HZ ||
+            primaryFrequency == FREQUENCY_999HZ ||
+            primaryFrequency == FREQUENCY_144000HZ,
+            "Invalid frequency"
+        );
 
         // Ensure IPFS hash is not already certified
         require(ipfsHashToTokenId[ipfsHash] == 0, "IPFS hash already certified");
@@ -416,6 +420,42 @@ contract SacredCertificationNFT is
     }
 
     /**
+     * @dev Mint a new Sacred Certification NFT with IPFS integration
+     * @param to Address to receive the NFT
+     * @param ipfsHash IPFS CID for the artifact
+     * @param artifactHash SHA-256 hash of artifact content
+     * @param geometryPattern Sacred geometry pattern for the certification
+     * @param artifactType Type of artifact being certified
+     * @param artifactName Human-readable name of the artifact
+     * @param primaryFrequency Primary frequency alignment
+     * @return tokenId The minted token ID
+     */
+    function mintSacredCertification(
+        address to,
+        string memory ipfsHash,
+        bytes32 artifactHash,
+        SacredGeometryPattern geometryPattern,
+        ArtifactType artifactType,
+        string memory artifactName,
+        uint256 primaryFrequency
+    )
+        external
+        onlyAuthorizedCertifier
+        nonReentrant
+        returns (uint256)
+    {
+        return _mintCertificationInternal(
+            to,
+            ipfsHash,
+            artifactHash,
+            geometryPattern,
+            artifactType,
+            artifactName,
+            primaryFrequency
+        );
+    }
+
+    /**
      * @dev Mint with extended IPFS metadata
      * @param to Address to receive the NFT
      * @param ipfsHash IPFS CID
@@ -441,7 +481,7 @@ contract SacredCertificationNFT is
         uint256 fileSize,
         string memory mimeType
     ) external onlyAuthorizedCertifier nonReentrant returns (uint256) {
-        uint256 tokenId = this.mintSacredCertification(
+        uint256 tokenId = _mintCertificationInternal(
             to,
             ipfsHash,
             artifactHash,

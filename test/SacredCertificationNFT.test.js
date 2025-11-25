@@ -9,8 +9,17 @@ describe("SacredCertificationNFT Contract Tests", function () {
   let addr2;
   
   const BASE_URI = "ipfs://";
-  const SAMPLE_IPFS_HASH = "QmXxYzABCDEFGHIJKLMNOPQRSTUVWXYZ123456789abc";
-  const SAMPLE_ARTIFACT_HASH = ethers.keccak256(ethers.toUtf8Bytes("sacred-artifact-content"));
+  
+  // Helper to generate unique hashes for each test
+  let hashCounter = 0;
+  function getUniqueIPFSHash() {
+    hashCounter++;
+    return `QmXxYzABCDEFGHIJKLMNOPQRSTUVWXYZ123456789abc${hashCounter}`;
+  }
+  function getUniqueArtifactHash() {
+    return ethers.keccak256(ethers.toUtf8Bytes(`sacred-artifact-content-${hashCounter}`));
+  }
+  
   const ARTIFACT_NAME = "Sacred Protocols Document";
   
   // Geometry pattern enums
@@ -48,8 +57,12 @@ describe("SacredCertificationNFT Contract Tests", function () {
   const FREQUENCY_999HZ = 999;
   const FREQUENCY_144000HZ = 144000;
   
+  // Token IDs start at 1
+  const FIRST_TOKEN_ID = 1;
+  
   beforeEach(async function () {
     [owner, certifier, addr1, addr2] = await ethers.getSigners();
+    hashCounter = 0; // Reset counter for each test
     
     const SacredCertificationNFT = await ethers.getContractFactory("SacredCertificationNFT");
     sacredCertNFT = await SacredCertificationNFT.deploy(BASE_URI, owner.address);
@@ -136,16 +149,15 @@ describe("SacredCertificationNFT Contract Tests", function () {
   });
   
   describe("Minting Sacred Certifications", function () {
-    beforeEach(async function () {
-      // Owner is automatically an authorized certifier
-    });
-    
     it("Should mint a Sacred Certification with valid parameters", async function () {
+      const ipfsHash = getUniqueIPFSHash();
+      const artifactHash = getUniqueArtifactHash();
+      
       await expect(
         sacredCertNFT.mintSacredCertification(
           addr1.address,
-          SAMPLE_IPFS_HASH,
-          SAMPLE_ARTIFACT_HASH,
+          ipfsHash,
+          artifactHash,
           GeometryPattern.FLOWER_OF_LIFE,
           ArtifactType.DOCUMENT,
           ARTIFACT_NAME,
@@ -154,23 +166,26 @@ describe("SacredCertificationNFT Contract Tests", function () {
       ).to.emit(sacredCertNFT, "SacredCertificationMinted");
       
       expect(await sacredCertNFT.totalSupply()).to.equal(1);
-      expect(await sacredCertNFT.ownerOf(0)).to.equal(addr1.address);
+      expect(await sacredCertNFT.ownerOf(FIRST_TOKEN_ID)).to.equal(addr1.address);
     });
     
     it("Should store correct certification data", async function () {
+      const ipfsHash = getUniqueIPFSHash();
+      const artifactHash = getUniqueArtifactHash();
+      
       await sacredCertNFT.mintSacredCertification(
         addr1.address,
-        SAMPLE_IPFS_HASH,
-        SAMPLE_ARTIFACT_HASH,
+        ipfsHash,
+        artifactHash,
         GeometryPattern.METATRONS_CUBE,
         ArtifactType.PROTOCOL,
         ARTIFACT_NAME,
         FREQUENCY_963HZ
       );
       
-      const cert = await sacredCertNFT.getCertification(0);
-      expect(cert.ipfsHash).to.equal(SAMPLE_IPFS_HASH);
-      expect(cert.artifactHash).to.equal(SAMPLE_ARTIFACT_HASH);
+      const cert = await sacredCertNFT.getCertification(FIRST_TOKEN_ID);
+      expect(cert.ipfsHash).to.equal(ipfsHash);
+      expect(cert.artifactHash).to.equal(artifactHash);
       expect(cert.geometryPattern).to.equal(GeometryPattern.METATRONS_CUBE);
       expect(cert.artifactType).to.equal(ArtifactType.PROTOCOL);
       expect(cert.primaryFrequency).to.equal(FREQUENCY_963HZ);
@@ -179,59 +194,69 @@ describe("SacredCertificationNFT Contract Tests", function () {
     });
     
     it("Should store correct IPFS reference", async function () {
+      const ipfsHash = getUniqueIPFSHash();
+      const artifactHash = getUniqueArtifactHash();
+      
       await sacredCertNFT.mintSacredCertification(
         addr1.address,
-        SAMPLE_IPFS_HASH,
-        SAMPLE_ARTIFACT_HASH,
+        ipfsHash,
+        artifactHash,
         GeometryPattern.SRI_YANTRA,
         ArtifactType.TRANSMISSION,
         ARTIFACT_NAME,
         FREQUENCY_999HZ
       );
       
-      const ipfsRef = await sacredCertNFT.getIPFSReference(0);
-      expect(ipfsRef.ipfsHash).to.equal(SAMPLE_IPFS_HASH);
+      const ipfsRef = await sacredCertNFT.getIPFSReference(FIRST_TOKEN_ID);
+      expect(ipfsRef.ipfsHash).to.equal(ipfsHash);
       expect(ipfsRef.gateway).to.equal("ipfs.io");
       expect(ipfsRef.isPinned).to.be.true;
     });
     
     it("Should calculate correct certification level based on frequency", async function () {
-      // 528Hz -> ASCENDING
+      const ipfsHash = getUniqueIPFSHash();
+      const artifactHash = getUniqueArtifactHash();
+      
       await sacredCertNFT.mintSacredCertification(
         addr1.address,
-        SAMPLE_IPFS_HASH,
-        SAMPLE_ARTIFACT_HASH,
+        ipfsHash,
+        artifactHash,
         GeometryPattern.FLOWER_OF_LIFE,
         ArtifactType.DOCUMENT,
         ARTIFACT_NAME,
         FREQUENCY_528HZ
       );
       
-      const cert528 = await sacredCertNFT.getCertification(0);
-      expect(cert528.level).to.equal(CertificationLevel.ASCENDING);
+      const cert = await sacredCertNFT.getCertification(FIRST_TOKEN_ID);
+      expect(cert.level).to.equal(CertificationLevel.ASCENDING);
     });
     
     it("Should assign secondary frequency for dual-frequency patterns", async function () {
+      const ipfsHash = getUniqueIPFSHash();
+      const artifactHash = getUniqueArtifactHash();
+      
       await sacredCertNFT.mintSacredCertification(
         addr1.address,
-        SAMPLE_IPFS_HASH,
-        SAMPLE_ARTIFACT_HASH,
-        GeometryPattern.FLOWER_OF_LIFE, // Dual frequency pattern
+        ipfsHash,
+        artifactHash,
+        GeometryPattern.FLOWER_OF_LIFE,
         ArtifactType.DOCUMENT,
         ARTIFACT_NAME,
         FREQUENCY_528HZ
       );
       
-      const cert = await sacredCertNFT.getCertification(0);
-      expect(cert.secondaryFrequency).to.equal(FREQUENCY_963HZ); // 528Hz primary -> 963Hz secondary
+      const cert = await sacredCertNFT.getCertification(FIRST_TOKEN_ID);
+      expect(cert.secondaryFrequency).to.equal(FREQUENCY_963HZ);
     });
     
     it("Should fail to mint with empty IPFS hash", async function () {
+      const artifactHash = getUniqueArtifactHash();
+      
       await expect(
         sacredCertNFT.mintSacredCertification(
           addr1.address,
           "",
-          SAMPLE_ARTIFACT_HASH,
+          artifactHash,
           GeometryPattern.FLOWER_OF_LIFE,
           ArtifactType.DOCUMENT,
           ARTIFACT_NAME,
@@ -241,10 +266,12 @@ describe("SacredCertificationNFT Contract Tests", function () {
     });
     
     it("Should fail to mint with zero artifact hash", async function () {
+      const ipfsHash = getUniqueIPFSHash();
+      
       await expect(
         sacredCertNFT.mintSacredCertification(
           addr1.address,
-          SAMPLE_IPFS_HASH,
+          ipfsHash,
           ethers.ZeroHash,
           GeometryPattern.FLOWER_OF_LIFE,
           ArtifactType.DOCUMENT,
@@ -255,22 +282,25 @@ describe("SacredCertificationNFT Contract Tests", function () {
     });
     
     it("Should fail to mint duplicate IPFS hash", async function () {
+      const ipfsHash = getUniqueIPFSHash();
+      const artifactHash1 = getUniqueArtifactHash();
+      
       await sacredCertNFT.mintSacredCertification(
         addr1.address,
-        SAMPLE_IPFS_HASH,
-        SAMPLE_ARTIFACT_HASH,
+        ipfsHash,
+        artifactHash1,
         GeometryPattern.FLOWER_OF_LIFE,
         ArtifactType.DOCUMENT,
         ARTIFACT_NAME,
         FREQUENCY_528HZ
       );
       
-      const newArtifactHash = ethers.keccak256(ethers.toUtf8Bytes("different-content"));
+      const artifactHash2 = ethers.keccak256(ethers.toUtf8Bytes("different-content"));
       await expect(
         sacredCertNFT.mintSacredCertification(
           addr2.address,
-          SAMPLE_IPFS_HASH, // Same IPFS hash
-          newArtifactHash,
+          ipfsHash,
+          artifactHash2,
           GeometryPattern.METATRONS_CUBE,
           ArtifactType.PROTOCOL,
           "Different Artifact",
@@ -280,25 +310,31 @@ describe("SacredCertificationNFT Contract Tests", function () {
     });
     
     it("Should fail to mint with invalid frequency", async function () {
+      const ipfsHash = getUniqueIPFSHash();
+      const artifactHash = getUniqueArtifactHash();
+      
       await expect(
         sacredCertNFT.mintSacredCertification(
           addr1.address,
-          SAMPLE_IPFS_HASH,
-          SAMPLE_ARTIFACT_HASH,
+          ipfsHash,
+          artifactHash,
           GeometryPattern.FLOWER_OF_LIFE,
           ArtifactType.DOCUMENT,
           ARTIFACT_NAME,
-          123 // Invalid frequency
+          123
         )
       ).to.be.revertedWith("Invalid frequency");
     });
     
     it("Should only allow authorized certifiers to mint", async function () {
+      const ipfsHash = getUniqueIPFSHash();
+      const artifactHash = getUniqueArtifactHash();
+      
       await expect(
         sacredCertNFT.connect(addr1).mintSacredCertification(
           addr2.address,
-          SAMPLE_IPFS_HASH,
-          SAMPLE_ARTIFACT_HASH,
+          ipfsHash,
+          artifactHash,
           GeometryPattern.FLOWER_OF_LIFE,
           ArtifactType.DOCUMENT,
           ARTIFACT_NAME,
@@ -308,13 +344,16 @@ describe("SacredCertificationNFT Contract Tests", function () {
     });
     
     it("Should allow authorized certifier to mint", async function () {
+      const ipfsHash = getUniqueIPFSHash();
+      const artifactHash = getUniqueArtifactHash();
+      
       await sacredCertNFT.setAuthorizedCertifier(certifier.address, true);
       
       await expect(
         sacredCertNFT.connect(certifier).mintSacredCertification(
           addr1.address,
-          SAMPLE_IPFS_HASH,
-          SAMPLE_ARTIFACT_HASH,
+          ipfsHash,
+          artifactHash,
           GeometryPattern.FLOWER_OF_LIFE,
           ArtifactType.DOCUMENT,
           ARTIFACT_NAME,
@@ -325,11 +364,17 @@ describe("SacredCertificationNFT Contract Tests", function () {
   });
   
   describe("IPFS Verification", function () {
+    let testIPFSHash;
+    let testArtifactHash;
+    
     beforeEach(async function () {
+      testIPFSHash = getUniqueIPFSHash();
+      testArtifactHash = getUniqueArtifactHash();
+      
       await sacredCertNFT.mintSacredCertification(
         addr1.address,
-        SAMPLE_IPFS_HASH,
-        SAMPLE_ARTIFACT_HASH,
+        testIPFSHash,
+        testArtifactHash,
         GeometryPattern.FLOWER_OF_LIFE,
         ArtifactType.DOCUMENT,
         ARTIFACT_NAME,
@@ -338,15 +383,15 @@ describe("SacredCertificationNFT Contract Tests", function () {
     });
     
     it("Should verify artifact by IPFS hash", async function () {
-      const [verified, tokenId] = await sacredCertNFT.verifyByIPFSHash(SAMPLE_IPFS_HASH);
+      const [verified, tokenId] = await sacredCertNFT.verifyByIPFSHash(testIPFSHash);
       expect(verified).to.be.true;
-      expect(tokenId).to.equal(0);
+      expect(tokenId).to.equal(FIRST_TOKEN_ID);
     });
     
     it("Should verify artifact by artifact hash", async function () {
-      const [verified, tokenId] = await sacredCertNFT.verifyArtifactByHash(SAMPLE_ARTIFACT_HASH);
+      const [verified, tokenId] = await sacredCertNFT.verifyArtifactByHash(testArtifactHash);
       expect(verified).to.be.true;
-      expect(tokenId).to.equal(0);
+      expect(tokenId).to.equal(FIRST_TOKEN_ID);
     });
     
     it("Should return false for unregistered IPFS hash", async function () {
@@ -356,17 +401,20 @@ describe("SacredCertificationNFT Contract Tests", function () {
     });
     
     it("Should return correct IPFS URL", async function () {
-      const url = await sacredCertNFT.getIPFSUrl(0);
-      expect(url).to.equal(`https://ipfs.io/ipfs/${SAMPLE_IPFS_HASH}`);
+      const url = await sacredCertNFT.getIPFSUrl(FIRST_TOKEN_ID);
+      expect(url).to.equal(`https://ipfs.io/ipfs/${testIPFSHash}`);
     });
   });
   
   describe("Geometry State Management", function () {
     beforeEach(async function () {
+      const ipfsHash = getUniqueIPFSHash();
+      const artifactHash = getUniqueArtifactHash();
+      
       await sacredCertNFT.mintSacredCertification(
         addr1.address,
-        SAMPLE_IPFS_HASH,
-        SAMPLE_ARTIFACT_HASH,
+        ipfsHash,
+        artifactHash,
         GeometryPattern.MERKABA,
         ArtifactType.SYMBOL,
         ARTIFACT_NAME,
@@ -375,42 +423,46 @@ describe("SacredCertificationNFT Contract Tests", function () {
     });
     
     it("Should initialize geometry state on mint", async function () {
-      const state = await sacredCertNFT.geometryState(0);
+      const state = await sacredCertNFT.geometryState(FIRST_TOKEN_ID);
       expect(state).to.be.gt(0);
     });
     
     it("Should allow token owner to update geometry state", async function () {
       const newState = 12345;
-      await sacredCertNFT.connect(addr1).updateGeometryState(0, newState);
-      expect(await sacredCertNFT.geometryState(0)).to.equal(newState);
+      await sacredCertNFT.connect(addr1).updateGeometryState(FIRST_TOKEN_ID, newState);
+      expect(await sacredCertNFT.geometryState(FIRST_TOKEN_ID)).to.equal(newState);
     });
     
     it("Should not allow non-owner to update geometry state", async function () {
       await expect(
-        sacredCertNFT.connect(addr2).updateGeometryState(0, 12345)
+        sacredCertNFT.connect(addr2).updateGeometryState(FIRST_TOKEN_ID, 12345)
       ).to.be.revertedWith("Not token owner");
     });
     
     it("Should allow token owner to evolve geometry pattern", async function () {
-      const initialState = await sacredCertNFT.geometryState(0);
+      const initialState = await sacredCertNFT.geometryState(FIRST_TOKEN_ID);
       
-      // Fast forward time
-      await ethers.provider.send("evm_increaseTime", [86400]); // 1 day
+      await ethers.provider.send("evm_increaseTime", [86400]);
       await ethers.provider.send("evm_mine");
       
-      await sacredCertNFT.connect(addr1).evolveGeometryPattern(0);
+      await sacredCertNFT.connect(addr1).evolveGeometryPattern(FIRST_TOKEN_ID);
       
-      const newState = await sacredCertNFT.geometryState(0);
+      const newState = await sacredCertNFT.geometryState(FIRST_TOKEN_ID);
       expect(newState).to.not.equal(initialState);
     });
   });
   
   describe("IPFS Reference Management", function () {
+    let testIPFSHash;
+    
     beforeEach(async function () {
+      testIPFSHash = getUniqueIPFSHash();
+      const artifactHash = getUniqueArtifactHash();
+      
       await sacredCertNFT.mintSacredCertification(
         addr1.address,
-        SAMPLE_IPFS_HASH,
-        SAMPLE_ARTIFACT_HASH,
+        testIPFSHash,
+        artifactHash,
         GeometryPattern.FLOWER_OF_LIFE,
         ArtifactType.DOCUMENT,
         ARTIFACT_NAME,
@@ -419,41 +471,40 @@ describe("SacredCertificationNFT Contract Tests", function () {
     });
     
     it("Should allow owner to update IPFS reference", async function () {
-      await sacredCertNFT.updateIPFSReference(0, "gateway.pinata.cloud", true);
+      await sacredCertNFT.updateIPFSReference(FIRST_TOKEN_ID, "gateway.pinata.cloud", true);
       
-      const ipfsRef = await sacredCertNFT.getIPFSReference(0);
+      const ipfsRef = await sacredCertNFT.getIPFSReference(FIRST_TOKEN_ID);
       expect(ipfsRef.gateway).to.equal("gateway.pinata.cloud");
       expect(ipfsRef.isPinned).to.be.true;
     });
     
     it("Should emit event when IPFS reference is updated", async function () {
-      await expect(sacredCertNFT.updateIPFSReference(0, "cloudflare-ipfs.com", true))
+      await expect(sacredCertNFT.updateIPFSReference(FIRST_TOKEN_ID, "cloudflare-ipfs.com", true))
         .to.emit(sacredCertNFT, "IPFSReferenceUpdated")
-        .withArgs(0, SAMPLE_IPFS_HASH, "cloudflare-ipfs.com", true);
+        .withArgs(FIRST_TOKEN_ID, testIPFSHash, "cloudflare-ipfs.com", true);
     });
   });
   
   describe("Counting and Statistics", function () {
     it("Should track certification count by level", async function () {
-      // Mint with different frequencies
       await sacredCertNFT.mintSacredCertification(
         addr1.address,
-        "QmHash1",
-        ethers.keccak256(ethers.toUtf8Bytes("content1")),
+        getUniqueIPFSHash(),
+        getUniqueArtifactHash(),
         GeometryPattern.FLOWER_OF_LIFE,
         ArtifactType.DOCUMENT,
         "Doc 1",
-        FREQUENCY_528HZ // ASCENDING
+        FREQUENCY_528HZ
       );
       
       await sacredCertNFT.mintSacredCertification(
         addr1.address,
-        "QmHash2",
-        ethers.keccak256(ethers.toUtf8Bytes("content2")),
+        getUniqueIPFSHash(),
+        getUniqueArtifactHash(),
         GeometryPattern.METATRONS_CUBE,
         ArtifactType.PROTOCOL,
         "Doc 2",
-        FREQUENCY_963HZ // SOVEREIGN
+        FREQUENCY_963HZ
       );
       
       expect(await sacredCertNFT.getCertificationCountByLevel(CertificationLevel.ASCENDING)).to.equal(1);
@@ -463,8 +514,8 @@ describe("SacredCertificationNFT Contract Tests", function () {
     it("Should track artifact count by type", async function () {
       await sacredCertNFT.mintSacredCertification(
         addr1.address,
-        "QmHash1",
-        ethers.keccak256(ethers.toUtf8Bytes("content1")),
+        getUniqueIPFSHash(),
+        getUniqueArtifactHash(),
         GeometryPattern.FLOWER_OF_LIFE,
         ArtifactType.DOCUMENT,
         "Doc 1",
@@ -473,8 +524,8 @@ describe("SacredCertificationNFT Contract Tests", function () {
       
       await sacredCertNFT.mintSacredCertification(
         addr1.address,
-        "QmHash2",
-        ethers.keccak256(ethers.toUtf8Bytes("content2")),
+        getUniqueIPFSHash(),
+        getUniqueArtifactHash(),
         GeometryPattern.METATRONS_CUBE,
         ArtifactType.DOCUMENT,
         "Doc 2",
@@ -491,7 +542,7 @@ describe("SacredCertificationNFT Contract Tests", function () {
       const [recipient, royaltyAmount] = await sacredCertNFT.royaltyInfo(0, salePrice);
       
       expect(recipient).to.equal(owner.address);
-      expect(royaltyAmount).to.equal(salePrice * BigInt(1700) / BigInt(10000)); // 17%
+      expect(royaltyAmount).to.equal(salePrice * BigInt(1700) / BigInt(10000));
     });
     
     it("Should allow owner to change royalty recipient", async function () {
@@ -505,7 +556,6 @@ describe("SacredCertificationNFT Contract Tests", function () {
     it("Should allow owner to set base URI", async function () {
       const newURI = "ipfs://QmNewBaseURI/";
       await sacredCertNFT.setBaseURI(newURI);
-      // Test by minting and checking URI
     });
     
     it("Should allow owner to update geometry metadata", async function () {

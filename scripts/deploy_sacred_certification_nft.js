@@ -3,6 +3,8 @@
 // Author: Supreme King Chais The Great ∞
 
 const hre = require("hardhat");
+const fs = require("fs");
+const path = require("path");
 
 async function main() {
   console.log("🔥 SACRED CERTIFICATION NFT - IPFS INTEGRATION DEPLOYMENT 🔥");
@@ -102,8 +104,6 @@ async function main() {
     royaltyPercentage: "17%"
   };
   
-  const fs = require("fs");
-  const path = require("path");
   const deploymentsDir = path.join(__dirname, "..", "deployments");
   
   if (!fs.existsSync(deploymentsDir)) {
