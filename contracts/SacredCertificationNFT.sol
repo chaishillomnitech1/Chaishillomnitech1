@@ -733,9 +733,10 @@ contract SacredCertificationNFT is
 
     /**
      * @dev Get current total supply
+     * @notice Since _tokenIdCounter starts at 1, total supply is counter - 1
      */
     function totalSupply() public view returns (uint256) {
-        return _tokenIdCounter;
+        return _tokenIdCounter - 1;
     }
 
     /**
