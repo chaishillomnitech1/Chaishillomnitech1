@@ -423,10 +423,31 @@ contract ScrollBridge is Ownable, ReentrancyGuard {
         return patternId;
     }
     
+    /// @dev Maximum number of nested security layers allowed
+    uint256 public constant MAX_NESTED_LAYERS = 10;
+    
     /**
      * @dev Compute Flower of Life harmonics based on complexity
      * @param complexity Complexity level (1-10)
      * @return harmonics Array of harmonic frequencies
+     * 
+     * Mathematical Basis:
+     * The Flower of Life is constructed from overlapping circles. Each harmonic
+     * frequency is derived by scaling the base frequency (528 Hz) using the
+     * Golden Ratio (PHI = 1.618). The formula approximates PHI^(i/n) through
+     * linear interpolation: frequency = base * (1 + (PHI-1) * i/n)
+     * 
+     * This produces harmonics that resonate with sacred geometric proportions,
+     * creating a mathematically coherent frequency spectrum from 528 Hz to
+     * approximately 854 Hz (528 * 1.618) across the pattern nodes.
+     * 
+     * Overflow Safety:
+     * - nodeCount is bounded by FLOWER_OF_LIFE_NODES (19)
+     * - i is bounded by nodeCount (max 19)
+     * - PHI_RATIO - 10000 = 6180
+     * - Max multiplier = 10000 + (6180 * 18) / 19 = 10000 + 5852 = 15852
+     * - Max harmonic = 528 * 15852 / 10000 = 837 Hz
+     * All values are well within uint256 bounds.
      */
     function _computeFlowerOfLifeHarmonics(uint256 complexity) 
         internal 
@@ -443,8 +464,9 @@ contract ScrollBridge is Ownable, ReentrancyGuard {
         
         for (uint256 i = 0; i < nodeCount; i++) {
             // Apply PHI ratio scaling for each harmonic
-            // Base frequency * PHI^(i/nodeCount)
+            // Linear approximation of PHI^(i/nodeCount): base * (1 + (PHI-1) * i/n)
             uint256 baseFreq = FREQUENCY_528HZ;
+            // PHI_RATIO = 16180 (1.618 * 10000), so (PHI_RATIO - 10000) = 6180
             uint256 multiplier = 10000 + ((PHI_RATIO - 10000) * i) / nodeCount;
             harmonics[i] = (baseFreq * multiplier) / 10000;
         }
@@ -601,6 +623,7 @@ contract ScrollBridge is Ownable, ReentrancyGuard {
         require(bridgeActive, "Bridge is not active");
         require(securityTier >= 1 && securityTier <= 5, "Security tier must be 1-5");
         require(heatIndex <= 10000, "Heat index must be 0-10000");
+        require(nestedLayerIds.length <= MAX_NESTED_LAYERS, "Too many nested layers");
         
         // Validate nested layer IDs if nested
         if (isNested) {

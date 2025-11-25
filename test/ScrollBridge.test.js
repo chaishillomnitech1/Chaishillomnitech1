@@ -71,6 +71,10 @@ describe("ScrollBridge Contract Tests", function () {
       expect(await scrollBridge.FREQUENCY_999HZ()).to.equal(999);
       expect(await scrollBridge.FREQUENCY_144000HZ()).to.equal(144000);
     });
+    
+    it("Should set correct security constant", async function () {
+      expect(await scrollBridge.MAX_NESTED_LAYERS()).to.equal(10);
+    });
   });
   
   describe("Modular Structure - Module Registration", function () {
@@ -112,7 +116,7 @@ describe("ScrollBridge Contract Tests", function () {
           1000,
           addr1.address
         )
-      ).to.be.reverted;
+      ).to.be.revertedWithCustomError(scrollBridge, "OwnableUnauthorizedAccount");
     });
     
     it("Should fail with zero address", async function () {
@@ -203,7 +207,7 @@ describe("ScrollBridge Contract Tests", function () {
           Pillar.TECHNOLOGY,
           Pillar.ISLAM
         )
-      ).to.be.reverted;
+      ).to.be.revertedWithCustomError(scrollBridge, "OwnableUnauthorizedAccount");
     });
   });
   
@@ -442,6 +446,15 @@ describe("ScrollBridge Contract Tests", function () {
       await expect(
         scrollBridge.createEdgeSecurityLayer(3, 10001, false, [])
       ).to.be.revertedWith("Heat index must be 0-10000");
+    });
+    
+    it("Should fail with too many nested layers", async function () {
+      // Create 11 fake layer IDs (exceeds MAX_NESTED_LAYERS of 10)
+      const tooManyLayers = Array(11).fill(ethers.keccak256(ethers.toUtf8Bytes("fake")));
+      
+      await expect(
+        scrollBridge.createEdgeSecurityLayer(3, 5000, true, tooManyLayers)
+      ).to.be.revertedWith("Too many nested layers");
     });
     
     it("Should update heat index successfully", async function () {
