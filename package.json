@@ -1,7 +1,7 @@
 {
   "name": "scrollverse-genesis-protocol",
-  "version": "1.0.0",
-  "description": "ScrollVerse Genesis Protocol - Quantum Ritual Deployment System",
+  "version": "1.1.0",
+  "description": "ScrollVerse Genesis Protocol - Quantum Ritual Deployment System with Sacred Certification IPFS Integration",
   "main": "index.js",
   "scripts": {
     "compile": "hardhat compile",
@@ -21,7 +21,11 @@
     "test:legacy-shield": "hardhat test test/LegacyShieldProtocol.test.js",
     "test:codex": "hardhat test test/CodexToken.test.js",
     "test:peace": "hardhat test test/PeaceCoin.test.js",
-    "test:osef": "npm run test:codex && npm run test:peace && npm run test:omni-wallet && npm run test:legacy-shield"
+    "test:osef": "npm run test:codex && npm run test:peace && npm run test:omni-wallet && npm run test:legacy-shield",
+    "deploy:mumbai:sacred-cert": "hardhat run scripts/deploy_sacred_certification_nft.js --network mumbai",
+    "deploy:polygon:sacred-cert": "hardhat run scripts/deploy_sacred_certification_nft.js --network polygon",
+    "deploy:scroll:sacred-cert": "hardhat run scripts/deploy_sacred_certification_nft.js --network scrollSepolia",
+    "test:sacred-cert": "hardhat test test/SacredCertificationNFT.test.js"
   },
   "keywords": [
     "scrollverse",
@@ -34,7 +38,10 @@
     "omni-sovereign",
     "mobile-wallet",
     "dao-governance",
-    "insurance"
+    "insurance",
+    "ipfs",
+    "sacred-geometry",
+    "certification"
   ],
   "author": "Supreme King Chais The Great ∞",
   "license": "MIT",
