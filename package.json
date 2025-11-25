@@ -11,7 +11,17 @@
     "deploy:mumbai:iap": "hardhat run scripts/deploy_infinite_ascension.js --network mumbai",
     "deploy:mumbai:all": "npm run deploy:mumbai:nft && npm run deploy:mumbai:token && npm run deploy:mumbai:iap",
     "deploy:polygon:iap": "hardhat run scripts/deploy_infinite_ascension.js --network polygon",
-    "test:iap": "hardhat test test/InfiniteAscensionProtocol.test.js"
+    "test:iap": "hardhat test test/InfiniteAscensionProtocol.test.js",
+    "deploy:mumbai:omni-wallet": "hardhat run scripts/deploy_omni_sovereign_wallet.js --network mumbai",
+    "deploy:mumbai:legacy-shield": "hardhat run scripts/deploy_legacy_shield_protocol.js --network mumbai",
+    "deploy:mumbai:codex": "hardhat run scripts/deploy_codex_token.js --network mumbai",
+    "deploy:mumbai:peace": "hardhat run scripts/deploy_peace_coin.js --network mumbai",
+    "deploy:mumbai:osef": "npm run deploy:mumbai:codex && npm run deploy:mumbai:peace && npm run deploy:mumbai:omni-wallet && npm run deploy:mumbai:legacy-shield",
+    "test:omni-wallet": "hardhat test test/OmniSovereignWallet.test.js",
+    "test:legacy-shield": "hardhat test test/LegacyShieldProtocol.test.js",
+    "test:codex": "hardhat test test/CodexToken.test.js",
+    "test:peace": "hardhat test test/PeaceCoin.test.js",
+    "test:osef": "npm run test:codex && npm run test:peace && npm run test:omni-wallet && npm run test:legacy-shield"
   },
   "keywords": [
     "scrollverse",
@@ -20,7 +30,11 @@
     "token",
     "polygon",
     "quantum",
-    "528hz"
+    "528hz",
+    "omni-sovereign",
+    "mobile-wallet",
+    "dao-governance",
+    "insurance"
   ],
   "author": "Supreme King Chais The Great ∞",
   "license": "MIT",
