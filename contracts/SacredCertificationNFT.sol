@@ -222,14 +222,22 @@ contract SacredCertificationNFT is
     }
 
     modifier validFrequency(uint256 frequency) {
-        require(
-            frequency == FREQUENCY_528HZ ||
-            frequency == FREQUENCY_963HZ ||
-            frequency == FREQUENCY_999HZ ||
-            frequency == FREQUENCY_144000HZ,
-            "Invalid frequency"
-        );
+        require(_isValidFrequency(frequency), "Invalid frequency");
         _;
+    }
+
+    // ============ PRIVATE HELPER FUNCTIONS ============
+
+    /**
+     * @dev Check if a frequency is valid
+     * @param frequency Frequency to check
+     * @return bool Whether the frequency is valid
+     */
+    function _isValidFrequency(uint256 frequency) private pure returns (bool) {
+        return frequency == FREQUENCY_528HZ ||
+               frequency == FREQUENCY_963HZ ||
+               frequency == FREQUENCY_999HZ ||
+               frequency == FREQUENCY_144000HZ;
     }
 
     // ============ CONSTRUCTOR ============
@@ -347,13 +355,7 @@ contract SacredCertificationNFT is
             uint8(geometryPattern) <= uint8(SacredGeometryPattern.MERKABA),
             "Invalid geometry pattern"
         );
-        require(
-            primaryFrequency == FREQUENCY_528HZ ||
-            primaryFrequency == FREQUENCY_963HZ ||
-            primaryFrequency == FREQUENCY_999HZ ||
-            primaryFrequency == FREQUENCY_144000HZ,
-            "Invalid frequency"
-        );
+        require(_isValidFrequency(primaryFrequency), "Invalid frequency");
 
         // Ensure IPFS hash is not already certified
         require(ipfsHashToTokenId[ipfsHash] == 0, "IPFS hash already certified");
