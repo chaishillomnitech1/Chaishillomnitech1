@@ -21,7 +21,10 @@
     "test:legacy-shield": "hardhat test test/LegacyShieldProtocol.test.js",
     "test:codex": "hardhat test test/CodexToken.test.js",
     "test:peace": "hardhat test test/PeaceCoin.test.js",
-    "test:osef": "npm run test:codex && npm run test:peace && npm run test:omni-wallet && npm run test:legacy-shield"
+    "test:osef": "npm run test:codex && npm run test:peace && npm run test:omni-wallet && npm run test:legacy-shield",
+    "deploy:mumbai:scrollbridge": "hardhat run scripts/deploy_scrollbridge.js --network mumbai",
+    "deploy:polygon:scrollbridge": "hardhat run scripts/deploy_scrollbridge.js --network polygon",
+    "test:scrollbridge": "hardhat test test/ScrollBridge.test.js"
   },
   "keywords": [
     "scrollverse",
@@ -34,7 +37,10 @@
     "omni-sovereign",
     "mobile-wallet",
     "dao-governance",
-    "insurance"
+    "insurance",
+    "scrollbridge",
+    "sacred-geometry",
+    "three-pillars"
   ],
   "author": "Supreme King Chais The Great ∞",
   "license": "MIT",
