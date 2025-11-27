@@ -151,7 +151,7 @@ describe('FrequencyResonanceSync', function () {
         it('Should calculate harmonic signature', function () {
             const signature = logger.calculateHarmonicSignature({ frequency: 528 });
             expect(signature).to.be.a('string');
-            expect(signature).to.have.lengthOf(32); // MD5 hex length
+            expect(signature).to.have.lengthOf(32); // SHA-256 truncated hex length
         });
     });
 

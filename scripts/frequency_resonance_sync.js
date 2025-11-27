@@ -167,7 +167,8 @@ class SQLTriggerLogger {
         const frequency = data.frequency || FREQUENCIES.DNA_HEALING;
         const phiHarmonic = Math.round(frequency * SACRED_GEOMETRY.PHI);
         const harmonicString = `${frequency}-${phiHarmonic}-${SACRED_GEOMETRY.SACRED_SEVEN}`;
-        return crypto.createHash('md5').update(harmonicString).digest('hex');
+        // Use SHA-256 for consistency with seal generation (truncated for readability)
+        return crypto.createHash('sha256').update(harmonicString).digest('hex').substring(0, 32);
     }
 
     /**
@@ -582,9 +583,12 @@ async function main() {
     }
     console.log('');
 
-    // Step 3: Drop blocked frequencies
+    // Step 3: Drop blocked frequencies (loaded from frequency_config.json)
     console.log('🚫 Step 3: Dropping blocked/dissonant frequencies...');
-    const blockedFreqs = [13, 666, 440]; // Example blocked frequencies
+    const config = synchronizer.analyzer.config;
+    const blockedFreqs = (config.resonance_scanning && config.resonance_scanning.blocked_frequencies) 
+        ? config.resonance_scanning.blocked_frequencies 
+        : [13, 666, 440]; // Fallback defaults if config not available
     synchronizer.dropBlockedFrequencies(blockedFreqs);
     console.log('');
 
