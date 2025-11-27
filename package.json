@@ -25,7 +25,9 @@
     "deploy:mumbai:sacred-cert": "hardhat run scripts/deploy_sacred_certification_nft.js --network mumbai",
     "deploy:polygon:sacred-cert": "hardhat run scripts/deploy_sacred_certification_nft.js --network polygon",
     "deploy:scroll:sacred-cert": "hardhat run scripts/deploy_sacred_certification_nft.js --network scrollSepolia",
-    "test:sacred-cert": "hardhat test test/SacredCertificationNFT.test.js"
+    "test:sacred-cert": "hardhat test test/SacredCertificationNFT.test.js",
+    "frequency:sync": "node scripts/frequency_resonance_sync.js",
+    "test:frequency": "npx mocha test/FrequencyResonanceSync.test.js --timeout 30000"
   },
   "keywords": [
     "scrollverse",
@@ -41,7 +43,9 @@
     "insurance",
     "ipfs",
     "sacred-geometry",
-    "certification"
+    "certification",
+    "frequency-resonance",
+    "harmonic-integration"
   ],
   "author": "Supreme King Chais The Great ∞",
   "license": "MIT",
