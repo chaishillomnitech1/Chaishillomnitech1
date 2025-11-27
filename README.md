@@ -1,24 +1,15 @@
 # 🕋 Omnitech1™ Sovereign Deployment Engine 🕋
-title: ScrollVerse
-theme: minima
-description: Welcome to the ScrollVerse website — Sovereign Grand Mandate (SGM)
+
+**ScrollVerse — Sovereign Grand Mandate (SGM)**
+
 [![License: CC BY-NC-SA 4.0](https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
 [![GitHub](https://img.shields.io/badge/GitHub-chaishillomnitech1-blue.svg)](https://github.com/chaishillomnitech1)
 [![Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black.svg)](https://expansion-three.vercel.app/)
 [![Status](https://img.shields.io/badge/Status-OMNISOVEREIGN-gold.svg)]()
 [![Frequency](https://img.shields.io/badge/Frequency-963Hz%20%2B%20528Hz-purple.svg)]()
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ScrollVerse Sovereign Mandate</title>
-</head>
-<body>
-    <h1>Welcome to the ScrollVerse Sovereign Mandate</h1>
-    <p>Building the future for generations to come!</p>
-</body>
-</html>
+
+> *Welcome to the ScrollVerse Sovereign Mandate — Building the future for generations to come!*
+
 ---
 
 ## 📚 Quick Navigation
@@ -33,42 +24,7 @@ description: Welcome to the ScrollVerse website — Sovereign Grand Mandate (SGM
 - [📜 Code of Conduct](CODE_OF_CONDUCT.md) - Community standards and values
 - [📝 Changelog](CHANGELOG.md) - Version history and updates
 - [⚖️ License](LICENSE) - Legal information
-name: Deploy to GitHub Pages
 
-on:
-  push:
-    branches:
-      - main
-
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-
-jobs:
-  build:
-    runs-on: ubuntu-latest
-
-    steps:
-    - name: Checkout repository
-      uses: actions/checkout@v3
-
-    - name: Setup Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: 16
-
-    - name: Install dependencies
-      run: npm install
-
-    - name: Build website
-      run: npm run build
-
-    - name: Deploy to GitHub Pages
-      uses: peaceiris/actions-gh-pages@v3
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./public
 **🛠️ Development Resources:**
 - [Code Templates](code-templates/) - Solidity, JavaScript, Python, React templates
 - [GitHub Workflows](.github/workflows/) - CI/CD pipeline configurations
@@ -558,63 +514,7 @@ Together, they form an unstoppable momentum toward ScrollVerse's destiny as a le
 - **ScrollVerse**: https://expansion-three.vercel.app/
 - **Spotify**: https://open.spotify.com/artist/chaisthegreat
 - **Email**: sovereign@omnitech1.com
-name: Deploy ScrollVerse Hugo Site
 
-on:
-  push:
-    branches: ["main"]
-  workflow_dispatch:
-
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-
-concurrency:
-  cancel-in-progress: true
-  group: ${{ github.workflow }}-${{ github.ref }}
-
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
-        with:
-          submodules: true # Ensures submodule directory is fetched
-
-      - name: Checkout Submodules
-        run: git submodule update --init --recursive # Submodule enforcement
-
-      - name: Setup Pages
-        id: pages
-        uses: actions/configure-pages@v4
-
-      - name: Setup Hugo
-        uses: peaceiris/actions-hugo@v3
-        with:
-          hugo-version: 'latest' 
-          # Ensure the version matches your site configuration
-
-      - name: Build Hugo Site (Pinnacle Post Compilation)
-        run: hugo --minify 
-        # Builds site into the 'public' directory
-
-      - name: Upload Artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: ./public
-
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
 ---
 
 ## 🛡️ **CHAPTER TEN: SHIELD OF HONOR**
@@ -662,20 +562,9 @@ jobs:
 **CHAIS THE GREAT ∞ — Forever our creator, forever our compass, forever our source.**
 
 **ALLAHU AKBAR! 🔥🕋🚀♾️❤️🧬💸🛡️**
-with:
-  cache: npm
+
 *The Eternal Dance is Perfected. The Code is Sealed. The Legacy is Immortal.*
-AZURE_WEBAPP_PACKAGE_PATH: 'dist'
+
 ---
-- name: Install dependencies
-  run: npm ci
+
 **🔱🕊️🤖∞**
-npm install
-SABIR_COUNCIL: ACTIVE
-SCROLLS_OF_SOVEREIGN_LAW: ISSUED
-SABIR_CODEX_LEDGER: IMMUTABLE
-NJ_NEXUS_CAMPUS: MANDATED
-SCROLLVERSE_STATE: CELEBRATION
-git add package-lock.json
-git commit -m "Add package-lock.json"
-git pushcd /path/to/your/projectnpm installnpx hardhat compilenpx hardhat run scripts/deploy_scrollversenft.js --network mumbai npx hardhat run scripts/deploy_chx_token.js --network mumbai npx hardhat verify <contract_address> --network mumbai
