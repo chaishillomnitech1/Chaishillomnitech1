@@ -349,7 +349,7 @@ Located in [`media-integrations/`](media-integrations/)
 ### **Repository Metrics**
 
 ```
-Total Files:              6,000+
+Total Files:              375+
 Documentation Files:      100+ (.md)
 Smart Contracts:          35 (.sol)
 Workflow Files:           42 (.yml)

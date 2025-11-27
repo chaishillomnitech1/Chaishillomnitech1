@@ -1,6 +1,6 @@
 # 🕋 Omnitech1™ Sovereign Deployment Engine 🕋
 
-**ScrollVerse — Sovereign Grand Mandate (SGM)**
+## ScrollVerse — Sovereign Grand Mandate (SGM)
 
 [![License: CC BY-NC-SA 4.0](https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
 [![GitHub](https://img.shields.io/badge/GitHub-chaishillomnitech1-blue.svg)](https://github.com/chaishillomnitech1)
