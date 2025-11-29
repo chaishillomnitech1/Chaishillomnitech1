@@ -27,7 +27,17 @@
     "deploy:scroll:sacred-cert": "hardhat run scripts/deploy_sacred_certification_nft.js --network scrollSepolia",
     "test:sacred-cert": "hardhat test test/SacredCertificationNFT.test.js",
     "frequency:sync": "node scripts/frequency_resonance_sync.js",
-    "test:frequency": "npx mocha test/FrequencyResonanceSync.test.js --timeout 30000"
+    "test:frequency": "npx mocha test/FrequencyResonanceSync.test.js --timeout 30000",
+    "deploy:mumbai:mirror-token": "hardhat run scripts/deploy_mirror_token.js --network mumbai",
+    "deploy:polygon:mirror-token": "hardhat run scripts/deploy_mirror_token.js --network polygon",
+    "deploy:mumbai:consciousness-nft": "hardhat run scripts/deploy_consciousness_mirror_nft.js --network mumbai",
+    "deploy:polygon:consciousness-nft": "hardhat run scripts/deploy_consciousness_mirror_nft.js --network polygon",
+    "deploy:mumbai:consciousness-mirror": "npm run deploy:mumbai:mirror-token && npm run deploy:mumbai:consciousness-nft",
+    "deploy:polygon:consciousness-mirror": "npm run deploy:polygon:mirror-token && npm run deploy:polygon:consciousness-nft",
+    "test:mirror-token": "hardhat test test/MirrorToken.test.js",
+    "test:consciousness-nft": "hardhat test test/ConsciousnessMirrorNFT.test.js",
+    "test:consciousness-mirror": "npm run test:mirror-token && npm run test:consciousness-nft",
+    "mint:consciousness-nft": "hardhat run scripts/mint_consciousness_mirror.js --network mumbai"
   },
   "keywords": [
     "scrollverse",
@@ -37,6 +47,10 @@
     "polygon",
     "quantum",
     "528hz",
+    "963hz",
+    "888hz",
+    "consciousness-mirror",
+    "mirror-token",
     "omni-sovereign",
     "mobile-wallet",
     "dao-governance",
@@ -45,7 +59,10 @@
     "sacred-geometry",
     "certification",
     "frequency-resonance",
-    "harmonic-integration"
+    "harmonic-integration",
+    "zakat",
+    "dividend",
+    "erc2981-royalty"
   ],
   "author": "Supreme King Chais The Great ∞",
   "license": "MIT",
