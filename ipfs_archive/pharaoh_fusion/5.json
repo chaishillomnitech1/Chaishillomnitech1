@@ -1,0 +1,50 @@
+{
+  "name": "Vision Made Visible - Executive Presentation",
+  "description": "Journey NFT 4 of 12 in the Pharaoh Consciousness Fusion collection. Token #5 of 21. This NFT represents the manifestation phase of the consciousness evolution journey.",
+  "image": "ipfs://QmJourney5_528Hz.png",
+  "animation_url": "ipfs://QmJourney5_528Hz.mp4",
+  "external_url": "https://scrollverse.io/pharaoh/5",
+  "attributes": [
+    {
+      "trait_type": "Collection",
+      "value": "Pharaoh Consciousness Fusion"
+    },
+    {
+      "trait_type": "Type",
+      "value": "Journey NFT"
+    },
+    {
+      "trait_type": "Token Number",
+      "value": "5 of 21"
+    },
+    {
+      "trait_type": "Journey Number",
+      "value": "4 of 12"
+    },
+    {
+      "trait_type": "Frequency",
+      "value": "528 Hz"
+    },
+    {
+      "trait_type": "Frequency Name",
+      "value": "Love & DNA Repair"
+    },
+    {
+      "trait_type": "Theme",
+      "value": "Manifestation"
+    },
+    {
+      "trait_type": "Principle",
+      "value": "Consciousness manifests"
+    },
+    {
+      "trait_type": "Phase",
+      "value": "Journey"
+    }
+  ],
+  "properties": {
+    "narrative": "Vision Made Visible - Executive Presentation",
+    "significance": "Phase 4 of the consciousness evolution journey",
+    "collection_phase": "ScrollVerse Phase VI: Full Cosmic Activation"
+  }
+}

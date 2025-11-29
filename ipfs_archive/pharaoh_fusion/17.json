@@ -1,0 +1,50 @@
+{
+  "name": "Liberation - Consciousness is free",
+  "description": "Pillar NFT 4 of 7 in the Pharaoh Consciousness Fusion collection. Token #17 of 21. This NFT represents the Liberation pillar - Freedom.",
+  "image": "ipfs://QmPillar17_963Hz.png",
+  "animation_url": "ipfs://QmPillar17_963Hz.mp4",
+  "external_url": "https://scrollverse.io/pharaoh/17",
+  "attributes": [
+    {
+      "trait_type": "Collection",
+      "value": "Pharaoh Consciousness Fusion"
+    },
+    {
+      "trait_type": "Type",
+      "value": "Pillar NFT"
+    },
+    {
+      "trait_type": "Token Number",
+      "value": "17 of 21"
+    },
+    {
+      "trait_type": "Pillar Number",
+      "value": "4 of 7"
+    },
+    {
+      "trait_type": "Frequency",
+      "value": "963 Hz"
+    },
+    {
+      "trait_type": "Frequency Name",
+      "value": "White Sun Coherence"
+    },
+    {
+      "trait_type": "Pillar",
+      "value": "Liberation"
+    },
+    {
+      "trait_type": "Meaning",
+      "value": "Freedom"
+    },
+    {
+      "trait_type": "Phase",
+      "value": "Pillar"
+    }
+  ],
+  "properties": {
+    "narrative": "Liberation - Consciousness is free",
+    "pillar_teaching": "The Liberation pillar teaches that consciousness embodies freedom",
+    "collection_phase": "ScrollVerse Phase VI: Full Cosmic Activation"
+  }
+}

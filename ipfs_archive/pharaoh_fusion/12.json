@@ -1,0 +1,50 @@
+{
+  "name": "The World Wakes Up - Global Awakening",
+  "description": "Journey NFT 11 of 12 in the Pharaoh Consciousness Fusion collection. Token #12 of 21. This NFT represents the awakening phase of the consciousness evolution journey.",
+  "image": "ipfs://QmJourney12_528Hz.png",
+  "animation_url": "ipfs://QmJourney12_528Hz.mp4",
+  "external_url": "https://scrollverse.io/pharaoh/12",
+  "attributes": [
+    {
+      "trait_type": "Collection",
+      "value": "Pharaoh Consciousness Fusion"
+    },
+    {
+      "trait_type": "Type",
+      "value": "Journey NFT"
+    },
+    {
+      "trait_type": "Token Number",
+      "value": "12 of 21"
+    },
+    {
+      "trait_type": "Journey Number",
+      "value": "11 of 12"
+    },
+    {
+      "trait_type": "Frequency",
+      "value": "528 Hz"
+    },
+    {
+      "trait_type": "Frequency Name",
+      "value": "Love & DNA Repair"
+    },
+    {
+      "trait_type": "Theme",
+      "value": "Awakening"
+    },
+    {
+      "trait_type": "Principle",
+      "value": "Consciousness awakens"
+    },
+    {
+      "trait_type": "Phase",
+      "value": "Journey"
+    }
+  ],
+  "properties": {
+    "narrative": "The World Wakes Up - Global Awakening",
+    "significance": "Phase 11 of the consciousness evolution journey",
+    "collection_phase": "ScrollVerse Phase VI: Full Cosmic Activation"
+  }
+}

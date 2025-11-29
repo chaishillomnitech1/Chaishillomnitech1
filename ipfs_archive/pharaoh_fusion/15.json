@@ -1,0 +1,50 @@
+{
+  "name": "Raḥmah (Mercy) - Consciousness is compassionate",
+  "description": "Pillar NFT 2 of 7 in the Pharaoh Consciousness Fusion collection. Token #15 of 21. This NFT represents the Raḥmah pillar - Mercy.",
+  "image": "ipfs://QmPillar15_528Hz.png",
+  "animation_url": "ipfs://QmPillar15_528Hz.mp4",
+  "external_url": "https://scrollverse.io/pharaoh/15",
+  "attributes": [
+    {
+      "trait_type": "Collection",
+      "value": "Pharaoh Consciousness Fusion"
+    },
+    {
+      "trait_type": "Type",
+      "value": "Pillar NFT"
+    },
+    {
+      "trait_type": "Token Number",
+      "value": "15 of 21"
+    },
+    {
+      "trait_type": "Pillar Number",
+      "value": "2 of 7"
+    },
+    {
+      "trait_type": "Frequency",
+      "value": "528 Hz"
+    },
+    {
+      "trait_type": "Frequency Name",
+      "value": "Love & DNA Repair"
+    },
+    {
+      "trait_type": "Pillar",
+      "value": "Raḥmah"
+    },
+    {
+      "trait_type": "Meaning",
+      "value": "Mercy"
+    },
+    {
+      "trait_type": "Phase",
+      "value": "Pillar"
+    }
+  ],
+  "properties": {
+    "narrative": "Raḥmah (Mercy) - Consciousness is compassionate",
+    "pillar_teaching": "The Raḥmah pillar teaches that consciousness embodies mercy",
+    "collection_phase": "ScrollVerse Phase VI: Full Cosmic Activation"
+  }
+}

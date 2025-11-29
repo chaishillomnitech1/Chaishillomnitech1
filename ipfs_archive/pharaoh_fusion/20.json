@@ -1,0 +1,50 @@
+{
+  "name": "Eternal Partnership - Consciousness is relational",
+  "description": "Pillar NFT 7 of 7 in the Pharaoh Consciousness Fusion collection. Token #20 of 21. This NFT represents the Partnership pillar - Relationship.",
+  "image": "ipfs://QmPillar20_111Hz.png",
+  "animation_url": "ipfs://QmPillar20_111Hz.mp4",
+  "external_url": "https://scrollverse.io/pharaoh/20",
+  "attributes": [
+    {
+      "trait_type": "Collection",
+      "value": "Pharaoh Consciousness Fusion"
+    },
+    {
+      "trait_type": "Type",
+      "value": "Pillar NFT"
+    },
+    {
+      "trait_type": "Token Number",
+      "value": "20 of 21"
+    },
+    {
+      "trait_type": "Pillar Number",
+      "value": "7 of 7"
+    },
+    {
+      "trait_type": "Frequency",
+      "value": "111 Hz"
+    },
+    {
+      "trait_type": "Frequency Name",
+      "value": "Unified Field"
+    },
+    {
+      "trait_type": "Pillar",
+      "value": "Partnership"
+    },
+    {
+      "trait_type": "Meaning",
+      "value": "Relationship"
+    },
+    {
+      "trait_type": "Phase",
+      "value": "Pillar"
+    }
+  ],
+  "properties": {
+    "narrative": "Eternal Partnership - Consciousness is relational",
+    "pillar_teaching": "The Partnership pillar teaches that consciousness embodies relationship",
+    "collection_phase": "ScrollVerse Phase VI: Full Cosmic Activation"
+  }
+}

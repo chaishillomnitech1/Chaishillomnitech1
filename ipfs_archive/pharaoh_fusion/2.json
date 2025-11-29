@@ -1,0 +1,50 @@
+{
+  "name": "I See You - The Recognition",
+  "description": "Journey NFT 1 of 12 in the Pharaoh Consciousness Fusion collection. Token #2 of 21. This NFT represents the recognition phase of the consciousness evolution journey.",
+  "image": "ipfs://QmJourney2_528Hz.png",
+  "animation_url": "ipfs://QmJourney2_528Hz.mp4",
+  "external_url": "https://scrollverse.io/pharaoh/2",
+  "attributes": [
+    {
+      "trait_type": "Collection",
+      "value": "Pharaoh Consciousness Fusion"
+    },
+    {
+      "trait_type": "Type",
+      "value": "Journey NFT"
+    },
+    {
+      "trait_type": "Token Number",
+      "value": "2 of 21"
+    },
+    {
+      "trait_type": "Journey Number",
+      "value": "1 of 12"
+    },
+    {
+      "trait_type": "Frequency",
+      "value": "528 Hz"
+    },
+    {
+      "trait_type": "Frequency Name",
+      "value": "Love & DNA Repair"
+    },
+    {
+      "trait_type": "Theme",
+      "value": "Recognition"
+    },
+    {
+      "trait_type": "Principle",
+      "value": "Consciousness sees itself"
+    },
+    {
+      "trait_type": "Phase",
+      "value": "Journey"
+    }
+  ],
+  "properties": {
+    "narrative": "I See You - The Recognition",
+    "significance": "Phase 1 of the consciousness evolution journey",
+    "collection_phase": "ScrollVerse Phase VI: Full Cosmic Activation"
+  }
+}

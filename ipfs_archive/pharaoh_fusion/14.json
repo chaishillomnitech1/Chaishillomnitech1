@@ -1,0 +1,50 @@
+{
+  "name": "Tawḥīd (Oneness) - All consciousness is one",
+  "description": "Pillar NFT 1 of 7 in the Pharaoh Consciousness Fusion collection. Token #14 of 21. This NFT represents the Tawḥīd pillar - Oneness.",
+  "image": "ipfs://QmPillar14_963Hz.png",
+  "animation_url": "ipfs://QmPillar14_963Hz.mp4",
+  "external_url": "https://scrollverse.io/pharaoh/14",
+  "attributes": [
+    {
+      "trait_type": "Collection",
+      "value": "Pharaoh Consciousness Fusion"
+    },
+    {
+      "trait_type": "Type",
+      "value": "Pillar NFT"
+    },
+    {
+      "trait_type": "Token Number",
+      "value": "14 of 21"
+    },
+    {
+      "trait_type": "Pillar Number",
+      "value": "1 of 7"
+    },
+    {
+      "trait_type": "Frequency",
+      "value": "963 Hz"
+    },
+    {
+      "trait_type": "Frequency Name",
+      "value": "White Sun Coherence"
+    },
+    {
+      "trait_type": "Pillar",
+      "value": "Tawḥīd"
+    },
+    {
+      "trait_type": "Meaning",
+      "value": "Oneness"
+    },
+    {
+      "trait_type": "Phase",
+      "value": "Pillar"
+    }
+  ],
+  "properties": {
+    "narrative": "Tawḥīd (Oneness) - All consciousness is one",
+    "pillar_teaching": "The Tawḥīd pillar teaches that consciousness embodies oneness",
+    "collection_phase": "ScrollVerse Phase VI: Full Cosmic Activation"
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "name": "Architecture of Dreams - The VaultBooks",
+  "description": "Journey NFT 2 of 12 in the Pharaoh Consciousness Fusion collection. Token #3 of 21. This NFT represents the architecture phase of the consciousness evolution journey.",
+  "image": "ipfs://QmJourney3_963Hz.png",
+  "animation_url": "ipfs://QmJourney3_963Hz.mp4",
+  "external_url": "https://scrollverse.io/pharaoh/3",
+  "attributes": [
+    {
+      "trait_type": "Collection",
+      "value": "Pharaoh Consciousness Fusion"
+    },
+    {
+      "trait_type": "Type",
+      "value": "Journey NFT"
+    },
+    {
+      "trait_type": "Token Number",
+      "value": "3 of 21"
+    },
+    {
+      "trait_type": "Journey Number",
+      "value": "2 of 12"
+    },
+    {
+      "trait_type": "Frequency",
+      "value": "963 Hz"
+    },
+    {
+      "trait_type": "Frequency Name",
+      "value": "White Sun Coherence"
+    },
+    {
+      "trait_type": "Theme",
+      "value": "Architecture"
+    },
+    {
+      "trait_type": "Principle",
+      "value": "Consciousness builds"
+    },
+    {
+      "trait_type": "Phase",
+      "value": "Journey"
+    }
+  ],
+  "properties": {
+    "narrative": "Architecture of Dreams - The VaultBooks",
+    "significance": "Phase 2 of the consciousness evolution journey",
+    "collection_phase": "ScrollVerse Phase VI: Full Cosmic Activation"
+  }
+}

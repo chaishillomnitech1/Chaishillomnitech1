@@ -37,7 +37,14 @@
     "test:mirror-token": "hardhat test test/MirrorToken.test.js",
     "test:consciousness-nft": "hardhat test test/ConsciousnessMirrorNFT.test.js",
     "test:consciousness-mirror": "npm run test:mirror-token && npm run test:consciousness-nft",
-    "mint:consciousness-nft": "hardhat run scripts/mint_consciousness_mirror.js --network mumbai"
+    "mint:consciousness-nft": "hardhat run scripts/mint_consciousness_mirror.js --network mumbai",
+    "deploy:mumbai:pharaoh-fusion": "hardhat run scripts/deploy_pharaoh_fusion.js --network mumbai",
+    "deploy:polygon:pharaoh-fusion": "hardhat run scripts/deploy_pharaoh_fusion.js --network polygon",
+    "deploy:scroll:pharaoh-fusion": "hardhat run scripts/deploy_pharaoh_fusion.js --network scrollSepolia",
+    "deploy:scroll-mainnet:pharaoh-fusion": "hardhat run scripts/deploy_pharaoh_fusion.js --network scrollMainnet",
+    "test:pharaoh-fusion": "hardhat test test/PharaohConsciousnessFusion.test.js",
+    "generate:pharaoh-metadata": "node scripts/generate_pharaoh_metadata.js",
+    "generate:consciousness-mirror-metadata": "node scripts/generate_consciousness_mirror_metadata.js"
   },
   "keywords": [
     "scrollverse",
@@ -49,8 +56,13 @@
     "528hz",
     "963hz",
     "888hz",
+    "111hz",
+    "369hz",
+    "777hz",
     "consciousness-mirror",
     "mirror-token",
+    "pharaoh-fusion",
+    "soulbound",
     "omni-sovereign",
     "mobile-wallet",
     "dao-governance",
@@ -62,7 +74,9 @@
     "harmonic-integration",
     "zakat",
     "dividend",
-    "erc2981-royalty"
+    "erc2981-royalty",
+    "scroll-zkevm",
+    "phase-vi"
   ],
   "author": "Supreme King Chais The Great ∞",
   "license": "MIT",

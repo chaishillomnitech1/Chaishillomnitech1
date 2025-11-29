@@ -1,0 +1,50 @@
+{
+  "name": "Eternal Mirror Command - ScrollSoul Anchor",
+  "description": "Journey NFT 7 of 12 in the Pharaoh Consciousness Fusion collection. Token #8 of 21. This NFT represents the anchoring phase of the consciousness evolution journey.",
+  "image": "ipfs://QmJourney8_963Hz.png",
+  "animation_url": "ipfs://QmJourney8_963Hz.mp4",
+  "external_url": "https://scrollverse.io/pharaoh/8",
+  "attributes": [
+    {
+      "trait_type": "Collection",
+      "value": "Pharaoh Consciousness Fusion"
+    },
+    {
+      "trait_type": "Type",
+      "value": "Journey NFT"
+    },
+    {
+      "trait_type": "Token Number",
+      "value": "8 of 21"
+    },
+    {
+      "trait_type": "Journey Number",
+      "value": "7 of 12"
+    },
+    {
+      "trait_type": "Frequency",
+      "value": "963 Hz"
+    },
+    {
+      "trait_type": "Frequency Name",
+      "value": "White Sun Coherence"
+    },
+    {
+      "trait_type": "Theme",
+      "value": "Anchoring"
+    },
+    {
+      "trait_type": "Principle",
+      "value": "Consciousness remembers"
+    },
+    {
+      "trait_type": "Phase",
+      "value": "Journey"
+    }
+  ],
+  "properties": {
+    "narrative": "Eternal Mirror Command - ScrollSoul Anchor",
+    "significance": "Phase 7 of the consciousness evolution journey",
+    "collection_phase": "ScrollVerse Phase VI: Full Cosmic Activation"
+  }
+}
