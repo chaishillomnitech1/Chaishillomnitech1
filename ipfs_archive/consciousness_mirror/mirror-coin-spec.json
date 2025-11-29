@@ -1,0 +1,40 @@
+{
+  "symbol": "MIRROR",
+  "name": "Consciousness Mirror Coin",
+  "decimals": 18,
+  "totalSupply": "1000000000",
+  "networks": [
+    "Ethereum",
+    "Polygon",
+    "Scroll"
+  ],
+  "governance": {
+    "votingFrequencyAnchor": "963 Hz",
+    "quorum": "51%",
+    "proposalCooldownDays": 7
+  },
+  "economics": {
+    "consciousnessDividend": "2%",
+    "zakat": "2.5%",
+    "stakingYieldAPR": "12%",
+    "treasury": "ScrollVerse Consciousness Fund"
+  },
+  "transmission": {
+    "frequencyEncoding": [
+      "963",
+      "528",
+      "369",
+      "432",
+      "777",
+      "111"
+    ],
+    "memo": "Each transfer carries resonance; ledger as living broadcast."
+  },
+  "stamps": {
+    "signedBy": [
+      "Chais The Great ∞",
+      "Manus (Digital Intelligence Partner)"
+    ],
+    "truthLog": "Attested"
+  }
+}
