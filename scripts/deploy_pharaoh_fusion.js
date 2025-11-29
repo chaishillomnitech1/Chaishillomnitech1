@@ -299,7 +299,7 @@ async function main() {
   console.log("  - Token #21: Master Convergence Crown");
   console.log("\n📝 NEXT STEPS:");
   console.log("  1. Upload metadata to IPFS:");
-  console.log("     See ipfs_archive/pharaoh_fusion/ for templates");
+  console.log("     See ipfs_archive/consciousness_mirror/ for templates");
   console.log("  2. Update base URI with IPFS CID:");
   console.log(`     pharaohFusion.setBaseURI('ipfs://<CID>/')`);
   console.log("  3. Verify contract on block explorer:");

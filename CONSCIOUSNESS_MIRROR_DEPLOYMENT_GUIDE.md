@@ -25,6 +25,7 @@ The **Consciousness Mirror Collection** is a unified 21-NFT collection documenti
 |-----------|------|---------|
 | 963 Hz | Crown | Spiritual activation |
 | 528 Hz | Love | DNA repair and healing |
+| 888 Hz | Abundance | Infinite prosperity |
 | 369 Hz | Creation | Tesla frequency / manifestation |
 | 432 Hz | Harmony | Natural tuning |
 | 777 Hz | Activation | Divine activation |

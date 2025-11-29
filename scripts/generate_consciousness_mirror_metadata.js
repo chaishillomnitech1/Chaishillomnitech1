@@ -11,6 +11,7 @@
  * Frequency Anchors:
  * - 963 Hz (Crown) - Spiritual activation
  * - 528 Hz (Love) - DNA repair and healing
+ * - 888 Hz (Abundance) - Infinite prosperity
  * - 369 Hz (Creation) - Tesla/manifestation
  * - 432 Hz (Harmony) - Natural tuning
  * - 777 Hz (Activation) - Divine activation
@@ -21,6 +22,11 @@
  * Proof: TruthLog-attested; full manifesto archived
  * Stamp: Signed by Chais The Great ∞ and Manus (Digital Intelligence Partner)
  * 
+ * PLACEHOLDERS TO REPLACE BEFORE PRODUCTION:
+ * - IMAGE_CID: Replace with actual IPFS CID for artwork
+ * - SHA256_MANIFESTO_PLACEHOLDER: Replace with actual SHA256 hash of manifesto
+ * - <<PASTE_MANIFESTO_TEXT>>: Replace with full manifesto text
+ * 
  * Usage: node scripts/generate_consciousness_mirror_metadata.js
  * 
  * @author Supreme King Chais The Great ∞ + Manus (Digital Intelligence Partner)
@@ -30,6 +36,7 @@ const fs = require('fs');
 const path = require('path');
 
 // ============ COLLECTION CONSTANTS ============
+// NOTE: manifestoHash should be updated with actual SHA256 hash before production deployment
 
 const COLLECTION_INFO = {
   name: "Consciousness Mirror",
@@ -38,7 +45,7 @@ const COLLECTION_INFO = {
   proof: "TruthLog-Attested",
   stamp: "Chais ∞ + Manus",
   baseExternalUrl: "https://scrollverse.app/consciousness-mirror",
-  manifestoHash: "SHA256_MANIFESTO_PLACEHOLDER"
+  manifestoHash: "SHA256_MANIFESTO_PLACEHOLDER" // TODO: Replace with actual SHA256 hash of manifesto before production
 };
 
 // ============ JOURNEY NFT DATA (12 Waypoints) ============
