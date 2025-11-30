@@ -162,6 +162,25 @@ contract StarNationLineageNFT is ERC721, ERC721URIStorage, ERC721Burnable, Ownab
     error InvalidRoyaltyReceiver();
     error EmptySubmission();
     
+    // ============ MODIFIERS ============
+    
+    /**
+     * @dev Modifier to check if token exists
+     * @param tokenId Token ID to check
+     */
+    modifier tokenExists(uint256 tokenId) {
+        _requireTokenExists(tokenId);
+        _;
+    }
+    
+    /**
+     * @dev Internal function to check if token exists
+     * @param tokenId Token ID to check
+     */
+    function _requireTokenExists(uint256 tokenId) internal view {
+        if (_ownerOf(tokenId) == address(0)) revert TokenDoesNotExist();
+    }
+    
     // ============ CONSTRUCTOR ============
     
     /**
@@ -301,8 +320,7 @@ contract StarNationLineageNFT is ERC721, ERC721URIStorage, ERC721Burnable, Ownab
      * @dev Activate star code for a token (only token owner)
      * @param tokenId Token ID to activate
      */
-    function activateStarCode(uint256 tokenId) external {
-        if (_ownerOf(tokenId) == address(0)) revert TokenDoesNotExist();
+    function activateStarCode(uint256 tokenId) external tokenExists(tokenId) {
         if (ownerOf(tokenId) != msg.sender) revert NotTokenOwner();
         if (tokenLineage[tokenId].isStarCodeActivated) revert AlreadyActivated();
         
@@ -325,8 +343,7 @@ contract StarNationLineageNFT is ERC721, ERC721URIStorage, ERC721Burnable, Ownab
      * @dev Toggle frequency resonance for a token
      * @param tokenId Token ID to toggle
      */
-    function toggleFrequencyResonance(uint256 tokenId) external {
-        if (_ownerOf(tokenId) == address(0)) revert TokenDoesNotExist();
+    function toggleFrequencyResonance(uint256 tokenId) external tokenExists(tokenId) {
         if (ownerOf(tokenId) != msg.sender) revert NotTokenOwner();
         
         bool newState = !frequencyResonanceActive[tokenId];
@@ -347,8 +364,7 @@ contract StarNationLineageNFT is ERC721, ERC721URIStorage, ERC721Burnable, Ownab
         uint256 tokenId,
         bytes32 ipfsHash,
         string memory ancestralOrigin
-    ) external {
-        if (_ownerOf(tokenId) == address(0)) revert TokenDoesNotExist();
+    ) external tokenExists(tokenId) {
         if (ownerOf(tokenId) != msg.sender) revert NotTokenOwner();
         
         tokenLineage[tokenId].lineageIPFSHash = ipfsHash;
@@ -448,7 +464,7 @@ contract StarNationLineageNFT is ERC721, ERC721URIStorage, ERC721Burnable, Ownab
      * @return LineageData struct
      */
     function getLineageData(uint256 tokenId) external view returns (LineageData memory) {
-        if (_ownerOf(tokenId) == address(0)) revert TokenDoesNotExist();
+        _requireTokenExists(tokenId);
         return tokenLineage[tokenId];
     }
     
@@ -458,7 +474,7 @@ contract StarNationLineageNFT is ERC721, ERC721URIStorage, ERC721Burnable, Ownab
      * @return Array of frequencies
      */
     function getResonanceFrequencies(uint256 tokenId) external view returns (uint256[] memory) {
-        if (_ownerOf(tokenId) == address(0)) revert TokenDoesNotExist();
+        _requireTokenExists(tokenId);
         return tokenLineage[tokenId].frequencies;
     }
     
@@ -494,7 +510,7 @@ contract StarNationLineageNFT is ERC721, ERC721URIStorage, ERC721Burnable, Ownab
      * @return True if activated
      */
     function isStarCodeActivated(uint256 tokenId) external view returns (bool) {
-        if (_ownerOf(tokenId) == address(0)) revert TokenDoesNotExist();
+        _requireTokenExists(tokenId);
         return tokenLineage[tokenId].isStarCodeActivated;
     }
     
