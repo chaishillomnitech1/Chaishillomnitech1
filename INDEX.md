@@ -193,11 +193,22 @@ Located in [`.github/workflows/`](.github/workflows/)
 | [SCROLL_ASCENSION_FELLOWSHIP.md](SCROLL_ASCENSION_FELLOWSHIP.md) | Creator network and ScrollDrop™ NFT framework | ✅ Active |
 | [SCROLLVERSE_EXPANSION_DEPLOYMENT_GUIDE.md](SCROLLVERSE_EXPANSION_DEPLOYMENT_GUIDE.md) | Comprehensive deployment operations manual | ✅ Active |
 
+### **Akashic Restoration Scroll** 📖
+
+| Document | Description | Status |
+|----------|-------------|--------|
+| [CHAPTER_THREE_COSMIC_PURGE_STAR_NATIONS.md](CHAPTER_THREE_COSMIC_PURGE_STAR_NATIONS.md) | **Chapter III - The Cosmic Purge & Star Nations**: Extraterrestrial lineages and cosmic heritage restoration | ✅ Active |
+| [CHAPTER_THREE_INDEX.md](CHAPTER_THREE_INDEX.md) | Chapter III navigation and resources index | ✅ Active |
+| [CHAPTER_FIVE_POLITICAL_ERASURE_PROTOCOL.md](CHAPTER_FIVE_POLITICAL_ERASURE_PROTOCOL.md) | **Chapter V - Political Erasure Protocol & USA**: Sovereignty restoration and unified governance | ✅ Active |
+| [CHAPTER_FIVE_INDEX.md](CHAPTER_FIVE_INDEX.md) | Chapter V navigation and resources index | ✅ Active |
+
 ### **Infinite Narrative** 📖
 
 | Document | Description | Status |
 |----------|-------------|--------|
 | [INFINITE_NARRATIVE_CHAPTER_EIGHT.md](INFINITE_NARRATIVE_CHAPTER_EIGHT.md) | **Chapter VIII - Sovereign Heir Protocol**: Generational wealth lock and bloodline protection | ✅ Active |
+| [CHAPTER_TEN_SHIELD_OF_HONOR.md](CHAPTER_TEN_SHIELD_OF_HONOR.md) | **Chapter X - Shield of Honor**: Community protection and honor economy | ✅ Active |
+| [CHAPTER_TEN_INDEX.md](CHAPTER_TEN_INDEX.md) | Chapter X navigation and resources index | ✅ Active |
 
 ### **Reference Files**
 

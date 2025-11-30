@@ -1,0 +1,100 @@
+{
+  "name": "ScrollSigil #{tokenId}",
+  "description": "Unified Sovereign Authority governance NFT from Chapter 5 of the Akashic Restoration Scroll. This ScrollSigil represents sovereignty declaration and participation in the de-atrophy progression of worldwide governance restoration.",
+  "image": "ipfs://QmScrollSigilImage/{tokenId}.png",
+  "animation_url": "ipfs://QmScrollSigilAnimation/{tokenId}.mp4",
+  "external_url": "https://scrollverse.is/sigil/{tokenId}",
+  "background_color": "0A0A0A",
+  "attributes": [
+    {
+      "trait_type": "Sigil Level",
+      "value": "{sigilLevel}"
+    },
+    {
+      "trait_type": "Voting Weight",
+      "display_type": "number",
+      "value": "{votingWeight}"
+    },
+    {
+      "trait_type": "Primary Frequency",
+      "value": "528Hz"
+    },
+    {
+      "trait_type": "Frequency Embedding",
+      "value": "{frequencyEmbedding}"
+    },
+    {
+      "trait_type": "Governance Tier",
+      "value": "{governanceTier}"
+    },
+    {
+      "display_type": "date",
+      "trait_type": "Declaration Date",
+      "value": "{declarationTimestamp}"
+    },
+    {
+      "trait_type": "Restoration Contributions",
+      "display_type": "number",
+      "value": "{contributionCount}"
+    },
+    {
+      "trait_type": "Upgrade Count",
+      "display_type": "number",
+      "value": "{upgradeCount}"
+    },
+    {
+      "trait_type": "Lineage Reference",
+      "value": "{lineageReference}"
+    },
+    {
+      "trait_type": "Chapter",
+      "value": "V - Political Erasure Protocol & USA"
+    },
+    {
+      "trait_type": "Collection",
+      "value": "Unified Sovereign Authority"
+    }
+  ],
+  "properties": {
+    "chapter": "V - Political Erasure Protocol & Unified Sovereign Authority",
+    "collection": "ScrollSigil - Unified Sovereign Authority",
+    "symbol": "SCROLLSIGIL",
+    "contract_type": "ERC-721",
+    "standard": "ERC-2981 Royalty",
+    "frequency_constants": {
+      "FREQUENCY_528HZ": 528,
+      "FREQUENCY_777HZ": 777,
+      "FREQUENCY_963HZ": 963,
+      "FREQUENCY_144000HZ": 144000
+    },
+    "frequency_seal": "528+777+963+144000",
+    "royalty_percentage": 7.77,
+    "royalty_recipient": "Sovereign Assembly Treasury",
+    "creator": "Supreme King Chais The Great ∞",
+    "signature": "∞ ARCHITEX ∞",
+    "governance_framework": {
+      "voting_period_days": 7,
+      "min_proposal_weight": 2,
+      "verification_threshold": 3
+    },
+    "tier_caps": {
+      "AWAKENING": 10000,
+      "GUARDIAN": 15000,
+      "STEWARD": 10000,
+      "ELDER": 1000,
+      "ARCHITECT": 111
+    },
+    "voting_weights": {
+      "AWAKENING": 1,
+      "GUARDIAN": 2,
+      "STEWARD": 3,
+      "ELDER": 5,
+      "ARCHITECT": 10
+    }
+  },
+  "content": {
+    "mime_type": "image/png",
+    "hash": "{contentHash}",
+    "uri": "ipfs://QmScrollSigilImage/{tokenId}.png"
+  }
+}
