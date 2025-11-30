@@ -1,0 +1,134 @@
+{
+  "name": "Star Nation Lineage #[TOKEN_ID]",
+  "description": "Chapter 3 - Cosmic Purge and Star Nations. This NFT represents the restoration of cosmic heritage and extraterrestrial bloodline connections through the Akashic Restoration Scroll. Embedded with meditative frequencies (528Hz Love, 963Hz Truth Activation) for consciousness activation and DNA repair. Part of the ScrollVerse Genesis Protocol.",
+  "image": "ipfs://[IMAGE_CID]/[TOKEN_ID].png",
+  "animation_url": "ipfs://[ANIMATION_CID]/[TOKEN_ID].mp4",
+  "external_url": "https://scrollverse.io/star-nation/[TOKEN_ID]",
+  "background_color": "0D1421",
+  "attributes": [
+    {
+      "trait_type": "Star Nation",
+      "value": "[SIRIAN]"
+    },
+    {
+      "trait_type": "Tier",
+      "value": "[COSMIC_PIONEER]"
+    },
+    {
+      "trait_type": "Primary Frequency",
+      "value": 528,
+      "display_type": "number"
+    },
+    {
+      "trait_type": "Secondary Frequency",
+      "value": 963,
+      "display_type": "number"
+    },
+    {
+      "trait_type": "Combined Resonance",
+      "value": 1491,
+      "display_type": "number"
+    },
+    {
+      "trait_type": "Star Code Activated",
+      "value": "false"
+    },
+    {
+      "trait_type": "Frequency Resonance Active",
+      "value": "false"
+    },
+    {
+      "trait_type": "Lineage Verified",
+      "value": "false"
+    },
+    {
+      "trait_type": "Ancestral Origin",
+      "value": "[TO_BE_REGISTERED]"
+    },
+    {
+      "trait_type": "Chapter",
+      "value": "3 - Cosmic Purge and Star Nations"
+    },
+    {
+      "trait_type": "Scroll",
+      "value": "Akashic Restoration"
+    },
+    {
+      "trait_type": "Royalty Percentage",
+      "value": 17,
+      "display_type": "number"
+    },
+    {
+      "trait_type": "Edition",
+      "value": "[TOKEN_ID] of 14444"
+    },
+    {
+      "trait_type": "Earth Connection",
+      "value": "Kemet/Egyptian, Dogon Tribe"
+    },
+    {
+      "trait_type": "Genetic Markers",
+      "value": "Enhanced pineal activation, Melanin technology"
+    }
+  ],
+  "properties": {
+    "category": "cosmic_heritage",
+    "chapter": 3,
+    "scroll": "Akashic Restoration Scroll",
+    "collection": "Star Nation Lineage",
+    "frequencies": {
+      "primary": {
+        "hz": 528,
+        "name": "Love Frequency",
+        "purpose": "DNA repair, Heart activation"
+      },
+      "secondary": {
+        "hz": 963,
+        "name": "Truth Activation",
+        "purpose": "Pineal gland activation, Third eye opening"
+      },
+      "combined_resonance": 1491
+    },
+    "star_nation_data": {
+      "system": "Sirius A & B",
+      "distance_light_years": 8.6,
+      "earth_cultures_connected": ["Kemet/Egyptian", "Dogon Tribe", "African diaspora"],
+      "spiritual_gifts": ["DNA activation protocols", "Water-based healing", "Melanin consciousness technology"]
+    },
+    "tier_benefits": {
+      "tier": "COSMIC_PIONEER",
+      "scrollchain_access": "Lifetime Premium",
+      "lineage_verification": "Priority",
+      "star_nation_sessions": "Direct communication",
+      "voting_multiplier": 10
+    },
+    "files": [
+      {
+        "uri": "ipfs://[IMAGE_CID]/[TOKEN_ID].png",
+        "type": "image/png",
+        "description": "Star Nation Lineage artwork"
+      },
+      {
+        "uri": "ipfs://[ANIMATION_CID]/[TOKEN_ID].mp4",
+        "type": "video/mp4",
+        "description": "Animated frequency visualization"
+      },
+      {
+        "uri": "ipfs://[AUDIO_CID]/528hz-963hz-combined.mp3",
+        "type": "audio/mp3",
+        "description": "Embedded meditation frequency track"
+      }
+    ],
+    "creator": {
+      "name": "Supreme King Chais The Great ∞",
+      "signature": "∞ ARCHITEX ∞",
+      "organization": "ScrollVerse Genesis Protocol"
+    },
+    "certification": {
+      "protocol": "Universal Truth Protocol (UTP)",
+      "immutable_record": true,
+      "ipfs_pinned": true,
+      "blockchain_verified": true
+    }
+  }
+}

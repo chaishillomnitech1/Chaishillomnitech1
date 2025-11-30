@@ -44,7 +44,11 @@
     "deploy:scroll-mainnet:pharaoh-fusion": "hardhat run scripts/deploy_pharaoh_fusion.js --network scrollMainnet",
     "test:pharaoh-fusion": "hardhat test test/PharaohConsciousnessFusion.test.js",
     "generate:pharaoh-metadata": "node scripts/generate_pharaoh_metadata.js",
-    "generate:consciousness-mirror-metadata": "node scripts/generate_consciousness_mirror_metadata.js"
+    "generate:consciousness-mirror-metadata": "node scripts/generate_consciousness_mirror_metadata.js",
+    "deploy:mumbai:star-nation": "hardhat run scripts/deploy_star_nation_lineage.js --network mumbai",
+    "deploy:polygon:star-nation": "hardhat run scripts/deploy_star_nation_lineage.js --network polygon",
+    "deploy:scroll:star-nation": "hardhat run scripts/deploy_star_nation_lineage.js --network scrollSepolia",
+    "test:star-nation": "hardhat test test/StarNationLineageNFT.test.js"
   },
   "keywords": [
     "scrollverse",
@@ -59,6 +63,8 @@
     "111hz",
     "369hz",
     "777hz",
+    "999hz",
+    "144000hz",
     "consciousness-mirror",
     "mirror-token",
     "pharaoh-fusion",
@@ -76,7 +82,11 @@
     "dividend",
     "erc2981-royalty",
     "scroll-zkevm",
-    "phase-vi"
+    "phase-vi",
+    "star-nation",
+    "lineage-restoration",
+    "cosmic-heritage",
+    "akashic-restoration"
   ],
   "author": "Supreme King Chais The Great ∞",
   "license": "MIT",
