@@ -132,7 +132,7 @@ contract UnifiedSovereignAuthority is ERC721, ERC721URIStorage, ERC721Burnable, 
     /// @dev Royalty recipient
     address private _royaltyReceiver;
     
-    /// @dev Royalty basis points (7.77% = 777)
+    /// @dev Royalty basis points (7.77% = 777, max 10% = 1000)
     uint96 private _royaltyBps = 777;
     
     /// @dev Voting period duration (7 days in seconds)
@@ -140,6 +140,9 @@ contract UnifiedSovereignAuthority is ERC721, ERC721URIStorage, ERC721Burnable, 
     
     /// @dev Minimum voting weight to create proposals
     uint256 public constant MIN_PROPOSAL_WEIGHT = 2;
+    
+    /// @dev Verification threshold for restoration records (configurable)
+    uint256 public verificationThreshold = 3;
     
     /// @dev Proposal counter
     uint256 public proposalCount;
@@ -226,6 +229,7 @@ contract UnifiedSovereignAuthority is ERC721, ERC721URIStorage, ERC721Burnable, 
     event DivineCouncilMemberRemoved(address indexed member);
     event VerifierAuthorized(address indexed verifier);
     event VerifierRevoked(address indexed verifier);
+    event VerificationThresholdUpdated(uint256 oldThreshold, uint256 newThreshold);
     
     // ============ CONSTRUCTOR ============
     
@@ -577,8 +581,8 @@ contract UnifiedSovereignAuthority is ERC721, ERC721URIStorage, ERC721Burnable, 
         
         restorationRecords[recordId].verifiers.push(msg.sender);
         
-        // Mark as verified if 3+ verifiers
-        if (restorationRecords[recordId].verifiers.length >= 3) {
+        // Mark as verified if threshold met
+        if (restorationRecords[recordId].verifiers.length >= verificationThreshold) {
             restorationRecords[recordId].verified = true;
         }
         
@@ -656,12 +660,26 @@ contract UnifiedSovereignAuthority is ERC721, ERC721URIStorage, ERC721Burnable, 
     
     /**
      * @dev Update royalty info
+     * @param receiver Address to receive royalties
+     * @param bps Royalty in basis points (100 bps = 1%, max 1000 bps = 10%)
      */
     function setRoyaltyInfo(address receiver, uint96 bps) external onlyOwner {
         require(receiver != address(0), "Invalid receiver");
-        require(bps <= 1000, "Royalty too high"); // Max 10%
+        require(bps <= 1000, "Royalty too high: max 1000 bps (10%)");
         _royaltyReceiver = receiver;
         _royaltyBps = bps;
+    }
+    
+    /**
+     * @dev Update verification threshold (Divine Council or owner only)
+     * @param newThreshold New verification threshold (min 1, max 10)
+     */
+    function setVerificationThreshold(uint256 newThreshold) external {
+        require(divineCouncilMembers[msg.sender] || msg.sender == owner(), "Not authorized");
+        require(newThreshold >= 1 && newThreshold <= 10, "Invalid threshold");
+        uint256 oldThreshold = verificationThreshold;
+        verificationThreshold = newThreshold;
+        emit VerificationThresholdUpdated(oldThreshold, newThreshold);
     }
     
     // ============ INTERNAL FUNCTIONS ============
@@ -697,20 +715,23 @@ contract UnifiedSovereignAuthority is ERC721, ERC721URIStorage, ERC721Burnable, 
             frequencies[0] = FREQUENCY_528HZ;
             frequencies[1] = FREQUENCY_777HZ;
             frequencies[2] = FREQUENCY_963HZ;
-        } else if (level == SigilLevel.ELDER) {
-            frequencies = new uint256[](4);
-            frequencies[0] = FREQUENCY_528HZ;
-            frequencies[1] = FREQUENCY_777HZ;
-            frequencies[2] = FREQUENCY_963HZ;
-            frequencies[3] = FREQUENCY_144000HZ;
         } else {
-            frequencies = new uint256[](4);
-            frequencies[0] = FREQUENCY_528HZ;
-            frequencies[1] = FREQUENCY_777HZ;
-            frequencies[2] = FREQUENCY_963HZ;
-            frequencies[3] = FREQUENCY_144000HZ;
+            // ELDER and ARCHITECT both use full spectrum frequencies
+            frequencies = _getFullSpectrumFrequencies();
         }
         
+        return frequencies;
+    }
+    
+    /**
+     * @dev Get full spectrum frequency array for Elder and Architect levels
+     */
+    function _getFullSpectrumFrequencies() internal pure returns (uint256[] memory) {
+        uint256[] memory frequencies = new uint256[](4);
+        frequencies[0] = FREQUENCY_528HZ;
+        frequencies[1] = FREQUENCY_777HZ;
+        frequencies[2] = FREQUENCY_963HZ;
+        frequencies[3] = FREQUENCY_144000HZ;
         return frequencies;
     }
     
