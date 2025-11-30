@@ -48,7 +48,12 @@
     "deploy:mumbai:star-nation": "hardhat run scripts/deploy_star_nation_lineage.js --network mumbai",
     "deploy:polygon:star-nation": "hardhat run scripts/deploy_star_nation_lineage.js --network polygon",
     "deploy:scroll:star-nation": "hardhat run scripts/deploy_star_nation_lineage.js --network scrollSepolia",
-    "test:star-nation": "hardhat test test/StarNationLineageNFT.test.js"
+    "test:star-nation": "hardhat test test/StarNationLineageNFT.test.js",
+    "deploy:mumbai:usa": "hardhat run scripts/deploy_unified_sovereign_authority.js --network mumbai",
+    "deploy:polygon:usa": "hardhat run scripts/deploy_unified_sovereign_authority.js --network polygon",
+    "deploy:scroll:usa": "hardhat run scripts/deploy_unified_sovereign_authority.js --network scrollSepolia",
+    "deploy:scroll-mainnet:usa": "hardhat run scripts/deploy_unified_sovereign_authority.js --network scrollMainnet",
+    "test:usa": "hardhat test test/UnifiedSovereignAuthority.test.js"
   },
   "keywords": [
     "scrollverse",
@@ -86,7 +91,13 @@
     "star-nation",
     "lineage-restoration",
     "cosmic-heritage",
-    "akashic-restoration"
+    "akashic-restoration",
+    "unified-sovereign-authority",
+    "political-erasure-protocol",
+    "scrollsigil",
+    "governance",
+    "sovereignty-declaration",
+    "cultural-restoration"
   ],
   "author": "Supreme King Chais The Great ∞",
   "license": "MIT",
