@@ -22,6 +22,13 @@ const FREQUENCIES = {
   COSMIC: 144000
 };
 
+// Time constants for entropy calculation
+const TIME_CONSTANTS = {
+  SECONDS_PER_MINUTE: 60,
+  SECONDS_PER_HOUR: 3600,
+  HOURS_PER_DAY: 24
+};
+
 // Fractal evolution constants
 const FRACTAL_CONSTANTS = {
   PHI: 1.618033988749895,
@@ -37,9 +44,9 @@ const FRACTAL_CONSTANTS = {
  * @returns {number} Entropy value between 0 and 1
  */
 const calculateTimestampEntropy = (timestamp) => {
-  const seconds = timestamp % 60;
-  const minutes = Math.floor(timestamp / 60) % 60;
-  const hours = Math.floor(timestamp / 3600) % 24;
+  const seconds = timestamp % TIME_CONSTANTS.SECONDS_PER_MINUTE;
+  const minutes = Math.floor(timestamp / TIME_CONSTANTS.SECONDS_PER_MINUTE) % TIME_CONSTANTS.SECONDS_PER_MINUTE;
+  const hours = Math.floor(timestamp / TIME_CONSTANTS.SECONDS_PER_HOUR) % TIME_CONSTANTS.HOURS_PER_DAY;
   
   // Combine time components with golden ratio scaling
   const entropy = (

@@ -40,22 +40,34 @@ const VENERATION_CYCLES = {
 };
 
 /**
- * Audio context for generating tones
+ * Audio context singleton with lazy initialization
+ * Uses module-level caching but reinitializes if context was closed
  */
-let audioContext = null;
-let gainNode = null;
+let audioContextInstance = null;
 
 /**
- * Initialize audio context
+ * Initialize audio context (singleton pattern)
  */
 const initAudioContext = () => {
-  if (!audioContext && typeof window !== 'undefined') {
-    audioContext = new (window.AudioContext || window.webkitAudioContext)();
-    gainNode = audioContext.createGain();
-    gainNode.connect(audioContext.destination);
-    gainNode.gain.value = 0.1; // Default volume
+  if (typeof window === 'undefined') return null;
+  
+  // Check if context needs to be created or recreated
+  if (!audioContextInstance || audioContextInstance.state === 'closed') {
+    try {
+      const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+      audioContextInstance = new AudioContextClass();
+    } catch (err) {
+      console.error('Failed to create AudioContext:', err);
+      return null;
+    }
   }
-  return audioContext;
+  
+  // Resume if suspended (browser autoplay policy)
+  if (audioContextInstance.state === 'suspended') {
+    audioContextInstance.resume().catch(console.error);
+  }
+  
+  return audioContextInstance;
 };
 
 /**
@@ -108,8 +120,8 @@ const mapNFTTraitToFrequency = (nftMetadata) => {
             attr.trait_type === 'Veneration Cycle'
   );
   
-  const venerationLevel = venerationTrait 
-    ? venerationTrait.value.toUpperCase() 
+  const venerationLevel = venerationTrait?.value
+    ? String(venerationTrait.value).toUpperCase()
     : 'INITIATE';
   
   const cycleConfig = VENERATION_CYCLES[venerationLevel] || VENERATION_CYCLES.INITIATE;

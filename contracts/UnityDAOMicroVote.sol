@@ -531,11 +531,18 @@ contract UnityDAOMicroVote is AccessControl, ReentrancyGuard, Pausable {
         
         ProposalStatus oldStatus = proposal.status;
         
-        // Calculate total votes
-        uint256 totalVotes = proposal.votesFor + proposal.votesAgainst + proposal.votesAbstain;
+        // Calculate quorum requirement with minimum of 1 voter
+        // QUORUM_PERCENTAGE is 1000 (10% in basis points)
+        uint256 voterCount = registeredVoters.length;
+        uint256 quorumRequired = (voterCount * QUORUM_PERCENTAGE) / 10000;
         
-        // Check quorum (simplified - uses voter count)
-        bool hasQuorum = proposal.totalVoters >= (registeredVoters.length * QUORUM_PERCENTAGE / 10000);
+        // Ensure minimum quorum of 1 voter to prevent zero-quorum edge case
+        if (quorumRequired == 0 && voterCount > 0) {
+            quorumRequired = 1;
+        }
+        
+        // Check quorum
+        bool hasQuorum = proposal.totalVoters >= quorumRequired;
         
         // Determine outcome
         if (!hasQuorum) {

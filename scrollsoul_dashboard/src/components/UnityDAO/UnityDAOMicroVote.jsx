@@ -69,9 +69,20 @@ const formatDate = (timestamp) => {
 
 /**
  * Format voting power for display
+ * Handles both BigInt strings and numbers safely
  */
 const formatVotingPower = (power) => {
-  return (Number(power) / 100).toFixed(2);
+  try {
+    // Handle BigInt string representation
+    const powerBigInt = typeof power === 'string' ? BigInt(power) : BigInt(Math.floor(Number(power)));
+    // Divide by 100 for display (2 decimal precision in contract)
+    const wholePart = powerBigInt / 100n;
+    const decimalPart = powerBigInt % 100n;
+    return `${wholePart}.${decimalPart.toString().padStart(2, '0')}`;
+  } catch (err) {
+    // Fallback for legacy number handling
+    return (Number(power) / 100).toFixed(2);
+  }
 };
 
 /**
@@ -104,10 +115,10 @@ const UnityDAOMicroVote = ({
   onVoteCast = () => {},
   onProposalCreated = () => {}
 }) => {
-  // State
+  // State - use string for votingPower to preserve BigInt precision
   const [isRegistered, setIsRegistered] = useState(false);
   const [voterInfo, setVoterInfo] = useState(null);
-  const [votingPower, setVotingPower] = useState(0);
+  const [votingPower, setVotingPower] = useState('0');
   const [proposals, setProposals] = useState([]);
   const [activeProposals, setActiveProposals] = useState([]);
   const [selectedProposal, setSelectedProposal] = useState(null);
@@ -136,9 +147,11 @@ const UnityDAOMicroVote = ({
     
     try {
       const info = await contract.getVoterInfo(account);
+      // Use BigInt.toString() for large numbers, then convert for display
+      // This prevents precision loss for very large voting power values
       setVoterInfo({
-        totalVotesCast: Number(info.totalVotesCast),
-        totalVotingPowerUsed: Number(info.totalVotingPowerUsed),
+        totalVotesCast: info.totalVotesCast.toString(),
+        totalVotingPowerUsed: info.totalVotingPowerUsed.toString(),
         lastVoteTimestamp: Number(info.lastVoteTimestamp),
         accordScore: Number(info.accordScore),
         isRegistered: info.isRegistered
@@ -147,7 +160,8 @@ const UnityDAOMicroVote = ({
       
       if (info.isRegistered) {
         const power = await contract.calculateVotingPower(account);
-        setVotingPower(Number(power));
+        // Store as string to preserve precision
+        setVotingPower(power.toString());
       }
     } catch (err) {
       console.error('Error loading voter info:', err);

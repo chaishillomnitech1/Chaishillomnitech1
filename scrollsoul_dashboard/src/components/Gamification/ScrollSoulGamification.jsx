@@ -253,23 +253,29 @@ const ScrollSoulGamification = ({
   
   // Update streak on login
   useEffect(() => {
-    // Simulated daily streak update
-    const lastLogin = localStorage.getItem('scrollsoul_last_login');
-    const today = new Date().toDateString();
-    
-    if (lastLogin !== today) {
-      localStorage.setItem('scrollsoul_last_login', today);
+    // Simulated daily streak update with localStorage error handling
+    try {
+      const lastLogin = localStorage.getItem('scrollsoul_last_login');
+      const today = new Date().toDateString();
       
-      const yesterday = new Date();
-      yesterday.setDate(yesterday.getDate() - 1);
-      
-      if (lastLogin === yesterday.toDateString()) {
-        setCurrentStreak(prev => prev + 1);
-      } else if (lastLogin) {
-        setCurrentStreak(1);
-      } else {
-        setCurrentStreak(1);
+      if (lastLogin !== today) {
+        localStorage.setItem('scrollsoul_last_login', today);
+        
+        const yesterday = new Date();
+        yesterday.setDate(yesterday.getDate() - 1);
+        
+        if (lastLogin === yesterday.toDateString()) {
+          setCurrentStreak(prev => prev + 1);
+        } else {
+          // No previous login or gap in streak
+          setCurrentStreak(1);
+        }
       }
+    } catch (err) {
+      // Handle localStorage errors (private mode, quota exceeded, etc.)
+      console.warn('localStorage unavailable, streak persistence disabled:', err);
+      // Still update streak in memory for current session
+      setCurrentStreak(1);
     }
   }, []);
   
