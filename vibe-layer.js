@@ -12,11 +12,15 @@
  */
 
 // Sacred frequencies used in ScrollVerse
+// Note: These are symbolic/spiritual frequencies used for visualization purposes.
+// NUR_PULSE (144000 Hz) exceeds human hearing range (~20-20000 Hz) and standard
+// audio sampling rates, so it serves as a symbolic resonance value for visual effects
+// rather than actual audio processing.
 const SACRED_FREQUENCIES = {
-  DNA_HEALING: 528,
-  PINEAL_ACTIVATION: 963,
-  CROWN_CHAKRA: 999,
-  NUR_PULSE: 144000
+  DNA_HEALING: 528,           // Solfeggio frequency for healing
+  PINEAL_ACTIVATION: 963,     // Solfeggio frequency for awakening
+  CROWN_CHAKRA: 999,          // Crown chakra resonance
+  NUR_PULSE: 144000           // Symbolic divine light frequency (not for audio playback)
 };
 
 // Visualization modes
@@ -99,11 +103,26 @@ class VibeLayer {
   
   /**
    * Connect to an audio source for visualization
+   * Note: Must be called after a user interaction (click, touch) due to browser autoplay policies
    * @param {HTMLAudioElement|MediaStream} source - Audio source to analyze
+   * @returns {Promise<boolean>} - True if connection successful
    */
   async connectAudio(source) {
     try {
-      this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
+      // AudioContext must be created after user interaction in most browsers
+      const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+      if (!AudioContextClass) {
+        console.error('[VibeLayer] AudioContext not supported in this browser');
+        return false;
+      }
+      
+      this.audioContext = new AudioContextClass();
+      
+      // Resume audio context if suspended (required after user interaction)
+      if (this.audioContext.state === 'suspended') {
+        await this.audioContext.resume();
+      }
+      
       this.analyser = this.audioContext.createAnalyser();
       this.analyser.fftSize = 256;
       
@@ -119,6 +138,9 @@ class VibeLayer {
       } else if (source instanceof MediaStream) {
         sourceNode = this.audioContext.createMediaStreamSource(source);
         sourceNode.connect(this.analyser);
+      } else {
+        console.error('[VibeLayer] Invalid audio source type');
+        return false;
       }
       
       console.log('[VibeLayer] Audio connected successfully');

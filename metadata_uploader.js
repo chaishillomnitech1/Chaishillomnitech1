@@ -32,11 +32,13 @@ async function uploadToIPFS(data, apiKey) {
   return new Promise((resolve, reject) => {
     const postData = typeof data === 'string' ? data : JSON.stringify(data);
     
+    // NFT.Storage API endpoint - see https://nft.storage/docs/
     const options = {
       hostname: 'api.nft.storage',
       port: 443,
       path: '/upload',
       method: 'POST',
+      timeout: 30000, // 30 second timeout
       headers: {
         'Authorization': `Bearer ${apiKey}`,
         'Content-Type': 'application/json',
@@ -46,6 +48,15 @@ async function uploadToIPFS(data, apiKey) {
     
     const req = https.request(options, (res) => {
       let responseData = '';
+      
+      // Handle non-success status codes
+      if (res.statusCode < 200 || res.statusCode >= 300) {
+        res.on('data', (chunk) => { responseData += chunk; });
+        res.on('end', () => {
+          reject(new Error(`HTTP ${res.statusCode}: ${responseData}`));
+        });
+        return;
+      }
       
       res.on('data', (chunk) => {
         responseData += chunk;
@@ -57,7 +68,7 @@ async function uploadToIPFS(data, apiKey) {
           if (parsed.ok && parsed.value && parsed.value.cid) {
             resolve(parsed.value.cid);
           } else {
-            reject(new Error(`Upload failed: ${responseData}`));
+            reject(new Error(`Upload failed: ${parsed.error?.message || responseData}`));
           }
         } catch (e) {
           reject(new Error(`Failed to parse response: ${responseData}`));
@@ -65,7 +76,15 @@ async function uploadToIPFS(data, apiKey) {
       });
     });
     
-    req.on('error', reject);
+    req.on('error', (err) => {
+      reject(new Error(`Network error: ${err.message}`));
+    });
+    
+    req.on('timeout', () => {
+      req.destroy();
+      reject(new Error('Request timed out after 30 seconds'));
+    });
+    
     req.write(postData);
     req.end();
   });

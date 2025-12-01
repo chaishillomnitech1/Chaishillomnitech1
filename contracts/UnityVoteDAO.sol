@@ -351,6 +351,7 @@ contract UnityVoteDAO is Ownable, ReentrancyGuard, Pausable {
     /**
      * @notice Execute a passed proposal
      * @param proposalId ID of the proposal to execute
+     * @dev Uses nonReentrant modifier and gas-limited external call for security
      */
     function executeProposal(uint256 proposalId) 
         external 
@@ -374,8 +375,10 @@ contract UnityVoteDAO is Ownable, ReentrancyGuard, Pausable {
         proposal.executed = true;
         
         // Execute call data if present
+        // Note: Uses gas limit to prevent griefing attacks and ensure bounded execution
         if (proposal.targetContract != address(0) && proposal.callData.length > 0) {
-            (bool success, ) = proposal.targetContract.call(proposal.callData);
+            // Gas limit of 500000 provides reasonable execution budget while preventing abuse
+            (bool success, ) = proposal.targetContract.call{gas: 500000}(proposal.callData);
             require(success, "UnityVoteDAO: Execution failed");
         }
         
