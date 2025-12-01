@@ -1,0 +1,85 @@
+# ============================================================================
+# CODEOWNERS - ScrollVerse Repository Ownership
+# ============================================================================
+#
+# This file defines code ownership for different parts of the repository.
+# Reviews from code owners are required for PRs that modify owned files.
+#
+# Format: <pattern> <owner1> <owner2> ...
+#
+# @author ScrollVerse Development Team
+# @version 1.0.0
+# ============================================================================
+
+# Default owner for all files
+* @chaishillomnitech1
+
+# ============================================================================
+# Smart Contracts
+# ============================================================================
+/contracts/ @chaishillomnitech1
+*.sol @chaishillomnitech1
+
+# ============================================================================
+# GitHub Configuration
+# ============================================================================
+/.github/ @chaishillomnitech1
+/.github/workflows/ @chaishillomnitech1
+/.github/ISSUE_TEMPLATE/ @chaishillomnitech1
+
+# ============================================================================
+# Deployment & Infrastructure
+# ============================================================================
+/deployment/ @chaishillomnitech1
+/scripts/ @chaishillomnitech1
+*.tf @chaishillomnitech1
+hardhat.config.js @chaishillomnitech1
+
+# ============================================================================
+# Security-sensitive Files
+# ============================================================================
+SECURITY.md @chaishillomnitech1
+.env.example @chaishillomnitech1
+/.github/CODEOWNERS @chaishillomnitech1
+
+# ============================================================================
+# Documentation
+# ============================================================================
+README.md @chaishillomnitech1
+CONTRIBUTING.md @chaishillomnitech1
+CHANGELOG.md @chaishillomnitech1
+/docs/ @chaishillomnitech1
+*.md @chaishillomnitech1
+
+# ============================================================================
+# Package Configuration
+# ============================================================================
+package.json @chaishillomnitech1
+package-lock.json @chaishillomnitech1
+
+# ============================================================================
+# Test Files
+# ============================================================================
+/test/ @chaishillomnitech1
+*.test.js @chaishillomnitech1
+*.spec.js @chaishillomnitech1
+
+# ============================================================================
+# Frontend / Client
+# ============================================================================
+/sovereign-tv-app/ @chaishillomnitech1
+/vibecanvas/ @chaishillomnitech1
+*.html @chaishillomnitech1
+*.css @chaishillomnitech1
+
+# ============================================================================
+# NFT Assets
+# ============================================================================
+/nft-assets/ @chaishillomnitech1
+/nft_assets/ @chaishillomnitech1
+
+# ============================================================================
+# Legal
+# ============================================================================
+/legal/ @chaishillomnitech1
+LICENSE @chaishillomnitech1

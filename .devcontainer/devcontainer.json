@@ -1,0 +1,79 @@
+{
+  "name": "ScrollVerse Development Environment",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:1-18-bullseye",
+  "features": {
+    "ghcr.io/devcontainers/features/git:1": {},
+    "ghcr.io/devcontainers/features/github-cli:1": {},
+    "ghcr.io/devcontainers/features/python:1": {
+      "version": "3.11"
+    }
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "esbenp.prettier-vscode",
+        "dbaeumer.vscode-eslint",
+        "JuanBlanco.solidity",
+        "NomicFoundation.hardhat-solidity",
+        "tintinweb.solidity-visual-auditor",
+        "ms-python.python",
+        "ms-azuretools.vscode-docker",
+        "GitHub.copilot",
+        "GitHub.vscode-pull-request-github",
+        "eamodio.gitlens",
+        "streetsidesoftware.code-spell-checker",
+        "EditorConfig.EditorConfig",
+        "redhat.vscode-yaml",
+        "ms-vscode.vscode-typescript-next"
+      ],
+      "settings": {
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "solidity.compileUsingRemoteVersion": "v0.8.20+commit.a1b79de6",
+        "solidity.defaultCompiler": "remote",
+        "solidity.linter": "solhint",
+        "solidity.packageDefaultDependenciesContractsDirectory": "",
+        "solidity.packageDefaultDependenciesDirectory": "node_modules",
+        "[solidity]": {
+          "editor.defaultFormatter": "JuanBlanco.solidity"
+        },
+        "files.associations": {
+          "*.sol": "solidity"
+        },
+        "typescript.tsdk": "node_modules/typescript/lib",
+        "git.autofetch": true,
+        "terminal.integrated.defaultProfile.linux": "bash"
+      }
+    },
+    "codespaces": {
+      "openFiles": [
+        "README.md",
+        "GETTING_STARTED.md"
+      ]
+    }
+  },
+  "postCreateCommand": "npm install && npm run compile || echo 'Initial setup complete'",
+  "postStartCommand": "git fetch --all",
+  "forwardPorts": [3000, 8545],
+  "portsAttributes": {
+    "3000": {
+      "label": "Application",
+      "onAutoForward": "notify"
+    },
+    "8545": {
+      "label": "Hardhat Network",
+      "onAutoForward": "silent"
+    }
+  },
+  "remoteUser": "node",
+  "containerEnv": {
+    "NODE_ENV": "development",
+    "SCROLLVERSE_ENV": "codespaces"
+  },
+  "mounts": [],
+  "hostRequirements": {
+    "cpus": 2,
+    "memory": "4gb",
+    "storage": "32gb"
+  }
+}

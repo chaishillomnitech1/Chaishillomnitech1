@@ -1,0 +1,106 @@
+# ============================================================================
+# Dependabot Configuration - ScrollVerse Dependency Management
+# ============================================================================
+#
+# Automated dependency updates for security and maintenance
+# Configures update schedules and PR limits for different ecosystems
+#
+# @author ScrollVerse DevOps Team
+# @version 1.0.0
+# ============================================================================
+
+version: 2
+updates:
+  # ==========================================================================
+  # npm Dependencies
+  # ==========================================================================
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "06:00"
+      timezone: "America/New_York"
+    open-pull-requests-limit: 10
+    reviewers:
+      - "chaishillomnitech1"
+    assignees:
+      - "chaishillomnitech1"
+    labels:
+      - "dependencies"
+      - "npm"
+      - "automated"
+    commit-message:
+      prefix: "chore(deps)"
+      include: "scope"
+    ignore:
+      # Ignore major version updates for critical packages to prevent breaking changes
+      - dependency-name: "hardhat"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "@openzeppelin/contracts"
+        update-types: ["version-update:semver-major"]
+    groups:
+      # Group development dependencies
+      dev-dependencies:
+        patterns:
+          - "@types/*"
+          - "eslint*"
+          - "prettier*"
+          - "jest*"
+          - "typescript"
+        update-types:
+          - "minor"
+          - "patch"
+      # Group testing dependencies
+      testing:
+        patterns:
+          - "chai*"
+          - "mocha*"
+          - "@nomicfoundation/*"
+
+  # ==========================================================================
+  # GitHub Actions
+  # ==========================================================================
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "06:00"
+      timezone: "America/New_York"
+    open-pull-requests-limit: 5
+    reviewers:
+      - "chaishillomnitech1"
+    assignees:
+      - "chaishillomnitech1"
+    labels:
+      - "dependencies"
+      - "github-actions"
+      - "automated"
+    commit-message:
+      prefix: "chore(ci)"
+    groups:
+      # Group all GitHub Actions updates
+      actions:
+        patterns:
+          - "*"
+
+  # ==========================================================================
+  # Docker (if applicable)
+  # ==========================================================================
+  - package-ecosystem: "docker"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "tuesday"
+      time: "06:00"
+      timezone: "America/New_York"
+    open-pull-requests-limit: 3
+    reviewers:
+      - "chaishillomnitech1"
+    labels:
+      - "dependencies"
+      - "docker"
+      - "automated"
+    commit-message:
+      prefix: "chore(docker)"
