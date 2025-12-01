@@ -7,7 +7,7 @@ Chaishillomnitech1 (Omnitech1™ Sovereign Deployment Engine) is a sovereign dep
 ## Technology Stack
 
 ### Primary Technologies
-- **Solidity** (0.8.20+): Smart contracts using OpenZeppelin v5.0.1
+- **Solidity** (^0.8.20): Smart contracts using OpenZeppelin v5.0.1
 - **JavaScript/Node.js**: Scripts, tests, and backend services
 - **React/Next.js**: Frontend web applications
 - **Python**: Backend services and utilities
@@ -117,8 +117,8 @@ npm run deploy:mumbai:all
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
-import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
-import "@openzeppelin/contracts/security/Pausable.sol";
+import "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
+import "@openzeppelin/contracts/utils/Pausable.sol";
 ```
 
 ### Standard Contract Structure
@@ -137,7 +137,11 @@ contract ContractName is Ownable, ReentrancyGuard, Pausable {
     // State variables
     // Events
     // Modifiers
-    // Constructor
+
+    constructor(address initialOwner) Ownable(initialOwner) {
+        // Initialization logic
+    }
+
     // External functions
     // Public functions
     // Internal functions
