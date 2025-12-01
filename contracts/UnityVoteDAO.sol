@@ -285,7 +285,8 @@ contract UnityVoteDAO is Ownable, ReentrancyGuard, Pausable {
 
         // Execute if target contract and data provided
         if (proposal.targetContract != address(0) && proposal.executionData.length > 0) {
-            (bool success, ) = proposal.targetContract.call(proposal.executionData);
+            // Use gas limit to prevent DoS attacks from consuming all gas
+            (bool success, ) = proposal.targetContract.call{gas: 500000}(proposal.executionData);
             require(success, "UnityVoteDAO: execution failed");
         }
 

@@ -16,7 +16,7 @@ class VibeLayer {
       colorScheme: options.colorScheme || 'sacred',
       intensity: options.intensity || 0.5,
       enabled: options.enabled !== false,
-      apiUrl: options.apiUrl || process.env.VIBECANVAS_API_URL || '',
+      apiUrl: options.apiUrl || (typeof window !== 'undefined' && window.VIBECANVAS_API_URL) || '',
       ...options
     };
 

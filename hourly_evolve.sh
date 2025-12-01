@@ -264,7 +264,8 @@ collect_metrics() {
     local disk_usage
     local load_avg
     
-    cpu_usage=$(top -bn1 | grep "Cpu(s)" | awk '{print $2}' | cut -d. -f1 2>/dev/null || echo "0")
+    # Use /proc/stat for more reliable CPU metrics across different environments
+    cpu_usage=$(awk '/^cpu / {usage=100-($5*100/($2+$3+$4+$5+$6+$7+$8)); printf "%.0f", usage}' /proc/stat 2>/dev/null || echo "0")
     mem_usage=$(free | awk '/Mem:/ {printf "%.0f", $3/$2 * 100}' 2>/dev/null || echo "0")
     disk_usage=$(df -h / | awk 'NR==2 {gsub(/%/,""); print $5}' 2>/dev/null || echo "0")
     load_avg=$(cat /proc/loadavg | awk '{print $1}' 2>/dev/null || echo "0")
