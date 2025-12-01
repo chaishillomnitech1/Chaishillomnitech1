@@ -362,7 +362,7 @@ const LoveUnityAccordPanel = ({
       <section className="directives-section">
         <h3>📜 Governance Directives</h3>
         <div className="directives-list">
-          {directives.map((directive, index) => (
+          {directives.map((directive) => (
             <div 
               key={directive.id} 
               className={`directive-card ${directive.isImmutable ? 'immutable' : ''}`}

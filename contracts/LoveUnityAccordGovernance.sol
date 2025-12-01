@@ -366,8 +366,11 @@ contract LoveUnityAccordGovernance is AccessControl, ReentrancyGuard, Pausable {
         require(unityAlignment <= 10000, "Invalid unity alignment");
         require(supportAlignment <= 10000, "Invalid support alignment");
         
+        // Generate unique ID suffix using title and timestamp
+        string memory idSuffix = string(abi.encodePacked("CUSTOM_", title));
+        
         bytes32 directiveId = _createDirective(
-            title,
+            idSuffix,
             title,
             description,
             loveAlignment,

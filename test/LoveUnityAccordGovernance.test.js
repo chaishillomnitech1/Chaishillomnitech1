@@ -185,7 +185,7 @@ describe("LoveUnityAccordGovernance", function () {
           9000n
         )
       ).to.emit(governance, "LoveScoreUpdated")
-        .withArgs(member1.address, 5000n, 8000n, (timestamp) => true);
+        .withArgs(member1.address, 5000n, 8000n, (timestamp) => timestamp > 0);
     });
   });
 
