@@ -1,0 +1,154 @@
+# ============================================================================
+# CodeQL Analysis Workflow - ScrollVerse Security Scanning
+# ============================================================================
+#
+# Advanced security analysis using GitHub CodeQL
+# Scans for vulnerabilities in JavaScript, TypeScript, and Solidity code
+#
+# @author ScrollVerse Security Team
+# @version 1.0.0
+# ============================================================================
+
+name: CodeQL Analysis
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+  pull_request:
+    branches:
+      - main
+  schedule:
+    # Run weekly on Sundays at 3:00 AM UTC
+    - cron: '0 3 * * 0'
+
+permissions:
+  actions: read
+  contents: read
+  security-events: write
+
+jobs:
+  # ============================================================================
+  # CodeQL Analysis
+  # ============================================================================
+  analyze:
+    name: Analyze (${{ matrix.language }})
+    runs-on: ubuntu-latest
+    
+    strategy:
+      fail-fast: false
+      matrix:
+        language:
+          - javascript-typescript
+          - actions
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v3
+        with:
+          languages: ${{ matrix.language }}
+          queries: security-extended,security-and-quality
+
+      - name: Autobuild
+        uses: github/codeql-action/autobuild@v3
+
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v3
+        with:
+          category: "/language:${{ matrix.language }}"
+
+  # ============================================================================
+  # Dependency Review (for Pull Requests)
+  # ============================================================================
+  dependency-review:
+    name: Dependency Review
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+    
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Dependency Review
+        uses: actions/dependency-review-action@v4
+        with:
+          fail-on-severity: high
+          deny-licenses: GPL-3.0, AGPL-3.0
+          allow-licenses: MIT, Apache-2.0, BSD-2-Clause, BSD-3-Clause, ISC
+
+  # ============================================================================
+  # Smart Contract Security (Solidity specific)
+  # ============================================================================
+  solidity-security:
+    name: Solidity Security Scan
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: npm ci || npm install
+
+      - name: Check for Common Vulnerabilities
+        run: |
+          echo "🔍 Scanning Solidity contracts for common vulnerabilities..."
+          
+          # Check for reentrancy patterns
+          echo "Checking for reentrancy vulnerabilities..."
+          if grep -rn "call{value" contracts/ 2>/dev/null | grep -v "ReentrancyGuard"; then
+            echo "⚠️ Potential reentrancy vulnerability - external calls found without ReentrancyGuard"
+          else
+            echo "✅ No obvious reentrancy patterns detected"
+          fi
+          
+          # Check for unchecked external calls
+          echo "Checking for unchecked external calls..."
+          if grep -rn "\.call(" contracts/ 2>/dev/null | grep -v "require\|assert"; then
+            echo "⚠️ External calls found - ensure return values are checked"
+          else
+            echo "✅ External call patterns look safe"
+          fi
+          
+          # Check for tx.origin usage
+          echo "Checking for tx.origin usage..."
+          if grep -rn "tx.origin" contracts/ 2>/dev/null; then
+            echo "⚠️ tx.origin usage detected - potential phishing vulnerability"
+          else
+            echo "✅ No tx.origin usage detected"
+          fi
+          
+          # Check for timestamp dependency
+          echo "Checking for timestamp dependency..."
+          if grep -rn "block.timestamp" contracts/ 2>/dev/null | grep -v "comment\|//"; then
+            echo "ℹ️ block.timestamp usage detected - ensure it's not used for critical randomness"
+          fi
+          
+          echo "✅ Basic security scan complete"
+
+      - name: Generate Security Report
+        run: |
+          echo "## 🔐 Solidity Security Scan Results" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Status:** ✅ Scan Complete" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Checks Performed" >> $GITHUB_STEP_SUMMARY
+          echo "- Reentrancy vulnerability patterns" >> $GITHUB_STEP_SUMMARY
+          echo "- Unchecked external calls" >> $GITHUB_STEP_SUMMARY
+          echo "- tx.origin usage" >> $GITHUB_STEP_SUMMARY
+          echo "- Timestamp dependency" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "For comprehensive security audits, consider using:" >> $GITHUB_STEP_SUMMARY
+          echo "- Slither" >> $GITHUB_STEP_SUMMARY
+          echo "- Mythril" >> $GITHUB_STEP_SUMMARY
+          echo "- Professional audit services" >> $GITHUB_STEP_SUMMARY

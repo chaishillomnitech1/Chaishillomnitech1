@@ -1,0 +1,107 @@
+# ============================================================================
+# Stale Issue/PR Management - ScrollVerse Repository Hygiene
+# ============================================================================
+#
+# Automatically marks and closes stale issues and pull requests
+# Helps maintain a clean and active issue tracker
+#
+# @author ScrollVerse DevOps Team
+# @version 1.0.0
+# ============================================================================
+
+# Number of days of inactivity before marking stale
+daysUntilStale: 60
+
+# Number of days after stale label before closing
+daysUntilClose: 14
+
+# Issues/PRs with these labels are exempt from stale
+exemptLabels:
+  - pinned
+  - security
+  - priority-high
+  - bug
+  - enhancement
+  - help wanted
+  - good first issue
+  - blocked
+  - in-progress
+  - do-not-close
+
+# Labels to use
+staleLabel: stale
+closeComment: false
+
+# Separate configuration for issues
+issues:
+  daysUntilStale: 60
+  daysUntilClose: 14
+  exemptLabels:
+    - pinned
+    - security
+    - priority-high
+  staleLabel: stale
+  markComment: |
+    This issue has been automatically marked as stale because it has not had recent activity. 
+    
+    It will be closed in 14 days if no further activity occurs.
+    
+    If this issue is still relevant:
+    - Add a comment with an update
+    - Remove the `stale` label
+    - Add a `pinned` or `priority-high` label if it should remain open
+    
+    Thank you for your contributions to ScrollVerse! 🔱
+  closeComment: |
+    This issue has been automatically closed due to inactivity.
+    
+    If you believe this issue should be reopened, please:
+    - Comment with additional context
+    - Create a new issue if the problem persists
+    
+    **ALLAHU AKBAR! 🕋🔥💎🌌**
+
+# Separate configuration for pull requests
+pulls:
+  daysUntilStale: 45
+  daysUntilClose: 14
+  exemptLabels:
+    - pinned
+    - security
+    - work-in-progress
+    - do-not-close
+  staleLabel: stale
+  markComment: |
+    This pull request has been automatically marked as stale because it has not had recent activity.
+    
+    It will be closed in 14 days if no further activity occurs.
+    
+    If you're still working on this:
+    - Push new commits to update the PR
+    - Add a comment with your progress
+    - Request a review if ready
+    
+    Thank you for your contributions to ScrollVerse! 🔱
+  closeComment: |
+    This pull request has been automatically closed due to inactivity.
+    
+    If you'd like to continue this work:
+    - Reopen this PR with updated changes
+    - Create a new PR referencing this one
+    
+    **ALLAHU AKBAR! 🕋🔥💎🌌**
+
+# Only process issues/PRs with specific labels (leave empty to process all)
+onlyLabels: []
+
+# Limit the number processed per run (0 = no limit)
+limitPerRun: 30
+
+# Ascending order processes older issues first
+ascending: true
+
+# Remove stale label when issue/PR is updated
+removeStaleWhenUpdated: true
+
+# Perform a dry run first (set to false in production)
+debug: false

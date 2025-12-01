@@ -1,0 +1,108 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:base",
+    ":dependencyDashboard",
+    ":semanticCommits",
+    ":timezone(America/New_York)",
+    "group:allNonMajor"
+  ],
+  "description": "ScrollVerse Renovate Configuration - Automated Dependency Management",
+  "labels": ["dependencies", "renovate", "automated"],
+  "reviewers": ["chaishillomnitech1"],
+  "assignees": ["chaishillomnitech1"],
+  "schedule": ["before 6am on monday"],
+  "prConcurrentLimit": 5,
+  "prHourlyLimit": 2,
+  "stabilityDays": 3,
+  "vulnerabilityAlerts": {
+    "labels": ["security", "priority-high"],
+    "enabled": true
+  },
+  "packageRules": [
+    {
+      "description": "OpenZeppelin contracts - careful with major updates",
+      "matchPackageNames": ["@openzeppelin/contracts"],
+      "matchUpdateTypes": ["major"],
+      "enabled": false
+    },
+    {
+      "description": "Hardhat ecosystem - group together",
+      "matchPackagePatterns": ["^hardhat", "^@nomicfoundation/"],
+      "groupName": "hardhat ecosystem",
+      "groupSlug": "hardhat",
+      "labels": ["hardhat", "tooling"]
+    },
+    {
+      "description": "Development dependencies - auto-merge patches",
+      "matchDepTypes": ["devDependencies"],
+      "matchUpdateTypes": ["patch"],
+      "automerge": true,
+      "automergeType": "pr",
+      "platformAutomerge": true
+    },
+    {
+      "description": "Type definitions - auto-merge minor and patch",
+      "matchPackagePatterns": ["^@types/"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "automerge": true,
+      "groupName": "type definitions"
+    },
+    {
+      "description": "Testing frameworks",
+      "matchPackagePatterns": ["^chai", "^mocha", "^jest", "^sinon"],
+      "groupName": "testing frameworks",
+      "labels": ["testing"]
+    },
+    {
+      "description": "Linting tools",
+      "matchPackagePatterns": ["^eslint", "^prettier", "^solhint"],
+      "groupName": "linting tools",
+      "labels": ["linting"]
+    },
+    {
+      "description": "GitHub Actions - weekly updates",
+      "matchManagers": ["github-actions"],
+      "groupName": "github actions",
+      "schedule": ["before 6am on tuesday"]
+    },
+    {
+      "description": "Node.js ecosystem packages",
+      "matchPackagePatterns": ["^node-", "^@node/"],
+      "groupName": "nodejs ecosystem"
+    },
+    {
+      "description": "Security packages - high priority",
+      "matchPackagePatterns": ["^helmet", "^cors", "^express-rate-limit"],
+      "labels": ["security", "priority-high"],
+      "prPriority": 10
+    }
+  ],
+  "npm": {
+    "minimumReleaseAge": "3 days",
+    "lockFileMaintenance": {
+      "enabled": true,
+      "schedule": ["before 5am on sunday"]
+    }
+  },
+  "postUpdateOptions": [
+    "npmDedupe"
+  ],
+  "commitMessagePrefix": "chore(deps): ",
+  "commitMessageAction": "update",
+  "commitMessageTopic": "{{depName}}",
+  "commitMessageExtra": "to {{newVersion}}",
+  "semanticCommitScope": "deps",
+  "semanticCommitType": "chore",
+  "regexManagers": [
+    {
+      "fileMatch": ["(^|/)hardhat\\.config\\.[jt]s$"],
+      "matchStrings": [
+        "solidity:\\s*[\"'](?<currentValue>[^\"']+)[\"']"
+      ],
+      "depNameTemplate": "solidity",
+      "datasourceTemplate": "npm",
+      "packageNameTemplate": "solc"
+    }
+  ]
+}
