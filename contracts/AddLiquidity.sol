@@ -163,6 +163,7 @@ contract AddLiquidity is Ownable, ReentrancyGuard, Pausable {
     error SlippageTooHigh();
     error DeadlineExpired();
     error InsufficientLiquidity();
+    error PairNotFound();
     error TransferFailed();
 
     // ============ CONSTRUCTOR ============
@@ -399,7 +400,7 @@ contract AddLiquidity is Ownable, ReentrancyGuard, Pausable {
         // Get LP token address
         address factory = uniswapRouter.factory();
         address pair = IUniswapV2Factory(factory).getPair(_tokenA, _tokenB);
-        if (pair == address(0)) revert InsufficientLiquidity();
+        if (pair == address(0)) revert PairNotFound();
 
         // Transfer LP tokens from user
         IERC20(pair).safeTransferFrom(msg.sender, address(this), _liquidity);
@@ -446,7 +447,7 @@ contract AddLiquidity is Ownable, ReentrancyGuard, Pausable {
         // Get LP token address
         address factory = uniswapRouter.factory();
         address pair = IUniswapV2Factory(factory).getPair(_token, uniswapRouter.WETH());
-        if (pair == address(0)) revert InsufficientLiquidity();
+        if (pair == address(0)) revert PairNotFound();
 
         // Transfer LP tokens from user
         IERC20(pair).safeTransferFrom(msg.sender, address(this), _liquidity);

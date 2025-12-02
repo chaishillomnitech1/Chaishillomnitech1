@@ -2,7 +2,7 @@
  * ScrollVerseNFT Event Handlers
  *
  * Subgraph mappings for ScrollVerseNFT contract events
- * Frequencies: 528Hz + 963Hz + 999Hz + 144,000Hz
+ * Frequencies: 528Hz + 963Hz + 888Hz + 777Hz + 144,000Hz
  */
 
 import { BigInt, Address, Bytes } from "@graphprotocol/graph-ts";
