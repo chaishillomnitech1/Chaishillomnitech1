@@ -52,7 +52,22 @@
     "deploy:mumbai:unity-dao": "hardhat run scripts/deploy_unity_dao_microvote.js --network mumbai",
     "deploy:polygon:unity-dao": "hardhat run scripts/deploy_unity_dao_microvote.js --network polygon",
     "deploy:scroll:unity-dao": "hardhat run scripts/deploy_unity_dao_microvote.js --network scrollSepolia",
-    "test:unity-dao": "hardhat test test/UnityDAOMicroVote.test.js"
+    "test:unity-dao": "hardhat test test/UnityDAOMicroVote.test.js",
+    "deploy:mumbai:add-liquidity": "hardhat run scripts/deploy_add_liquidity.js --network mumbai",
+    "deploy:polygon:add-liquidity": "hardhat run scripts/deploy_add_liquidity.js --network polygon",
+    "deploy:scroll:add-liquidity": "hardhat run scripts/deploy_add_liquidity.js --network scrollSepolia",
+    "deploy:mumbai:incentives": "hardhat run scripts/deploy_liquidity_incentives.js --network mumbai",
+    "deploy:polygon:incentives": "hardhat run scripts/deploy_liquidity_incentives.js --network polygon",
+    "deploy:scroll:incentives": "hardhat run scripts/deploy_liquidity_incentives.js --network scrollSepolia",
+    "deploy:mumbai:staking-pool": "hardhat run scripts/deploy_staking_pool.js --network mumbai",
+    "deploy:polygon:staking-pool": "hardhat run scripts/deploy_staking_pool.js --network polygon",
+    "deploy:scroll:staking-pool": "hardhat run scripts/deploy_staking_pool.js --network scrollSepolia",
+    "verify:add-liquidity": "hardhat run scripts/verify_add_liquidity.js --network mumbai",
+    "verify:incentives": "hardhat run scripts/verify_liquidity_incentives.js --network mumbai",
+    "verify:phase1": "hardhat run scripts/verify_phase1_deployment.js --network mumbai",
+    "deploy:mumbai:liquidity-suite": "npm run deploy:mumbai:add-liquidity && npm run deploy:mumbai:incentives",
+    "deploy:polygon:liquidity-suite": "npm run deploy:polygon:add-liquidity && npm run deploy:polygon:incentives",
+    "deploy:scroll:liquidity-suite": "npm run deploy:scroll:add-liquidity && npm run deploy:scroll:incentives"
   },
   "keywords": [
     "scrollverse",
