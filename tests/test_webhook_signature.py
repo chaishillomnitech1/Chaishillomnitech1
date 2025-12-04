@@ -12,9 +12,18 @@ import json
 import os
 import pytest
 
-# Set up test environment variables before importing the server
-os.environ['FLASK_SECRET_KEY'] = 'test-secret-key'
 
+@pytest.fixture(autouse=True)
+def reset_env(monkeypatch):
+    """Reset environment variables before each test."""
+    monkeypatch.setenv('FLASK_SECRET_KEY', 'test-secret-key')
+    # Clear any existing webhook/auth settings
+    monkeypatch.delenv('GITHUB_WEBHOOK_SECRET', raising=False)
+    monkeypatch.delenv('ADMIN_TOKEN', raising=False)
+    monkeypatch.delenv('JWT_SECRET', raising=False)
+
+
+# Import after setting up env fixtures
 from omnitech_server import app, verify_webhook_signature
 
 

@@ -89,10 +89,14 @@ class OmnitechPersistence:
         try:
             with self._driver.session() as session:
                 # Sanitize attributes for Neo4j (convert complex types to strings)
-                safe_attrs = {
-                    k: str(v) if not isinstance(v, (str, int, float, bool)) else v
-                    for k, v in attributes.items()
-                }
+                # Also validate keys to prevent injection
+                safe_attrs = {}
+                for k, v in attributes.items():
+                    # Validate key: only allow alphanumeric and underscores
+                    if not k.isidentifier():
+                        logger.warning(f"Skipping invalid attribute key: {k}")
+                        continue
+                    safe_attrs[k] = str(v) if not isinstance(v, (str, int, float, bool)) else v
 
                 query = """
                 MERGE (n:OmniNode {id: $node_id})
@@ -124,11 +128,15 @@ class OmnitechPersistence:
 
         try:
             with self._driver.session() as session:
-                # Sanitize attributes for Neo4j
-                safe_attrs = {
-                    k: str(v) if not isinstance(v, (str, int, float, bool)) else v
-                    for k, v in attributes.items()
-                }
+                # Sanitize attributes for Neo4j (convert complex types to strings)
+                # Also validate keys to prevent injection
+                safe_attrs = {}
+                for k, v in attributes.items():
+                    # Validate key: only allow alphanumeric and underscores
+                    if not k.isidentifier():
+                        logger.warning(f"Skipping invalid attribute key: {k}")
+                        continue
+                    safe_attrs[k] = str(v) if not isinstance(v, (str, int, float, bool)) else v
 
                 query = """
                 MATCH (s:OmniNode {id: $source})

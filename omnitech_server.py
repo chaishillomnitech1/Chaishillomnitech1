@@ -35,7 +35,11 @@ logger = logging.getLogger(__name__)
 
 # Initialize Flask app
 app = Flask(__name__)
-app.config['SECRET_KEY'] = os.environ.get('FLASK_SECRET_KEY', os.urandom(32).hex())
+_flask_secret = os.environ.get('FLASK_SECRET_KEY')
+if not _flask_secret:
+    logger.warning("FLASK_SECRET_KEY not set - using random key (sessions will not persist across restarts)")
+    _flask_secret = os.urandom(32).hex()
+app.config['SECRET_KEY'] = _flask_secret
 
 # Initialize Socket.IO
 socketio = SocketIO(app, cors_allowed_origins="*", async_mode='eventlet')
