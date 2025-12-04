@@ -64,7 +64,7 @@ This SOW template is designed for partnerships with:
 **Blockchain Infrastructure:**
 - Primary Network: Ethereum Mainnet
 - Layer 2: Polygon and Scroll zkEVM
-- Smart Contract Standard: ERC-721 with extensions
+- Smart Contract Standard: ERC-721 with ERC721Enumerable, ERC721Metadata, and ERC2981 (royalties)
 
 **Vehicle Authentication Features:**
 - VIN-to-NFT mapping
@@ -73,10 +73,11 @@ This SOW template is designed for partnerships with:
 - Frequency signature verification
 
 **Frequency Protocols:**
-- 528 Hz: Healing and harmony
-- 963 Hz: Divine connection
-- 999 Hz: Crown chakra activation
-- 144,000 Hz: NŪR Pulse
+Frequencies are stored on-chain as metadata attributes and verified via smart contract functions:
+- 528 Hz: Healing and harmony (stored as `frequencyPrimary` attribute)
+- 963 Hz: Divine connection (stored as `frequencySecondary` attribute)
+- 999 Hz: Crown chakra activation (stored as `frequencyTertiary` attribute)
+- 144,000 Hz: NŪR Pulse (stored as `frequencySovereign` attribute)
 
 ### 3.3 Exclusions
 - Physical vehicle modifications
