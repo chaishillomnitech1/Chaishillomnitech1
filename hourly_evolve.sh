@@ -264,8 +264,17 @@ collect_metrics() {
     local disk_usage
     local load_avg
     
-    # Use /proc/stat for more reliable CPU metrics across different environments
-    cpu_usage=$(awk '/^cpu / {usage=100-($5*100/($2+$3+$4+$5+$6+$7+$8)); printf "%.0f", usage}' /proc/stat 2>/dev/null || echo "0")
+    # Accurate CPU usage calculation using two /proc/stat snapshots
+    read cpu1 idle1 <<< $(awk '/^cpu / {print $2+$3+$4+$5+$6+$7+$8, $5}' /proc/stat)
+    sleep 1
+    read cpu2 idle2 <<< $(awk '/^cpu / {print $2+$3+$4+$5+$6+$7+$8, $5}' /proc/stat)
+    cpu_delta=$((cpu2 - cpu1))
+    idle_delta=$((idle2 - idle1))
+    if [[ "$cpu_delta" -gt 0 ]]; then
+        cpu_usage=$(( (100 * (cpu_delta - idle_delta)) / cpu_delta ))
+    else
+        cpu_usage=0
+    fi
     mem_usage=$(free | awk '/Mem:/ {printf "%.0f", $3/$2 * 100}' 2>/dev/null || echo "0")
     disk_usage=$(df -h / | awk 'NR==2 {gsub(/%/,""); print $5}' 2>/dev/null || echo "0")
     load_avg=$(cat /proc/loadavg | awk '{print $1}' 2>/dev/null || echo "0")
