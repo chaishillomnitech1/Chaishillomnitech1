@@ -97,7 +97,16 @@
     "test:prosperity-coin": "hardhat test test/ProsperityCoin.test.js",
     "test:love-coin": "hardhat test test/LoveCoin.test.js",
     "test:spiritual-portal": "hardhat test test/SpiritualActivationPortal.test.js",
-    "test:holy-bloodline-system": "npm run test:holy-bloodline-nft && npm run test:truth-coin && npm run test:prosperity-coin && npm run test:love-coin && npm run test:spiritual-portal"
+    "test:holy-bloodline-system": "npm run test:holy-bloodline-nft && npm run test:truth-coin && npm run test:prosperity-coin && npm run test:love-coin && npm run test:spiritual-portal",
+    "deploy:mumbai:obb-nft": "hardhat run operation-bounce-back/scripts/deploy_obb_nft.js --network mumbai",
+    "deploy:polygon:obb-nft": "hardhat run operation-bounce-back/scripts/deploy_obb_nft.js --network polygon",
+    "deploy:mumbai:de-coin": "hardhat run operation-bounce-back/scripts/deploy_de_coin.js --network mumbai",
+    "deploy:polygon:de-coin": "hardhat run operation-bounce-back/scripts/deploy_de_coin.js --network polygon",
+    "deploy:mumbai:obb": "npm run deploy:mumbai:obb-nft && npm run deploy:mumbai:de-coin",
+    "deploy:polygon:obb": "npm run deploy:polygon:obb-nft && npm run deploy:polygon:de-coin",
+    "test:obb-nft": "hardhat test operation-bounce-back/test/OperationBounceBackNFT.test.js",
+    "test:de-coin": "hardhat test operation-bounce-back/test/DivineEssenceCoin.test.js",
+    "test:obb": "npm run test:obb-nft && npm run test:de-coin"
   },
   "keywords": [
     "scrollverse",
