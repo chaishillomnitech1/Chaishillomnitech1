@@ -186,8 +186,8 @@ contract DivineEssenceCoin is ERC20, ERC20Burnable, Ownable, ReentrancyGuard, Pa
         bool hasFirstStakerBonus = _checkFirstStakerBonus();
         bool hasNFTBonus = _checkNFTBonus(msg.sender);
         
-        // Transfer tokens from user
-        require(transfer(address(this), amount), "Transfer failed");
+        // Transfer tokens from user to contract
+        _transfer(msg.sender, address(this), amount);
         
         // Create stake
         Stake memory newStake = Stake({
