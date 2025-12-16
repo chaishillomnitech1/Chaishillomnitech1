@@ -573,7 +573,8 @@ contract DualMissionNFT is ERC721, ERC721URIStorage, Ownable, ReentrancyGuard {
     function updateSchumannCoherence(address user, uint256 coherence) external onlyOwner {
         require(coherence <= 100, "Coherence must be 0-100");
         schumannCoherence[user] = coherence;
-        emit FrequencyAligned(user, 783, coherence); // 7.83Hz Schumann base
+        // Note: 783 represents 7.83Hz × 100 (stored as integer for gas efficiency)
+        emit FrequencyAligned(user, 783, coherence); // 7.83Hz Schumann base resonance
     }
     
     // ============ SOULBOUND LOGIC ============
