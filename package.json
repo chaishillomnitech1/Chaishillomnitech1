@@ -106,7 +106,11 @@
     "deploy:polygon:obb": "npm run deploy:polygon:obb-nft && npm run deploy:polygon:de-coin",
     "test:obb-nft": "hardhat test operation-bounce-back/test/OperationBounceBackNFT.test.js",
     "test:de-coin": "hardhat test operation-bounce-back/test/DivineEssenceCoin.test.js",
-    "test:obb": "npm run test:obb-nft && npm run test:de-coin"
+    "test:obb": "npm run test:obb-nft && npm run test:de-coin",
+    "deploy:mumbai:dual-mission": "hardhat run scripts/deploy_dual_mission_nft.js --network mumbai",
+    "deploy:polygon:dual-mission": "hardhat run scripts/deploy_dual_mission_nft.js --network polygon",
+    "deploy:scroll:dual-mission": "hardhat run scripts/deploy_dual_mission_nft.js --network scrollSepolia",
+    "test:dual-mission": "hardhat test test/DualMissionNFT.test.js"
   },
   "keywords": [
     "scrollverse",
