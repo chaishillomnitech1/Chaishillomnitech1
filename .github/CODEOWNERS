@@ -1,0 +1,53 @@
+# ScrollVerse CODEOWNERS
+# This file defines code ownership for the repository
+# See: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+
+# Default owners for everything in the repo
+*                                       @chaishillomnitech1
+
+# Smart Contracts - Require careful review
+/contracts/                             @chaishillomnitech1
+*.sol                                   @chaishillomnitech1
+
+# Security-sensitive files
+/legal/                                 @chaishillomnitech1
+SECURITY.md                             @chaishillomnitech1
+.github/workflows/                      @chaishillomnitech1
+.github/CODEOWNERS                      @chaishillomnitech1
+
+# Deployment configurations
+/deployment/                            @chaishillomnitech1
+/scripts/                               @chaishillomnitech1
+hardhat.config.js                       @chaishillomnitech1
+vercel.json                             @chaishillomnitech1
+main.tf                                 @chaishillomnitech1
+
+# Package management
+package.json                            @chaishillomnitech1
+package-lock.json                       @chaishillomnitech1
+
+# CI/CD and DevOps
+.github/workflows/*.yml                 @chaishillomnitech1
+.github/dependabot.yml                  @chaishillomnitech1
+.github/renovate.json                   @chaishillomnitech1
+
+# Documentation
+*.md                                    @chaishillomnitech1
+
+# Frontend applications
+/sovereign-tv-app/                      @chaishillomnitech1
+/vibecanvas/                            @chaishillomnitech1
+/scrollsoul_dashboard/                  @chaishillomnitech1
+
+# NFT and media assets
+/nft-assets/                            @chaishillomnitech1
+/nft_assets/                            @chaishillomnitech1
+/media-integrations/                    @chaishillomnitech1
+
+# Sacred and protocol files
+/sacred_ledgers/                        @chaishillomnitech1
+/broadcast_protocols/                   @chaishillomnitech1
+/divine_symbols/                        @chaishillomnitech1
+
+# Test files
+/test/                                  @chaishillomnitech1

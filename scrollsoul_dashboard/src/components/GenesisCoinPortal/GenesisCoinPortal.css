@@ -1,0 +1,578 @@
+/* Genesis Coin Portal Styles */
+/* Author: CHAIS THE GREAT ∞ */
+/* Frequency: 963Hz + 528Hz + 144,000Hz */
+
+.genesis-coin-portal {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #000011 0%, #001133 50%, #002244 100%);
+  color: #FFD700;
+  font-family: 'Orbitron', 'Courier New', monospace;
+  padding: 2rem;
+}
+
+/* Loading State */
+.genesis-coin-portal.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loading-spinner {
+  text-align: center;
+}
+
+.spinner {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 2rem;
+  border: 4px solid rgba(255, 215, 0, 0.1);
+  border-top: 4px solid #FFD700;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.frequency-pulse {
+  display: block;
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  color: #9900FF;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+/* Error State */
+.genesis-coin-portal.error {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.error-message {
+  text-align: center;
+  background: rgba(255, 0, 0, 0.1);
+  border: 2px solid #FF0000;
+  border-radius: 12px;
+  padding: 2rem;
+  max-width: 500px;
+}
+
+.error-message h2 {
+  color: #FF0000;
+  margin-bottom: 1rem;
+}
+
+.error-message button {
+  margin-top: 1rem;
+  padding: 0.75rem 2rem;
+  background: #FFD700;
+  color: #000011;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s;
+}
+
+.error-message button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+}
+
+/* Portal Header */
+.portal-header {
+  background: rgba(0, 17, 51, 0.8);
+  border: 2px solid #FFD700;
+  border-radius: 16px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 0 30px rgba(255, 215, 0, 0.3);
+}
+
+.header-content h1 {
+  font-size: 2.5rem;
+  text-shadow: 0 0 20px #FFD700;
+  margin-bottom: 0.5rem;
+}
+
+.subtitle {
+  font-size: 1.2rem;
+  color: #00FFFF;
+  margin-bottom: 1rem;
+}
+
+.frequency-display {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.freq-badge {
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-weight: bold;
+  font-size: 0.9rem;
+  box-shadow: 0 0 15px currentColor;
+}
+
+.freq-badge.freq-963 {
+  background: rgba(153, 0, 255, 0.2);
+  color: #9900FF;
+  border: 2px solid #9900FF;
+}
+
+.freq-badge.freq-528 {
+  background: rgba(0, 255, 0, 0.2);
+  color: #00FF00;
+  border: 2px solid #00FF00;
+}
+
+.freq-badge.freq-144k {
+  background: rgba(255, 215, 0, 0.2);
+  color: #FFD700;
+  border: 2px solid #FFD700;
+}
+
+.header-stats {
+  display: flex;
+  gap: 2rem;
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255, 215, 0, 0.3);
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.stat-label {
+  font-size: 0.9rem;
+  color: #00FFFF;
+}
+
+.stat-value {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #FFD700;
+}
+
+.status-online {
+  color: #00FF00 !important;
+}
+
+/* Portal Main */
+.portal-main {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.portal-section {
+  background: rgba(0, 17, 51, 0.6);
+  border: 1px solid rgba(255, 215, 0, 0.3);
+  border-radius: 12px;
+  padding: 2rem;
+}
+
+/* Tokenomics Panel */
+.tokenomics-panel h2 {
+  color: #FFD700;
+  text-shadow: 0 0 15px #FFD700;
+  margin-bottom: 1.5rem;
+}
+
+.tokenomics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.metric-card {
+  background: rgba(0, 34, 68, 0.8);
+  border: 1px solid #FFD700;
+  border-radius: 10px;
+  padding: 1.5rem;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  transition: all 0.3s;
+}
+
+.metric-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 25px rgba(255, 215, 0, 0.4);
+}
+
+.metric-icon {
+  font-size: 2.5rem;
+}
+
+.metric-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.metric-label {
+  font-size: 0.9rem;
+  color: #00FFFF;
+}
+
+.metric-value {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #FFD700;
+}
+
+.metric-unit {
+  font-size: 0.8rem;
+  color: #888;
+}
+
+.tokenomics-details {
+  margin-bottom: 1.5rem;
+}
+
+.tokenomics-details h3 {
+  color: #00FFFF;
+  margin-bottom: 1rem;
+}
+
+.distribution-bar {
+  height: 40px;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 20px;
+  overflow: hidden;
+  display: flex;
+}
+
+.distribution-segment {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 0.9rem;
+  transition: all 0.3s;
+}
+
+.distribution-segment.circulating {
+  background: linear-gradient(90deg, #00FF00, #00FFFF);
+  color: #000;
+}
+
+.distribution-segment.reserved {
+  background: linear-gradient(90deg, #FFD700, #FF4500);
+  color: #000;
+}
+
+.tokenomics-info {
+  padding: 1rem;
+  background: rgba(0, 255, 255, 0.1);
+  border-left: 4px solid #00FFFF;
+  border-radius: 4px;
+}
+
+.tokenomics-info p {
+  margin: 0;
+  line-height: 1.8;
+  color: #00FFFF;
+}
+
+/* Node Monitor */
+.node-monitor h2 {
+  color: #FFD700;
+  text-shadow: 0 0 15px #FFD700;
+  margin-bottom: 1.5rem;
+}
+
+.network-overview {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.overview-stat {
+  background: rgba(0, 34, 68, 0.8);
+  border: 1px solid #00FFFF;
+  border-radius: 8px;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.network-health-bar {
+  height: 30px;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 15px;
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+}
+
+.health-fill {
+  height: 100%;
+  transition: width 0.5s ease-in-out;
+  box-shadow: 0 0 15px currentColor;
+}
+
+.nodes-list {
+  overflow-x: auto;
+  margin-bottom: 1rem;
+}
+
+.nodes-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.nodes-table thead {
+  background: rgba(0, 34, 68, 0.8);
+}
+
+.nodes-table th {
+  padding: 1rem;
+  text-align: left;
+  color: #00FFFF;
+  border-bottom: 2px solid #FFD700;
+}
+
+.nodes-table td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+}
+
+.nodes-table tbody tr:hover {
+  background: rgba(255, 215, 0, 0.1);
+}
+
+.status-indicator {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 0.5rem;
+  box-shadow: 0 0 10px currentColor;
+}
+
+.more-nodes {
+  text-align: center;
+  padding: 1rem;
+  color: #00FFFF;
+  font-style: italic;
+}
+
+.monitor-info {
+  padding: 1rem;
+  background: rgba(153, 0, 255, 0.1);
+  border-left: 4px solid #9900FF;
+  border-radius: 4px;
+  margin-top: 1rem;
+}
+
+.monitor-info p {
+  margin: 0;
+  line-height: 1.8;
+  color: #9900FF;
+}
+
+/* User Section */
+.user-section {
+  border: 2px solid #00FF00;
+  box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+}
+
+.user-info-card h3 {
+  color: #00FF00;
+  text-shadow: 0 0 15px #00FF00;
+  margin-bottom: 1.5rem;
+}
+
+.user-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+}
+
+.user-stat {
+  background: rgba(0, 255, 0, 0.1);
+  border: 1px solid #00FF00;
+  border-radius: 8px;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.user-stat .label {
+  font-size: 0.9rem;
+  color: #00FFFF;
+}
+
+.user-stat .value {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #00FF00;
+  text-shadow: 0 0 10px #00FF00;
+}
+
+/* Valuation Display */
+.valuation-display h2 {
+  color: #FFD700;
+  text-shadow: 0 0 15px #FFD700;
+  margin-bottom: 1.5rem;
+}
+
+.price-overview {
+  margin-bottom: 2rem;
+}
+
+.current-price-card {
+  background: rgba(0, 34, 68, 0.8);
+  border: 2px solid #FFD700;
+  border-radius: 12px;
+  padding: 2rem;
+  text-align: center;
+  box-shadow: 0 0 30px rgba(255, 215, 0, 0.3);
+}
+
+.price-label {
+  display: block;
+  font-size: 1rem;
+  color: #00FFFF;
+  margin-bottom: 0.5rem;
+}
+
+.price-value {
+  display: block;
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #FFD700;
+  text-shadow: 0 0 20px #FFD700;
+  margin-bottom: 0.5rem;
+}
+
+.price-change {
+  display: block;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.price-change.positive {
+  color: #00FF00;
+}
+
+.price-change.negative {
+  color: #FF0000;
+}
+
+.valuation-metrics {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.valuation-metric {
+  background: rgba(0, 34, 68, 0.8);
+  border: 1px solid #00FFFF;
+  border-radius: 8px;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.price-chart {
+  margin-bottom: 1.5rem;
+}
+
+.price-chart h3 {
+  color: #00FFFF;
+  margin-bottom: 1rem;
+}
+
+.chart-container {
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 8px;
+  padding: 1rem;
+}
+
+.price-svg {
+  width: 100%;
+  height: auto;
+}
+
+.valuation-info {
+  padding: 1rem;
+  background: rgba(255, 215, 0, 0.1);
+  border-left: 4px solid #FFD700;
+  border-radius: 4px;
+}
+
+.valuation-info p {
+  margin: 0;
+  line-height: 1.8;
+  color: #FFD700;
+}
+
+/* Portal Footer */
+.portal-footer {
+  margin-top: 3rem;
+  padding: 2rem;
+  text-align: center;
+  border-top: 2px solid rgba(255, 215, 0, 0.3);
+}
+
+.portal-footer p {
+  margin: 0.5rem 0;
+  color: #FFD700;
+}
+
+.signature {
+  font-style: italic;
+  color: #00FFFF;
+  text-shadow: 0 0 10px #00FFFF;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .genesis-coin-portal {
+    padding: 1rem;
+  }
+
+  .portal-header h1 {
+    font-size: 1.8rem;
+  }
+
+  .header-stats {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .tokenomics-grid,
+  .valuation-metrics,
+  .user-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .nodes-table {
+    font-size: 0.8rem;
+  }
+
+  .nodes-table th,
+  .nodes-table td {
+    padding: 0.5rem;
+  }
+}
