@@ -1,0 +1,101 @@
+/* Buffett Metrics Styles */
+.buffett-metrics {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 24px;
+}
+
+.buffett-metrics.compact {
+  padding: 16px;
+}
+
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.metrics-compact {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.metric-card {
+  background: rgba(0, 34, 68, 0.6);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 20px;
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  transition: all 0.3s ease;
+}
+
+.metric-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 20px rgba(255, 215, 0, 0.3);
+}
+
+.metric-icon {
+  font-size: 2.5rem;
+}
+
+.metric-label {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+}
+
+.metric-value {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--divine-gold);
+}
+
+.metric-value.achieved {
+  color: var(--success);
+}
+
+.metric-value.warning {
+  color: var(--warning);
+}
+
+.metric-value.positive {
+  color: var(--success);
+}
+
+.metric-compact {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px;
+  background: rgba(0, 34, 68, 0.5);
+  border-radius: 4px;
+}
+
+.compounding-insights {
+  margin-top: 24px;
+}
+
+.insights-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+.insight {
+  text-align: center;
+  padding: 16px;
+  background: rgba(0, 34, 68, 0.5);
+  border-radius: 8px;
+}
+
+.insight-value {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--success);
+  margin-bottom: 8px;
+}

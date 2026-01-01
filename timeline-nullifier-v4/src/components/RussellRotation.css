@@ -1,0 +1,119 @@
+/* Russell Rotation Styles */
+.russell-rotation {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 24px;
+}
+
+.russell-rotation.compact {
+  padding: 16px;
+}
+
+.rotation-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+.rotation-chart, .rotation-signals {
+  background: rgba(0, 34, 68, 0.5);
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.signal-card {
+  margin-bottom: 20px;
+  padding: 16px;
+  background: rgba(0, 17, 51, 0.5);
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+}
+
+.signal-recommendation {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--success);
+  text-align: center;
+  margin: 16px 0;
+}
+
+.signal-confidence-bar {
+  width: 100%;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  overflow: hidden;
+  margin: 12px 0;
+}
+
+.confidence-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--success), var(--divine-gold));
+  transition: width 0.3s ease;
+}
+
+.factor-breakdown {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.factor-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.factor-bar {
+  width: 100%;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.factor-fill {
+  height: 100%;
+  transition: width 0.3s ease;
+}
+
+.factor-fill.growth {
+  background: var(--success);
+}
+
+.factor-fill.value {
+  background: var(--warning);
+}
+
+.factor-fill.neutral {
+  background: var(--text-muted);
+}
+
+.risk-assessment {
+  margin: 24px 0;
+  padding: 20px;
+  background: rgba(0, 34, 68, 0.5);
+  border-radius: 8px;
+}
+
+.risk-metrics {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.risk-metric {
+  text-align: center;
+  padding: 12px;
+  background: rgba(0, 17, 51, 0.5);
+  border-radius: 6px;
+}
+
+@media (max-width: 768px) {
+  .rotation-grid {
+    grid-template-columns: 1fr;
+  }
+}
