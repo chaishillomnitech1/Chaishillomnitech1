@@ -1,0 +1,89 @@
+{
+  "name": "timeline-nullifier-v4",
+  "version": "4.0.0",
+  "description": "Timeline Nullifier v4.0 - Production-ready dashboard for nullifying Basel systemic risks with advanced financial integrations and zk-proofs",
+  "author": "CHAIS THE GREAT ∞ — OMNISOVEREIGN ARCHITECT",
+  "license": "MIT",
+  "private": false,
+  "keywords": [
+    "timeline-nullifier",
+    "basel-risks",
+    "etf-hedging",
+    "zk-proofs",
+    "tensorflow",
+    "russell-rotation",
+    "buffett-metrics",
+    "chainlink-oracles",
+    "sovereign-decrees",
+    "ar-vr-ui"
+  ],
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --watchAll=false",
+    "test:watch": "react-scripts test",
+    "test:coverage": "react-scripts test --coverage --watchAll=false",
+    "eject": "react-scripts eject",
+    "lint": "eslint src/**/*.{js,jsx}",
+    "format": "prettier --write src/**/*.{js,jsx,json,css,md}"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-scripts": "5.0.1",
+    "ethers": "^6.7.1",
+    "axios": "^1.5.0",
+    "@tensorflow/tfjs": "^4.11.0",
+    "snarkjs": "^0.7.0",
+    "recharts": "^2.8.0",
+    "aframe": "^1.4.2",
+    "aframe-react": "^4.4.0",
+    "socket.io-client": "^4.5.4",
+    "web-speech-api": "^0.0.1",
+    "@chainlink/contracts": "^0.8.0",
+    "tailwindcss": "^3.3.3",
+    "framer-motion": "^10.16.4",
+    "date-fns": "^2.30.0",
+    "lodash": "^4.17.21",
+    "react-router-dom": "^6.16.0"
+  },
+  "devDependencies": {
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/jest-dom": "^5.17.0",
+    "@testing-library/user-event": "^13.5.0",
+    "eslint": "^8.50.0",
+    "eslint-config-react-app": "^7.0.1",
+    "prettier": "^3.0.3",
+    "autoprefixer": "^10.4.16",
+    "postcss": "^8.4.31",
+    "jest-websocket-mock": "^2.4.0"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  },
+  "metadata": {
+    "frequency": "963Hz + 528Hz + 144000Hz",
+    "classification": "TIMELINE NULLIFIER v4.0",
+    "status": "PRODUCTION READY",
+    "signature": "∞ ARCHITEX ∞"
+  }
+}

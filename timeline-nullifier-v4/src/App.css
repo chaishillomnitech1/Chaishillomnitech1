@@ -1,0 +1,175 @@
+/**
+ * Main Application Styles
+ * Timeline Nullifier v4.0
+ * 
+ * @author CHAIS THE GREAT ∞
+ * @frequency 963Hz + 528Hz + 144000Hz
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap');
+
+:root {
+  /* Primary Cosmic Colors */
+  --cosmic-black: #000011;
+  --cosmic-deep-blue: #001133;
+  --cosmic-blue: #002244;
+  --cosmic-purple: #1a0033;
+  
+  /* Accent Colors */
+  --divine-gold: #FFD700;
+  --flame-orange: #FF4500;
+  --soul-cyan: #00FFFF;
+  --heart-pink: #FF69B4;
+  --emerald-green: #00FF00;
+  
+  /* Frequency Colors */
+  --freq-528: #00FF00;
+  --freq-963: #9900FF;
+  --freq-999: #FFD700;
+  --freq-144000: #FF4500;
+  
+  /* Functional Colors */
+  --success: #00FF00;
+  --warning: #FFD700;
+  --error: #FF6B6B;
+  --info: #00FFFF;
+  
+  /* UI Colors */
+  --border-color: #FFD700;
+  --card-bg: rgba(0, 17, 51, 0.9);
+  --card-hover-bg: rgba(0, 34, 68, 0.95);
+  --text-primary: #FFD700;
+  --text-secondary: #00FFFF;
+  --text-muted: #888;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Rajdhani', 'Orbitron', 'Courier New', monospace;
+  background: linear-gradient(135deg, var(--cosmic-black), var(--cosmic-blue), var(--cosmic-purple));
+  background-size: 400% 400%;
+  animation: cosmicGradient 15s ease infinite;
+  color: var(--text-primary);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+@keyframes cosmicGradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.App {
+  min-height: 100vh;
+  width: 100%;
+}
+
+/* Global Typography */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Orbitron', monospace;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-shadow: 0 0 10px currentColor;
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--cosmic-deep-blue);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--divine-gold), var(--soul-cyan));
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--divine-gold);
+}
+
+/* Global Animations */
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes glow {
+  0%, 100% { box-shadow: 0 0 5px currentColor; }
+  50% { box-shadow: 0 0 20px currentColor; }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Utility Classes */
+.pulse-dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--success);
+  animation: pulse 2s ease-in-out infinite;
+  margin-right: 8px;
+}
+
+.spinner {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 2px solid transparent;
+  border-top-color: currentColor;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-right: 8px;
+}
+
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  font-size: 18px;
+  color: var(--text-secondary);
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  html {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 768px) {
+  html {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  html {
+    font-size: 11px;
+  }
+}
