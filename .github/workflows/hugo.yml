@@ -25,6 +25,10 @@ jobs:
 
       - name: Initialize Go modules
         run: |
+          if [ ! -f "go.mod" ]; then
+            echo "go.mod not found, initializing..."
+            go mod init github.com/chaishillomnitech1/Chaishillomnitech1
+          fi
           go mod tidy
           go mod vendor
 
