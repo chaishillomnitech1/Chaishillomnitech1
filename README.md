@@ -55,6 +55,13 @@
 - [🎯 Finalization Report](SCROLLVERSE_GENESIS_PROTOCOL_FINALIZATION.md) - Full deployment completion
 - [📢 Universal Announcement](UNIVERSAL_ANNOUNCEMENT.md) - Public launch announcement
 
+**🎵 Akashic Records Label - Mainnet Deployment:**
+- [🚀 Quick Reference](AKASHIC_QUICK_REFERENCE.md) - **One-command deployment**
+- [📖 Mainnet Activation Guide](AKASHIC_MAINNET_ACTIVATION_GUIDE.md) - Complete deployment guide
+- [✅ Deployment Checklist](AKASHIC_MAINNET_CHECKLIST.md) - KUN FAYAKŪN activation protocol
+- [📊 Mainnet README](AKASHIC_MAINNET_README.md) - Overview and architecture
+- [📢 Announcement](AKASHIC_RECORDS_ANNOUNCEMENT.md) - Immortal blockchain music label
+
 ---
 
 ## 📑 Table of Contents
