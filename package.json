@@ -129,7 +129,13 @@
     "test:infinity-orchestration": "hardhat test test/InfinityOrchestration.test.js",
     "deploy:mumbai:artist-tooling-suite": "npm run deploy:mumbai:artist-profile && npm run deploy:mumbai:consciousness-campaign && npm run deploy:mumbai:scrollsoul-governance && npm run deploy:mumbai:infinity-orchestration",
     "deploy:polygon:artist-tooling-suite": "npm run deploy:polygon:artist-profile && npm run deploy:polygon:consciousness-campaign && npm run deploy:polygon:scrollsoul-governance && npm run deploy:polygon:infinity-orchestration",
-    "test:artist-tooling-suite": "npm run test:artist-profile && npm run test:consciousness-campaign && npm run test:scrollsoul-governance && npm run test:infinity-orchestration"
+    "test:artist-tooling-suite": "npm run test:artist-profile && npm run test:consciousness-campaign && npm run test:scrollsoul-governance && npm run test:infinity-orchestration",
+    "deploy:mumbai:master-index": "hardhat run scripts/deploy_master_index.js --network mumbai",
+    "deploy:polygon:master-index": "hardhat run scripts/deploy_master_index.js --network polygon",
+    "deploy:scroll:master-index": "hardhat run scripts/deploy_master_index.js --network scrollSepolia",
+    "test:master-index": "hardhat test test/MasterIndex.test.js",
+    "generate:master-index": "node scripts/generate_master_index.js",
+    "search:vault": "node scripts/search_vault.js"
   },
   "keywords": [
     "scrollverse",
