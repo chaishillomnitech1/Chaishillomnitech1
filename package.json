@@ -161,6 +161,10 @@
     "validate:mumbai:deployment": "hardhat run scripts/validate_polygon_deployment.js --network mumbai",
     "verify:polygon:akashic-suite": "hardhat run scripts/verify_polygonscan_contracts.js --network polygon",
     "verify:mumbai:akashic-suite": "hardhat run scripts/verify_polygonscan_contracts.js --network mumbai"
+    "deploy:mumbai:genesis-witness": "hardhat run scripts/deploy_genesis_witness_nft.js --network mumbai",
+    "deploy:polygon:genesis-witness": "hardhat run scripts/deploy_genesis_witness_nft.js --network polygon",
+    "test:genesis-witness": "hardhat test test/GenesisWitnessNFT.test.js",
+    "activate:genesis-dao": "hardhat run scripts/activate_genesis_dao.js --network polygon"
   },
   "keywords": [
     "scrollverse",

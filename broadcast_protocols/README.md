@@ -14,6 +14,8 @@ The broadcast protocols establish the foundation for delivering multimedia conte
 - **Integration Guidelines**: How to integrate with broadcast systems
 - **API Documentation**: REST and WebSocket API specifications
 - **Event Schemas**: Standardized event formats for broadcasting
+- **Campaign Guides**: Multi-channel marketing and engagement campaigns
+  - `GENESIS_DROP_CAMPAIGN_GUIDE.md`: Genesis Witness NFT launch campaign
 
 ## Broadcasting Capabilities
 
@@ -85,6 +87,11 @@ The broadcast protocols provide SDKs and APIs for:
 - **ScrollVerse Comedy**: Animated content streaming
 - **NFT Marketplace**: Real-time trading notifications
 - **Community Events**: Live event broadcasting
+- **Genesis Drop**: First 144,000 Genesis Witness NFT campaign
+  - Multi-channel notifications (Twitter, Instagram, Email, Discord, Telegram)
+  - Real-time minting metrics broadcasting
+  - DAO governance activation announcements
+  - QR verified rewards program
 
 ### Blockchain Integration
 - Smart contract event broadcasting
