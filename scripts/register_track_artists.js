@@ -46,15 +46,29 @@ async function main() {
   console.log("✅ Deployer has TREASURY_ADMIN_ROLE");
   
   // Artist configuration
-  // In production, this should map to actual artist wallet addresses
+  // IMPORTANT: In production, provide individual artist wallet addresses
   const DEFAULT_ARTIST_ADDRESS = process.env.ARTIST_WALLET_ADDRESS || deployer.address;
+  
+  // Safety check for production deployments
+  if (hre.network.name === "polygon" && DEFAULT_ARTIST_ADDRESS === deployer.address) {
+    console.log("\n⚠️  CRITICAL WARNING: Using deployer address as default artist!");
+    console.log("For production (polygon mainnet), you MUST provide individual artist addresses.");
+    console.log("\nOptions:");
+    console.log("1. Set ARTIST_WALLET_ADDRESS in .env file");
+    console.log("2. Modify this script with individual artist addresses per track");
+    console.log("3. Run on testnet first (mumbai) to test");
+    
+    throw new Error("SAFETY CHECK: Cannot use deployer as default artist on mainnet. Please configure individual artist addresses.");
+  }
   
   console.log("\n📋 Artist Configuration:");
   console.log("  Default Artist Address:", DEFAULT_ARTIST_ADDRESS);
   console.log("  Tracks to Register:", mintingData.mintedTracks.length);
   
-  console.log("\n⚠️  IMPORTANT: Using default artist address for all tracks.");
-  console.log("In production, update this script with individual artist addresses.");
+  if (DEFAULT_ARTIST_ADDRESS === deployer.address) {
+    console.log("\n⚠️  WARNING: Using deployer address for all tracks.");
+    console.log("In production, update this script with individual artist addresses.");
+  }
   
   // Prepare batch registration data
   const tokenIds = [];

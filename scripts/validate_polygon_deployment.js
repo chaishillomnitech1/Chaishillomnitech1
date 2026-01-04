@@ -62,7 +62,7 @@ async function main() {
       console.log("⚠️  WARNING: Expected 26 tracks, found", totalSupply.toString());
     }
     
-    // Test 2: Check sacred frequencies
+    // Test 2: Check sacred frequencies (constants, not functions)
     const healingFreq = await label.HEALING_FREQUENCY_528HZ();
     const unityFreq = await label.UNITY_FREQUENCY_963HZ();
     const crownFreq = await label.CROWN_FREQUENCY_999HZ();
@@ -141,7 +141,8 @@ async function main() {
   try {
     const vault = await hre.ethers.getContractAt("AkashicTreasuryVault", deployment.contracts.vault.address);
     
-    // Test 7: Check revenue allocation percentages
+    // Test 7: Check revenue allocation percentages (basis points: 10000 = 100%)
+    // 70% = 7000, 15% = 1500, 7.77% = 777, 7.23% = 723
     const artistAllocation = await vault.ARTIST_ALLOCATION_BPS();
     const treasuryAllocation = await vault.TREASURY_ALLOCATION_BPS();
     const zakatAllocation = await vault.ZAKAT_ALLOCATION_BPS();
