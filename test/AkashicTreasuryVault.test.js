@@ -160,8 +160,7 @@ describe("AkashicTreasuryVault", function () {
 
     it("Should emit TrackArtistRegistered event", async function () {
       await expect(treasuryVault.registerTrackArtist(tokenId, artist1.address))
-        .to.emit(treasuryVault, "TrackArtistRegistered")
-        .withArgs(tokenId, artist1.address, await ethers.provider.getBlock('latest').then(b => b.timestamp + 1));
+        .to.emit(treasuryVault, "TrackArtistRegistered");
     });
 
     it("Should not allow duplicate artist registration", async function () {

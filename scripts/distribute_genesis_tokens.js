@@ -10,29 +10,30 @@ const GENESIS_TOKEN_SUPPLY = 144000; // Total genesis tokens
 const MAX_FOUNDING_MEMBERS = 50;
 
 // Example founding members (to be updated with actual addresses)
+// ⚠️ WARNING: Replace these placeholder addresses with actual member wallets before mainnet deployment!
 const FOUNDING_MEMBERS = [
   {
-    address: "0x0000000000000000000000000000000000000001", // Placeholder
+    address: "0x0000000000000000000000000000000000000001", // Placeholder - REPLACE BEFORE MAINNET
     name: "Founding Member 1",
     tier: 4, // MemberTier.SOVEREIGN
     votingPower: 5000,
     tokensAllocated: 5000
   },
   {
-    address: "0x0000000000000000000000000000000000000002",
+    address: "0x0000000000000000000000000000000000000002", // Placeholder - REPLACE BEFORE MAINNET
     name: "Founding Member 2",
     tier: 3, // MemberTier.PROPHET
     votingPower: 4000,
     tokensAllocated: 4000
   },
   {
-    address: "0x0000000000000000000000000000000000000003",
+    address: "0x0000000000000000000000000000000000000003", // Placeholder - REPLACE BEFORE MAINNET
     name: "Founding Member 3",
     tier: 2, // MemberTier.CORE
     votingPower: 3000,
     tokensAllocated: 3000
   }
-  // Add more founding members up to 50
+  // ⚠️ Add more founding members (up to 50) with actual wallet addresses
 ];
 
 /**
@@ -53,6 +54,8 @@ function calculateTokenAllocation(tier, baseAllocation = 1000) {
 
 /**
  * Generate balanced token distribution
+ * Note: This generates placeholder addresses for demonstration.
+ * Replace with actual member wallet addresses before mainnet deployment!
  */
 function generateTokenDistribution() {
   const baseAllocation = Math.floor(GENESIS_TOKEN_SUPPLY / MAX_FOUNDING_MEMBERS);
@@ -92,6 +95,17 @@ function generateTokenDistribution() {
 async function main() {
   console.log("🪙 AKASHIC RECORDS - GENESIS TOKEN DISTRIBUTION 🪙");
   console.log("=".repeat(70));
+  
+  // Pre-deployment safety check
+  if (FOUNDING_MEMBERS.length > 0 && FOUNDING_MEMBERS[0].address.startsWith("0x00000000000")) {
+    console.log("\n⚠️  WARNING: Placeholder addresses detected!");
+    console.log("Please update FOUNDING_MEMBERS array with actual wallet addresses");
+    console.log("before running on mainnet.");
+    
+    if (hre.network.name === "polygon") {
+      throw new Error("SAFETY CHECK: Cannot deploy to mainnet with placeholder addresses!");
+    }
+  }
   
   const [deployer] = await hre.ethers.getSigners();
   console.log("Distributing with account:", deployer.address);

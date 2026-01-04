@@ -249,7 +249,7 @@ contract AkashicTreasuryVault is AccessControl, ReentrancyGuard, Pausable {
             block.timestamp
         );
         
-        // Auto-distribute Zakat if balance exceeds threshold (1 ETH equivalent)
+        // Auto-distribute Zakat if balance exceeds threshold (1 MATIC)
         if (zakatBalance >= 1 ether) {
             _distributeZakat();
         }

@@ -12,7 +12,7 @@ const GENESIS_TRACKS = [
     artistName: "Chais The Great",
     spotifyURI: "spotify:track:throwing-stones",
     vydiaURI: "vydia:track:throwing-stones",
-    ipfsHash: "QmThrowingStones"
+    ipfsHash: "QmPlaceholder1" // TODO: Replace with actual IPFS hash after upload
   },
   {
     trackName: "Promise Land",
@@ -194,6 +194,17 @@ const GENESIS_TRACKS = [
 async function main() {
   console.log("🎵 AKASHIC RECORDS - GENESIS DROP MINTING 🎵");
   console.log("=".repeat(70));
+  
+  // Pre-deployment safety check for IPFS hashes
+  if (GENESIS_TRACKS[0].ipfsHash.includes("Placeholder")) {
+    console.log("\n⚠️  WARNING: Placeholder IPFS hashes detected!");
+    console.log("Please upload metadata to IPFS first and update the ipfsHash");
+    console.log("fields in GENESIS_TRACKS before minting on mainnet.");
+    
+    if (hre.network.name === "polygon") {
+      throw new Error("SAFETY CHECK: Cannot mint on mainnet with placeholder IPFS hashes!");
+    }
+  }
   
   const [deployer] = await hre.ethers.getSigners();
   console.log("Minting with account:", deployer.address);
