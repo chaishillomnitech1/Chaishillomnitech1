@@ -135,7 +135,19 @@
     "deploy:scroll:master-index": "hardhat run scripts/deploy_master_index.js --network scrollSepolia",
     "test:master-index": "hardhat test test/MasterIndex.test.js",
     "generate:master-index": "node scripts/generate_master_index.js",
-    "search:vault": "node scripts/search_vault.js"
+    "search:vault": "node scripts/search_vault.js",
+    "deploy:mumbai:akashic-label": "hardhat run scripts/deploy_akashic_label.js --network mumbai",
+    "deploy:polygon:akashic-label": "hardhat run scripts/deploy_akashic_label.js --network polygon",
+    "deploy:mumbai:akashic-dao": "hardhat run scripts/deploy_akashic_dao.js --network mumbai",
+    "deploy:polygon:akashic-dao": "hardhat run scripts/deploy_akashic_dao.js --network polygon",
+    "deploy:mumbai:akashic-all": "npm run deploy:mumbai:akashic-label && npm run deploy:mumbai:akashic-dao",
+    "deploy:polygon:akashic-all": "npm run deploy:polygon:akashic-label && npm run deploy:polygon:akashic-dao",
+    "mint:akashic-tracks": "hardhat run scripts/mint_akashic_tracks.js --network mumbai",
+    "generate:akashic-qr": "node scripts/generate_akashic_qr_codes.js",
+    "onboard:founding-members": "hardhat run scripts/onboard_founding_members.js --network mumbai",
+    "test:akashic-label": "hardhat test test/AkashicRecordsLabel.test.js",
+    "test:akashic-dao": "hardhat test test/AkashicRecordsDAO.test.js",
+    "test:akashic-all": "npm run test:akashic-label && npm run test:akashic-dao"
   },
   "keywords": [
     "scrollverse",
