@@ -155,7 +155,11 @@
     "test:akashic-label": "hardhat test test/AkashicRecordsLabel.test.js",
     "test:akashic-dao": "hardhat test test/AkashicRecordsDAO.test.js",
     "test:akashic-treasury": "hardhat test test/AkashicTreasuryVault.test.js",
-    "test:akashic-all": "npm run test:akashic-label && npm run test:akashic-dao && npm run test:akashic-treasury"
+    "test:akashic-all": "npm run test:akashic-label && npm run test:akashic-dao && npm run test:akashic-treasury",
+    "deploy:mumbai:genesis-witness": "hardhat run scripts/deploy_genesis_witness_nft.js --network mumbai",
+    "deploy:polygon:genesis-witness": "hardhat run scripts/deploy_genesis_witness_nft.js --network polygon",
+    "test:genesis-witness": "hardhat test test/GenesisWitnessNFT.test.js",
+    "activate:genesis-dao": "hardhat run scripts/activate_genesis_dao.js --network polygon"
   },
   "keywords": [
     "scrollverse",
