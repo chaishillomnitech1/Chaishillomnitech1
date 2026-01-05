@@ -1,0 +1,20 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 💬 Community Discussions
+    url: https://github.com/chaishillomnitech1/Chaishillomnitech1/discussions
+    about: Ask questions and discuss ideas with the community
+  - name: 🔐 Security Vulnerability
+    url: https://github.com/chaishillomnitech1/Chaishillomnitech1/security/advisories/new
+    about: Report a security vulnerability privately
+  - name: 📚 Documentation
+    url: https://github.com/chaishillomnitech1/Chaishillomnitech1/blob/main/README.md
+    about: Read the complete documentation
+  - name: 🚀 Quick Start Guide
+    url: https://github.com/chaishillomnitech1/Chaishillomnitech1/blob/main/QUICKSTART.md
+    about: Get started in 5 minutes
+  - name: 🤝 Contributing Guide
+    url: https://github.com/chaishillomnitech1/Chaishillomnitech1/blob/main/CONTRIBUTING.md
+    about: Learn how to contribute to the project
+  - name: 📧 Contact Support
+    url: mailto:sovereign@omnitech1.com
+    about: Email us for direct support

@@ -12,18 +12,49 @@
 
 ---
 
+## ⚡ Quick Start Commands
+
+```bash
+# Install dependencies
+npm install
+
+# Compile smart contracts
+npm run compile
+
+# Run tests
+npm test
+
+# Build for production
+npm run build
+
+# Deploy to testnet (Mumbai)
+npm run deploy:mumbai:all
+
+# Deploy to mainnet (Polygon)
+npm run deploy:polygon:all
+```
+
+**New here?** → Start with the [Quick Start Guide](QUICKSTART.md) (5 minutes!)  
+**Want to contribute?** → Read the [Onboarding Guide](ONBOARDING.md) first  
+**Repository owner:** @chaishillomnitech1 (primary codeowner for all components)
+
+---
+
 ## 📚 Quick Navigation
 
 > 🚀 **New here?** Start with the **[Quick Start Guide](QUICKSTART.md)** (5 minutes!)  
+> 👋 **First time contributor?** Read the **[Onboarding Guide](ONBOARDING.md)** first  
 > 🛠️ **Developer?** Check the **[Development Setup Guide](DEVELOPMENT_SETUP.md)**  
 > 📖 **Looking for something specific?** Check the **[Complete Repository Index](INDEX.md)**
 
 **📖 Essential Documentation:**
 - [⚡ Quick Start](QUICKSTART.md) - Get started in 5 minutes
+- [👋 Onboarding Guide](ONBOARDING.md) - Comprehensive guide for new contributors
 - [🛠️ Development Setup](DEVELOPMENT_SETUP.md) - Complete development environment setup
 - [📋 Projects & Achievements](PROJECTS.md) - Portfolio of capabilities and systems
 - [🏗️ Architecture](ARCHITECTURE.md) - Technical architecture and design
 - [🤝 Contributing](CONTRIBUTING.md) - How to contribute to the ecosystem
+- [🛡️ Branch Protection](BRANCH_PROTECTION.md) - Branch protection and security recommendations
 - [📜 Code of Conduct](CODE_OF_CONDUCT.md) - Community standards and values
 - [📝 Changelog](CHANGELOG.md) - Version history and updates
 - [⚖️ License](LICENSE) - Legal information
