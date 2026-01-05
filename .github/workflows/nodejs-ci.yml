@@ -121,7 +121,7 @@ jobs:
           if grep -q "\"test:coverage\"" package.json; then
             npm run test:coverage
           elif [ -f "jest.config.js" ] || [ -f "jest.config.json" ]; then
-            npx jest --coverage || true
+            npx jest --coverage
           fi
         continue-on-error: true
       
