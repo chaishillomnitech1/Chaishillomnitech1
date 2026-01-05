@@ -1,8 +1,7 @@
-// Template for JavaScript Unit Tests (CommonJS)
+// Template for JavaScript Unit Tests (ES Modules)
 // Replace 'myModule' with your module name
-// Note: Use unit.test.esm.template.js for ES modules
 
-const myModule = require('./myModule');
+import myModule from './myModule.js';
 
 describe('MyModule', () => {
   describe('functionName', () => {

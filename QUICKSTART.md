@@ -4,7 +4,7 @@ Get up and running with Omnitech1 in 5 minutes!
 
 ## Prerequisites
 
-- Node.js v16+ installed
+- Node.js v18+ installed
 - Git installed
 - A code editor (VS Code recommended)
 
@@ -55,8 +55,9 @@ npm run test:unit
 # Start local blockchain
 npx hardhat node
 
-# In another terminal, deploy contracts
-npx hardhat run scripts/deploy_your_contract.js --network localhost
+# In another terminal, deploy contracts (example)
+npx hardhat run scripts/deploy_chx_token.js --network localhost
+# Or use any deployment script from the scripts/ directory
 ```
 
 ### Option B: Frontend Development

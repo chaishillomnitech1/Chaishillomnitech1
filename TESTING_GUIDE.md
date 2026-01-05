@@ -275,20 +275,20 @@ npm run test:coverage
 
 ### Coverage Thresholds
 
-Target coverage levels:
-- **Statements**: 80%+
-- **Branches**: 75%+
-- **Functions**: 80%+
-- **Lines**: 80%+
+Target coverage levels (configured in `jest.config.js`):
+- **Statements**: 70%+
+- **Branches**: 70%+
+- **Functions**: 70%+
+- **Lines**: 70%+
 
 Configure in `jest.config.js`:
 ```javascript
 coverageThreshold: {
   global: {
-    branches: 75,
-    functions: 80,
-    lines: 80,
-    statements: 80,
+    branches: 70,
+    functions: 70,
+    lines: 70,
+    statements: 70,
   },
 }
 ```

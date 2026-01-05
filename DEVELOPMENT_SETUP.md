@@ -8,7 +8,7 @@ This guide will help you set up your development environment for contributing to
 
 ### Required Software
 
-- **Node.js** (v16 or higher) - [Download](https://nodejs.org/)
+- **Node.js** (v18 or higher recommended) - [Download](https://nodejs.org/)
 - **npm** (v8 or higher) - Comes with Node.js
 - **Git** - [Download](https://git-scm.com/)
 - **Code Editor** - We recommend [VS Code](https://code.visualstudio.com/)
