@@ -229,6 +229,47 @@ We especially welcome contributions in:
 
 ---
 
+## 🧪 **TECHNICAL ASSESSMENTS**
+
+For those interested in joining the ScrollVerse development team, we have comprehensive technical assessment scripts:
+
+### **Test Categories**
+
+We evaluate candidates across our primary technology stack:
+
+1. **React Native** - Mobile app development (iOS/Android)
+2. **Solidity** - Smart contract development and blockchain engineering
+3. **JavaScript/Node.js** - Full-stack JavaScript development
+4. **Python** - Backend development and data processing
+
+### **Difficulty Levels**
+
+- **Junior**: Entry-level positions (1-2 hours)
+- **Mid-level**: Intermediate positions (2-3 hours)
+- **Senior**: Advanced positions (3-4 hours)
+
+### **Assessment Process**
+
+1. Review the test in the `/technical-test-scripts` directory
+2. Complete the assessment within the specified time
+3. Submit your solution via GitHub repository
+4. Include comprehensive tests and documentation
+5. Our team will review and provide feedback
+
+### **Evaluation Criteria**
+
+- **Code Quality** (30%): Clean, readable, well-organized code
+- **Functionality** (30%): All requirements met, edge cases handled
+- **Best Practices** (20%): Following language-specific conventions
+- **Testing** (10%): Comprehensive test coverage
+- **Documentation** (10%): Clear documentation and usage instructions
+
+**📚 View Test Scripts**: [Technical Test Scripts Directory](technical-test-scripts/README.md)
+
+**📧 Apply**: Send your resume and portfolio to careers@omnitech1.com
+
+---
+
 ## 🏆 **RECOGNITION**
 
 Outstanding contributors will be:
