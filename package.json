@@ -160,11 +160,16 @@
     "validate:polygon:deployment": "hardhat run scripts/validate_polygon_deployment.js --network polygon",
     "validate:mumbai:deployment": "hardhat run scripts/validate_polygon_deployment.js --network mumbai",
     "verify:polygon:akashic-suite": "hardhat run scripts/verify_polygonscan_contracts.js --network polygon",
-    "verify:mumbai:akashic-suite": "hardhat run scripts/verify_polygonscan_contracts.js --network mumbai"
+    "verify:mumbai:akashic-suite": "hardhat run scripts/verify_polygonscan_contracts.js --network mumbai",
     "deploy:mumbai:genesis-witness": "hardhat run scripts/deploy_genesis_witness_nft.js --network mumbai",
     "deploy:polygon:genesis-witness": "hardhat run scripts/deploy_genesis_witness_nft.js --network polygon",
     "test:genesis-witness": "hardhat test test/GenesisWitnessNFT.test.js",
-    "activate:genesis-dao": "hardhat run scripts/activate_genesis_dao.js --network polygon"
+    "activate:genesis-dao": "hardhat run scripts/activate_genesis_dao.js --network polygon",
+    "deploy:ethereum:throwing-stones": "hardhat run scripts/deploy_throwing_stones_fractional.js --network ethereum",
+    "deploy:polygon:throwing-stones": "hardhat run scripts/deploy_throwing_stones_fractional.js --network polygon",
+    "test:throwing-stones": "hardhat test test/ThrowingStonesFractionalNFT.test.js",
+    "generate:ai-remixes": "node scripts/ai_remix_pipeline.js",
+    "genesis:phase1": "npm run generate:ai-remixes && npm run deploy:ethereum:throwing-stones"
   },
   "keywords": [
     "scrollverse",
