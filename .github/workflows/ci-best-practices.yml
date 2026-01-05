@@ -39,13 +39,13 @@ jobs:
           echo "📦 Installing dependencies..."
           npm ci
       
-      - name: Cache Node Modules
+      - name: Cache Dependencies
         uses: actions/cache@v3
         with:
-          path: node_modules
-          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
+          path: ~/.npm
+          key: ${{ runner.os }}-npm-${{ hashFiles('package-lock.json') }}
           restore-keys: |
-            ${{ runner.os }}-node-
+            ${{ runner.os }}-npm-
 
   # Job 2: Run tests
   test:
@@ -63,11 +63,11 @@ jobs:
           node-version: '18'
           cache: 'npm'
       
-      - name: Restore Node Modules Cache
+      - name: Restore Dependencies Cache
         uses: actions/cache@v3
         with:
-          path: node_modules
-          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
+          path: ~/.npm
+          key: ${{ runner.os }}-npm-${{ hashFiles('package-lock.json') }}
       
       - name: Install Dependencies (if cache miss)
         run: npm ci --prefer-offline --no-audit
@@ -102,11 +102,11 @@ jobs:
           node-version: '18'
           cache: 'npm'
       
-      - name: Restore Node Modules Cache
+      - name: Restore Dependencies Cache
         uses: actions/cache@v3
         with:
-          path: node_modules
-          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
+          path: ~/.npm
+          key: ${{ runner.os }}-npm-${{ hashFiles('package-lock.json') }}
       
       - name: Install Dependencies (if cache miss)
         run: npm ci --prefer-offline --no-audit
@@ -137,6 +137,8 @@ jobs:
           if-no-files-found: ignore
 
   # Job 4: Deploy (only on main branch)
+  # NOTE: This demonstrates deployment workflow structure
+  # Actual Vercel deployment is handled by Vercel GitHub integration
   deploy:
     name: Deploy to Production
     runs-on: ubuntu-latest
@@ -144,7 +146,7 @@ jobs:
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
     environment:
       name: production
-      url: https://expansion-three.vercel.app/
+      url: https://expansion-three.vercel.app/  # Example production URL
     
     steps:
       - name: Checkout Repository
@@ -183,11 +185,11 @@ jobs:
           node-version: '18'
           cache: 'npm'
       
-      - name: Restore Node Modules Cache
+      - name: Restore Dependencies Cache
         uses: actions/cache@v3
         with:
-          path: node_modules
-          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
+          path: ~/.npm
+          key: ${{ runner.os }}-npm-${{ hashFiles('package-lock.json') }}
       
       - name: Install Dependencies (if cache miss)
         run: npm ci --prefer-offline --no-audit
