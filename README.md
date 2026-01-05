@@ -14,10 +14,13 @@
 
 ## 📚 Quick Navigation
 
-> 🚀 **New here?** Start with the **[Getting Started Guide](GETTING_STARTED.md)**  
+> 🚀 **New here?** Start with the **[Quick Start Guide](QUICKSTART.md)** (5 minutes!)  
+> 🛠️ **Developer?** Check the **[Development Setup Guide](DEVELOPMENT_SETUP.md)**  
 > 📖 **Looking for something specific?** Check the **[Complete Repository Index](INDEX.md)**
 
 **📖 Essential Documentation:**
+- [⚡ Quick Start](QUICKSTART.md) - Get started in 5 minutes
+- [🛠️ Development Setup](DEVELOPMENT_SETUP.md) - Complete development environment setup
 - [📋 Projects & Achievements](PROJECTS.md) - Portfolio of capabilities and systems
 - [🏗️ Architecture](ARCHITECTURE.md) - Technical architecture and design
 - [🤝 Contributing](CONTRIBUTING.md) - How to contribute to the ecosystem
@@ -27,8 +30,8 @@
 
 **🛠️ Development Resources:**
 - [Code Templates](code-templates/) - Solidity, JavaScript, Python, React templates
-- [GitHub Workflows](.github/workflows/) - CI/CD pipeline configurations
-- [Issue Templates](.github/ISSUE_TEMPLATE/) - Bug reports and feature requests
+- [GitHub Workflows](.github/workflows/) - CI/CD pipeline configurations (60+ workflows)
+- [Issue Templates](.github/ISSUE_TEMPLATE/) - Bug reports, feature requests, security reports
 - [CI/CD Guide](CI_CD_GUIDE.md) - Comprehensive CI/CD pipeline documentation
 - [Security Guide](SECURITY_GUIDE.md) - Security best practices and protocols
 - [Workflows Quick Reference](WORKFLOWS_QUICK_REFERENCE.md) - Quick workflow commands
