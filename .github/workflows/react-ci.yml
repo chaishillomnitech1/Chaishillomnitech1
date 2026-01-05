@@ -44,7 +44,9 @@ jobs:
         with:
           node-version: '18'
           cache: 'npm'
-          cache-dependency-path: '${{ matrix.app.path }}/package-lock.json'
+          cache-dependency-path: |
+            ${{ matrix.app.path }}/package-lock.json
+            ${{ matrix.app.path }}/package.json
       
       - name: Check if app directory exists
         id: check-app

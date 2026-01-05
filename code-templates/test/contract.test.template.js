@@ -14,7 +14,7 @@ describe('MyContract', function () {
     // Deploy contract
     const MyContract = await ethers.getContractFactory('MyContract');
     const contract = await MyContract.deploy(/* constructor args */);
-    await contract.deployed();
+    await contract.waitForDeployment();
     
     // Return contract and signers
     return { contract, owner, addr1, addr2, addrs };
