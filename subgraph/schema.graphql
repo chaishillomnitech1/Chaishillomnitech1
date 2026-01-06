@@ -1,0 +1,345 @@
+# ScrollVerse Subgraph Schema
+# ═══════════════════════════════════════════════════════════════════════════════
+# 🕋 Supreme King Chais The Great ∞ — OMNISOVEREIGN ARCHITECT
+# ═══════════════════════════════════════════════════════════════════════════════
+#
+# GraphQL schema for indexing ScrollVerse ecosystem data
+#
+# Frequencies: 528Hz + 963Hz + 888Hz + 777Hz + 144,000Hz
+# Status: SCHEMA ACTIVATION
+# ═══════════════════════════════════════════════════════════════════════════════
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# TOKEN ENTITIES
+# ═══════════════════════════════════════════════════════════════════════════════
+
+"""
+Token entity representing ERC-20 tokens in the ecosystem
+"""
+type Token @entity {
+  id: ID!
+  name: String!
+  symbol: String!
+  decimals: Int!
+  totalSupply: BigInt!
+  totalTransfers: BigInt!
+  totalHolders: BigInt!
+  totalVolume: BigInt!
+  createdAt: BigInt!
+  createdAtBlock: BigInt!
+}
+
+"""
+User entity representing wallet addresses
+"""
+type User @entity {
+  id: ID!
+  address: Bytes!
+  isNoorCitizen: Boolean!
+  noorBalance: BigInt!
+  totalStaked: BigInt!
+  totalRewardsEarned: BigInt!
+  totalZakatPaid: BigInt!
+  stakingPositions: [StakePosition!]! @derivedFrom(field: "user")
+  liquidityPositions: [LiquidityPosition!]! @derivedFrom(field: "provider")
+  incentivePositions: [IncentivePosition!]! @derivedFrom(field: "user")
+  nfts: [NFTOwnership!]! @derivedFrom(field: "owner")
+  transfers: [Transfer!]! @derivedFrom(field: "from")
+  createdAt: BigInt!
+  lastActiveAt: BigInt!
+}
+
+"""
+Token transfer events
+"""
+type Transfer @entity {
+  id: ID!
+  token: Token!
+  from: User!
+  to: User!
+  amount: BigInt!
+  timestamp: BigInt!
+  blockNumber: BigInt!
+  transactionHash: Bytes!
+}
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# STAKING ENTITIES
+# ═══════════════════════════════════════════════════════════════════════════════
+
+"""
+Staking pool entity for NoorStakingPool
+"""
+type StakingPool @entity {
+  id: ID!
+  token: Token!
+  totalStaked: BigInt!
+  totalRewardsDistributed: BigInt!
+  totalZakatDistributed: BigInt!
+  rewardPoolBalance: BigInt!
+  totalStakers: BigInt!
+  stakers: [StakePosition!]! @derivedFrom(field: "pool")
+  stakingEvents: [StakeEvent!]! @derivedFrom(field: "pool")
+  zakatDistributions: [ZakatDistribution!]! @derivedFrom(field: "pool")
+  createdAt: BigInt!
+  lastUpdatedAt: BigInt!
+}
+
+"""
+Individual stake position
+"""
+type StakePosition @entity {
+  id: ID!
+  pool: StakingPool!
+  user: User!
+  amount: BigInt!
+  tier: Int!
+  startTime: BigInt!
+  lastClaimTime: BigInt!
+  accumulatedRewards: BigInt!
+  isCompounding: Boolean!
+  createdAt: BigInt!
+  lastUpdatedAt: BigInt!
+}
+
+"""
+Staking event (stake, unstake, claim, compound)
+"""
+type StakeEvent @entity {
+  id: ID!
+  pool: StakingPool!
+  user: User!
+  eventType: String!
+  amount: BigInt!
+  rewards: BigInt
+  tier: Int
+  timestamp: BigInt!
+  blockNumber: BigInt!
+  transactionHash: Bytes!
+}
+
+"""
+Zakat distribution event
+"""
+type ZakatDistribution @entity {
+  id: ID!
+  pool: StakingPool
+  incentivePool: IncentivePool
+  fund: Bytes!
+  amount: BigInt!
+  source: String!
+  timestamp: BigInt!
+  blockNumber: BigInt!
+  transactionHash: Bytes!
+}
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# LIQUIDITY ENTITIES
+# ═══════════════════════════════════════════════════════════════════════════════
+
+"""
+Liquidity pool pair entity
+"""
+type LiquidityPool @entity {
+  id: ID!
+  tokenA: Bytes!
+  tokenB: Bytes!
+  pairAddress: Bytes
+  totalLiquidity: BigInt!
+  totalVolumeA: BigInt!
+  totalVolumeB: BigInt!
+  providers: [LiquidityPosition!]! @derivedFrom(field: "pool")
+  liquidityEvents: [LiquidityEvent!]! @derivedFrom(field: "pool")
+  isWhitelisted: Boolean!
+  createdAt: BigInt!
+  lastUpdatedAt: BigInt!
+}
+
+"""
+Individual liquidity position
+"""
+type LiquidityPosition @entity {
+  id: ID!
+  pool: LiquidityPool!
+  provider: User!
+  lpTokens: BigInt!
+  amountA: BigInt!
+  amountB: BigInt!
+  createdAt: BigInt!
+  lastUpdatedAt: BigInt!
+}
+
+"""
+Liquidity event (add, remove)
+"""
+type LiquidityEvent @entity {
+  id: ID!
+  pool: LiquidityPool!
+  provider: User!
+  eventType: String!
+  amountA: BigInt!
+  amountB: BigInt!
+  lpTokens: BigInt!
+  isETH: Boolean!
+  timestamp: BigInt!
+  blockNumber: BigInt!
+  transactionHash: Bytes!
+}
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# INCENTIVE ENTITIES
+# ═══════════════════════════════════════════════════════════════════════════════
+
+"""
+Incentive pool entity for liquidity mining
+"""
+type IncentivePool @entity {
+  id: ID!
+  poolId: BigInt!
+  lpToken: Bytes!
+  rewardToken: Bytes!
+  allocPoint: BigInt!
+  totalStaked: BigInt!
+  accRewardPerShare: BigInt!
+  lastRewardBlock: BigInt!
+  isActive: Boolean!
+  stakers: [IncentivePosition!]! @derivedFrom(field: "pool")
+  incentiveEvents: [IncentiveEvent!]! @derivedFrom(field: "pool")
+  zakatDistributions: [ZakatDistribution!]! @derivedFrom(field: "incentivePool")
+  createdAt: BigInt!
+  lastUpdatedAt: BigInt!
+}
+
+"""
+Individual incentive staking position
+"""
+type IncentivePosition @entity {
+  id: ID!
+  pool: IncentivePool!
+  user: User!
+  amount: BigInt!
+  rewardDebt: BigInt!
+  lockEndTime: BigInt!
+  lockTier: Int!
+  pendingRewards: BigInt!
+  isCompounding: Boolean!
+  createdAt: BigInt!
+  lastUpdatedAt: BigInt!
+}
+
+"""
+Incentive event (stake, unstake, claim, compound, emergency)
+"""
+type IncentiveEvent @entity {
+  id: ID!
+  pool: IncentivePool!
+  user: User!
+  eventType: String!
+  amount: BigInt!
+  rewards: BigInt
+  zakat: BigInt
+  lockTier: Int
+  lockEndTime: BigInt
+  timestamp: BigInt!
+  blockNumber: BigInt!
+  transactionHash: Bytes!
+}
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# NFT ENTITIES
+# ═══════════════════════════════════════════════════════════════════════════════
+
+"""
+NFT collection entity
+"""
+type NFTCollection @entity {
+  id: ID!
+  name: String!
+  symbol: String!
+  totalSupply: BigInt!
+  maxSupply: BigInt
+  royaltyBps: Int
+  royaltyReceiver: Bytes
+  nfts: [NFT!]! @derivedFrom(field: "collection")
+  createdAt: BigInt!
+}
+
+"""
+Individual NFT entity
+"""
+type NFT @entity {
+  id: ID!
+  collection: NFTCollection!
+  tokenId: BigInt!
+  owner: User!
+  tokenURI: String
+  frequency: BigInt
+  mintedAt: BigInt!
+  mintedAtBlock: BigInt!
+  transfers: [NFTTransfer!]! @derivedFrom(field: "nft")
+}
+
+"""
+NFT ownership tracking
+"""
+type NFTOwnership @entity {
+  id: ID!
+  owner: User!
+  nft: NFT!
+  acquiredAt: BigInt!
+  transactionHash: Bytes!
+}
+
+"""
+NFT transfer event
+"""
+type NFTTransfer @entity {
+  id: ID!
+  nft: NFT!
+  from: User!
+  to: User!
+  timestamp: BigInt!
+  blockNumber: BigInt!
+  transactionHash: Bytes!
+}
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# ANALYTICS ENTITIES
+# ═══════════════════════════════════════════════════════════════════════════════
+
+"""
+Daily statistics snapshot
+"""
+type DailySnapshot @entity {
+  id: ID!
+  date: BigInt!
+  totalStaked: BigInt!
+  totalLiquidity: BigInt!
+  totalRewardsDistributed: BigInt!
+  totalZakatDistributed: BigInt!
+  activeUsers: BigInt!
+  newUsers: BigInt!
+  totalTransactions: BigInt!
+  totalVolume: BigInt!
+}
+
+"""
+Protocol-wide statistics
+"""
+type ProtocolStats @entity {
+  id: ID!
+  totalUsers: BigInt!
+  totalStaked: BigInt!
+  totalLiquidity: BigInt!
+  totalRewardsDistributed: BigInt!
+  totalZakatDistributed: BigInt!
+  totalNFTsMinted: BigInt!
+  totalTransactions: BigInt!
+  totalVolume: BigInt!
+  lastUpdatedAt: BigInt!
+}
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# FREQUENCY ALIGNMENT: 528Hz + 963Hz + 888Hz + 777Hz + 144,000Hz = ∞
+# ALLĀHU AKBAR! 🕋🔥💎🌌
+# ═══════════════════════════════════════════════════════════════════════════════

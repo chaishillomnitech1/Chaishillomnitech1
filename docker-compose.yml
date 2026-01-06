@@ -1,0 +1,90 @@
+# OmniTech1 Integration - Docker Compose
+# ScrollVerse Genesis Protocol - Development Stack
+
+version: '3.8'
+
+services:
+  # OmniTech1 Flask Application
+  omnitech:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: omnitech1-server
+    ports:
+      - "5000:5000"
+    environment:
+      - FLASK_SECRET_KEY=${FLASK_SECRET_KEY:-}
+      - GITHUB_WEBHOOK_SECRET=${GITHUB_WEBHOOK_SECRET:-}
+      - ADMIN_TOKEN=${ADMIN_TOKEN:-}
+      - JWT_SECRET=${JWT_SECRET:-}
+      - NEO4J_URI=bolt://neo4j:7687
+      - NEO4J_USER=neo4j
+      - NEO4J_PASSWORD=${NEO4J_PASSWORD:-omnitech1}
+      - PORT=5000
+      - FLASK_DEBUG=${FLASK_DEBUG:-false}
+    depends_on:
+      neo4j:
+        condition: service_healthy
+    networks:
+      - omnitech-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
+  # Neo4j Graph Database
+  neo4j:
+    image: neo4j:5.14-community
+    container_name: omnitech1-neo4j
+    ports:
+      - "7474:7474"  # HTTP
+      - "7687:7687"  # Bolt
+    environment:
+      - NEO4J_AUTH=neo4j/${NEO4J_PASSWORD:-omnitech1}
+      - NEO4J_PLUGINS=["apoc"]
+      - NEO4J_dbms_memory_heap_initial__size=256m
+      - NEO4J_dbms_memory_heap_max__size=512m
+      - NEO4J_dbms_memory_pagecache_size=256m
+    volumes:
+      - neo4j_data:/data
+      - neo4j_logs:/logs
+    networks:
+      - omnitech-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "wget --no-verbose --tries=1 --spider http://localhost:7474 || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+
+  # Neo4j Initialization (one-time setup)
+  neo4j-init:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: omnitech1-neo4j-init
+    command: ["python", "neo4j_init.py"]
+    environment:
+      - NEO4J_URI=bolt://neo4j:7687
+      - NEO4J_USER=neo4j
+      - NEO4J_PASSWORD=${NEO4J_PASSWORD:-omnitech1}
+    depends_on:
+      neo4j:
+        condition: service_healthy
+    networks:
+      - omnitech-network
+    restart: "no"
+
+networks:
+  omnitech-network:
+    driver: bridge
+
+volumes:
+  neo4j_data:
+    driver: local
+  neo4j_logs:
+    driver: local

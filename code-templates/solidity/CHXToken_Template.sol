@@ -103,15 +103,20 @@ contract CHXToken is ERC20, ERC20Burnable, Ownable, Pausable {
      * @dev Calculate passive income for an account
      * @param account The account to calculate income for
      * @return The passive income amount
+     * @dev AI Integration Point: Precise integer mathematics for modular AI systems
      */
     function calculatePassiveIncome(address account) public view returns (uint256) {
         uint256 balance = balanceOf(account);
         if (balance == 0) return 0;
         
-        uint256 timePassed = block.timestamp - lastClaimTime[account];
+        uint256 lastClaim = lastClaimTime[account];
+        if (lastClaim == 0) lastClaim = block.timestamp;
+        
+        uint256 timePassed = block.timestamp - lastClaim;
         if (timePassed == 0) return 0;
         
         // Daily rate = balance * 0.005% = balance * 5 / 100000
+        // Using precise integer math for AI modular integration
         uint256 dailyRate = (balance * DAILY_RATE_BASIS_POINTS) / 100000;
         
         // Total income = daily rate * days passed
@@ -141,25 +146,31 @@ contract CHXToken is ERC20, ERC20Burnable, Ownable, Pausable {
     /**
      * @dev Distribute royalties from passive income
      * @param amount The amount to distribute royalties from
+     * @dev AI Integration Point: Core modular distribution logic for external systems
      */
     function _distributeRoyalties(uint256 amount) internal {
+        // Cache vault addresses to save gas
+        address creator = creatorVault;
+        address ambassador = ambassadorVault;
+        address dao = daoVault;
+        
         uint256 creatorAmount = (amount * CREATOR_ROYALTY) / 10000;
         uint256 ambassadorAmount = (amount * AMBASSADOR_ROYALTY) / 10000;
         uint256 daoAmount = (amount * DAO_ROYALTY) / 10000;
         
         if (creatorAmount > 0) {
-            _mint(creatorVault, creatorAmount);
-            emit RoyaltyDistributed(creatorVault, creatorAmount, "CREATOR");
+            _mint(creator, creatorAmount);
+            emit RoyaltyDistributed(creator, creatorAmount, "CREATOR");
         }
         
         if (ambassadorAmount > 0) {
-            _mint(ambassadorVault, ambassadorAmount);
-            emit RoyaltyDistributed(ambassadorVault, ambassadorAmount, "AMBASSADOR");
+            _mint(ambassador, ambassadorAmount);
+            emit RoyaltyDistributed(ambassador, ambassadorAmount, "AMBASSADOR");
         }
         
         if (daoAmount > 0) {
-            _mint(daoVault, daoAmount);
-            emit RoyaltyDistributed(daoVault, daoAmount, "DAO");
+            _mint(dao, daoAmount);
+            emit RoyaltyDistributed(dao, daoAmount, "DAO");
         }
     }
     
@@ -169,6 +180,7 @@ contract CHXToken is ERC20, ERC20Burnable, Ownable, Pausable {
      * @dev Circularize Zakat (2% distribution)
      * @param recipient The recipient of the Zakat
      * @param amount The amount to circulate
+     * @dev AI Integration Point: Automated Zakat distribution for modular AI systems
      */
     function circularizeZakat(address recipient, uint256 amount) 
         external 
@@ -177,16 +189,20 @@ contract CHXToken is ERC20, ERC20Burnable, Ownable, Pausable {
     {
         require(recipient != address(0), "Invalid recipient");
         require(amount > 0, "Amount must be greater than 0");
-        require(balanceOf(msg.sender) >= amount, "Insufficient balance");
         
-        // Calculate 2% Zakat
+        uint256 senderBalance = balanceOf(msg.sender);
+        require(senderBalance >= amount, "Insufficient balance");
+        
+        // Calculate 2% Zakat using precise integer math
         uint256 zakat = (amount * 200) / 10000;
+        require(senderBalance >= amount + zakat, "Insufficient balance for amount + zakat");
         
         // Transfer amount to recipient
         _transfer(msg.sender, recipient, amount);
         
-        // Transfer Zakat to DAO
-        _transfer(msg.sender, daoVault, zakat);
+        // Transfer Zakat to DAO (cached for gas optimization)
+        address dao = daoVault;
+        _transfer(msg.sender, dao, zakat);
         
         // Track Zakat
         zakatPaid[msg.sender] += zakat;
@@ -330,9 +346,14 @@ contract CHXToken is ERC20, ERC20Burnable, Ownable, Pausable {
         onlyOwner 
     {
         require(token != address(0), "Invalid token");
+        require(token != address(this), "Cannot withdraw own tokens");
         require(amount > 0, "Amount must be greater than 0");
         
-        IERC20(token).transfer(msg.sender, amount);
+        // Use safe transfer pattern
+        (bool success, ) = token.call(
+            abi.encodeWithSelector(IERC20.transfer.selector, msg.sender, amount)
+        );
+        require(success, "Transfer failed");
     }
 }
 

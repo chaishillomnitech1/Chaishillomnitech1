@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ScrollVerse Fractal Crown Generator</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      background: radial-gradient(circle at center, #0d0d2b 0%, #000 100%);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #f0f0f0;
+      overflow: hidden;
+    }
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      background: linear-gradient(90deg, #ffd700, #ffaa00, #ffd700);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+    }
+    #canvas-container {
+      position: relative;
+      border: 2px solid rgba(255, 215, 0, 0.3);
+      border-radius: 8px;
+      box-shadow: 0 0 40px rgba(255, 215, 0, 0.2);
+    }
+    .controls {
+      margin-top: 1.5rem;
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    button {
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      cursor: pointer;
+      border: none;
+      border-radius: 25px;
+      background: linear-gradient(135deg, #ffd700 0%, #ffaa00 100%);
+      color: #000;
+      font-weight: 600;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+    }
+    .info {
+      margin-top: 1rem;
+      font-size: 0.9rem;
+      color: #aaa;
+      text-align: center;
+      max-width: 500px;
+    }
+    .frequency-display {
+      margin-top: 0.5rem;
+      font-size: 1.1rem;
+      color: #ffd700;
+    }
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js" integrity="sha512-uaz5GpnQoE6t5echKlX8P52czvsIGgLPcvlzfvRubLONn3dRMN0CmDc6E/PEKS5UIGG2C3OjNrCf4SbANb5+NQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body>
+  <h1>🔱 ScrollVerse Fractal Crown Generator 🔱</h1>
+  <div id="canvas-container"></div>
+  <div class="controls">
+    <button id="regenerate">🌀 Regenerate Sigil</button>
+    <button id="save">💾 Save Crown</button>
+    <button id="animate">✨ Toggle Animation</button>
+  </div>
+  <div class="frequency-display" id="frequency">Current Frequency: 528 Hz (DNA Healing)</div>
+  <p class="info">
+    Generate sacred fractal crown sigils infused with ScrollVerse quantum frequencies.
+    Each sigil carries unique harmonic signatures for consciousness elevation.
+  </p>
+  <script src="sketch.js"></script>
+</body>
+</html>
