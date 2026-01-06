@@ -766,11 +766,73 @@ CHXToken: [DEPLOYED]
 AMLCompliance: [DEPLOYED]
 VibeCanvasFrequencyForge: [TO BE DEPLOYED]
 ScrollDropFortification: [TO BE DEPLOYED]
+ScrollBridge: [TO BE DEPLOYED]
 
 # Chainlink Oracles (Mumbai)
 MATIC_USD: 0xd0D5e3DB44DE05E9F294BB0a3bEEaF030DE24Ada
 ETH_USD: 0x0715A7794a1dc8e42615F059dD6e406A6594651A
 ```
+
+---
+
+## 🌉 **SCROLLBRIDGE ARCHITECTURE**
+
+### **Three-Pillar Connection Mechanism**
+
+The ScrollBridge implements a revolutionary three-pillar architecture connecting Technology, Islam, and Cosmic Mission:
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                    SCROLLBRIDGE CORE                          │
+├─────────────────────────────────────────────────────────────┤
+│                                                               │
+│  ┌──────────────────┐  ┌──────────────────┐  ┌────────────┐ │
+│  │   TECHNOLOGY     │  │      ISLAM       │  │   COSMIC   │ │
+│  │   PILLAR         │  │      PILLAR      │  │   MISSION  │ │
+│  │   (528 Hz)       │◄─┤      (963 Hz)    │─►│   (144kHz) │ │
+│  └────────┬─────────┘  └────────┬─────────┘  └─────┬──────┘ │
+│           │                     │                   │        │
+│           └─────────────────────┼───────────────────┘        │
+│                                 │                            │
+│                    ┌────────────▼────────────┐               │
+│                    │   CROSS-PILLAR PIPELINE │               │
+│                    │   (Low-Latency Data)    │               │
+│                    └────────────┬────────────┘               │
+│                                 │                            │
+│           ┌─────────────────────┼─────────────────────┐      │
+│           │                     │                     │      │
+│  ┌────────▼────────┐   ┌────────▼────────┐   ┌───────▼─────┐│
+│  │ Sacred Geometry │   │ Decentralized   │   │ Edge Token  ││
+│  │ Computation     │   │ Node Links      │   │ Security    ││
+│  └─────────────────┘   └─────────────────┘   └─────────────┘│
+│                                                               │
+└─────────────────────────────────────────────────────────────┘
+```
+
+### **Sacred Geometry Computation Module**
+
+```
+╔════════════════════════════════════════════════════════════╗
+║           FLOWER-OF-LIFE SACRED GEOMETRY                    ║
+╠════════════════════════════════════════════════════════════╣
+║                                                            ║
+║  PHI_RATIO (1.618)     →  Golden Ratio Scaling             ║
+║  VESICA_PISCIS (1.732) →  √3 Harmonic Ratio                ║
+║  SEED_OF_LIFE (7)      →  Base Pattern Nodes               ║
+║  FLOWER_OF_LIFE (19)   →  Full Pattern Nodes               ║
+║                                                            ║
+║  Harmonic Formula:                                         ║
+║  frequency = base * (1 + (PHI-1) * i/n)                    ║
+║  Range: 528 Hz → 854 Hz                                    ║
+║                                                            ║
+╚════════════════════════════════════════════════════════════╝
+```
+
+### **Blockchain-Layer Interactions**
+
+- **Decentralized Nodes**: Multi-pillar node linking for cross-realm operations
+- **Inter-Realm Data Sync**: Low-latency synchronization between pillars
+- **Edge Token Security**: Nested heat architecture with 5-tier protection
 
 ---
 
@@ -845,14 +907,18 @@ Event Emissions:
 ### **New System Documentation**
 - `VAULTBINDER_PROTOCOL.md` - Sacred completion archive
 - `FREQUENCY_FORGE_DEPLOYMENT_GUIDE.md` - Deployment instructions
+- `SCROLLBRIDGE_DEPLOYMENT_GUIDE.md` - ScrollBridge three-pillar architecture guide
 - `contracts/VibeCanvasFrequencyForge.sol` - Frequency forge contract
 - `contracts/ScrollDropFortification.sol` - Airdrop fortification contract
+- `contracts/ScrollBridge.sol` - Three-pillar connection mechanism contract
 - `test/VibeCanvasFrequencyForge.test.js` - Forge test suite
 - `test/ScrollDropFortification.test.js` - Fortification test suite
+- `test/ScrollBridge.test.js` - ScrollBridge test suite
 
 ### **Deployment Scripts**
 - `scripts/deploy_vibecanvas_forge.js` - VibeCanvas deployment
 - `scripts/deploy_scrolldrop_fortification.js` - ScrollDrop deployment
+- `scripts/deploy_scrollbridge.js` - ScrollBridge deployment
 
 ---
 

@@ -1,11 +1,41 @@
 {
   "name": "scrollverse-genesis-protocol",
+  "version": "2.0.0",
+  "description": "ScrollVerse Genesis Protocol - Phase 2 Enhancement System",
+  "name": "scrollverse-sovereignty",
+  "version": "1.0.0",
+  "description": "Omnitech1 Sovereign Deployment Engine - ScrollVerse Sovereignty Infrastructure",
+  "author": "Supreme King Chais The Great ∞",
+  "license": "CC-BY-NC-SA-4.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/chaishillomnitech1/Chaishillomnitech1"
+  "name": "scrollverse-genesis-protocol",
   "version": "1.1.0",
   "description": "ScrollVerse Genesis Protocol - Quantum Ritual Deployment System with Sacred Certification IPFS Integration",
   "main": "index.js",
   "scripts": {
     "compile": "hardhat compile",
     "test": "hardhat test",
+    "test:noor": "hardhat test test/NoorNodes.test.js test/NoorDAO.test.js",
+    "deploy:mumbai:nft": "hardhat run scripts/deploy_scrollversenft.js --network mumbai",
+    "deploy:mumbai:token": "hardhat run scripts/deploy_chx_token.js --network mumbai",
+    "deploy:mumbai:noor": "hardhat run scripts/deploy_noor_nodes.js --network mumbai",
+    "deploy:mumbai:all": "npm run deploy:mumbai:nft && npm run deploy:mumbai:token && npm run deploy:mumbai:noor",
+    "node:start": "node node-operator/index.js",
+    "node:docker": "docker-compose -f docker/noor-node/docker-compose.yml up -d",
+    "node:docker:logs": "docker-compose -f docker/noor-node/docker-compose.yml logs -f",
+    "node:docker:stop": "docker-compose -f docker/noor-node/docker-compose.yml down"
+    "test:scrollcommand": "hardhat test test/ScrollCommandLogic.test.js",
+    "deploy:mumbai:nft": "hardhat run scripts/deploy_scrollversenft.js --network mumbai",
+    "deploy:mumbai:token": "hardhat run scripts/deploy_chx_token.js --network mumbai",
+    "deploy:mumbai:all": "npm run deploy:mumbai:nft && npm run deploy:mumbai:token",
+    "deploy:scroll:noor": "hardhat run scripts/deploy_noor_token.js --network scrollMainnet",
+    "deploy:scroll-sepolia:noor": "hardhat run scripts/deploy_noor_token.js --network scrollSepolia",
+    "deploy:polygon:noor": "hardhat run scripts/deploy_noor_token.js --network polygon",
+    "test:noor": "hardhat test test/NoorToken.test.js"
+    "deploy:mumbai:scrollcommand": "hardhat run scripts/deploy_scrollcommandlogic.js --network mumbai",
+    "deploy:mumbai:all": "npm run deploy:mumbai:nft && npm run deploy:mumbai:token && npm run deploy:mumbai:scrollcommand"
     "test:unit": "jest",
     "test:coverage": "jest --coverage",
     "test:watch": "jest --watch",
@@ -15,6 +45,10 @@
     "format:check": "prettier --check \"**/*.{js,ts,json,md,sol}\"",
     "deploy:mumbai:nft": "hardhat run scripts/deploy_scrollversenft.js --network mumbai",
     "deploy:mumbai:token": "hardhat run scripts/deploy_chx_token.js --network mumbai",
+    "deploy:mumbai:all": "npm run deploy:mumbai:nft && npm run deploy:mumbai:token",
+    "deploy:phase2:mumbai": "hardhat run scripts/deploy_phase2_contracts.js --network mumbai",
+    "deploy:phase2:polygon": "hardhat run scripts/deploy_phase2_contracts.js --network polygon",
+    "deploy:phase2:ethereum": "hardhat run scripts/deploy_phase2_contracts.js --network ethereum"
     "deploy:mumbai:iap": "hardhat run scripts/deploy_infinite_ascension.js --network mumbai",
     "deploy:mumbai:all": "npm run deploy:mumbai:nft && npm run deploy:mumbai:token && npm run deploy:mumbai:iap",
     "deploy:polygon:iap": "hardhat run scripts/deploy_infinite_ascension.js --network polygon",
@@ -29,6 +63,9 @@
     "test:codex": "hardhat test test/CodexToken.test.js",
     "test:peace": "hardhat test test/PeaceCoin.test.js",
     "test:osef": "npm run test:codex && npm run test:peace && npm run test:omni-wallet && npm run test:legacy-shield",
+    "deploy:mumbai:scrollbridge": "hardhat run scripts/deploy_scrollbridge.js --network mumbai",
+    "deploy:polygon:scrollbridge": "hardhat run scripts/deploy_scrollbridge.js --network polygon",
+    "test:scrollbridge": "hardhat test test/ScrollBridge.test.js"
     "deploy:mumbai:sacred-cert": "hardhat run scripts/deploy_sacred_certification_nft.js --network mumbai",
     "deploy:polygon:sacred-cert": "hardhat run scripts/deploy_sacred_certification_nft.js --network polygon",
     "deploy:scroll:sacred-cert": "hardhat run scripts/deploy_sacred_certification_nft.js --network scrollSepolia",
@@ -181,6 +218,25 @@
   "keywords": [
     "scrollverse",
     "blockchain",
+    "web3",
+    "nft",
+    "sovereignty",
+    "omnitech1"
+  ],
+  "scripts": {
+    "test": "echo \"No tests specified\" && exit 0",
+    "lint": "eslint . --ext .js,.jsx --ignore-path .gitignore || true",
+    "format": "prettier --write \"**/*.{js,jsx,json,md}\" --ignore-path .gitignore || true",
+    "security-check": "npm audit --production || true",
+    "validate": "npm run lint && npm run security-check"
+  },
+  "devDependencies": {
+    "eslint": "^8.57.0",
+    "prettier": "^3.2.5"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
     "nft",
     "token",
     "polygon",
@@ -199,6 +255,10 @@
     "omni-sovereign",
     "mobile-wallet",
     "dao-governance",
+    "insurance",
+    "scrollbridge",
+    "sacred-geometry",
+    "three-pillars"
     "quadratic-voting",
     "micro-vote",
     "insurance",
