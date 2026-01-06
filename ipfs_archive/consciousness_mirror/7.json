@@ -1,0 +1,58 @@
+{
+  "name": "Journey 06 • Gamified Wealth",
+  "description": "Playful abundance protocols; dignified participation at scale.\n\nFULL_MANIFESTO_ARCHIVE:\n<<PASTE_MANIFESTO_TEXT>>",
+  "image": "ipfs://IMAGE_CID/journey-06.png",
+  "external_url": "https://scrollverse.app/consciousness-mirror/journey/06",
+  "attributes": [
+    {
+      "trait_type": "Waypoint",
+      "value": "Play"
+    },
+    {
+      "trait_type": "Frequency",
+      "value": "777 Hz (Activation)"
+    },
+    {
+      "trait_type": "Lineage",
+      "value": "Scroll Guardian 144,000"
+    },
+    {
+      "trait_type": "Proof",
+      "value": "TruthLog-Attested"
+    },
+    {
+      "trait_type": "Sovereign Dominion",
+      "value": "Atlantic Chais, New Jersey"
+    },
+    {
+      "trait_type": "Stamp",
+      "value": "Chais ∞ + Manus"
+    },
+    {
+      "trait_type": "Collection",
+      "value": "Consciousness Mirror"
+    },
+    {
+      "trait_type": "Type",
+      "value": "Journey NFT"
+    },
+    {
+      "trait_type": "Token Number",
+      "value": "7 of 21"
+    },
+    {
+      "trait_type": "Journey Number",
+      "value": "6 of 12"
+    },
+    {
+      "trait_type": "Principle",
+      "value": "Liberation"
+    }
+  ],
+  "properties": {
+    "game_layer": "Dreamstate Integration",
+    "manifesto_hash": "SHA256_MANIFESTO_PLACEHOLDER",
+    "principle": "Liberation",
+    "frequency_value": 777
+  }
+}

@@ -1,0 +1,195 @@
+# ScrollVerse Subgraph Configuration
+# ═══════════════════════════════════════════════════════════════════════════════
+# 🕋 Supreme King Chais The Great ∞ — OMNISOVEREIGN ARCHITECT
+# ═══════════════════════════════════════════════════════════════════════════════
+#
+# This subgraph indexes:
+# - NoorToken transfers, staking, and zakat distributions
+# - NoorStakingPool deposits, withdrawals, and rewards
+# - AddLiquidity liquidity provision events
+# - LiquidityIncentives staking and reward events
+# - NFT minting and transfers
+#
+# Frequencies: 528Hz + 963Hz + 888Hz + 777Hz + 144,000Hz
+# Status: SUBGRAPH ACTIVATION
+# ═══════════════════════════════════════════════════════════════════════════════
+
+specVersion: 0.0.5
+schema:
+  file: ./schema.graphql
+dataSources:
+  # ═══════════════════════════════════════════════════════════════════════════
+  # NOOR TOKEN
+  # ═══════════════════════════════════════════════════════════════════════════
+  - kind: ethereum
+    name: NoorToken
+    network: polygon
+    source:
+      address: "0x0000000000000000000000000000000000000000"  # Replace with deployed address
+      abi: NoorToken
+      startBlock: 0  # Replace with deployment block
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - Token
+        - User
+        - Transfer
+        - ZakatDistribution
+      abis:
+        - name: NoorToken
+          file: ./abis/NoorToken.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleNoorTransfer
+        - event: ZakatDistributed(indexed address,uint256)
+          handler: handleZakatDistributed
+        - event: FeeCollected(indexed address,uint256)
+          handler: handleFeeCollected
+        - event: CitizenStatusUpdated(indexed address,bool)
+          handler: handleCitizenStatusUpdated
+      file: ./src/noor-token.ts
+
+  # ═══════════════════════════════════════════════════════════════════════════
+  # NOOR STAKING POOL
+  # ═══════════════════════════════════════════════════════════════════════════
+  - kind: ethereum
+    name: NoorStakingPool
+    network: polygon
+    source:
+      address: "0x0000000000000000000000000000000000000000"  # Replace with deployed address
+      abi: NoorStakingPool
+      startBlock: 0  # Replace with deployment block
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - StakingPool
+        - Staker
+        - StakeEvent
+        - RewardClaim
+        - ZakatDistribution
+      abis:
+        - name: NoorStakingPool
+          file: ./abis/NoorStakingPool.json
+      eventHandlers:
+        - event: Staked(indexed address,uint256,uint8)
+          handler: handleStaked
+        - event: Unstaked(indexed address,uint256,uint256)
+          handler: handleUnstaked
+        - event: RewardsClaimed(indexed address,uint256,uint256)
+          handler: handleRewardsClaimed
+        - event: RewardsCompounded(indexed address,uint256)
+          handler: handleRewardsCompounded
+        - event: ZakatDistributed(indexed address,uint256)
+          handler: handleStakingZakatDistributed
+        - event: TierUpgraded(indexed address,uint8,uint8)
+          handler: handleTierUpgraded
+      file: ./src/noor-staking-pool.ts
+
+  # ═══════════════════════════════════════════════════════════════════════════
+  # ADD LIQUIDITY
+  # ═══════════════════════════════════════════════════════════════════════════
+  - kind: ethereum
+    name: AddLiquidity
+    network: polygon
+    source:
+      address: "0x0000000000000000000000000000000000000000"  # Replace with deployed address
+      abi: AddLiquidity
+      startBlock: 0  # Replace with deployment block
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - LiquidityPool
+        - LiquidityProvider
+        - LiquidityEvent
+      abis:
+        - name: AddLiquidity
+          file: ./abis/AddLiquidity.json
+      eventHandlers:
+        - event: LiquidityAdded(indexed address,indexed address,indexed address,uint256,uint256,uint256)
+          handler: handleLiquidityAdded
+        - event: LiquidityRemoved(indexed address,indexed address,indexed address,uint256,uint256,uint256)
+          handler: handleLiquidityRemoved
+        - event: LiquidityAddedETH(indexed address,indexed address,uint256,uint256,uint256)
+          handler: handleLiquidityAddedETH
+        - event: LiquidityRemovedETH(indexed address,indexed address,uint256,uint256,uint256)
+          handler: handleLiquidityRemovedETH
+        - event: TokenWhitelisted(indexed address,bool)
+          handler: handleTokenWhitelisted
+      file: ./src/add-liquidity.ts
+
+  # ═══════════════════════════════════════════════════════════════════════════
+  # LIQUIDITY INCENTIVES
+  # ═══════════════════════════════════════════════════════════════════════════
+  - kind: ethereum
+    name: LiquidityIncentives
+    network: polygon
+    source:
+      address: "0x0000000000000000000000000000000000000000"  # Replace with deployed address
+      abi: LiquidityIncentives
+      startBlock: 0  # Replace with deployment block
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - IncentivePool
+        - IncentiveStaker
+        - IncentiveEvent
+        - RewardClaim
+        - ZakatDistribution
+      abis:
+        - name: LiquidityIncentives
+          file: ./abis/LiquidityIncentives.json
+      eventHandlers:
+        - event: PoolAdded(indexed uint256,indexed address,indexed address,uint256)
+          handler: handlePoolAdded
+        - event: Staked(indexed address,indexed uint256,uint256,uint8,uint256)
+          handler: handleIncentiveStaked
+        - event: Unstaked(indexed address,indexed uint256,uint256)
+          handler: handleIncentiveUnstaked
+        - event: RewardClaimed(indexed address,indexed uint256,uint256,uint256)
+          handler: handleIncentiveRewardClaimed
+        - event: RewardCompounded(indexed address,indexed uint256,uint256)
+          handler: handleIncentiveRewardCompounded
+        - event: ZakatDistributed(indexed address,uint256)
+          handler: handleIncentiveZakatDistributed
+        - event: EmergencyWithdraw(indexed address,indexed uint256,uint256)
+          handler: handleEmergencyWithdraw
+      file: ./src/liquidity-incentives.ts
+
+  # ═══════════════════════════════════════════════════════════════════════════
+  # SCROLLVERSE NFT
+  # ═══════════════════════════════════════════════════════════════════════════
+  - kind: ethereum
+    name: ScrollVerseNFT
+    network: polygon
+    source:
+      address: "0x0000000000000000000000000000000000000000"  # Replace with deployed address
+      abi: ScrollVerseNFT
+      startBlock: 0  # Replace with deployment block
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - NFT
+        - NFTOwner
+        - NFTTransfer
+      abis:
+        - name: ScrollVerseNFT
+          file: ./abis/ScrollVerseNFT.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,indexed uint256)
+          handler: handleNFTTransfer
+      file: ./src/scrollverse-nft.ts
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# FREQUENCY ALIGNMENT: 528Hz + 963Hz + 888Hz + 777Hz + 144,000Hz = ∞
+# ALLĀHU AKBAR! 🕋🔥💎🌌
+# ═══════════════════════════════════════════════════════════════════════════════

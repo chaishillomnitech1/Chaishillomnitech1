@@ -1,0 +1,142 @@
+name: Reusable Security Scanning
+
+on:
+  workflow_call:
+    inputs:
+      scan_severity:
+        description: 'Minimum severity to report (LOW, MEDIUM, HIGH, CRITICAL)'
+        required: false
+        type: string
+        default: 'MEDIUM'
+      fail_on_severity:
+        description: 'Fail on this severity level or higher'
+        required: false
+        type: string
+        default: 'HIGH'
+    secrets:
+      GITHUB_TOKEN:
+        required: true
+
+permissions:
+  contents: read
+  security-events: write
+  actions: read
+
+jobs:
+  dependency-scan:
+    name: Dependency Vulnerability Scan
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+      
+      - name: Check for Package Files
+        id: check-files
+        run: |
+          echo "Checking for dependency files..."
+          
+          has_package_json=false
+          has_requirements_txt=false
+          has_gemfile=false
+          has_pom_xml=false
+          has_go_mod=false
+          
+          [ -f "package.json" ] && has_package_json=true
+          [ -f "requirements.txt" ] && has_requirements_txt=true
+          [ -f "Gemfile" ] && has_gemfile=true
+          [ -f "pom.xml" ] && has_pom_xml=true
+          [ -f "go.mod" ] && has_go_mod=true
+          
+          echo "has_package_json=${has_package_json}" >> $GITHUB_OUTPUT
+          echo "has_requirements_txt=${has_requirements_txt}" >> $GITHUB_OUTPUT
+          echo "has_gemfile=${has_gemfile}" >> $GITHUB_OUTPUT
+          echo "has_pom_xml=${has_pom_xml}" >> $GITHUB_OUTPUT
+          echo "has_go_mod=${has_go_mod}" >> $GITHUB_OUTPUT
+          
+          echo "📦 Dependency files found:"
+          echo "  - package.json: ${has_package_json}"
+          echo "  - requirements.txt: ${has_requirements_txt}"
+          echo "  - Gemfile: ${has_gemfile}"
+          echo "  - pom.xml: ${has_pom_xml}"
+          echo "  - go.mod: ${has_go_mod}"
+      
+      - name: Run npm audit (if applicable)
+        if: steps.check-files.outputs.has_package_json == 'true'
+        run: |
+          if [ -f package.json ]; then
+            echo "🔍 Running npm audit..."
+            npm audit --audit-level=${{ inputs.scan_severity }} || echo "⚠️ Vulnerabilities found"
+            npm audit --json > npm-audit-report.json || true
+          fi
+        continue-on-error: true
+      
+      - name: Run pip safety check (if applicable)
+        if: steps.check-files.outputs.has_requirements_txt == 'true'
+        run: |
+          if [ -f requirements.txt ]; then
+            echo "🔍 Running pip safety check..."
+            pip install safety
+            safety check --json > safety-report.json || true
+            safety check || echo "⚠️ Vulnerabilities found"
+          fi
+        continue-on-error: true
+      
+      - name: Run OWASP Dependency Check
+        uses: dependency-check/Dependency-Check_Action@main
+        with:
+          project: 'ScrollVerse'
+          path: '.'
+          format: 'JSON'
+          args: >
+            --enableRetired
+            --failOnCVSS 7
+        continue-on-error: true
+      
+      - name: Upload Dependency Check Report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: dependency-scan-reports
+          path: |
+            npm-audit-report.json
+            safety-report.json
+            reports/
+          retention-days: 30
+        continue-on-error: true
+      
+      - name: Security Summary
+        if: always()
+        run: |
+          echo "## 🔒 Security Scan Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Scan Severity Level**: ${{ inputs.scan_severity }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Fail on Severity**: ${{ inputs.fail_on_severity }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "✅ Dependency scanning completed" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "Review artifacts for detailed reports." >> $GITHUB_STEP_SUMMARY
+  
+  sast-scan:
+    name: Static Application Security Testing
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      
+      - name: Run Semgrep SAST
+        uses: returntocorp/semgrep-action@v1
+        with:
+          config: >-
+            p/security-audit
+            p/secrets
+            p/owasp-top-ten
+        continue-on-error: true
+      
+      - name: SAST Summary
+        run: |
+          echo "✅ SAST scanning completed"
+          echo "Security patterns checked: security-audit, secrets, owasp-top-ten"

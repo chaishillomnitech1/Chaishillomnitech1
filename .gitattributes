@@ -1,1 +1,3 @@
-AI, Solidity, Automation, Omnitech1
+# ScrollVerse Infrastructure - Git Attributes
+*.sol linguist-language=Solidity
+*.js linguist-language=JavaScript

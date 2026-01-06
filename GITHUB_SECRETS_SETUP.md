@@ -274,7 +274,7 @@ Monitor the workflow execution for any errors.
 
 Before running deployment, verify:
 
-- [ ] All 6 secrets added to GitHub
+- [ ] Core secrets added (PRIVATE_KEY, RPC URLs, API keys)
 - [ ] Private key format is correct (no 0x prefix)
 - [ ] Wallet has sufficient MATIC for gas
 - [ ] RPC endpoint is accessible
@@ -283,6 +283,51 @@ Before running deployment, verify:
 - [ ] Workflow file is in `.github/workflows/`
 - [ ] Contracts compile successfully
 - [ ] Tests pass (if any)
+
+### **All Available Secrets**
+
+| Category | Secret Name | Required |
+|----------|-------------|----------|
+| **Deployment** | `PRIVATE_KEY` | ✅ Yes |
+| **Deployment** | `DEPLOYER_PRIVATE_KEY` | For multi-chain |
+| **Deployment** | `DEPLOYER_WALLET_ADDRESS` | For multi-chain |
+| **RPC** | `POLYGON_MUMBAI_RPC_URL` | ✅ Yes |
+| **RPC** | `SCROLL_RPC_URL` | For Scroll L2 |
+| **API Keys** | `POLYGONSCAN_API_KEY` | For verification |
+| **API Keys** | `SCROLLSCAN_API_KEY` | For Scroll |
+| **API Keys** | `INFURA_KEY` | Optional |
+| **API Keys** | `ALCHEMY_KEY` | Optional |
+| **Vaults** | `CREATOR_VAULT_ADDRESS` | ✅ Yes |
+| **Vaults** | `AMBASSADOR_VAULT_ADDRESS` | ✅ Yes |
+| **Vaults** | `DAO_VAULT_ADDRESS` | ✅ Yes |
+| **Contracts** | `DEPLOYMENT_REGISTRY_CONTRACT` | For registry |
+| **Contracts** | `PROMISE_LAND_NFT_CONTRACT` | Post-deploy |
+| **Contracts** | `REFERENCE_IDENTITY_POLICY` | For governance |
+| **Cloud - AWS** | `AWS_ACCESS_KEY_ID` | For AWS deploys |
+| **Cloud - AWS** | `AWS_SECRET_ACCESS_KEY` | For AWS deploys |
+| **Cloud - AWS** | `AWS_ROLE_ARN` | For AWS deploys |
+| **Cloud - Azure** | `AZURE_WEBAPP_PUBLISH_PROFILE` | For Azure deploys |
+| **Cloud - IBM** | `IBM_CLOUD_API_KEY` | For IBM deploys |
+| **Cloud - IBM** | `ICR_NAMESPACE` | For IBM deploys |
+| **Cloud - Alibaba** | `ACCESS_KEY_ID` | For Alibaba deploys |
+| **Cloud - Alibaba** | `ACCESS_KEY_SECRET` | For Alibaba deploys |
+| **Cloud - OpenShift** | `OPENSHIFT_SERVER` | For OpenShift |
+| **Cloud - OpenShift** | `OPENSHIFT_TOKEN` | For OpenShift |
+| **Vercel** | `VERCEL_TOKEN` | For Vercel deploys |
+| **Vercel** | `VERCEL_ORG_ID` | For Vercel deploys |
+| **Vercel** | `VERCEL_PROJECT_ID` | For Vercel deploys |
+| **Terraform** | `TF_API_TOKEN` | For Terraform Cloud |
+| **Firebase** | `FIREBASE_API_KEY` | For Sovereign TV |
+| **Firebase** | `FIREBASE_AUTH_DOMAIN` | For Sovereign TV |
+| **Firebase** | `FIREBASE_PROJECT_ID` | For Sovereign TV |
+| **Firebase** | `FIREBASE_STORAGE_BUCKET` | For Sovereign TV |
+| **Firebase** | `FIREBASE_MESSAGING_SENDER_ID` | For Sovereign TV |
+| **Firebase** | `FIREBASE_APP_ID` | For Sovereign TV |
+| **Security** | `SNYK_TOKEN` | For vulnerability scanning |
+| **Security** | `CRDA_KEY` | For dependency analysis |
+| **Security** | `IMAGE_REGISTRY_PASSWORD` | For container registry |
+
+> 📝 **Note**: See `.env.example` for a complete list with descriptions.
 
 ---
 
