@@ -1,13 +1,54 @@
 {
   "name": "scrollverse-genesis-protocol",
+  "version": "2.0.0",
+  "description": "ScrollVerse Genesis Protocol - Phase 2 Enhancement System",
+  "name": "scrollverse-sovereignty",
+  "version": "1.0.0",
+  "description": "Omnitech1 Sovereign Deployment Engine - ScrollVerse Sovereignty Infrastructure",
+  "author": "Supreme King Chais The Great ∞",
+  "license": "CC-BY-NC-SA-4.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/chaishillomnitech1/Chaishillomnitech1"
+  "name": "scrollverse-genesis-protocol",
   "version": "1.1.0",
   "description": "ScrollVerse Genesis Protocol - Quantum Ritual Deployment System with Sacred Certification IPFS Integration",
   "main": "index.js",
   "scripts": {
     "compile": "hardhat compile",
     "test": "hardhat test",
+    "test:noor": "hardhat test test/NoorNodes.test.js test/NoorDAO.test.js",
     "deploy:mumbai:nft": "hardhat run scripts/deploy_scrollversenft.js --network mumbai",
     "deploy:mumbai:token": "hardhat run scripts/deploy_chx_token.js --network mumbai",
+    "deploy:mumbai:noor": "hardhat run scripts/deploy_noor_nodes.js --network mumbai",
+    "deploy:mumbai:all": "npm run deploy:mumbai:nft && npm run deploy:mumbai:token && npm run deploy:mumbai:noor",
+    "node:start": "node node-operator/index.js",
+    "node:docker": "docker-compose -f docker/noor-node/docker-compose.yml up -d",
+    "node:docker:logs": "docker-compose -f docker/noor-node/docker-compose.yml logs -f",
+    "node:docker:stop": "docker-compose -f docker/noor-node/docker-compose.yml down"
+    "test:scrollcommand": "hardhat test test/ScrollCommandLogic.test.js",
+    "deploy:mumbai:nft": "hardhat run scripts/deploy_scrollversenft.js --network mumbai",
+    "deploy:mumbai:token": "hardhat run scripts/deploy_chx_token.js --network mumbai",
+    "deploy:mumbai:all": "npm run deploy:mumbai:nft && npm run deploy:mumbai:token",
+    "deploy:scroll:noor": "hardhat run scripts/deploy_noor_token.js --network scrollMainnet",
+    "deploy:scroll-sepolia:noor": "hardhat run scripts/deploy_noor_token.js --network scrollSepolia",
+    "deploy:polygon:noor": "hardhat run scripts/deploy_noor_token.js --network polygon",
+    "test:noor": "hardhat test test/NoorToken.test.js"
+    "deploy:mumbai:scrollcommand": "hardhat run scripts/deploy_scrollcommandlogic.js --network mumbai",
+    "deploy:mumbai:all": "npm run deploy:mumbai:nft && npm run deploy:mumbai:token && npm run deploy:mumbai:scrollcommand"
+    "test:unit": "jest",
+    "test:coverage": "jest --coverage",
+    "test:watch": "jest --watch",
+    "lint": "eslint . --ext .js,.ts",
+    "lint:fix": "eslint . --ext .js,.ts --fix",
+    "format": "prettier --write \"**/*.{js,ts,json,md,sol}\"",
+    "format:check": "prettier --check \"**/*.{js,ts,json,md,sol}\"",
+    "deploy:mumbai:nft": "hardhat run scripts/deploy_scrollversenft.js --network mumbai",
+    "deploy:mumbai:token": "hardhat run scripts/deploy_chx_token.js --network mumbai",
+    "deploy:mumbai:all": "npm run deploy:mumbai:nft && npm run deploy:mumbai:token",
+    "deploy:phase2:mumbai": "hardhat run scripts/deploy_phase2_contracts.js --network mumbai",
+    "deploy:phase2:polygon": "hardhat run scripts/deploy_phase2_contracts.js --network polygon",
+    "deploy:phase2:ethereum": "hardhat run scripts/deploy_phase2_contracts.js --network ethereum"
     "deploy:mumbai:iap": "hardhat run scripts/deploy_infinite_ascension.js --network mumbai",
     "deploy:mumbai:all": "npm run deploy:mumbai:nft && npm run deploy:mumbai:token && npm run deploy:mumbai:iap",
     "deploy:polygon:iap": "hardhat run scripts/deploy_infinite_ascension.js --network polygon",
@@ -22,6 +63,9 @@
     "test:codex": "hardhat test test/CodexToken.test.js",
     "test:peace": "hardhat test test/PeaceCoin.test.js",
     "test:osef": "npm run test:codex && npm run test:peace && npm run test:omni-wallet && npm run test:legacy-shield",
+    "deploy:mumbai:scrollbridge": "hardhat run scripts/deploy_scrollbridge.js --network mumbai",
+    "deploy:polygon:scrollbridge": "hardhat run scripts/deploy_scrollbridge.js --network polygon",
+    "test:scrollbridge": "hardhat test test/ScrollBridge.test.js"
     "deploy:mumbai:sacred-cert": "hardhat run scripts/deploy_sacred_certification_nft.js --network mumbai",
     "deploy:polygon:sacred-cert": "hardhat run scripts/deploy_sacred_certification_nft.js --network polygon",
     "deploy:scroll:sacred-cert": "hardhat run scripts/deploy_sacred_certification_nft.js --network scrollSepolia",
@@ -140,20 +184,61 @@
     "deploy:polygon:akashic-label": "hardhat run scripts/deploy_akashic_label.js --network polygon",
     "deploy:mumbai:akashic-dao": "hardhat run scripts/deploy_akashic_dao.js --network mumbai",
     "deploy:polygon:akashic-dao": "hardhat run scripts/deploy_akashic_dao.js --network polygon",
+    "deploy:mumbai:akashic-treasury": "hardhat run scripts/deploy_akashic_treasury.js --network mumbai",
+    "deploy:polygon:akashic-treasury": "hardhat run scripts/deploy_akashic_treasury.js --network polygon",
     "deploy:mumbai:akashic-all": "npm run deploy:mumbai:akashic-label && npm run deploy:mumbai:akashic-dao",
     "deploy:polygon:akashic-all": "npm run deploy:polygon:akashic-label && npm run deploy:polygon:akashic-dao",
     "deploy:polygon:akashic-mainnet": "hardhat run scripts/deploy_akashic_mainnet.js --network polygon",
+    "deploy:mumbai:akashic-suite": "hardhat run scripts/deploy_akashic_mainnet_suite.js --network mumbai",
+    "deploy:polygon:akashic-suite": "hardhat run scripts/deploy_akashic_mainnet_suite.js --network polygon",
     "mint:akashic-tracks": "hardhat run scripts/mint_akashic_tracks.js --network mumbai",
+    "mint:genesis-drop": "hardhat run scripts/mint_genesis_drop.js --network polygon",
     "generate:akashic-qr": "node scripts/generate_akashic_qr_codes.js",
+    "prepare:ipfs-metadata": "node scripts/prepare_ipfs_metadata.js",
     "onboard:founding-members": "hardhat run scripts/onboard_founding_members.js --network mumbai",
+    "distribute:genesis-tokens": "hardhat run scripts/distribute_genesis_tokens.js --network polygon",
     "test:akashic-label": "hardhat test test/AkashicRecordsLabel.test.js",
     "test:akashic-dao": "hardhat test test/AkashicRecordsDAO.test.js",
     "test:akashic-treasury": "hardhat test test/AkashicTreasuryVault.test.js",
     "test:akashic-all": "npm run test:akashic-label && npm run test:akashic-dao && npm run test:akashic-treasury"
+    "test:akashic-all": "npm run test:akashic-label && npm run test:akashic-dao && npm run test:akashic-treasury",
+    "register:track-artists": "hardhat run scripts/register_track_artists.js --network polygon",
+    "validate:polygon:deployment": "hardhat run scripts/validate_polygon_deployment.js --network polygon",
+    "validate:mumbai:deployment": "hardhat run scripts/validate_polygon_deployment.js --network mumbai",
+    "verify:polygon:akashic-suite": "hardhat run scripts/verify_polygonscan_contracts.js --network polygon",
+    "verify:mumbai:akashic-suite": "hardhat run scripts/verify_polygonscan_contracts.js --network mumbai",
+    "deploy:mumbai:genesis-witness": "hardhat run scripts/deploy_genesis_witness_nft.js --network mumbai",
+    "deploy:polygon:genesis-witness": "hardhat run scripts/deploy_genesis_witness_nft.js --network polygon",
+    "test:genesis-witness": "hardhat test test/GenesisWitnessNFT.test.js",
+    "activate:genesis-dao": "hardhat run scripts/activate_genesis_dao.js --network polygon",
+    "deploy:ethereum:throwing-stones": "hardhat run scripts/deploy_throwing_stones_fractional.js --network ethereum",
+    "deploy:polygon:throwing-stones": "hardhat run scripts/deploy_throwing_stones_fractional.js --network polygon",
+    "test:throwing-stones": "hardhat test test/ThrowingStonesFractionalNFT.test.js",
+    "generate:ai-remixes": "node scripts/ai_remix_pipeline.js",
+    "genesis:phase1": "npm run generate:ai-remixes && npm run deploy:ethereum:throwing-stones"
   },
   "keywords": [
     "scrollverse",
     "blockchain",
+    "web3",
+    "nft",
+    "sovereignty",
+    "omnitech1"
+  ],
+  "scripts": {
+    "test": "echo \"No tests specified\" && exit 0",
+    "lint": "eslint . --ext .js,.jsx --ignore-path .gitignore || true",
+    "format": "prettier --write \"**/*.{js,jsx,json,md}\" --ignore-path .gitignore || true",
+    "security-check": "npm audit --production || true",
+    "validate": "npm run lint && npm run security-check"
+  },
+  "devDependencies": {
+    "eslint": "^8.57.0",
+    "prettier": "^3.2.5"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
     "nft",
     "token",
     "polygon",
@@ -172,6 +257,10 @@
     "omni-sovereign",
     "mobile-wallet",
     "dao-governance",
+    "insurance",
+    "scrollbridge",
+    "sacred-geometry",
+    "three-pillars"
     "quadratic-voting",
     "micro-vote",
     "insurance",
@@ -195,10 +284,28 @@
   "license": "MIT",
   "devDependencies": {
     "@nomicfoundation/hardhat-toolbox": "^4.0.0",
-    "hardhat": "^2.19.0"
+    "hardhat": "^2.19.0",
+    "eslint": "^8.56.0",
+    "prettier": "^3.1.1",
+    "prettier-plugin-solidity": "^1.3.1",
+    "jest": "^29.7.0",
+    "husky": "^8.0.3",
+    "lint-staged": "^15.2.0"
   },
   "dependencies": {
     "@openzeppelin/contracts": "^5.0.1",
     "dotenv": "^16.3.1"
+  },
+  "lint-staged": {
+    "*.{js,ts}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{json,md}": [
+      "prettier --write"
+    ],
+    "*.sol": [
+      "prettier --write"
+    ]
   }
 }
