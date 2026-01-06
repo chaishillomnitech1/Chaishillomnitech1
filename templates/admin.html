@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OmniTech1 Admin Dashboard</title>
+    <style>
+        :root {
+            --primary-color: #6366f1;
+            --danger-color: #ef4444;
+            --success-color: #22c55e;
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --text-color: #e2e8f0;
+            --border-color: #334155;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        h1 {
+            font-size: 2rem;
+            background: linear-gradient(135deg, #ef4444, #f97316);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .admin-badge {
+            background: var(--danger-color);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .auth-panel {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .auth-panel h2 {
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #94a3b8;
+            font-size: 0.9rem;
+        }
+
+        input[type="text"],
+        input[type="password"],
+        textarea {
+            width: 100%;
+            padding: 0.75rem;
+            background: var(--bg-color);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: var(--text-color);
+            font-size: 1rem;
+        }
+
+        input:focus,
+        textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .btn-primary {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #4f46e5;
+        }
+
+        .btn-danger {
+            background: var(--danger-color);
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background: #dc2626;
+        }
+
+        .btn-success {
+            background: var(--success-color);
+            color: white;
+        }
+
+        .panel {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .panel h2 {
+            font-size: 1.25rem;
+        }
+
+        .status-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+        }
+
+        .status-item {
+            background: var(--bg-color);
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .status-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--success-color);
+        }
+
+        .status-label {
+            color: #64748b;
+            font-size: 0.85rem;
+            margin-top: 0.25rem;
+        }
+
+        .graph-controls {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+        }
+
+        .log-output {
+            background: #0a0f1a;
+            border-radius: 8px;
+            padding: 1rem;
+            font-family: monospace;
+            font-size: 0.9rem;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .log-entry {
+            padding: 0.25rem 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .log-time {
+            color: #64748b;
+        }
+
+        .log-info {
+            color: var(--primary-color);
+        }
+
+        .log-error {
+            color: var(--danger-color);
+        }
+
+        .log-success {
+            color: var(--success-color);
+        }
+
+        .alert {
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+
+        .alert-warning {
+            background: #422006;
+            border: 1px solid #f97316;
+            color: #fed7aa;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 3rem;
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🔐 Admin Dashboard</h1>
+            <span class="admin-badge">Admin Access</span>
+        </header>
+
+        <div class="alert alert-warning">
+            <strong>⚠️ Security Notice:</strong> This is a privileged admin interface.
+            All actions are logged. Ensure you are authorized before proceeding.
+        </div>
+
+        <div class="auth-panel" id="auth-panel">
+            <h2>Authentication</h2>
+            <div class="form-group">
+                <label for="admin-token">Admin Token</label>
+                <input type="password" id="admin-token" placeholder="Enter admin token">
+            </div>
+            <button class="btn btn-primary" onclick="authenticate()">Authenticate</button>
+            <span id="auth-status" style="margin-left: 1rem; color: #64748b;"></span>
+        </div>
+
+        <div class="panel">
+            <div class="panel-header">
+                <h2>System Status</h2>
+                <button class="btn btn-primary" onclick="refreshStatus()">Refresh</button>
+            </div>
+            <div class="status-grid">
+                <div class="status-item">
+                    <div class="status-value" id="status-nodes">-</div>
+                    <div class="status-label">Graph Nodes</div>
+                </div>
+                <div class="status-item">
+                    <div class="status-value" id="status-edges">-</div>
+                    <div class="status-label">Graph Edges</div>
+                </div>
+                <div class="status-item">
+                    <div class="status-value" id="status-neo4j">-</div>
+                    <div class="status-label">Neo4j Status</div>
+                </div>
+                <div class="status-item">
+                    <div class="status-value" id="status-health">-</div>
+                    <div class="status-label">System Health</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel">
+            <h2>Graph Management</h2>
+            <div class="graph-controls">
+                <div class="form-group" style="flex: 1;">
+                    <label for="node-id">Node ID</label>
+                    <input type="text" id="node-id" placeholder="node_123">
+                </div>
+                <div class="form-group" style="flex: 2;">
+                    <label for="node-attrs">Attributes (JSON)</label>
+                    <input type="text" id="node-attrs" placeholder='{"type": "example"}'>
+                </div>
+                <div class="form-group" style="align-self: flex-end;">
+                    <button class="btn btn-success" onclick="addNode()">Add Node</button>
+                </div>
+            </div>
+
+            <div class="graph-controls">
+                <div class="form-group" style="flex: 1;">
+                    <label for="edge-source">Source Node</label>
+                    <input type="text" id="edge-source" placeholder="source_node">
+                </div>
+                <div class="form-group" style="flex: 1;">
+                    <label for="edge-target">Target Node</label>
+                    <input type="text" id="edge-target" placeholder="target_node">
+                </div>
+                <div class="form-group" style="align-self: flex-end;">
+                    <button class="btn btn-success" onclick="addEdge()">Add Edge</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel">
+            <div class="panel-header">
+                <h2>Activity Log</h2>
+                <button class="btn btn-danger" onclick="clearLog()">Clear</button>
+            </div>
+            <div class="log-output" id="log-output">
+                <div class="log-entry">
+                    <span class="log-time">[System]</span>
+                    <span class="log-info">Admin dashboard initialized</span>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>OmniTech1™ Sovereign Deployment Engine &copy; ScrollVerse Genesis Protocol</p>
+            <p style="margin-top: 0.5rem;">Admin access is logged and monitored.</p>
+        </footer>
+    </div>
+
+    <script>
+        let adminToken = '';
+
+        function log(message, type = 'info') {
+            const logOutput = document.getElementById('log-output');
+            const time = new Date().toLocaleTimeString();
+            const entry = document.createElement('div');
+            entry.className = 'log-entry';
+            entry.innerHTML = `<span class="log-time">[${time}]</span> <span class="log-${type}">${message}</span>`;
+            logOutput.appendChild(entry);
+            logOutput.scrollTop = logOutput.scrollHeight;
+        }
+
+        function clearLog() {
+            document.getElementById('log-output').innerHTML = '';
+            log('Log cleared', 'info');
+        }
+
+        function authenticate() {
+            adminToken = document.getElementById('admin-token').value;
+            if (!adminToken) {
+                document.getElementById('auth-status').textContent = 'Please enter a token';
+                document.getElementById('auth-status').style.color = '#ef4444';
+                return;
+            }
+
+            log('Authenticating...', 'info');
+
+            fetch('/admin/status', {
+                headers: {
+                    'X-Admin-Token': adminToken
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    document.getElementById('auth-status').textContent = '✓ Authenticated';
+                    document.getElementById('auth-status').style.color = '#22c55e';
+                    log('Authentication successful', 'success');
+                    refreshStatus();
+                } else {
+                    throw new Error('Authentication failed');
+                }
+            })
+            .catch(error => {
+                document.getElementById('auth-status').textContent = '✗ Authentication failed';
+                document.getElementById('auth-status').style.color = '#ef4444';
+                log('Authentication failed: ' + error.message, 'error');
+            });
+        }
+
+        function refreshStatus() {
+            fetch('/admin/status', {
+                headers: adminToken ? { 'X-Admin-Token': adminToken } : {}
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('status-nodes').textContent = data.graph_nodes || 0;
+                document.getElementById('status-edges').textContent = data.graph_edges || 0;
+                document.getElementById('status-neo4j').textContent = data.neo4j_connected ? 'Connected' : 'Disconnected';
+                document.getElementById('status-neo4j').style.color = data.neo4j_connected ? '#22c55e' : '#ef4444';
+                document.getElementById('status-health').textContent = data.status === 'healthy' ? 'Healthy' : 'Unhealthy';
+                document.getElementById('status-health').style.color = data.status === 'healthy' ? '#22c55e' : '#ef4444';
+                log('Status refreshed', 'success');
+            })
+            .catch(error => {
+                log('Failed to refresh status: ' + error.message, 'error');
+            });
+        }
+
+        function addNode() {
+            const nodeId = document.getElementById('node-id').value;
+            const attrsStr = document.getElementById('node-attrs').value || '{}';
+
+            if (!nodeId) {
+                log('Node ID is required', 'error');
+                return;
+            }
+
+            let attributes;
+            try {
+                attributes = JSON.parse(attrsStr);
+            } catch (e) {
+                log('Invalid JSON for attributes', 'error');
+                return;
+            }
+
+            fetch('/admin/graph/node', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    ...(adminToken ? { 'X-Admin-Token': adminToken } : {})
+                },
+                body: JSON.stringify({ id: nodeId, attributes })
+            })
+            .then(response => {
+                if (!response.ok) throw new Error('Failed to add node');
+                return response.json();
+            })
+            .then(data => {
+                log(`Node "${nodeId}" added successfully`, 'success');
+                refreshStatus();
+            })
+            .catch(error => {
+                log('Failed to add node: ' + error.message, 'error');
+            });
+        }
+
+        function addEdge() {
+            const source = document.getElementById('edge-source').value;
+            const target = document.getElementById('edge-target').value;
+
+            if (!source || !target) {
+                log('Source and target are required', 'error');
+                return;
+            }
+
+            fetch('/admin/graph/edge', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    ...(adminToken ? { 'X-Admin-Token': adminToken } : {})
+                },
+                body: JSON.stringify({ source, target, attributes: {} })
+            })
+            .then(response => {
+                if (!response.ok) throw new Error('Failed to add edge');
+                return response.json();
+            })
+            .then(data => {
+                log(`Edge "${source}" -> "${target}" added successfully`, 'success');
+                refreshStatus();
+            })
+            .catch(error => {
+                log('Failed to add edge: ' + error.message, 'error');
+            });
+        }
+
+        // Initial status refresh
+        refreshStatus();
+    </script>
+</body>
+</html>

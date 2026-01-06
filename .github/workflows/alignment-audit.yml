@@ -1,0 +1,74 @@
+name: Alignment Audit
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+      - 'feature/**'
+  pull_request:
+    branches:
+      - main
+      - develop
+  workflow_dispatch:
+  schedule:
+    # Run weekly on Sundays at midnight UTC
+    - cron: '0 0 * * 0'
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  audit:
+    name: OmniTech1 Alignment Audit
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Run Alignment Audit
+        id: audit
+        run: |
+          cd ${{ github.workspace }}
+          export REPO_ROOT="."
+          export OUTPUT_JSON="true"
+
+          echo "🔍 Running OmniTech1 Alignment Audit..."
+          python audit/check_alignment.py | tee audit-results.json
+
+          # Extract summary for step output
+          if [ -f audit-results.json ]; then
+            passed=$(python -c "import json; data=json.load(open('audit-results.json')); print(data.get('passed', 0))")
+            warnings=$(python -c "import json; data=json.load(open('audit-results.json')); print(data.get('warnings', 0))")
+            failed=$(python -c "import json; data=json.load(open('audit-results.json')); print(data.get('failed', 0))")
+            echo "passed=$passed" >> $GITHUB_OUTPUT
+            echo "warnings=$warnings" >> $GITHUB_OUTPUT
+            echo "failed=$failed" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Upload Audit Results
+        uses: actions/upload-artifact@v4
+        with:
+          name: alignment-audit-results
+          path: audit-results.json
+          retention-days: 30
+
+      - name: Generate Summary
+        run: |
+          echo "## 🔍 OmniTech1 Alignment Audit Results" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Metric | Count |" >> $GITHUB_STEP_SUMMARY
+          echo "|--------|-------|" >> $GITHUB_STEP_SUMMARY
+          echo "| ✅ Passed | ${{ steps.audit.outputs.passed || '0' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| ⚠️ Warnings | ${{ steps.audit.outputs.warnings || '0' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| ❌ Failed | ${{ steps.audit.outputs.failed || '0' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "---" >> $GITHUB_STEP_SUMMARY
+          echo "**OmniTech1™ Sovereign Deployment Engine**" >> $GITHUB_STEP_SUMMARY

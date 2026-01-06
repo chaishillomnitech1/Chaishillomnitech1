@@ -1,0 +1,74 @@
+{
+  "network": {
+    "name": "Scroll zkEVM",
+    "chainId": 534352,
+    "rpcUrl": "https://rpc.scroll.io",
+    "blockExplorer": "https://scrollscan.com",
+    "currency": {
+      "name": "Ethereum",
+      "symbol": "ETH",
+      "decimals": 18
+    }
+  },
+  "testnet": {
+    "name": "Scroll Sepolia",
+    "chainId": 534351,
+    "rpcUrl": "https://sepolia-rpc.scroll.io",
+    "blockExplorer": "https://sepolia.scrollscan.com",
+    "faucet": "https://scroll.io/faucet"
+  },
+  "deployment": {
+    "gasLimit": 8000000,
+    "gasPrice": "auto",
+    "confirmations": 2,
+    "timeout": 300000,
+    "polling_interval": 5000
+  },
+  "contracts": {
+    "nft": {
+      "name": "ScrollVerse NFT Collection",
+      "symbol": "SVNFT",
+      "baseURI": "ipfs://",
+      "maxSupply": 10000,
+      "royaltyPercentage": 1500,
+      "royaltyReceiver": "0x721AxisEntryPointFLAMEGENESIS∞CHX777"
+    },
+    "token": {
+      "name": "CHXToken",
+      "symbol": "CHX",
+      "decimals": 18,
+      "initialSupply": "1000000000000000000000000",
+      "mintable": true,
+      "burnable": true
+    },
+    "marketplace": {
+      "platformFee": 250,
+      "feeRecipient": "0x721AxisEntryPointFLAMEGENESIS∞CHX777"
+    }
+  },
+  "verification": {
+    "enabled": true,
+    "apiKey": "YOUR_SCROLLSCAN_API_KEY",
+    "apiUrl": "https://api.scrollscan.com/api"
+  },
+  "monitoring": {
+    "enabled": true,
+    "webhooks": [],
+    "alertThreshold": {
+      "gasPrice": 100,
+      "failureRate": 0.05
+    }
+  },
+  "security": {
+    "multiSig": false,
+    "timelockDelay": 0,
+    "upgradeability": "transparent",
+    "accessControl": true
+  },
+  "metadata": {
+    "author": "Chais Hill | Chais The Great",
+    "organization": "Omnitech1",
+    "version": "1.0.0",
+    "license": "CC BY-NC-SA 4.0"
+  }
+}

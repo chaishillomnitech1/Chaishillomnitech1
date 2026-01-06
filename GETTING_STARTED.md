@@ -23,6 +23,7 @@ Welcome to the Chais Hill OmniTech ecosystem! This guide will help you get start
 ### **I want to...**
 
 - [👤 Learn About the Project](#-for-users--enthusiasts) - Explore what we do
+- [🌟 Join the Expansion Initiatives](#-for-expansion-participants) - **NEW: Be part of the legendary future**
 - [💻 Start Developing](#-for-developers) - Build with our tools
 - [🤝 Contribute Code](#-for-contributors) - Help improve the ecosystem
 - [🎨 Create Content](#-for-content-creators) - Use our platforms
@@ -57,6 +58,55 @@ Visit the live deployment:
 - Check [CHANGELOG.md](CHANGELOG.md) for updates
 - Watch for new releases
 - Follow development progress
+
+---
+
+## 🌟 **FOR EXPANSION PARTICIPANTS**
+
+### **🚀 NEW: ScrollVerse Expansion Initiatives**
+
+**Three transformative protocols are now active for eternal growth:**
+
+#### **Quick Start**
+1. **[⚡ Read the Quick Reference](EXPANSION_QUICK_REFERENCE.md)** - Get oriented fast
+2. **[📊 View the Visual Overview](EXPANSION_INITIATIVES_OVERVIEW.md)** - See how it all fits together
+3. **Choose your path below** based on your interests
+
+#### **For Partners & Organizations**
+**Interested in forming strategic alliances?**
+- Read: [Universal Emissary Protocol](UNIVERSAL_EMISSARY_PROTOCOL.md)
+- Learn about: 3-tier partnership structure (Sovereign, Frequency Allies, Seekers)
+- Contact: partnerships@scrollverse.com
+- Target sectors: Technology, Arts, Spiritual, Business, Education
+
+#### **For Creators & Artists**
+**Want to join the fellowship and create with us?**
+- Read: [Scroll Ascension Fellowship](SCROLL_ASCENSION_FELLOWSHIP.md)
+- Learn about: ScrollDrop™ NFT collection (144,000 supply)
+- Access: CHAIS-VISION 1.0 creative platform (6 modules)
+- Contact: fellowship@scrollverse.com
+- Benefits: 5-15% royalties, mentorship, AI tools
+
+#### **For Long-term Thinkers**
+**Interested in multi-generational sustainability?**
+- Read: [Legacy 100-Year Roadmap](LEGACY_100_YEAR_ROADMAP.md)
+- Learn about: Century-long strategic framework (2025-2125)
+- Explore: Generational succession protocols
+- Join: ScrollVerse Academy programs
+- Contact: academy@scrollverse.com
+
+#### **For Implementation Teams**
+**Ready to deploy the initiatives?**
+- Read: [Expansion Deployment Guide](SCROLLVERSE_EXPANSION_DEPLOYMENT_GUIDE.md)
+- Access: Pre-deployment checklists, phase-by-phase instructions
+- Contact: deployment@scrollverse.com
+
+### **Key Targets**
+- **Community**: 144,000+ aligned souls
+- **Partnerships**: 100+ sovereign partners
+- **NFTs**: 144,000 ScrollDrop™ tokens
+- **Reach**: 10M+ monthly audience
+- **Timeline**: Active now through 2125+
 
 ---
 
