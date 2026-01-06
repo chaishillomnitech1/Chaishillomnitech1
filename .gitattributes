@@ -1,0 +1,3 @@
+# ScrollVerse Infrastructure - Git Attributes
+*.sol linguist-language=Solidity
+*.js linguist-language=JavaScript

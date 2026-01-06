@@ -1,0 +1,30 @@
+# Edge to Infinity Deployment Pipeline
+---
+name: Deploy Pipeline
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Install Dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y your-deployment-tool
+
+      - name: Execute Deployment
+        env:
+          DEPLOYMENT_ENV: production
+        run: |
+          your-deployment-tool deploy --global --scale max

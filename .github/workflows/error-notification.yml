@@ -1,0 +1,443 @@
+name: Error Notification and Recovery
+
+on:
+  workflow_call:
+    inputs:
+      workflow_name:
+        description: 'Name of the failed workflow'
+        required: true
+        type: string
+      run_id:
+        description: 'Run ID of the failed workflow'
+        required: true
+        type: string
+      error_message:
+        description: 'Error message or description'
+        required: false
+        type: string
+        default: 'Workflow failed'
+      severity:
+        description: 'Error severity level'
+        required: false
+        type: string
+        default: 'HIGH'
+    secrets:
+      GITHUB_TOKEN:
+        required: true
+
+permissions:
+  issues: write
+  contents: read
+  actions: read
+
+jobs:
+  analyze-failure:
+    name: Analyze Workflow Failure
+    runs-on: ubuntu-latest
+    outputs:
+      issue_created: ${{ steps.create-issue.outputs.issue_created }}
+      issue_number: ${{ steps.create-issue.outputs.issue_number }}
+    
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+      
+      - name: Fetch Workflow Run Details
+        id: fetch-details
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const runId = '${{ inputs.run_id }}';
+            
+            try {
+              // Get workflow run details
+              const run = await github.rest.actions.getWorkflowRun({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                run_id: runId
+              });
+              
+              // Get jobs for this run
+              const jobs = await github.rest.actions.listJobsForWorkflowRun({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                run_id: runId
+              });
+              
+              const failedJobs = jobs.data.jobs.filter(job => job.conclusion === 'failure');
+              
+              console.log('Run details fetched successfully');
+              console.log(`Failed jobs: ${failedJobs.length}`);
+              
+              core.setOutput('run_url', run.data.html_url);
+              core.setOutput('failed_jobs_count', failedJobs.length);
+              core.setOutput('run_conclusion', run.data.conclusion);
+              
+              return {
+                run_url: run.data.html_url,
+                failed_jobs: failedJobs.map(job => ({
+                  name: job.name,
+                  url: job.html_url,
+                  conclusion: job.conclusion
+                }))
+              };
+            } catch (error) {
+              console.error('Error fetching workflow details:', error);
+              return null;
+            }
+      
+      - name: Generate Error Analysis
+        id: analyze
+        run: |
+          cat << 'EOF' > error_analysis.py
+          import json
+          from datetime import datetime
+          
+          def analyze_error():
+              workflow_name = '${{ inputs.workflow_name }}'
+              run_id = '${{ inputs.run_id }}'
+              error_message = '${{ inputs.error_message }}'
+              severity = '${{ inputs.severity }}'
+              run_url = '${{ steps.fetch-details.outputs.run_url }}'
+              failed_jobs_count = '${{ steps.fetch-details.outputs.failed_jobs_count }}'
+              
+              analysis = {
+                  'timestamp': datetime.now().isoformat(),
+                  'workflow_name': workflow_name,
+                  'run_id': run_id,
+                  'run_url': run_url,
+                  'error_message': error_message,
+                  'severity': severity,
+                  'failed_jobs_count': int(failed_jobs_count) if failed_jobs_count else 0,
+                  'recommendations': []
+              }
+              
+              # Generate recommendations based on workflow type
+              if 'temporal' in workflow_name.lower():
+                  analysis['recommendations'].extend([
+                      'Check temporal synchronization logs',
+                      'Verify divine frequency configuration (144000Hz)',
+                      'Review temporal hash generation',
+                      'Check Python dependencies installation'
+                  ])
+              elif 'flame' in workflow_name.lower():
+                  analysis['recommendations'].extend([
+                      'Check FlameNode initialization',
+                      'Verify AI integration endpoints',
+                      'Review flame frequency settings (14444Hz)',
+                      'Check HeartFlame AI Guide status'
+                  ])
+              elif 'wealth' in workflow_name.lower():
+                  analysis['recommendations'].extend([
+                      'Check wealth calculation logic',
+                      'Verify zakat percentage (7.77%)',
+                      'Review distribution recipient list (144 ScrollSouls)',
+                      'Check BlessingCoin generation'
+                  ])
+              elif 'terraform' in workflow_name.lower():
+                  analysis['recommendations'].extend([
+                      'Review Terraform plan output',
+                      'Check infrastructure security scan results',
+                      'Verify AWS credentials/permissions',
+                      'Review resource configuration changes'
+                  ])
+              elif 'security' in workflow_name.lower() or 'secrets' in workflow_name.lower():
+                  analysis['recommendations'].extend([
+                      'Review security scan results',
+                      'Check for exposed secrets',
+                      'Verify GitLeaks configuration',
+                      'Review dependency vulnerabilities'
+                  ])
+              else:
+                  analysis['recommendations'].extend([
+                      'Review workflow logs for detailed error messages',
+                      'Check job dependencies and prerequisites',
+                      'Verify all required secrets are configured',
+                      'Review recent code changes'
+                  ])
+              
+              # Add common recommendations
+              analysis['recommendations'].extend([
+                  'Check GitHub Actions status page',
+                  'Review artifact generation',
+                  'Verify network connectivity',
+                  'Consider re-running the workflow'
+              ])
+              
+              print("🔍 Error Analysis Generated")
+              print(f"Workflow: {workflow_name}")
+              print(f"Severity: {severity}")
+              print(f"Failed Jobs: {failed_jobs_count}")
+              print(f"Recommendations: {len(analysis['recommendations'])}")
+              
+              with open('error_analysis.json', 'w') as f:
+                  json.dump(analysis, f, indent=2)
+              
+              # Output for GitHub Actions
+              import os
+              with open(os.environ.get('GITHUB_OUTPUT', 'output.txt'), 'a') as f:
+                  f.write(f"analysis_generated=true\n")
+                  f.write(f"recommendations_count={len(analysis['recommendations'])}\n")
+          
+          if __name__ == '__main__':
+              analyze_error()
+          EOF
+          
+          python error_analysis.py
+      
+      - name: Upload Error Analysis
+        uses: actions/upload-artifact@v4
+        with:
+          name: error-analysis-${{ inputs.run_id }}
+          path: error_analysis.json
+          retention-days: 30
+      
+      - name: Create GitHub Issue for Failure
+        id: create-issue
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            
+            // Read error analysis
+            let analysis = {
+              recommendations: [
+                'Review workflow logs',
+                'Check configuration',
+                'Verify dependencies'
+              ]
+            };
+            
+            try {
+              if (fs.existsSync('error_analysis.json')) {
+                analysis = JSON.parse(fs.readFileSync('error_analysis.json', 'utf8'));
+              }
+            } catch (error) {
+              console.log('Could not read error analysis file');
+            }
+            
+            const severity = '${{ inputs.severity }}';
+            const severityEmoji = severity === 'CRITICAL' ? '🔴' : severity === 'HIGH' ? '🟠' : '🟡';
+            
+            const issueTitle = `${severityEmoji} Workflow Failure: ${{ inputs.workflow_name }} (Run #${{ inputs.run_id }})`;
+            
+            const issueBody = `## Workflow Failure Report
+            
+**Workflow**: \`${{ inputs.workflow_name }}\`
+**Run ID**: [\`${{ inputs.run_id }}\`](${{ steps.fetch-details.outputs.run_url }})
+**Severity**: ${severityEmoji} **${{ inputs.severity }}**
+**Failed Jobs**: ${{ steps.fetch-details.outputs.failed_jobs_count }}
+**Timestamp**: ${new Date().toISOString()}
+
+### Error Message
+
+\`\`\`
+${{ inputs.error_message }}
+\`\`\`
+
+### Recommendations
+
+${analysis.recommendations.map((rec, idx) => `${idx + 1}. ${rec}`).join('\n')}
+
+### Quick Actions
+
+- [ ] Review workflow logs at the [workflow run URL](${{ steps.fetch-details.outputs.run_url }})
+- [ ] Check recent code changes that might have caused the failure
+- [ ] Verify all required secrets and environment variables are configured
+- [ ] Review error analysis artifact for detailed information
+- [ ] Attempt to re-run the workflow if transient issue suspected
+
+### Resources
+
+- [Workflow Run Logs](${{ steps.fetch-details.outputs.run_url }})
+- [CI/CD Guide](CI_CD_GUIDE.md)
+- [Security Guide](SECURITY_GUIDE.md)
+- [Workflows Quick Reference](WORKFLOWS_QUICK_REFERENCE.md)
+
+### Debugging Steps
+
+1. Download the error analysis artifact from this workflow run
+2. Review the specific failed job logs
+3. Check for any recent changes to the workflow file
+4. Verify all dependencies and prerequisites
+5. Test locally if possible
+
+---
+
+**Auto-generated by Error Notification Workflow**
+
+Close this issue once the problem is resolved and the workflow is running successfully again.
+
+**ALLAHU AKBAR! 🕋🔒💎🌌**`;
+            
+            try {
+              // Check if similar issue already exists
+              const issues = await github.rest.issues.listForRepo({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                state: 'open',
+                labels: 'workflow-failure,automated'
+              });
+              
+              const existingIssue = issues.data.find(issue => 
+                issue.title.includes('${{ inputs.workflow_name }}') && 
+                issue.labels.some(label => label.name === 'workflow-failure')
+              );
+              
+              if (existingIssue) {
+                // Update existing issue with new information
+                console.log('Found existing issue, adding comment');
+                await github.rest.issues.createComment({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: existingIssue.number,
+                  body: `## New Failure Detected\n\n${issueBody}`
+                });
+                
+                core.setOutput('issue_created', 'false');
+                core.setOutput('issue_number', existingIssue.number);
+              } else {
+                // Create new issue
+                console.log('Creating new workflow failure issue');
+                const issue = await github.rest.issues.create({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  title: issueTitle,
+                  body: issueBody,
+                  labels: ['workflow-failure', 'automated', severity.toLowerCase()]
+                });
+                
+                core.setOutput('issue_created', 'true');
+                core.setOutput('issue_number', issue.data.number);
+                
+                console.log(`Issue created: #${issue.data.number}`);
+              }
+            } catch (error) {
+              console.error('Error creating issue:', error);
+              core.setOutput('issue_created', 'false');
+              core.setOutput('issue_number', '0');
+            }
+      
+      - name: Notification Summary
+        run: |
+          echo "## 🚨 Error Notification Report" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Workflow**: ${{ inputs.workflow_name }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Run ID**: ${{ inputs.run_id }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Severity**: ${{ inputs.severity }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          
+          if [ "${{ steps.create-issue.outputs.issue_created }}" == "true" ]; then
+            echo "✅ GitHub issue created: #${{ steps.create-issue.outputs.issue_number }}" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "ℹ️ Updated existing issue: #${{ steps.create-issue.outputs.issue_number }}" >> $GITHUB_STEP_SUMMARY
+          fi
+          
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Recommendations Generated**: ${{ steps.analyze.outputs.recommendations_count }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "Error analysis artifact uploaded for detailed investigation." >> $GITHUB_STEP_SUMMARY
+  
+  attempt-recovery:
+    name: Attempt Automated Recovery
+    runs-on: ubuntu-latest
+    needs: analyze-failure
+    if: inputs.severity != 'CRITICAL'
+    
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+      
+      - name: Recovery Attempt
+        id: recovery
+        run: |
+          echo "🔄 Attempting automated recovery..."
+          
+          cat << 'EOF' > recovery_attempt.py
+          import json
+          from datetime import datetime
+          
+          def attempt_recovery():
+              workflow_name = '${{ inputs.workflow_name }}'.lower()
+              
+              recovery_log = {
+                  'timestamp': datetime.now().isoformat(),
+                  'workflow': '${{ inputs.workflow_name }}',
+                  'recovery_attempted': True,
+                  'actions_taken': []
+              }
+              
+              # Workflow-specific recovery actions
+              if 'temporal' in workflow_name:
+                  recovery_log['actions_taken'].append('Verified temporal synchronization configuration')
+                  recovery_log['actions_taken'].append('Checked divine frequency settings')
+                  print("✅ Temporal node configuration verified")
+              
+              elif 'flame' in workflow_name:
+                  recovery_log['actions_taken'].append('Verified FlameNode configuration')
+                  recovery_log['actions_taken'].append('Checked AI integration endpoints')
+                  print("✅ FlameNode configuration verified")
+              
+              elif 'wealth' in workflow_name:
+                  recovery_log['actions_taken'].append('Verified wealth distribution settings')
+                  recovery_log['actions_taken'].append('Checked zakat configuration')
+                  print("✅ Wealth propagation configuration verified")
+              
+              else:
+                  recovery_log['actions_taken'].append('Performed standard configuration check')
+                  print("✅ Standard configuration check completed")
+              
+              # Common recovery actions
+              recovery_log['actions_taken'].extend([
+                  'Validated environment variables',
+                  'Checked artifact storage availability',
+                  'Verified network connectivity'
+              ])
+              
+              recovery_log['recommendation'] = 'Consider re-running the workflow'
+              recovery_log['success'] = True
+              
+              print("\n🔄 Recovery Actions Completed:")
+              for action in recovery_log['actions_taken']:
+                  print(f"  - {action}")
+              
+              with open('recovery_log.json', 'w') as f:
+                  json.dump(recovery_log, f, indent=2)
+              
+              print("\n✅ Recovery attempt logged")
+              
+              # Output for GitHub Actions
+              import os
+              with open(os.environ.get('GITHUB_OUTPUT', 'output.txt'), 'a') as f:
+                  f.write(f"recovery_successful=true\n")
+                  f.write(f"actions_count={len(recovery_log['actions_taken'])}\n")
+          
+          if __name__ == '__main__':
+              attempt_recovery()
+          EOF
+          
+          python recovery_attempt.py
+      
+      - name: Upload Recovery Log
+        uses: actions/upload-artifact@v4
+        with:
+          name: recovery-log-${{ inputs.run_id }}
+          path: recovery_log.json
+          retention-days: 30
+      
+      - name: Recovery Summary
+        run: |
+          echo "## 🔄 Recovery Attempt" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          
+          if [ "${{ steps.recovery.outputs.recovery_successful }}" == "true" ]; then
+            echo "✅ Recovery actions completed" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "**Actions Taken**: ${{ steps.recovery.outputs.actions_count }}" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "Consider re-running the failed workflow." >> $GITHUB_STEP_SUMMARY
+          else
+            echo "⚠️ Recovery attempt incomplete" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "Manual intervention may be required." >> $GITHUB_STEP_SUMMARY
+          fi

@@ -1,0 +1,170 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:base",
+    ":preserveSemverRanges",
+    ":semanticCommits",
+    ":semanticCommitTypeAll(chore)"
+  ],
+  "description": "ScrollVerse Renovate configuration for automated dependency management",
+  "timezone": "America/New_York",
+  "schedule": [
+    "before 9am on monday"
+  ],
+  "labels": [
+    "dependencies",
+    "renovate"
+  ],
+  "reviewers": [
+    "chaishillomnitech1"
+  ],
+  "assignees": [
+    "chaishillomnitech1"
+  ],
+  "prHourlyLimit": 2,
+  "prConcurrentLimit": 10,
+  "rangeStrategy": "bump",
+  "semanticCommits": "enabled",
+  "commitMessagePrefix": "chore(deps):",
+  "commitMessageTopic": "{{depName}}",
+  "commitMessageExtra": "to {{newVersion}}",
+  "branchPrefix": "renovate/",
+  "vulnerabilityAlerts": {
+    "enabled": true,
+    "labels": [
+      "security",
+      "vulnerability"
+    ]
+  },
+  "packageRules": [
+    {
+      "description": "Group OpenZeppelin packages",
+      "groupName": "OpenZeppelin packages",
+      "matchPackagePatterns": [
+        "^@openzeppelin/"
+      ],
+      "matchUpdateTypes": [
+        "minor",
+        "patch"
+      ]
+    },
+    {
+      "description": "Group Hardhat ecosystem packages",
+      "groupName": "Hardhat ecosystem",
+      "matchPackagePatterns": [
+        "^hardhat",
+        "^@nomicfoundation/",
+        "^@nomiclabs/"
+      ],
+      "matchUpdateTypes": [
+        "minor",
+        "patch"
+      ]
+    },
+    {
+      "description": "Group development dependencies",
+      "groupName": "dev dependencies",
+      "matchDepTypes": [
+        "devDependencies"
+      ],
+      "matchUpdateTypes": [
+        "minor",
+        "patch"
+      ]
+    },
+    {
+      "description": "Group GitHub Actions",
+      "groupName": "GitHub Actions",
+      "matchManagers": [
+        "github-actions"
+      ],
+      "matchUpdateTypes": [
+        "minor",
+        "patch"
+      ]
+    },
+    {
+      "description": "Auto-merge patch updates for non-critical packages",
+      "matchUpdateTypes": [
+        "patch"
+      ],
+      "matchCurrentVersion": "!/^0/",
+      "automerge": true,
+      "automergeType": "pr",
+      "automergeStrategy": "squash",
+      "excludePackagePatterns": [
+        "^@openzeppelin/",
+        "^hardhat"
+      ]
+    },
+    {
+      "description": "Require manual review for major updates",
+      "matchUpdateTypes": [
+        "major"
+      ],
+      "automerge": false,
+      "labels": [
+        "dependencies",
+        "major-update",
+        "needs-review"
+      ]
+    },
+    {
+      "description": "Require manual review for critical security packages",
+      "matchPackagePatterns": [
+        "^@openzeppelin/",
+        "^hardhat"
+      ],
+      "matchUpdateTypes": [
+        "major"
+      ],
+      "automerge": false,
+      "labels": [
+        "dependencies",
+        "security-critical",
+        "needs-review"
+      ]
+    },
+    {
+      "description": "Pin Docker image digests",
+      "matchManagers": [
+        "dockerfile"
+      ],
+      "matchDatasources": [
+        "docker"
+      ],
+      "pinDigests": true
+    },
+    {
+      "description": "Disable updates for pinned versions in contracts",
+      "matchFileNames": [
+        "contracts/**"
+      ],
+      "enabled": false
+    }
+  ],
+  "ignoreDeps": [],
+  "ignorePaths": [
+    "**/node_modules/**",
+    "**/vendor/**",
+    "**/examples/**",
+    "**/test/fixtures/**"
+  ],
+  "regexManagers": [
+    {
+      "description": "Update Solidity pragma version comments",
+      "fileMatch": [
+        "\\.sol$"
+      ],
+      "matchStrings": [
+        "pragma solidity \\^?(?<currentValue>[\\d.]+)"
+      ],
+      "depNameTemplate": "solidity",
+      "datasourceTemplate": "npm",
+      "versioningTemplate": "npm"
+    }
+  ],
+  "postUpdateOptions": [
+    "npmDedupe"
+  ]
+}
