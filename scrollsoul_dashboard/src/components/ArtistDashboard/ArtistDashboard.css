@@ -1,0 +1,400 @@
+/**
+ * ArtistDashboard Component Styles
+ * Frequency-aligned styling: 528Hz + 963Hz + 999Hz
+ */
+
+.artist-dashboard {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+/* Loading State */
+.artist-dashboard.loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 500px;
+}
+
+.frequency-loader {
+    text-align: center;
+}
+
+.frequency-pulse {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin: 10px;
+    display: inline-block;
+    animation: pulse 2s infinite;
+}
+
+.pulse-528 {
+    background: linear-gradient(135deg, #FFD700, #FFA500);
+}
+
+.pulse-963 {
+    background: linear-gradient(135deg, #9370DB, #8B008B);
+}
+
+.pulse-999 {
+    background: linear-gradient(135deg, #FF69B4, #FF1493);
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 0.7; }
+    50% { transform: scale(1.1); opacity: 1; }
+}
+
+/* Header Section */
+.dashboard-header {
+    margin-bottom: 40px;
+}
+
+.profile-banner {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 16px;
+    padding: 40px;
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.profile-image {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 5px solid rgba(255, 255, 255, 0.3);
+    object-fit: cover;
+}
+
+.profile-info {
+    flex: 1;
+    color: white;
+}
+
+.profile-info h1 {
+    margin: 0 0 15px 0;
+    font-size: 2.5em;
+    font-weight: 700;
+}
+
+.profile-meta {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.tier-badge {
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 0.9em;
+    font-weight: 600;
+    color: white;
+}
+
+.verified-badge {
+    padding: 6px 16px;
+    border-radius: 20px;
+    background: #10b981;
+    font-size: 0.9em;
+    font-weight: 600;
+}
+
+.bio {
+    margin: 0;
+    font-size: 1.1em;
+    line-height: 1.6;
+    opacity: 0.95;
+}
+
+/* Metrics Grid */
+.metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+    margin-bottom: 40px;
+}
+
+.metric-card {
+    background: white;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.metric-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+.metric-card h3 {
+    margin: 0 0 20px 0;
+    font-size: 1.3em;
+    color: #1f2937;
+}
+
+.stat-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #f3f4f6;
+}
+
+.stat-row:last-child {
+    border-bottom: none;
+}
+
+.stat-label {
+    color: #6b7280;
+    font-size: 0.95em;
+}
+
+.stat-value {
+    font-weight: 600;
+    color: #1f2937;
+    font-size: 1.05em;
+}
+
+.stat-value.highlight {
+    color: #10b981;
+    font-size: 1.2em;
+}
+
+.stat-value.active {
+    color: #10b981;
+}
+
+.stat-value.inactive {
+    color: #6b7280;
+}
+
+/* Revenue Stats Specific */
+.revenue-stats {
+    background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+}
+
+/* Staking Stats Specific */
+.staking-stats {
+    background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+}
+
+/* Reputation Stats */
+.reputation-stats {
+    background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+    text-align: center;
+}
+
+.reputation-score {
+    padding: 20px;
+}
+
+.score-circle {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #FFD700, #FFA500);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 15px;
+    box-shadow: 0 4px 12px rgba(255, 215, 0, 0.4);
+}
+
+.score-number {
+    font-size: 2.5em;
+    font-weight: 700;
+    color: white;
+}
+
+/* Artworks Section */
+.artworks-section {
+    margin-top: 40px;
+}
+
+.artworks-section h2 {
+    font-size: 2em;
+    margin-bottom: 24px;
+    color: #1f2937;
+}
+
+.artworks-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 24px;
+}
+
+.artwork-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.artwork-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+}
+
+.artwork-image {
+    position: relative;
+    width: 100%;
+    height: 250px;
+    overflow: hidden;
+}
+
+.artwork-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.artwork-status {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    padding: 6px 14px;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    border-radius: 20px;
+    font-size: 0.85em;
+    font-weight: 600;
+}
+
+.artwork-info {
+    padding: 20px;
+}
+
+.artwork-info h4 {
+    margin: 0 0 10px 0;
+    font-size: 1.3em;
+    color: #1f2937;
+}
+
+.artwork-description {
+    color: #6b7280;
+    margin: 0 0 15px 0;
+    font-size: 0.95em;
+    line-height: 1.5;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.artwork-metrics {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #f3f4f6;
+}
+
+.artwork-metrics span {
+    font-size: 0.95em;
+    color: #6b7280;
+}
+
+.artwork-price {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.95em;
+}
+
+.artwork-price span:first-child {
+    font-weight: 600;
+    color: #1f2937;
+}
+
+.artwork-price span:last-child {
+    color: #10b981;
+    font-weight: 600;
+}
+
+.no-artworks {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 60px 20px;
+    color: #6b7280;
+    font-size: 1.1em;
+}
+
+/* Frequency Footer */
+.frequency-footer {
+    margin-top: 60px;
+    padding: 30px;
+    background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+    border-radius: 12px;
+}
+
+.frequency-indicator {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.frequency-indicator span {
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 0.95em;
+    color: white;
+}
+
+.freq-528 {
+    background: linear-gradient(135deg, #FFD700, #FFA500);
+}
+
+.freq-963 {
+    background: linear-gradient(135deg, #9370DB, #8B008B);
+}
+
+.freq-999 {
+    background: linear-gradient(135deg, #FF69B4, #FF1493);
+}
+
+.freq-144k {
+    background: linear-gradient(135deg, #00CED1, #1E90FF);
+}
+
+/* No Profile State */
+.artist-dashboard.no-profile {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 400px;
+    font-size: 1.2em;
+    color: #6b7280;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .profile-banner {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .profile-info h1 {
+        font-size: 2em;
+    }
+
+    .metrics-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .artworks-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .frequency-indicator {
+        gap: 15px;
+    }
+}
