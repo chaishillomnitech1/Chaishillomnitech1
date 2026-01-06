@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OmniTech1 Integration Dashboard</title>
+    <style>
+        :root {
+            --primary-color: #6366f1;
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --text-color: #e2e8f0;
+            --border-color: #334155;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, #6366f1, #a855f7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            color: #94a3b8;
+            font-size: 1.1rem;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .stat-label {
+            color: #94a3b8;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        .status-indicator {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+
+        .status-connected {
+            background-color: #22c55e;
+            box-shadow: 0 0 10px #22c55e;
+        }
+
+        .status-disconnected {
+            background-color: #ef4444;
+        }
+
+        .graph-container {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 1px solid var(--border-color);
+            margin-bottom: 2rem;
+        }
+
+        .graph-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .graph-header h2 {
+            font-size: 1.25rem;
+        }
+
+        #graph-canvas {
+            width: 100%;
+            height: 400px;
+            background: #0f172a;
+            border-radius: 8px;
+        }
+
+        .events-list {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .event-item {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .event-item:last-child {
+            border-bottom: none;
+        }
+
+        .event-type {
+            font-weight: 500;
+            color: var(--primary-color);
+        }
+
+        .event-time {
+            color: #64748b;
+            font-size: 0.85rem;
+        }
+
+        .no-events {
+            text-align: center;
+            color: #64748b;
+            padding: 2rem;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 3rem;
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>OmniTech1 Integration</h1>
+            <p class="subtitle">ScrollVerse Genesis Protocol - Real-time Dashboard</p>
+        </header>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-value" id="node-count">0</div>
+                <div class="stat-label">Graph Nodes</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="edge-count">0</div>
+                <div class="stat-label">Graph Edges</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="webhook-count">0</div>
+                <div class="stat-label">Webhooks Received</div>
+            </div>
+            <div class="stat-card">
+                <div>
+                    <span class="status-indicator status-disconnected" id="connection-status"></span>
+                    <span id="connection-text">Disconnected</span>
+                </div>
+                <div class="stat-label">Connection Status</div>
+            </div>
+        </div>
+
+        <div class="graph-container">
+            <div class="graph-header">
+                <h2>Integration Graph</h2>
+                <span id="last-update">Last update: --</span>
+            </div>
+            <div id="graph-canvas">
+                <svg width="100%" height="100%" id="graph-svg"></svg>
+            </div>
+        </div>
+
+        <div class="events-list">
+            <h2>Recent Events</h2>
+            <div id="events-container">
+                <div class="no-events">No events received yet. Waiting for webhooks...</div>
+            </div>
+        </div>
+
+        <footer>
+            <p>OmniTech1™ Sovereign Deployment Engine &copy; ScrollVerse Genesis Protocol</p>
+        </footer>
+    </div>
+
+    <script src="https://cdn.socket.io/4.6.0/socket.io.min.js"></script>
+    <script src="/static/js/main.js"></script>
+</body>
+</html>

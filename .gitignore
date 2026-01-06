@@ -1,3 +1,11 @@
+# Dependencies
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+yarn.lock
+
 # Python
 __pycache__/
 *.py[cod]
@@ -20,6 +28,17 @@ wheels/
 .installed.cfg
 *.egg
 MANIFEST
+venv/
+env/
+ENV/
+.venv
+
+# Build outputs
+dist/
+build/
+*.egg-info/
+.next/
+out/
 
 # Environment variables
 .env
@@ -45,6 +64,37 @@ override.tf
 override.tf.json
 *_override.tf
 *_override.tf.json
+.env.development.local
+.env.test.local
+.env.production.local
+# Hardhat files
+cache/
+artifacts/
+typechain/
+typechain-types/
+
+# Dependencies
+node_modules/
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# Exception: Allow Active-Divine-QFS logs (narrative documentation)
+!Active-Divine-QFS/logs/
+
+# OS
+.DS_Store
+Thumbs.db
 
 # IDE
 .vscode/
@@ -69,9 +119,75 @@ iam-policy.json
 # AWS
 .aws/
 credentials
+# Testing
+coverage/
+.nyc_output/
+.pytest_cache/
+
+# Logs
+logs/
+*.log
 
 # Temporary files
 tmp/
 temp/
 *.tmp
 *.bak
+.cache/
+
+# Hardhat
+cache/
+artifacts/
+typechain/
+typechain-types/
+
+# Vercel
+.vercel
+
+# Testing
+coverage/
+coverage.json
+.coverage_contracts/
+.coverage_artifacts/
+
+# Build
+dist/
+build/
+
+# Misc
+*.tgz
+.npm
+.eslintcache
+.node_repl_history
+*.orig
+*.rej
+
+# God Mode Binder compilation artifacts
+god-mode-binder-*/
+god-mode-binder-*.zip
+god-mode-binder-*.zip.sha256
+portal-activation-log.json
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+ENV/
+env/
+.venv/
+pip-log.txt
+pip-delete-this-directory.txt
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.nox/
+*.egg-info/
+*.egg
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
