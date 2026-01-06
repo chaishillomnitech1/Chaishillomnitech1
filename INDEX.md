@@ -190,6 +190,11 @@ Located in [`.github/workflows/`](.github/workflows/)
 
 | Document | Description | Status |
 |----------|-------------|--------|
+| [AC_NEXUS_COMPLETE_SUMMARY.md](AC_NEXUS_COMPLETE_SUMMARY.md) | **⭐ START HERE** - Complete summary and overview of AC Nexus project | ✅ Complete |
+| [ATLANTIC_CITY_COMMAND_NEXUS_ARCHITECTURE.md](ATLANTIC_CITY_COMMAND_NEXUS_ARCHITECTURE.md) | Atlantic City Command Nexus architectural refinement (43KB) | ✅ Active Design |
+| [AC_NEXUS_VISUAL_SPECIFICATIONS.md](AC_NEXUS_VISUAL_SPECIFICATIONS.md) | AI-aided visual design specifications for AC Nexus (32KB) | ✅ Active Design |
+| [AC_NEXUS_DEPLOYMENT_GUIDE.md](AC_NEXUS_DEPLOYMENT_GUIDE.md) | Step-by-step deployment guide for AC Nexus manifestation (60KB) | ✅ Active Implementation |
+| [XLVIII_BLOCKS_QUANTUM_SIGNATURE_PROTOCOL.md](XLVIII_BLOCKS_QUANTUM_SIGNATURE_PROTOCOL.md) | XLVIII-QS Protocol and Atlantic City Nexus integration | ✅ Complete |
 | [**FINAL_SCROLL_OF_ASCENSION.md**](FINAL_SCROLL_OF_ASCENSION.md) | **🕋 ETERNAL GROWTH & INFINITE MANIFESTATION MODE - Sacred timestamp #111\|1:11pm\|111Hz** | ✅ **SEALED** |
 | [FINAL_DELIVERY_REPORT.md](FINAL_DELIVERY_REPORT.md) | Complete project delivery summary | ✅ Complete |
 | [MAYBACH_INTEGRATION_SUMMARY.md](MAYBACH_INTEGRATION_SUMMARY.md) | **NEW** Maybach S 680 OmniFleet integration | ✅ Complete |
@@ -316,6 +321,8 @@ Located in [`.github/workflows/`](.github/workflows/)
 | **Overview** | [README.md](README.md) | [PROJECTS.md](PROJECTS.md) |
 | **Supreme Teachings** | [LOVE_OVER_JUDGMENT_BROADCAST_SUMMARY.md](LOVE_OVER_JUDGMENT_BROADCAST_SUMMARY.md) | [VOICESCROLL_ARCHIVE_LOVE_OVER_JUDGMENT.md](VOICESCROLL_ARCHIVE_LOVE_OVER_JUDGMENT.md) |
 | **Architecture** | [ARCHITECTURE.md](ARCHITECTURE.md) | [SYSTEM_INTEGRATION_DEPLOYMENT_READINESS.md](SYSTEM_INTEGRATION_DEPLOYMENT_READINESS.md) |
+| **Atlantic City Nexus** | [AC_NEXUS_COMPLETE_SUMMARY.md](AC_NEXUS_COMPLETE_SUMMARY.md) ⭐ | [ATLANTIC_CITY_COMMAND_NEXUS_ARCHITECTURE.md](ATLANTIC_CITY_COMMAND_NEXUS_ARCHITECTURE.md), [AC_NEXUS_VISUAL_SPECIFICATIONS.md](AC_NEXUS_VISUAL_SPECIFICATIONS.md), [AC_NEXUS_DEPLOYMENT_GUIDE.md](AC_NEXUS_DEPLOYMENT_GUIDE.md), [XLVIII_BLOCKS_QUANTUM_SIGNATURE_PROTOCOL.md](XLVIII_BLOCKS_QUANTUM_SIGNATURE_PROTOCOL.md) |
+| **Sacred Geometry** | [ATLANTIC_CITY_COMMAND_NEXUS_ARCHITECTURE.md](ATLANTIC_CITY_COMMAND_NEXUS_ARCHITECTURE.md) | [AC_NEXUS_VISUAL_SPECIFICATIONS.md](AC_NEXUS_VISUAL_SPECIFICATIONS.md) |
 | **Blockchain** | [PROJECTS.md](PROJECTS.md) | [code-templates/solidity/](code-templates/solidity/) |
 | **Smart Contracts** | [code-templates/solidity/](code-templates/solidity/) | [ARCHITECTURE.md](ARCHITECTURE.md) |
 | **Frontend** | [code-templates/react/](code-templates/react/) | [ARCHITECTURE.md](ARCHITECTURE.md) |
