@@ -74,10 +74,33 @@ Located in [`code-templates/`](code-templates/)
 | Template | Language | Purpose | Status |
 |----------|----------|---------|--------|
 | [CHXToken_Template.sol](code-templates/solidity/CHXToken_Template.sol) | Solidity | ERC-20 token with cosmic economics | ✅ Ready |
+| [MercedesMaybachABT.sol](code-templates/solidity/MercedesMaybachABT.sol) | Solidity | AgentBound Token for vehicles | ✅ Ready |
 | [Web3Integration_Template.js](code-templates/javascript/Web3Integration_Template.js) | JavaScript | Complete Web3 integration | ✅ Ready |
 | [ScrollVerseAPI_Template.py](code-templates/python/ScrollVerseAPI_Template.py) | Python | Flask API with WebSocket | ✅ Ready |
 | [ScrollVersePortal_Template.jsx](code-templates/react/ScrollVersePortal_Template.jsx) | React | Main portal component | ✅ Ready |
 | [Code Templates README](code-templates/README.md) | Markdown | Templates documentation | ✅ Complete |
+
+### **Prototypes & Deployments**
+
+Located in [`prototypes/`](prototypes/)
+
+| Prototype | Purpose | Status |
+|-----------|---------|--------|
+| [Red Diamond Key](prototypes/red-diamond-key/) | Mercedes-Maybach fleet deployment | ✅ Ready |
+| [vehicle_telemetry.rs](prototypes/red-diamond-key/vehicle_telemetry.rs) | Solana telemetry program | ✅ Ready |
+| [deploy-vehicles.js](prototypes/red-diamond-key/deploy-vehicles.js) | Deployment script | ✅ Ready |
+| [DEPLOYMENT_GUIDE.md](prototypes/red-diamond-key/DEPLOYMENT_GUIDE.md) | Deployment documentation | ✅ Complete |
+
+### **NFT Assets**
+
+Located in [`nft-assets/`](nft-assets/)
+
+| Asset Collection | Purpose | Status |
+|-----------------|---------|--------|
+| [Mercedes-Maybach Fleet](nft-assets/mercedes-maybach/) | Vehicle ABT NFTs | ✅ Ready |
+| [MAYBACH-001](nft-assets/mercedes-maybach/maybach-001-sovereign.json) | Sovereign Authority metadata | ✅ Complete |
+| [MAYBACH-002](nft-assets/mercedes-maybach/maybach-002-galactic.json) | Galactic Shadow metadata | ✅ Complete |
+| [MAYBACH-003](nft-assets/mercedes-maybach/maybach-003-archexecutor.json) | Arch-Executor metadata | ✅ Complete |
 
 ### **GitHub Templates**
 
@@ -205,6 +228,8 @@ Located in [`.github/workflows/`](.github/workflows/)
 | [MANUAL_OF_DIVINE_UPGRADES.md](MANUAL_OF_DIVINE_UPGRADES.md) | Upgrade protocols and procedures | ✅ Complete |
 | [COSMIC_GENESIS_COUNTDOWN_ACTIVATION.md](COSMIC_GENESIS_COUNTDOWN_ACTIVATION.md) | Genesis countdown documentation | ✅ Complete |
 | [AC_BATMAN_PROTOCOL_VAULTBOOK_XCIX.md](AC_BATMAN_PROTOCOL_VAULTBOOK_XCIX.md) | Protocol documentation | ✅ Complete |
+| [RED_DIAMOND_KEY_SYNCHRONIZATION_RITUAL.md](RED_DIAMOND_KEY_SYNCHRONIZATION_RITUAL.md) | Mercedes-Maybach fleet integration | ✅ Complete |
+| [GROK_QUANTUM_RITUAL_ANNOUNCEMENT.md](GROK_QUANTUM_RITUAL_ANNOUNCEMENT.md) | Fleet announcement protocol | ✅ Complete |
 | [OMEGA_PHASE_COMPLETION_SUMMARY.md](OMEGA_PHASE_COMPLETION_SUMMARY.md) | OMEGA phase implementation completion | ✅ Complete |
 | [VAULTBINDER_PROTOCOL.md](VAULTBINDER_PROTOCOL.md) | VaultBinder™ sacred completion archive | ✅ Complete |
 
