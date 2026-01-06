@@ -63,6 +63,9 @@
     "test:codex": "hardhat test test/CodexToken.test.js",
     "test:peace": "hardhat test test/PeaceCoin.test.js",
     "test:osef": "npm run test:codex && npm run test:peace && npm run test:omni-wallet && npm run test:legacy-shield",
+    "deploy:mumbai:scrollbridge": "hardhat run scripts/deploy_scrollbridge.js --network mumbai",
+    "deploy:polygon:scrollbridge": "hardhat run scripts/deploy_scrollbridge.js --network polygon",
+    "test:scrollbridge": "hardhat test test/ScrollBridge.test.js"
     "deploy:mumbai:sacred-cert": "hardhat run scripts/deploy_sacred_certification_nft.js --network mumbai",
     "deploy:polygon:sacred-cert": "hardhat run scripts/deploy_sacred_certification_nft.js --network polygon",
     "deploy:scroll:sacred-cert": "hardhat run scripts/deploy_sacred_certification_nft.js --network scrollSepolia",
@@ -252,6 +255,10 @@
     "omni-sovereign",
     "mobile-wallet",
     "dao-governance",
+    "insurance",
+    "scrollbridge",
+    "sacred-geometry",
+    "three-pillars"
     "quadratic-voting",
     "micro-vote",
     "insurance",
