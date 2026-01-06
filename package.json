@@ -1,4 +1,7 @@
 {
+  "name": "scrollverse-genesis-protocol",
+  "version": "2.0.0",
+  "description": "ScrollVerse Genesis Protocol - Phase 2 Enhancement System",
   "name": "scrollverse-sovereignty",
   "version": "1.0.0",
   "description": "Omnitech1 Sovereign Deployment Engine - ScrollVerse Sovereignty Infrastructure",
@@ -23,6 +26,10 @@
     "format:check": "prettier --check \"**/*.{js,ts,json,md,sol}\"",
     "deploy:mumbai:nft": "hardhat run scripts/deploy_scrollversenft.js --network mumbai",
     "deploy:mumbai:token": "hardhat run scripts/deploy_chx_token.js --network mumbai",
+    "deploy:mumbai:all": "npm run deploy:mumbai:nft && npm run deploy:mumbai:token",
+    "deploy:phase2:mumbai": "hardhat run scripts/deploy_phase2_contracts.js --network mumbai",
+    "deploy:phase2:polygon": "hardhat run scripts/deploy_phase2_contracts.js --network polygon",
+    "deploy:phase2:ethereum": "hardhat run scripts/deploy_phase2_contracts.js --network ethereum"
     "deploy:mumbai:iap": "hardhat run scripts/deploy_infinite_ascension.js --network mumbai",
     "deploy:mumbai:all": "npm run deploy:mumbai:nft && npm run deploy:mumbai:token && npm run deploy:mumbai:iap",
     "deploy:polygon:iap": "hardhat run scripts/deploy_infinite_ascension.js --network polygon",
