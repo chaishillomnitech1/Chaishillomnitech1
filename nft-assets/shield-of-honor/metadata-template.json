@@ -1,0 +1,127 @@
+{
+  "name": "Sabir Allah Honor #{TOKEN_ID}",
+  "description": "Shield of Honor Collection - Honoring law enforcement, first responders, and community guardians. Part of Chapter Ten of the Infinite Narrative. Sabir Allah (Patient with God) embodies the values of service, dedication, and unwavering commitment to community protection.",
+  "image": "ipfs://{IPFS_HASH}/shield-of-honor-{TOKEN_ID}.png",
+  "external_url": "https://expansion-three.vercel.app/chapter-ten/shield-of-honor/{TOKEN_ID}",
+  "animation_url": "ipfs://{IPFS_HASH}/shield-of-honor-{TOKEN_ID}.mp4",
+  "attributes": [
+    {
+      "trait_type": "Tier",
+      "value": "{TIER}"
+    },
+    {
+      "trait_type": "Badge of Honor",
+      "value": "{BADGE}"
+    },
+    {
+      "trait_type": "Frequency",
+      "value": "{FREQUENCY}",
+      "display_type": "number"
+    },
+    {
+      "trait_type": "Location",
+      "value": "{LOCATION}"
+    },
+    {
+      "trait_type": "Heritage",
+      "value": "{HERITAGE}"
+    },
+    {
+      "trait_type": "Rarity",
+      "value": "{RARITY}"
+    },
+    {
+      "trait_type": "Edition",
+      "value": "{TOKEN_ID} of 100",
+      "display_type": "string"
+    },
+    {
+      "trait_type": "Chapter",
+      "value": "Chapter Ten"
+    },
+    {
+      "trait_type": "Initiative",
+      "value": "Shield of Honor"
+    },
+    {
+      "trait_type": "Charity Allocation",
+      "value": "{CHARITY_PERCENTAGE}",
+      "display_type": "boost_percentage"
+    }
+  ],
+  "properties": {
+    "category": "Cultural NFT",
+    "creators": [
+      {
+        "address": "0x{CREATOR_ADDRESS}",
+        "share": 100
+      }
+    ],
+    "files": [
+      {
+        "uri": "ipfs://{IPFS_HASH}/shield-of-honor-{TOKEN_ID}.png",
+        "type": "image/png"
+      },
+      {
+        "uri": "ipfs://{IPFS_HASH}/shield-of-honor-{TOKEN_ID}.mp4",
+        "type": "video/mp4"
+      }
+    ],
+    "governance": {
+      "voting_power": "{VOTING_POWER}",
+      "proposal_rights": true,
+      "community_council": true
+    },
+    "scroll_pulse": {
+      "primary_frequency": "{FREQUENCY}",
+      "resonance_field": "Community Honor",
+      "divine_law": "Service & Protection"
+    },
+    "atlantic_city": {
+      "orange_loop_integrated": true,
+      "location_reference": "{LOCATION}",
+      "cultural_heritage": "{HERITAGE}",
+      "community_roots": "Cumberland County"
+    },
+    "narrative": {
+      "chapter": "Chapter Ten",
+      "initiative": "Shield of Honor",
+      "deployment_phase": "Cultural Deployment",
+      "infinite_narrative": true
+    },
+    "charity": {
+      "mint_allocation": "{CHARITY_PERCENTAGE}",
+      "beneficiaries": [
+        "Police Benevolent Association",
+        "Firefighters Relief Fund",
+        "EMS & First Responders",
+        "Community Food Banks",
+        "Youth Programs"
+      ],
+      "transparency": "On-chain verification"
+    }
+  },
+  "royalty_info": {
+    "recipient": "0x{ROYALTY_RECIPIENT}",
+    "percentage": "{ROYALTY_PERCENTAGE}",
+    "distribution": {
+      "creator": "{CREATOR_SHARE}",
+      "community_fund": "{COMMUNITY_SHARE}",
+      "dao": "{DAO_SHARE}"
+    }
+  },
+  "cultural_significance": {
+    "sabir_allah": "Patient with God - embodying patience, dedication, and divine service",
+    "honor_code": "To protect and serve with courage, compassion, and unwavering commitment",
+    "community_impact": "Automatic charitable donations supporting first responder families and community programs",
+    "atlantic_city_legacy": "Celebrating the cultural heritage of Atlantic City and Cumberland County",
+    "scrollverse_integration": "Part of the global ScrollVerse narrative promoting unity, love, and community"
+  },
+  "frequencies": {
+    "primary": "{FREQUENCY}",
+    "secondary": "144000",
+    "tertiary": "528",
+    "harmonic_field": "Divine Service Frequency",
+    "resonance_type": "Community Unity"
+  }
+}

@@ -1,0 +1,262 @@
+name: AI PR Bot
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+    branches:
+      - main
+      - develop
+  workflow_dispatch:
+    inputs:
+      pr_number:
+        description: 'PR number to analyze'
+        required: true
+        type: number
+
+permissions:
+  contents: read
+  pull-requests: write
+  issues: write
+
+jobs:
+  ai-review:
+    name: AI-Powered PR Review
+    runs-on: ubuntu-latest
+    # Conservative rate limiting - only run once per PR update
+    concurrency:
+      group: ai-pr-review-${{ github.event.pull_request.number || inputs.pr_number }}
+      cancel-in-progress: false
+    
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      
+      - name: Setup Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      
+      - name: Get PR Information
+        id: pr-info
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const prNumber = context.payload.pull_request?.number || ${{ inputs.pr_number || 0 }};
+            
+            if (!prNumber) {
+              core.setFailed('No PR number found');
+              return;
+            }
+            
+            const pr = await github.rest.pulls.get({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: prNumber
+            });
+            
+            core.setOutput('pr_number', prNumber);
+            core.setOutput('pr_title', pr.data.title);
+            core.setOutput('pr_body', pr.data.body || '');
+            core.setOutput('base_branch', pr.data.base.ref);
+            core.setOutput('head_branch', pr.data.head.ref);
+            
+            return pr.data;
+      
+      - name: Get PR Diff
+        id: get-diff
+        run: |
+          PR_NUMBER="${{ steps.pr-info.outputs.pr_number }}"
+          
+          # Get the diff for the PR (limited to 5000 lines to control AI costs)
+          git fetch origin pull/${PR_NUMBER}/head:pr-${PR_NUMBER}
+          git diff origin/${{ steps.pr-info.outputs.base_branch }}...pr-${PR_NUMBER} > pr-diff.txt
+          
+          # Check diff size
+          DIFF_LINES=$(wc -l < pr-diff.txt)
+          echo "diff_lines=${DIFF_LINES}" >> $GITHUB_OUTPUT
+          
+          if [ ${DIFF_LINES} -gt 5000 ]; then
+            echo "⚠️ PR diff is too large (${DIFF_LINES} lines). Truncating to 5000 lines for AI review."
+            head -n 5000 pr-diff.txt > pr-diff-truncated.txt
+            mv pr-diff-truncated.txt pr-diff.txt
+          fi
+      
+      - name: AI Code Review
+        id: ai-review
+        if: env.OPENAI_API_KEY != ''
+        run: |
+          cat << 'EOF' > ai_review.py
+          import os
+          import json
+          import sys
+          
+          # Check if OpenAI API key is available
+          api_key = os.environ.get('OPENAI_API_KEY', '')
+          
+          if not api_key:
+              print("⚠️ OPENAI_API_KEY not configured. Skipping AI review.")
+              print("To enable AI reviews, add OPENAI_API_KEY to GitHub Secrets.")
+              sys.exit(0)
+          
+          try:
+              # Conservative API usage - only import if we have the key
+              import requests
+              
+              # Read PR information
+              pr_title = os.environ.get('PR_TITLE', '')
+              pr_body = os.environ.get('PR_BODY', '')
+              diff_lines = int(os.environ.get('DIFF_LINES', 0))
+              
+              # Read diff file
+              with open('pr-diff.txt', 'r') as f:
+                  diff_content = f.read()
+              
+              # Prepare AI prompt (conservative - focused review)
+              prompt = f"""Review this pull request for the ScrollVerse project.
+
+          PR Title: {pr_title}
+          PR Description: {pr_body}
+          Diff Size: {diff_lines} lines
+
+          Please provide:
+          1. A brief summary of changes
+          2. Potential issues or concerns (security, bugs, best practices)
+          3. Suggestions for improvement
+          4. Overall assessment (APPROVE, REQUEST_CHANGES, or COMMENT)
+
+          Keep the review concise and actionable. Focus on critical issues.
+
+          Diff:
+          {diff_content[:8000]}
+          """
+              
+              # Call OpenAI API (using GPT-3.5-turbo for cost efficiency)
+              headers = {
+                  'Authorization': f'Bearer {api_key}',
+                  'Content-Type': 'application/json'
+              }
+              
+              data = {
+                  'model': 'gpt-3.5-turbo',
+                  'messages': [
+                      {'role': 'system', 'content': 'You are an expert code reviewer for blockchain and web3 projects.'},
+                      {'role': 'user', 'content': prompt}
+                  ],
+                  'max_tokens': 800,  # Conservative token limit
+                  'temperature': 0.3
+              }
+              
+              response = requests.post(
+                  'https://api.openai.com/v1/chat/completions',
+                  headers=headers,
+                  json=data,
+                  timeout=30
+              )
+              
+              if response.status_code == 200:
+                  result = response.json()
+                  review_content = result['choices'][0]['message']['content']
+                  
+                  # Save review to file
+                  with open('ai-review.txt', 'w') as f:
+                      f.write(review_content)
+                  
+                  print("✅ AI review completed")
+                  print(review_content)
+              else:
+                  print(f"⚠️ AI API request failed: {response.status_code}")
+                  print(response.text)
+                  sys.exit(0)
+          
+          except ImportError:
+              print("⚠️ 'requests' library not available. Installing...")
+              os.system('pip install requests')
+              print("Please re-run the workflow.")
+              sys.exit(0)
+          except Exception as e:
+              print(f"⚠️ AI review failed: {str(e)}")
+              sys.exit(0)
+          
+          EOF
+          
+          pip install requests
+          python ai_review.py
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          PR_TITLE: ${{ steps.pr-info.outputs.pr_title }}
+          PR_BODY: ${{ steps.pr-info.outputs.pr_body }}
+          DIFF_LINES: ${{ steps.get-diff.outputs.diff_lines }}
+      
+      - name: Post AI Review as Comment
+        if: steps.ai-review.outcome == 'success' && env.OPENAI_API_KEY != ''
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            
+            let reviewContent = '⚠️ AI review not available';
+            
+            if (fs.existsSync('ai-review.txt')) {
+              reviewContent = fs.readFileSync('ai-review.txt', 'utf8');
+            }
+            
+            const comment = `## 🤖 AI-Powered Code Review
+            
+            ${reviewContent}
+            
+            ---
+            
+            *This review was generated by AI. Please use it as guidance alongside human review.*
+            
+            **ALLAHU AKBAR! 🕋🔥💎🌌**`;
+            
+            // Check if we already posted a review
+            const comments = await github.rest.issues.listComments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: ${{ steps.pr-info.outputs.pr_number }}
+            });
+            
+            const existingComment = comments.data.find(c => 
+              c.body.includes('🤖 AI-Powered Code Review') && 
+              c.user.login === 'github-actions[bot]'
+            );
+            
+            if (existingComment) {
+              // Update existing comment
+              await github.rest.issues.updateComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                comment_id: existingComment.id,
+                body: comment
+              });
+            } else {
+              // Create new comment
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: ${{ steps.pr-info.outputs.pr_number }},
+                body: comment
+              });
+            }
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+      
+      - name: Review Summary
+        run: |
+          echo "## 🤖 AI PR Review Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**PR Number:** #${{ steps.pr-info.outputs.pr_number }}" >> $GITHUB_STEP_SUMMARY
+          echo "**PR Title:** ${{ steps.pr-info.outputs.pr_title }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Diff Size:** ${{ steps.get-diff.outputs.diff_lines }} lines" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          
+          if [ -z "${{ secrets.OPENAI_API_KEY }}" ]; then
+            echo "⚠️ **AI Review:** Not configured (OPENAI_API_KEY missing)" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "To enable AI reviews, add OPENAI_API_KEY to GitHub Secrets." >> $GITHUB_STEP_SUMMARY
+          else
+            echo "✅ **AI Review:** Completed and posted as comment" >> $GITHUB_STEP_SUMMARY
+          fi

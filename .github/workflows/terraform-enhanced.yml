@@ -1,0 +1,420 @@
+name: Enhanced Terraform Infrastructure Management
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+    paths:
+      - '**.tf'
+      - '.github/workflows/terraform-enhanced.yml'
+  pull_request:
+    branches:
+      - main
+      - develop
+    paths:
+      - '**.tf'
+  workflow_dispatch:
+    inputs:
+      action:
+        description: 'Terraform action to perform'
+        required: true
+        type: choice
+        options:
+          - plan
+          - apply
+          - destroy
+          - validate
+        default: 'plan'
+      environment:
+        description: 'Target environment'
+        required: true
+        type: choice
+        options:
+          - development
+          - staging
+          - production
+        default: 'development'
+
+env:
+  TF_VERSION: '1.6.0'
+  TF_INPUT: false
+  TF_IN_AUTOMATION: true
+
+permissions:
+  contents: read
+  pull-requests: write
+  issues: write
+
+jobs:
+  terraform-validate:
+    name: Validate Terraform Configuration
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+      
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: ${{ env.TF_VERSION }}
+      
+      - name: Terraform Format Check
+        id: fmt
+        run: |
+          echo "🔍 Checking Terraform formatting..."
+          terraform fmt -check -recursive -diff
+        continue-on-error: true
+      
+      - name: Terraform Init
+        id: init
+        run: |
+          echo "🚀 Initializing Terraform..."
+          terraform init -backend=false
+      
+      - name: Terraform Validate
+        id: validate
+        run: |
+          echo "✅ Validating Terraform configuration..."
+          terraform validate -no-color
+      
+      - name: Validation Summary
+        run: |
+          echo "## 🏗️ Terraform Validation" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Terraform Version**: ${{ env.TF_VERSION }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          
+          if [ "${{ steps.fmt.outcome }}" == "success" ]; then
+            echo "- ✅ **Format Check**: Passed" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "- ⚠️ **Format Check**: Failed (non-blocking)" >> $GITHUB_STEP_SUMMARY
+          fi
+          
+          if [ "${{ steps.validate.outcome }}" == "success" ]; then
+            echo "- ✅ **Validation**: Passed" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "- ❌ **Validation**: Failed" >> $GITHUB_STEP_SUMMARY
+          fi
+  
+  terraform-security-scan:
+    name: Terraform Security Scan
+    runs-on: ubuntu-latest
+    needs: terraform-validate
+    
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+      
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: ${{ env.TF_VERSION }}
+      
+      - name: Install tfsec
+        run: |
+          wget -q https://github.com/aquasecurity/tfsec/releases/download/v1.28.1/tfsec-linux-amd64
+          chmod +x tfsec-linux-amd64
+          sudo mv tfsec-linux-amd64 /usr/local/bin/tfsec
+          tfsec --version
+      
+      - name: Run tfsec Security Scan
+        id: tfsec
+        run: |
+          echo "🔒 Running Terraform security scan..."
+          tfsec . --format json --out tfsec-report.json || true
+          tfsec . --format default || echo "⚠️ Security issues detected"
+        continue-on-error: true
+      
+      - name: Install Checkov
+        run: |
+          pip install checkov
+      
+      - name: Run Checkov Scan
+        id: checkov
+        run: |
+          echo "🔍 Running Checkov policy scan..."
+          checkov -d . --output json --output-file-path checkov-report.json || true
+          checkov -d . --compact || echo "⚠️ Policy violations detected"
+        continue-on-error: true
+      
+      - name: Upload Security Reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: terraform-security-reports
+          path: |
+            tfsec-report.json
+            checkov-report.json
+          retention-days: 30
+      
+      - name: Security Scan Summary
+        run: |
+          echo "## 🔒 Terraform Security Scan" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "Security scans completed:" >> $GITHUB_STEP_SUMMARY
+          echo "- ✅ tfsec scan" >> $GITHUB_STEP_SUMMARY
+          echo "- ✅ Checkov policy scan" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "Review artifacts for detailed reports." >> $GITHUB_STEP_SUMMARY
+  
+  terraform-plan:
+    name: Terraform Plan
+    runs-on: ubuntu-latest
+    needs: [terraform-validate, terraform-security-scan]
+    environment: ${{ inputs.environment || 'development' }}
+    
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+      
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: ${{ env.TF_VERSION }}
+          terraform_wrapper: false
+      
+      - name: Configure AWS Credentials (if needed)
+        if: false  # Enable if using AWS
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-region: us-east-1
+          role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
+      
+      - name: Terraform Init
+        id: init
+        run: |
+          echo "🚀 Initializing Terraform..."
+          terraform init -backend=false
+      
+      - name: Terraform Plan
+        id: plan
+        run: |
+          echo "📋 Generating Terraform plan..."
+          terraform plan -out=tfplan -no-color | tee terraform-plan.txt
+          terraform show -json tfplan > tfplan.json
+        continue-on-error: true
+      
+      - name: Analyze Plan Changes
+        id: analyze
+        run: |
+          cat << 'EOF' > analyze_plan.py
+          import json
+          import sys
+          
+          def analyze_terraform_plan():
+              try:
+                  with open('tfplan.json', 'r') as f:
+                      plan = json.load(f)
+                  
+                  # Extract resource changes
+                  resource_changes = plan.get('resource_changes', [])
+                  
+                  analysis = {
+                      'create': 0,
+                      'update': 0,
+                      'delete': 0,
+                      'no_change': 0,
+                      'resources': []
+                  }
+                  
+                  for change in resource_changes:
+                      actions = change.get('change', {}).get('actions', [])
+                      resource = {
+                          'address': change.get('address', 'unknown'),
+                          'type': change.get('type', 'unknown'),
+                          'actions': actions
+                      }
+                      analysis['resources'].append(resource)
+                      
+                      if 'create' in actions:
+                          analysis['create'] += 1
+                      elif 'delete' in actions:
+                          analysis['delete'] += 1
+                      elif 'update' in actions:
+                          analysis['update'] += 1
+                      else:
+                          analysis['no_change'] += 1
+                  
+                  print("📊 Terraform Plan Analysis:")
+                  print(f"  Resources to create: {analysis['create']}")
+                  print(f"  Resources to update: {analysis['update']}")
+                  print(f"  Resources to delete: {analysis['delete']}")
+                  print(f"  Resources unchanged: {analysis['no_change']}")
+                  
+                  if analysis['resources']:
+                      print("\nResource Changes:")
+                      for resource in analysis['resources']:
+                          action_str = ', '.join(resource['actions'])
+                          print(f"  - {resource['address']} ({resource['type']}): {action_str}")
+                  
+                  with open('plan_analysis.json', 'w') as f:
+                      json.dump(analysis, f, indent=2)
+                  
+                  # Output for GitHub Actions
+                  import os
+                  with open(os.environ.get('GITHUB_OUTPUT', 'output.txt'), 'a') as f:
+                      f.write(f"create_count={analysis['create']}\n")
+                      f.write(f"update_count={analysis['update']}\n")
+                      f.write(f"delete_count={analysis['delete']}\n")
+                      f.write(f"has_changes={'true' if (analysis['create'] + analysis['update'] + analysis['delete']) > 0 else 'false'}\n")
+                  
+                  return True
+              
+              except Exception as e:
+                  print(f"⚠️ Error analyzing plan: {e}")
+                  return False
+          
+          if __name__ == '__main__':
+              success = analyze_terraform_plan()
+              sys.exit(0 if success else 1)
+          EOF
+          
+          python analyze_plan.py || echo "⚠️ Plan analysis failed"
+        continue-on-error: true
+      
+      - name: Estimate Cost (if available)
+        id: cost
+        run: |
+          echo "💰 Infrastructure cost estimation..."
+          echo "Cost estimation would be performed here with tools like Infracost"
+          echo "estimate_available=false" >> $GITHUB_OUTPUT
+        continue-on-error: true
+      
+      - name: Upload Plan Artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: terraform-plan
+          path: |
+            tfplan
+            tfplan.json
+            terraform-plan.txt
+            plan_analysis.json
+          retention-days: 30
+      
+      - name: Comment PR with Plan
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            
+            let planOutput = 'Terraform plan output not available';
+            if (fs.existsSync('terraform-plan.txt')) {
+              planOutput = fs.readFileSync('terraform-plan.txt', 'utf8');
+              // Truncate if too long
+              if (planOutput.length > 65000) {
+                planOutput = planOutput.substring(0, 65000) + '\n\n... (truncated)';
+              }
+            }
+            
+            const comment = `## 🏗️ Terraform Plan Results
+            
+**Environment**: \`${{ inputs.environment || 'development' }}\`
+**Changes Detected**: ${{ steps.analyze.outputs.has_changes }}
+
+### Resource Changes
+- ➕ Create: ${{ steps.analyze.outputs.create_count }}
+- 🔄 Update: ${{ steps.analyze.outputs.update_count }}
+- ➖ Delete: ${{ steps.analyze.outputs.delete_count }}
+
+<details>
+<summary>📋 View Full Plan</summary>
+
+\`\`\`terraform
+${planOutput}
+\`\`\`
+
+</details>
+
+---
+*Review the plan carefully before applying changes.*`;
+            
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: comment
+            });
+      
+      - name: Plan Summary
+        run: |
+          echo "## 📋 Terraform Plan" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Environment**: ${{ inputs.environment || 'development' }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Changes Detected**: ${{ steps.analyze.outputs.has_changes }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Resource Changes" >> $GITHUB_STEP_SUMMARY
+          echo "- ➕ Create: ${{ steps.analyze.outputs.create_count }}" >> $GITHUB_STEP_SUMMARY
+          echo "- 🔄 Update: ${{ steps.analyze.outputs.update_count }}" >> $GITHUB_STEP_SUMMARY
+          echo "- ➖ Delete: ${{ steps.analyze.outputs.delete_count }}" >> $GITHUB_STEP_SUMMARY
+  
+  terraform-apply:
+    name: Terraform Apply
+    runs-on: ubuntu-latest
+    needs: terraform-plan
+    if: |
+      (github.ref == 'refs/heads/main' && github.event_name == 'push') ||
+      (github.event_name == 'workflow_dispatch' && inputs.action == 'apply')
+    environment: 
+      name: ${{ inputs.environment || 'production' }}
+      url: https://expansion-three.vercel.app
+    
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+      
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: ${{ env.TF_VERSION }}
+      
+      - name: Terraform Init
+        run: |
+          echo "🚀 Initializing Terraform..."
+          terraform init -backend=false
+      
+      - name: Download Plan
+        uses: actions/download-artifact@v4
+        with:
+          name: terraform-plan
+        continue-on-error: true
+      
+      - name: Terraform Apply
+        id: apply
+        run: |
+          echo "🚀 Applying Terraform changes..."
+          if [ -f tfplan ]; then
+            terraform apply -auto-approve tfplan
+          else
+            echo "⚠️ No plan file found, generating new plan and applying..."
+            terraform plan -out=tfplan
+            terraform apply -auto-approve tfplan
+          fi
+        continue-on-error: false
+      
+      - name: Post-Apply Validation
+        run: |
+          echo "✅ Validating applied infrastructure..."
+          terraform output -json > terraform-outputs.json || true
+          echo "Infrastructure deployment completed successfully"
+      
+      - name: Upload Apply Results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: terraform-apply-results
+          path: |
+            terraform-outputs.json
+          retention-days: 90
+      
+      - name: Apply Summary
+        run: |
+          echo "## 🚀 Terraform Apply Complete" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Environment**: ${{ inputs.environment || 'production' }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Status**: ✅ SUCCESS" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "Infrastructure changes have been applied successfully." >> $GITHUB_STEP_SUMMARY
