@@ -25,13 +25,25 @@ This is your comprehensive guide to navigating the Chais Hill OmniTech ecosystem
 | Document | Description | Status |
 |----------|-------------|--------|
 | [README.md](README.md) | Main repository overview and introduction | ✅ Complete |
+| [ONBOARDING.md](ONBOARDING.md) | **NEW** - Comprehensive onboarding guide for new contributors | ✅ Complete |
 | [GETTING_STARTED.md](GETTING_STARTED.md) | Quick start guide for all user types | ✅ Complete |
+| [QUICKSTART.md](QUICKSTART.md) | 5-minute quick start guide | ✅ Complete |
 | [PROJECTS.md](PROJECTS.md) | Portfolio of all capabilities and achievements (10 projects) | ✅ Complete |
 | [ARCHITECTURE.md](ARCHITECTURE.md) | Complete technical architecture documentation | ✅ Complete |
 | [CONTRIBUTING.md](CONTRIBUTING.md) | How to contribute to the ecosystem | ✅ Complete |
 | [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) | Community standards and values | ✅ Complete |
 | [LICENSE](LICENSE) | Legal information and licensing terms | ✅ Complete |
 | [CHANGELOG.md](CHANGELOG.md) | Version history and updates | ✅ Complete |
+
+### **Governance & Security**
+
+| Document | Description | Status |
+|----------|-------------|--------|
+| [BRANCH_PROTECTION.md](BRANCH_PROTECTION.md) | **NEW** - Branch protection and security recommendations | ✅ Complete |
+| [DAO_AUTOMATION.md](DAO_AUTOMATION.md) | **NEW** - DAO automation hooks and integration guide | ✅ Complete |
+| [REPOSITORY_SETTINGS.md](REPOSITORY_SETTINGS.md) | Repository configuration and settings guide | ✅ Complete |
+| [SECURITY.md](SECURITY.md) | Security policies and vulnerability reporting | ✅ Complete |
+| [CODEOWNERS](.github/CODEOWNERS) | Code ownership definitions (@chaishillomnitech1) | ✅ Complete |
 
 ### **🚀 Active Development (Q4 2025)**
 
@@ -108,9 +120,12 @@ Located in [`.github/`](.github/)
 
 | Template | Purpose | Location |
 |----------|---------|----------|
+| Issue Template Config | **NEW** - Organize issue templates with helpful links | [.github/ISSUE_TEMPLATE/config.yml](.github/ISSUE_TEMPLATE/config.yml) |
 | Bug Report | Report bugs and issues | [.github/ISSUE_TEMPLATE/bug_report.md](.github/ISSUE_TEMPLATE/bug_report.md) |
 | Feature Request | Suggest new features | [.github/ISSUE_TEMPLATE/feature_request.md](.github/ISSUE_TEMPLATE/feature_request.md) |
+| Security Vulnerability | Report security issues | [.github/ISSUE_TEMPLATE/security_vulnerability.md](.github/ISSUE_TEMPLATE/security_vulnerability.md) |
 | Pull Request | Submit code changes | [.github/PULL_REQUEST_TEMPLATE.md](.github/PULL_REQUEST_TEMPLATE.md) |
+| Code Owners | Define code ownership | [.github/CODEOWNERS](.github/CODEOWNERS) |
 
 ---
 

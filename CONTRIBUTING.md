@@ -329,6 +329,8 @@ Your contributions help make the ScrollVerse Sovereignty Infrastructure stronger
 
 Thank you for your interest in contributing to the Chais Hill OmniTech ecosystem! This repository serves as the central hub for the ScrollVerse, OmniChain, and all related systems. We welcome contributions that align with our vision of sovereignty, innovation, and divine inspiration.
 
+> **👋 New to the project?** Start with our comprehensive [Onboarding Guide](ONBOARDING.md) to learn about the ecosystem, set up your development environment, and understand how to make your first contribution!
+
 ---
 
 ## 📋 **CODE OF CONDUCT**
