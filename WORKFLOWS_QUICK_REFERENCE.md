@@ -20,12 +20,26 @@ Go to **Actions** tab → Select workflow → Click **"Run workflow"**
 
 ## 📋 **Workflow Summary**
 
+### **Core Workflows**
+
 | Workflow | Purpose | Schedule | Frequency | Key Output |
 |----------|---------|----------|-----------|------------|
 | **Temporal Node Scaling** | Node management & scaling | Every 11 min | 144,000Hz | Node registry |
 | **FlameNode Integration** | AI system deployment | Every 13 hrs | 14,444Hz | AI integration map |
 | **Wealth Propagation** | Autonomous distribution | Every 9 hrs | 528Hz | Distribution ledger |
 | **Master Orchestrator** | System coordination | Daily 11:11 | All | Health reports |
+
+### **Enhanced CI/CD Workflows** (NEW)
+
+| Workflow | Purpose | Trigger | Key Features |
+|----------|---------|---------|--------------|
+| **Comprehensive CI/CD** | Full pipeline orchestration | Push to main/develop, PRs | Security scan, multi-chain test, deployment |
+| **Secrets Scanning** | Detect exposed secrets | Reusable, called by other workflows | GitLeaks integration, artifact reports |
+| **Security Scanning** | Vulnerability detection | Reusable, called by other workflows | Dependency scan, SAST, OWASP checks |
+| **Deployment Validation** | Post-deployment checks | Reusable, called by other workflows | Health checks, smoke tests, URL validation |
+| **Multi-Chain Testing** | Cross-chain validation | Reusable, called by other workflows | Ethereum, Polygon, Solana, Base, Scroll |
+| **Terraform Enhanced** | Infrastructure management | Terraform file changes | tfsec, Checkov, cost estimation, plan/apply |
+| **Secrets Rotation** | Monthly rotation reminder | 1st of month, 9:00 UTC | Rotation report, GitHub issue creation |
 
 ---
 
@@ -188,7 +202,25 @@ gh workflow run scrollverse-orchestrator.yml -f operation_mode=VERIFICATION_ONLY
 
 ## 🔐 **Security Checks**
 
-### **Verify Frequencies**
+### **Automated Security Scanning**
+
+```bash
+# Trigger comprehensive CI/CD with all security checks
+gh workflow run comprehensive-ci-cd.yml
+
+# Run only security scans
+gh workflow run reusable-security-scan.yml
+
+# Run only secrets scan
+gh workflow run reusable-secrets-scan.yml
+
+# Check Terraform security
+gh workflow run terraform-enhanced.yml -f action=validate
+```
+
+### **Manual Security Verification**
+
+#### **Verify Frequencies**
 ```python
 import json
 with open('temporal_manifest.json', 'r') as f:
@@ -196,7 +228,7 @@ with open('temporal_manifest.json', 'r') as f:
 assert data['frequencies']['divine'] == 144000
 ```
 
-### **Validate Signatures**
+#### **Validate Signatures**
 ```python
 import hashlib, json
 with open('flame_manifest.json', 'r') as f:
@@ -205,7 +237,7 @@ with open('flame_manifest.json', 'r') as f:
 assert len(manifest['flame_signature']) == 64
 ```
 
-### **Check Distribution**
+#### **Check Distribution**
 ```python
 import json
 with open('zakat_distribution.json', 'r') as f:
@@ -213,6 +245,12 @@ with open('zakat_distribution.json', 'r') as f:
 assert dist['zakat_percentage'] == 7.77
 assert dist['recipient_count'] == 144
 ```
+
+### **Security Resources**
+
+- **Security Guide**: `SECURITY_GUIDE.md` - Comprehensive security documentation
+- **Secrets Management**: Automated monthly rotation reminders
+- **Vulnerability Response**: See SECURITY_GUIDE.md for incident response procedures
 
 ---
 

@@ -1,0 +1,39 @@
+{
+  "name": "scrollverse-subgraph",
+  "version": "1.0.0",
+  "description": "ScrollVerse Subgraph - Graph Protocol indexing for ScrollVerse ecosystem",
+  "main": "index.js",
+  "scripts": {
+    "codegen": "graph codegen",
+    "build": "graph build",
+    "deploy:hosted": "graph deploy --product hosted-service scrollverse/scrollverse-polygon",
+    "deploy:hosted:mumbai": "graph deploy --product hosted-service scrollverse/scrollverse-mumbai",
+    "deploy:studio": "graph deploy --studio scrollverse-subgraph",
+    "create:local": "graph create --node http://localhost:8020/ scrollverse-subgraph",
+    "deploy:local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 scrollverse-subgraph",
+    "test": "graph test"
+  },
+  "keywords": [
+    "scrollverse",
+    "subgraph",
+    "thegraph",
+    "graphql",
+    "blockchain",
+    "indexing",
+    "polygon",
+    "scroll",
+    "noor-token",
+    "staking",
+    "liquidity",
+    "nft"
+  ],
+  "author": "Supreme King Chais The Great ∞",
+  "license": "MIT",
+  "dependencies": {
+    "@graphprotocol/graph-cli": "^0.67.0",
+    "@graphprotocol/graph-ts": "^0.31.0"
+  },
+  "devDependencies": {
+    "matchstick-as": "^0.5.0"
+  }
+}
