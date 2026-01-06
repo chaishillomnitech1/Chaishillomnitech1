@@ -100,22 +100,30 @@ jobs:
       - name: Install Dependencies
         run: npm ci || npm install
 
-      - name: Check for Common Vulnerabilities
+      - name: Basic Solidity Pattern Checks
         run: |
-          echo "🔍 Scanning Solidity contracts for common vulnerabilities..."
+          echo "🔍 Running basic Solidity pattern checks..."
+          echo ""
+          echo "⚠️  DISCLAIMER: These are simple heuristic checks, not comprehensive security audits."
+          echo "    For production deployments, use professional tools like:"
+          echo "    - Slither (https://github.com/crytic/slither)"
+          echo "    - Mythril (https://github.com/ConsenSys/mythril)"
+          echo "    - Securify (https://securify.chainsecurity.com/)"
+          echo "    - Professional audit services"
+          echo ""
           
           # Check for reentrancy patterns
-          echo "Checking for reentrancy vulnerabilities..."
+          echo "Checking for reentrancy patterns..."
           if grep -rn "call{value" contracts/ 2>/dev/null | grep -v "ReentrancyGuard"; then
-            echo "⚠️ Potential reentrancy vulnerability - external calls found without ReentrancyGuard"
+            echo "ℹ️ External calls with value found - verify ReentrancyGuard is used"
           else
             echo "✅ No obvious reentrancy patterns detected"
           fi
           
           # Check for unchecked external calls
           echo "Checking for unchecked external calls..."
-          if grep -rn "\.call(" contracts/ 2>/dev/null | grep -v "require\|assert"; then
-            echo "⚠️ External calls found - ensure return values are checked"
+          if grep -rn "\.call(" contracts/ 2>/dev/null | grep -v "require\|assert\|if.*success"; then
+            echo "ℹ️ External calls found - verify return values are properly handled"
           else
             echo "✅ External call patterns look safe"
           fi
@@ -131,24 +139,30 @@ jobs:
           # Check for timestamp dependency
           echo "Checking for timestamp dependency..."
           if grep -rn "block.timestamp" contracts/ 2>/dev/null | grep -v "comment\|//"; then
-            echo "ℹ️ block.timestamp usage detected - ensure it's not used for critical randomness"
+            echo "ℹ️ block.timestamp usage detected - verify it's not used for critical randomness"
           fi
           
-          echo "✅ Basic security scan complete"
+          echo ""
+          echo "✅ Basic pattern checks complete"
+          echo "⚠️  Remember: These checks have limitations and may produce false positives/negatives"
 
       - name: Generate Security Report
         run: |
           echo "## 🔐 Solidity Security Scan Results" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "**Status:** ✅ Scan Complete" >> $GITHUB_STEP_SUMMARY
+          echo "**Status:** ✅ Basic Pattern Checks Complete" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "### Checks Performed" >> $GITHUB_STEP_SUMMARY
-          echo "- Reentrancy vulnerability patterns" >> $GITHUB_STEP_SUMMARY
-          echo "- Unchecked external calls" >> $GITHUB_STEP_SUMMARY
+          echo "> **⚠️ IMPORTANT**: These are basic heuristic checks only. They may produce false positives and can miss real vulnerabilities." >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Basic Checks Performed" >> $GITHUB_STEP_SUMMARY
+          echo "- Reentrancy vulnerability patterns (limited - doesn't check inheritance)" >> $GITHUB_STEP_SUMMARY
+          echo "- Unchecked external calls (basic grep - may miss if-statement checks)" >> $GITHUB_STEP_SUMMARY
           echo "- tx.origin usage" >> $GITHUB_STEP_SUMMARY
-          echo "- Timestamp dependency" >> $GITHUB_STEP_SUMMARY
+          echo "- Timestamp dependency (flags all usage, even safe cases)" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "For comprehensive security audits, consider using:" >> $GITHUB_STEP_SUMMARY
-          echo "- Slither" >> $GITHUB_STEP_SUMMARY
-          echo "- Mythril" >> $GITHUB_STEP_SUMMARY
-          echo "- Professional audit services" >> $GITHUB_STEP_SUMMARY
+          echo "### Recommended for Production" >> $GITHUB_STEP_SUMMARY
+          echo "For comprehensive security analysis, use professional tools:" >> $GITHUB_STEP_SUMMARY
+          echo "- **[Slither](https://github.com/crytic/slither)** - Static analysis framework" >> $GITHUB_STEP_SUMMARY
+          echo "- **[Mythril](https://github.com/ConsenSys/mythril)** - Security analysis tool" >> $GITHUB_STEP_SUMMARY
+          echo "- **[Securify](https://securify.chainsecurity.com/)** - Automated security scanner" >> $GITHUB_STEP_SUMMARY
+          echo "- **Professional audit services** - For production deployments" >> $GITHUB_STEP_SUMMARY
