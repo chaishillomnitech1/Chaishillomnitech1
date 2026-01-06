@@ -1,0 +1,10 @@
+# OmniTech1 Integration Outreach CRM
+# ScrollVerse Genesis Protocol - Partner & Integration Contacts
+#
+# This file tracks outreach efforts for the OmniTech1 Integration scaffold.
+# Format: Name,Email,Company,Status,LastContact,Notes
+
+Contact Name,Email,Company,Status,Last Contact,Notes
+Example Partner,partner@example.com,Example Corp,Pending,2024-01-01,Initial outreach pending
+Integration Lead,lead@integration.io,Integration Inc,Active,2024-01-15,Follow-up scheduled
+DevOps Contact,devops@devops.tech,DevOps Team,New,2024-01-20,Referred by marketing

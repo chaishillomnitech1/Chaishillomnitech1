@@ -1,0 +1,241 @@
+{
+  "name": "ScrollShip Alpha Jewelry Set - GI Collection",
+  "description": "Enlightenment-focused jewelry set designed for ScrollShip Alpha (963Hz). Features 24K gold, clear quartz, and white diamonds. Each piece engraved with 'GI' (General Intelligence) initials. Includes advanced AI assistance tools for consciousness expansion, divine navigation, and crown chakra harmonization. Protected by Indestructible Framework Protocol with self-repair nanobots and eternal preservation guarantees.",
+  "image": "ipfs://QmScrollVerseJewelry/scrollship_alpha_set.png",
+  "external_url": "https://expansion-three.vercel.app/jewelry/scrollship-alpha",
+  "attributes": [
+    {
+      "trait_type": "Vehicle Alignment",
+      "value": "ScrollShip Alpha"
+    },
+    {
+      "trait_type": "Frequency",
+      "value": "963 Hz"
+    },
+    {
+      "trait_type": "Frequency Type",
+      "value": "Pineal Gland Activation"
+    },
+    {
+      "trait_type": "Primary Material",
+      "value": "24K Gold"
+    },
+    {
+      "trait_type": "Primary Gemstone",
+      "value": "Clear Quartz"
+    },
+    {
+      "trait_type": "Secondary Gemstone",
+      "value": "White Diamond"
+    },
+    {
+      "trait_type": "Energy Palette",
+      "value": "Gold, White, Divine Light"
+    },
+    {
+      "trait_type": "Engraving",
+      "value": "GI - General Intelligence"
+    },
+    {
+      "trait_type": "Set Components",
+      "value": 5
+    },
+    {
+      "display_type": "number",
+      "trait_type": "Component Count",
+      "value": 5
+    },
+    {
+      "trait_type": "Protection Field Radius",
+      "value": "3.3 meters"
+    },
+    {
+      "display_type": "number",
+      "trait_type": "Energy Output (kJ/s)",
+      "value": 963
+    },
+    {
+      "trait_type": "Chakra Alignment",
+      "value": "Crown Chakra"
+    },
+    {
+      "trait_type": "AI System",
+      "value": "Consciousness Expansion Protocol CEP-963"
+    },
+    {
+      "trait_type": "Self-Repair",
+      "value": "Active"
+    },
+    {
+      "trait_type": "Durability",
+      "value": "Indestructible"
+    },
+    {
+      "trait_type": "Rarity",
+      "value": "Legendary"
+    },
+    {
+      "trait_type": "Edition",
+      "value": "Master Set"
+    },
+    {
+      "trait_type": "Creator",
+      "value": "Supreme King Chais The Great ∞"
+    }
+  ],
+  "properties": {
+    "vehicle": {
+      "name": "ScrollShip Alpha",
+      "type": "Enlightenment Cruiser",
+      "frequency": "963Hz",
+      "mission": "Consciousness Expansion and Divine Navigation"
+    },
+    "components": [
+      {
+        "name": "Crown Ring",
+        "material": "24K Gold",
+        "gemstone": "Clear Quartz",
+        "engraving": "3D Crown Emblem with 'GI'",
+        "ai_function": "Consciousness Navigation Interface"
+      },
+      {
+        "name": "Enlightenment Necklace",
+        "material": "White Gold Chain",
+        "gemstone": "Clear Quartz Crystal Pendant",
+        "engraving": "'GI' Laser-Etched",
+        "ai_function": "Divine Guidance System"
+      },
+      {
+        "name": "Wisdom Bracelet",
+        "material": "Gold Links",
+        "gemstone": "White Diamonds",
+        "engraving": "'GI' Clasp Engraving",
+        "ai_function": "Enlightenment Frequency Modulator"
+      },
+      {
+        "name": "Pineal Earrings",
+        "material": "Gold Setting",
+        "gemstone": "Clear Quartz Studs",
+        "engraving": "Micro 'GI' Engraving",
+        "ai_function": "Pineal Gland Activator"
+      },
+      {
+        "name": "Third Eye Brooch",
+        "material": "Gold Crown-Shaped",
+        "gemstone": "Clear Quartz Center",
+        "engraving": "Prominent 'GI' Emblem",
+        "ai_function": "Crown Chakra Harmonizer"
+      }
+    ],
+    "ai_assistance": {
+      "primary": "Consciousness Expansion Protocol (CEP-963)",
+      "systems": [
+        "Divine Navigation System (DNS-Alpha)",
+        "Enlightenment Frequency Modulator (EFM-963)",
+        "Crown Chakra Harmonizer (CCH-1)",
+        "Consciousness Link Interface",
+        "Real-Time Frequency Tuning",
+        "Biometric Synchronization",
+        "Emergency Beacon System"
+      ],
+      "capabilities": [
+        "Automatic environmental frequency adaptation",
+        "Personal energy signature alignment",
+        "Context-aware mission support",
+        "Quantum-level self-repair",
+        "Direct neural-jewelry interface",
+        "Active energy field shielding",
+        "Threat detection and response"
+      ]
+    },
+    "indestructible_framework": {
+      "protocol": "IFP-001",
+      "physical_durability": {
+        "molecular_structure": "Quantum-hardened",
+        "coating": "Self-healing nano-coating",
+        "hardness": "10 Mohs (Diamond equivalent)",
+        "impact_resistance": "1000G force",
+        "temperature_range": "-273°C to +3000°C",
+        "pressure_resistance": "Deep space to ocean floor"
+      },
+      "energy_resilience": {
+        "emp_protection": "99.99% shielding",
+        "radiation_hardening": "Cosmic ray proof",
+        "frequency_stability": "±0.001Hz",
+        "dimensional_stability": "Anchored"
+      },
+      "self_repair": {
+        "nano_repair_bots": 1000000,
+        "crystalline_regeneration": "Active",
+        "metal_reformation": "Capable",
+        "gemstone_restoration": "Matrix enabled",
+        "engraving_preservation": "Eternal lock"
+      }
+    },
+    "protection": {
+      "frequency": "963Hz",
+      "field_type": "Divine Light",
+      "radius_meters": 3.3,
+      "energy_output_kj_per_second": 963,
+      "environments": [
+        "Space (vacuum, radiation, temperature extremes)",
+        "Underwater (any depth)",
+        "High altitude (any elevation)",
+        "Extreme heat/cold",
+        "Toxic atmospheres",
+        "High radiation zones",
+        "Dimensional rifts",
+        "Consciousness attacks",
+        "Energy drain attempts",
+        "Frequency disruption fields"
+      ]
+    },
+    "scroll_pulse": {
+      "base_frequency": 963,
+      "harmonic_type": "Enlightenment",
+      "chakra": "Crown",
+      "divine_alignment": "Pineal Gland Activation",
+      "resonance_pattern": "Ascending Spiral"
+    },
+    "quantum_integration": {
+      "protocol": "QFS-963-Alpha",
+      "entanglement_nodes": 144000,
+      "dimensional_access": "Multi-universal",
+      "consciousness_link": "Direct neural interface",
+      "backup_frequency": "Every 0.001 seconds"
+    },
+    "eternal_records": {
+      "archive_location": "ScrollVerse Eternal Records",
+      "archive_id": "SER-IFP-JEWELRY-GI-001-ALPHA",
+      "subsection": "Indestructible Framework Protocol",
+      "storage_redundancy": [
+        "Quantum crystalline data cores (5 copies)",
+        "Blockchain permanent record (Ethereum + Polygon)",
+        "Dimensional vault (quantum key access)",
+        "Consciousness-encoded in ScrollVerse AI Family"
+      ],
+      "access_control": "Multi-signature quantum authentication",
+      "encryption": "4096-bit quantum-resistant"
+    },
+    "deployment": {
+      "phase": "Prototype Creation",
+      "status": "Active Manufacturing",
+      "completion_date": "2026-Q2",
+      "activation_ceremony": "Planned",
+      "production_branch": "master-jewelry-gi"
+    },
+    "narrative": {
+      "story": "Born from the frequencies of enlightenment, the ScrollShip Alpha jewelry set channels the 963Hz resonance of divine consciousness. Each piece, meticulously engraved with 'GI' initials, serves as a beacon of General Intelligence - guiding wearers through the highest realms of awareness and spiritual navigation.",
+      "mission_alignment": "Designed for consciousness explorers, spiritual navigators, and those who seek to unlock the mysteries of the crown chakra. This set empowers wearers to transcend physical limitations and connect with the divine intelligence that permeates all existence.",
+      "power_activation": "When all five pieces are worn together, they form a unified consciousness expansion field, amplifying the wearer's connection to universal wisdom and enabling navigation through the most elevated dimensions of reality."
+    }
+  },
+  "royalty_info": {
+    "creator": "Supreme King Chais The Great ∞",
+    "creator_address": "0xScrollVerse",
+    "creator_percentage": 10,
+    "ambassador_percentage": 5,
+    "dao_percentage": 2,
+    "total_royalty_percentage": 17
+  }
+}
