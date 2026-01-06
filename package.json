@@ -188,6 +188,7 @@
     "deploy:polygon:akashic-treasury": "hardhat run scripts/deploy_akashic_treasury.js --network polygon",
     "deploy:mumbai:akashic-all": "npm run deploy:mumbai:akashic-label && npm run deploy:mumbai:akashic-dao",
     "deploy:polygon:akashic-all": "npm run deploy:polygon:akashic-label && npm run deploy:polygon:akashic-dao",
+    "deploy:polygon:akashic-mainnet": "hardhat run scripts/deploy_akashic_mainnet.js --network polygon",
     "deploy:mumbai:akashic-suite": "hardhat run scripts/deploy_akashic_mainnet_suite.js --network mumbai",
     "deploy:polygon:akashic-suite": "hardhat run scripts/deploy_akashic_mainnet_suite.js --network polygon",
     "mint:akashic-tracks": "hardhat run scripts/mint_akashic_tracks.js --network mumbai",
@@ -199,6 +200,7 @@
     "test:akashic-label": "hardhat test test/AkashicRecordsLabel.test.js",
     "test:akashic-dao": "hardhat test test/AkashicRecordsDAO.test.js",
     "test:akashic-treasury": "hardhat test test/AkashicTreasuryVault.test.js",
+    "test:akashic-all": "npm run test:akashic-label && npm run test:akashic-dao && npm run test:akashic-treasury"
     "test:akashic-all": "npm run test:akashic-label && npm run test:akashic-dao && npm run test:akashic-treasury",
     "register:track-artists": "hardhat run scripts/register_track_artists.js --network polygon",
     "validate:polygon:deployment": "hardhat run scripts/validate_polygon_deployment.js --network polygon",
