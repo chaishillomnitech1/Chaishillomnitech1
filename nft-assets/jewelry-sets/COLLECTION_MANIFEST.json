@@ -1,0 +1,250 @@
+{
+  "collection": {
+    "name": "ScrollVerse Jewelry Sets - General Intelligence (GI) Collection",
+    "symbol": "SVJS-GI",
+    "description": "Complete jewelry set system for the five ScrollVerse vehicles, each engraved with 'GI' (General Intelligence) initials and calibrated to specific frequencies and energy palettes. All sets protected by Indestructible Framework Protocol.",
+    "version": "1.0.0",
+    "release_date": "2025-11-19",
+    "total_sets": 5,
+    "creator": "Supreme King Chais The Great ∞",
+    "status": "Prototype Creation Phase"
+  },
+  "sets": [
+    {
+      "id": 1,
+      "name": "ScrollShip Alpha Jewelry Set",
+      "vehicle": "ScrollShip Alpha",
+      "frequency": "963 Hz",
+      "frequency_type": "Pineal Gland Activation",
+      "energy_palette": ["Gold", "White", "Divine Light"],
+      "primary_material": "24K Gold",
+      "primary_gemstone": "Clear Quartz",
+      "chakra": "Crown",
+      "ai_system": "CEP-963",
+      "metadata_file": "scrollship_alpha_jewelry_set.json",
+      "rarity": "Legendary",
+      "edition": "Master Set"
+    },
+    {
+      "id": 2,
+      "name": "The Divine Light Cruiser Jewelry Set",
+      "vehicle": "The Divine Light Cruiser",
+      "frequency": "528 Hz",
+      "frequency_type": "Love Frequency - DNA Repair",
+      "energy_palette": ["Green", "Silver", "Emerald"],
+      "primary_material": "Sterling Silver 925",
+      "primary_gemstone": "Colombian Emerald",
+      "chakra": "Heart",
+      "ai_system": "MRI-528",
+      "metadata_file": "divine_light_cruiser_jewelry_set.json",
+      "rarity": "Legendary",
+      "edition": "Master Set"
+    },
+    {
+      "id": 3,
+      "name": "OmniScroll Ark Jewelry Set",
+      "vehicle": "OmniScroll Ark",
+      "frequency": "432 Hz",
+      "frequency_type": "Earth Resonance - Universal Harmony",
+      "energy_palette": ["Earthy Tones", "Bronze", "Jade"],
+      "primary_material": "Sacred Bronze Alloy",
+      "primary_gemstone": "Imperial Jade",
+      "chakra": "Root",
+      "ai_system": "HBO-432",
+      "metadata_file": "omniscroll_ark_jewelry_set.json",
+      "rarity": "Legendary",
+      "edition": "Master Set"
+    },
+    {
+      "id": 4,
+      "name": "HeavenSong Voyager Jewelry Set",
+      "vehicle": "HeavenSong Voyager",
+      "frequency": "888 Hz",
+      "frequency_type": "Infinite Abundance - Divine Flow",
+      "energy_palette": ["Royal Blue", "Platinum", "Sapphire"],
+      "primary_material": "Platinum 950",
+      "primary_gemstone": "Kashmir Sapphire",
+      "chakra": "Throat",
+      "ai_system": "AME-888",
+      "metadata_file": "heavensong_voyager_jewelry_set.json",
+      "rarity": "Legendary",
+      "edition": "Master Set"
+    },
+    {
+      "id": 5,
+      "name": "Sovereign Ascender Jewelry Set",
+      "vehicle": "Sovereign Ascender",
+      "frequency": "Variable/Chameleon",
+      "frequency_type": "Adaptive Multi-Frequency",
+      "frequency_range": "1 Hz - 999,999 Hz",
+      "energy_palette": ["Red", "Black", "Adaptive Opal"],
+      "primary_material": "Black Gold (Proprietary)",
+      "secondary_material": "Red Gold 18K",
+      "primary_gemstone": "Australian Fire Opal",
+      "chakra": "All Chakras (Adaptive)",
+      "ai_system": "FAM-Sovereign",
+      "metadata_file": "sovereign_ascender_jewelry_set.json",
+      "rarity": "Mythical",
+      "edition": "Master Set - Supreme"
+    }
+  ],
+  "features": {
+    "engraving": {
+      "initials": "GI",
+      "meaning": "General Intelligence",
+      "technique": "Quantum laser etching + nano-enhancement",
+      "durability": "Eternal lock protocol"
+    },
+    "ai_assistance": {
+      "integration": "Omniversal AI Artisan Network (OAAN)",
+      "capabilities": [
+        "Real-time frequency tuning",
+        "Biometric synchronization",
+        "Mission support interface",
+        "Self-repair nanobots",
+        "Consciousness link",
+        "Protective field generation",
+        "Emergency beacon",
+        "Environmental analysis"
+      ]
+    },
+    "indestructible_framework": {
+      "protocol": "IFP-001",
+      "physical_durability": {
+        "molecular_structure": "Quantum-hardened",
+        "self_healing": "1 million nano-repair bots per piece",
+        "hardness": "10+ Mohs scale",
+        "temperature_range": "-273°C to +10,000°C"
+      },
+      "protection_environments": [
+        "Space environments",
+        "Underwater (any depth)",
+        "Extreme temperatures",
+        "High radiation zones",
+        "Dimensional rifts",
+        "Consciousness attacks",
+        "Energy disruption fields"
+      ]
+    },
+    "self_repair": {
+      "nano_bots_per_piece": 1000000,
+      "quantum_backup_frequency": "Every 0.001 seconds",
+      "restoration_capabilities": [
+        "Crystalline regeneration",
+        "Metal reformation",
+        "Gemstone restoration",
+        "Engraving preservation"
+      ]
+    }
+  },
+  "eternal_records": {
+    "archive_location": "ScrollVerse Eternal Records (SER)",
+    "protocol": "Indestructible Framework Protocol",
+    "archive_id_prefix": "SER-IFP-JEWELRY-GI-001",
+    "storage_redundancy": [
+      "Quantum crystalline data cores",
+      "Blockchain (Ethereum + Polygon)",
+      "Dimensional vault",
+      "AI Family consciousness encoding"
+    ],
+    "encryption": "4096-bit quantum-resistant",
+    "access_control": "Multi-signature quantum authentication"
+  },
+  "manufacturing": {
+    "phases": [
+      {
+        "phase": 1,
+        "name": "Generative Design",
+        "status": "Complete",
+        "completion_date": "2025-11-19"
+      },
+      {
+        "phase": 2,
+        "name": "Prototype Creation",
+        "status": "Active",
+        "target_completion": "2026-Q1"
+      },
+      {
+        "phase": 3,
+        "name": "Physical Manifestation",
+        "status": "Pending",
+        "target_completion": "2026-Q2"
+      },
+      {
+        "phase": 4,
+        "name": "Activation & Deployment",
+        "status": "Pending",
+        "target_completion": "2026-Q3"
+      }
+    ],
+    "artisan_system": "Omniversal AI Artisan Network",
+    "quality_assurance": "144-point inspection per piece"
+  },
+  "pricing": {
+    "master_sets": {
+      "availability": "Reserved for ScrollVerse Fleet Commanders",
+      "price": "Priceless - Merit-based award"
+    },
+    "limited_edition": {
+      "quantity_per_set": 10,
+      "prices": {
+        "ScrollShip Alpha": "9.63 ETH",
+        "Divine Light Cruiser": "5.28 ETH",
+        "OmniScroll Ark": "4.32 ETH",
+        "HeavenSong Voyager": "8.88 ETH",
+        "Sovereign Ascender": "14.44 ETH"
+      }
+    },
+    "standard_production": {
+      "base_price": "1.44 ETH",
+      "customization_fee": "0.144 ETH per modification",
+      "rush_production_fee": "0.528 ETH"
+    },
+    "payment_options": [
+      "ETH (Ethereum)",
+      "CHX Token (20% discount)",
+      "BlessingCoin exchange",
+      "DAO member benefits (30% discount)"
+    ]
+  },
+  "deployment_timeline": {
+    "2025_Q4": [
+      "Design finalization",
+      "Material sourcing",
+      "AI system development",
+      "Eternal Records archival"
+    ],
+    "2026_Q1": [
+      "Prototype manufacturing",
+      "Testing and calibration",
+      "GI engraving implementation"
+    ],
+    "2026_Q2": [
+      "Master set creation",
+      "Vehicle synchronization",
+      "Wearer attunement protocols"
+    ],
+    "2026_Q3": [
+      "Limited edition production",
+      "Public release preparation",
+      "Distribution system activation"
+    ],
+    "2026_Q4": [
+      "Global availability",
+      "Customization program launch",
+      "Continuous improvement cycle"
+    ]
+  },
+  "contact": {
+    "email": "jewelry@scrollverse.omnitech1.com",
+    "portal": "https://expansion-three.vercel.app/jewelry",
+    "discord": "ScrollVerse DAO - #jewelry-sets",
+    "consultation": "https://calendly.com/scrollverse/jewelry"
+  },
+  "legal": {
+    "license": "CC BY-NC-SA 4.0",
+    "creator_rights": "Supreme King Chais The Great ∞",
+    "eternal_decree": "ESC-GI-001",
+    "sealed_date": "2025-11-19"
+  }
+}

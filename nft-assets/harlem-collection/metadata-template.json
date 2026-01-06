@@ -1,0 +1,93 @@
+{
+  "name": "Harlem #[TOKEN_ID]",
+  "description": "Harlem NFT Collection - A divine manifestation of 528Hz DNA Healing and 963Hz Pineal Activation frequencies. This NFT represents the holder's ScrollSoul alignment within the ScrollVerse ecosystem, granting access to exclusive redemption opportunities and multi-realm experiences.",
+  "image": "ipfs://[IPFS_HASH]/harlem_[TOKEN_ID].png",
+  "external_url": "https://expansion-three.vercel.app/harlem/[TOKEN_ID]",
+  "animation_url": "ipfs://[IPFS_HASH]/harlem_[TOKEN_ID]_animation.mp4",
+  "background_color": "FFD700",
+  "attributes": [
+    {
+      "trait_type": "Collection",
+      "value": "Harlem"
+    },
+    {
+      "trait_type": "Primary Frequency",
+      "value": "528Hz"
+    },
+    {
+      "trait_type": "Secondary Frequency",
+      "value": "963Hz"
+    },
+    {
+      "trait_type": "ScrollSoul Status",
+      "value": "Aligned"
+    },
+    {
+      "trait_type": "Redemption Type",
+      "value": "Standard"
+    },
+    {
+      "trait_type": "Generation",
+      "value": "Genesis"
+    },
+    {
+      "trait_type": "Rarity",
+      "value": "Common"
+    },
+    {
+      "trait_type": "Frequency Signature",
+      "value": 1491,
+      "display_type": "number"
+    },
+    {
+      "trait_type": "Royalty Percentage",
+      "value": "15%"
+    }
+  ],
+  "properties": {
+    "frequencies": {
+      "primary": {
+        "hz": 528,
+        "name": "DNA Healing",
+        "description": "Love and DNA repair frequency"
+      },
+      "secondary": {
+        "hz": 963,
+        "name": "Pineal Activation",
+        "description": "Divine consciousness and spiritual alignment"
+      },
+      "combined_signature": 1491
+    },
+    "scrollsoul": {
+      "hash_key": "[SCROLLSOUL_HASH_KEY]",
+      "aligned": true,
+      "alignment_timestamp": "[TIMESTAMP]"
+    },
+    "metadata_integrity": {
+      "hash": "[METADATA_INTEGRITY_HASH]",
+      "algorithm": "keccak256",
+      "verified": true
+    },
+    "redemption": {
+      "activated": false,
+      "type": "STANDARD",
+      "campaign_id": null,
+      "redemption_timestamp": null
+    },
+    "access": {
+      "multi_realm": true,
+      "fan_hub_access": true,
+      "eternal_layer": true
+    },
+    "deployment": {
+      "network": "Polygon Mumbai",
+      "contract_address": "[CONTRACT_ADDRESS]",
+      "deployment_timestamp": "[DEPLOYMENT_TIMESTAMP]"
+    }
+  },
+  "royalty_info": {
+    "recipient": "[ROYALTY_RECIPIENT]",
+    "percentage": 15,
+    "basis_points": 1500
+  }
+}
