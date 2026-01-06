@@ -1,3 +1,7 @@
+# Quantum Vault Audit Reports
+quantum_vault_audit_*.json
+integration_test_*.json
+test_report_*.json
 # Dependencies
 node_modules/
 npm-debug.log*
@@ -24,10 +28,28 @@ parts/
 sdist/
 var/
 wheels/
+pip-wheel-metadata/
+share/python-wheels/
 *.egg-info/
 .installed.cfg
 *.egg
 MANIFEST
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.nox/
+
+# Virtual environments
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# IDEs
 venv/
 env/
 ENV/
