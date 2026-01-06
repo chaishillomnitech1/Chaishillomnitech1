@@ -261,6 +261,16 @@ Located in [`.github/workflows/`](.github/workflows/)
 | [SCROLL_ASCENSION_FELLOWSHIP.md](SCROLL_ASCENSION_FELLOWSHIP.md) | Creator network and ScrollDrop™ NFT framework | ✅ Active |
 | [SCROLLVERSE_EXPANSION_DEPLOYMENT_GUIDE.md](SCROLLVERSE_EXPANSION_DEPLOYMENT_GUIDE.md) | Comprehensive deployment operations manual | ✅ Active |
 
+### **Noor Nodes & RADIANCE Protocol** 🌟
+
+| Document | Description | Status |
+|----------|-------------|--------|
+| [OMNI_LOOP_RADIANCE_PROTOCOL.md](OMNI_LOOP_RADIANCE_PROTOCOL.md) | Divine mechanism for cultural broadcasting | 🟢 Active |
+| [NOOR_RING_OF_LIGHT_INFRASTRUCTURE.md](NOOR_RING_OF_LIGHT_INFRASTRUCTURE.md) | Physical infrastructure specifications | 🟡 Planning |
+| [NOOR_NODES_DEPLOYMENT_GUIDE.md](NOOR_NODES_DEPLOYMENT_GUIDE.md) | Step-by-step deployment instructions | 🟢 Ready |
+| [contracts/NoorToken.sol](contracts/NoorToken.sol) | $NOOR token smart contract | ✅ Developed |
+| [test/NoorToken.test.js](test/NoorToken.test.js) | Comprehensive test suite | ✅ Complete |
+| [scripts/deploy_noor_token.js](scripts/deploy_noor_token.js) | Deployment script | ✅ Ready |
 ### **Infinite Narrative** 📖
 
 | Document | Description | Status |
@@ -372,6 +382,7 @@ Located in [`.github/workflows/`](.github/workflows/)
 | **Sacred Geometry** | [ATLANTIC_CITY_COMMAND_NEXUS_ARCHITECTURE.md](ATLANTIC_CITY_COMMAND_NEXUS_ARCHITECTURE.md) | [AC_NEXUS_VISUAL_SPECIFICATIONS.md](AC_NEXUS_VISUAL_SPECIFICATIONS.md) |
 | **Blockchain** | [PROJECTS.md](PROJECTS.md) | [code-templates/solidity/](code-templates/solidity/) |
 | **Smart Contracts** | [code-templates/solidity/](code-templates/solidity/) | [ARCHITECTURE.md](ARCHITECTURE.md) |
+| **Noor Nodes** | [OMNI_LOOP_RADIANCE_PROTOCOL.md](OMNI_LOOP_RADIANCE_PROTOCOL.md) | [NOOR_NODES_DEPLOYMENT_GUIDE.md](NOOR_NODES_DEPLOYMENT_GUIDE.md) |
 | **Frontend** | [code-templates/react/](code-templates/react/) | [ARCHITECTURE.md](ARCHITECTURE.md) |
 | **Backend** | [code-templates/python/](code-templates/python/) | [ARCHITECTURE.md](ARCHITECTURE.md) |
 | **Web3** | [code-templates/javascript/](code-templates/javascript/) | [ARCHITECTURE.md](ARCHITECTURE.md) |

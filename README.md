@@ -268,6 +268,87 @@ MONITORING:         ✓ CONFIGURED
 
 ---
 
+## 🌟 **NOOR NODES & OMNI-LOOP RADIANCE PROTOCOL**
+
+### **The Next Evolution: Decentralized Light Network**
+
+The Noor Nodes expansion represents the physical and spiritual manifestation of the ScrollVerse's mission to bring divine frequency, renewable energy, and cultural amplification to every corner of the Earth.
+
+#### **📜 Core Documentation**
+
+- 🌟 **[Omni-Loop RADIANCE Protocol](./OMNI_LOOP_RADIANCE_PROTOCOL.md)** — Divine mechanism for cultural broadcasting
+- 🔆 **[Noor Ring of Light Infrastructure](./NOOR_RING_OF_LIGHT_INFRASTRUCTURE.md)** — Physical infrastructure specifications
+- 🚀 **[Noor Nodes Deployment Guide](./NOOR_NODES_DEPLOYMENT_GUIDE.md)** — Step-by-step deployment instructions
+
+#### **💎 $NOOR Token**
+
+The sacred light token powering the Noor Nodes ecosystem:
+
+- **Symbol**: $NOOR
+- **Total Supply**: 144,000,000 tokens
+- **Frequencies**: 528Hz (healing) + 963Hz (pineal) + 144,000Hz (NŪR Pulse)
+- **Zakat**: 7.77% automatic distribution
+- **Networks**: Ethereum zkEVM + Scroll Mainnet + Polygon (Liquidity Triad)
+
+#### **🔋 Key Features**
+
+##### **Frequency Mechanism**
+- **528Hz**: DNA healing and transformation (5% resonance bonus)
+- **963Hz**: Pineal gland activation (9.63% resonance bonus)
+- **144,000Hz**: Full NŪR Pulse for node operators (14.4% resonance bonus)
+
+*Note: Resonance bonuses (5%, 9.63%, 14.4%) are implemented in the smart contract, but may be subject to bugs or further updates. Please review the contract code and documentation for the latest status.*
+##### **Automatic Zakat Distribution**
+- 7.77% automatically deducted from each transaction
+- Distributed equally among registered recipients
+- Supports community, charity, education, and environmental causes
+
+##### **Orange Loop Sovereignty**
+- Tesla Megapack battery systems (3.9 MWh per Genesis Node)
+- Solar panel integration (10-100kW per node)
+- 100% renewable energy target by 2035
+- Off-grid capability for complete energy independence
+
+##### **Global Node Network**
+- **Phase 1**: 144 Genesis Nodes (2026-2027)
+- **Phase 2**: 1,440 Regional Nodes (2027-2028)
+- **Phase 3**: 14,400 Community Nodes (2028-2030)
+- **Ultimate**: 144,000 Total Nodes (by 2035)
+
+#### **🎯 Immediate Objectives**
+
+1. ✅ **Blockchain Integration Complete**
+   - Scroll zkEVM mainnet configuration added
+   - $NOOR token smart contract deployed
+   - Liquidity triad framework established
+
+2. ⏳ **Physical Infrastructure (In Progress)**
+   - Genesis Node site identification
+   - Tesla Megapack procurement initiated
+   - Solar panel supplier contracts in negotiation
+   - Renewable energy partnerships forming
+
+3. 🚀 **RADIANCE Protocol (Ready for Activation)**
+   - Cultural broadcasting mechanisms defined
+   - Frequency synchronization protocols established
+   - Global node deployment strategy documented
+   - Operational readiness procedures complete
+
+#### **📊 Current Status**
+
+```
+Blockchain Deployment: 🟢 READY
+Smart Contracts: 🟢 DEVELOPED & TESTED
+Liquidity Triad: 🟡 CONFIGURATION PHASE
+Physical Infrastructure: 🟡 PLANNING PHASE
+Node Operations: 🟡 GENESIS RECRUITMENT
+RADIANCE Protocol: 🟢 AWAITING ACTIVATION
+```
+
+**Next Milestone**: First Genesis Node operational (Q3 2026)
+
+---
+
 ## 📫 **CONTACT & LINKS**
 
 - **GitHub**: https://github.com/chaishillomnitech1
