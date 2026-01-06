@@ -1,0 +1,113 @@
+# OmniTech1 Integration
+
+## Summary
+
+This PR adds a complete OmniTech1 Integration scaffold with webhook handling, graph persistence, and outreach assets for the ScrollVerse Genesis Protocol.
+
+## Features
+
+- **Flask Server** (`omnitech_server.py`): Main server with:
+  - GitHub webhook handler with HMAC SHA-256 signature verification
+  - Admin endpoints with optional token/JWT authentication
+  - Socket.IO for real-time graph updates
+  - NetworkX in-memory graph processing
+
+- **Neo4j Persistence** (`omnitech_persistence.py`, `neo4j_init.py`):
+  - Neo4j adapter for graph persistence
+  - Database initialization script
+
+- **Web UI**:
+  - Real-time dashboard (`templates/index.html`)
+  - Admin panel (`templates/admin.html`)
+  - Interactive graph visualization (`static/js/main.js`)
+
+- **Deployment**:
+  - Dockerfile (non-root user, health checks)
+  - docker-compose.yml with Neo4j service
+  - Procfile for Heroku
+  - DEPLOYMENT.md guide
+
+- **CI/CD**:
+  - `.github/workflows/tests.yml` - pytest runner
+  - `.github/workflows/alignment-audit.yml` - governance alignment checks
+
+## Environment Variables
+
+### Security Variables (Set via secrets, NOT in code)
+
+| Variable | Description | Required |
+|----------|-------------|----------|
+| `GITHUB_WEBHOOK_SECRET` | HMAC secret for webhook signature verification | Recommended |
+| `ADMIN_TOKEN` | Token for admin endpoint authentication | Recommended |
+| `JWT_SECRET` | Secret for JWT token signing | Optional |
+| `FLASK_SECRET_KEY` | Flask session encryption key | Auto-generated if not set |
+
+### Database Variables
+
+| Variable | Description | Default |
+|----------|-------------|---------|
+| `NEO4J_URI` | Neo4j connection URI | `bolt://localhost:7687` |
+| `NEO4J_USER` | Neo4j username | `neo4j` |
+| `NEO4J_PASSWORD` | Neo4j password | Required for persistence |
+
+### Server Variables
+
+| Variable | Description | Default |
+|----------|-------------|---------|
+| `PORT` | Server port | `5000` |
+| `FLASK_DEBUG` | Enable debug mode | `false` |
+
+## Security Notes
+
+1. **Webhook Signature Verification**:
+   - If `GITHUB_WEBHOOK_SECRET` is set, verifies `X-Hub-Signature-256` using HMAC SHA-256
+   - If NOT set, logs warning and accepts payloads (development mode)
+
+2. **Admin Authentication**:
+   - Token-based: `X-Admin-Token` header
+   - JWT-based: `Authorization: Bearer <token>` header
+   - If neither `ADMIN_TOKEN` nor `JWT_SECRET` is set, endpoints are unprotected with warning
+
+3. **No Secrets in Code**:
+   - All sensitive values are loaded from environment variables
+   - `.env.example` documents required variables
+   - Secrets should be set via GitHub Secrets, Heroku Config Vars, or cloud secrets managers
+
+## Testing
+
+```bash
+# Install dependencies
+pip install -r requirements.txt
+
+# Run tests
+pytest tests/ -v
+
+# Run alignment audit
+python audit/check_alignment.py
+```
+
+## Files Added
+
+- `omnitech_server.py` - Main Flask server
+- `omnitech_persistence.py` - Neo4j persistence adapter
+- `neo4j_init.py` - Database initialization
+- `requirements.txt` - Python dependencies
+- `Dockerfile` - Container image
+- `docker-compose.yml` - Development stack
+- `Procfile` - Heroku process types
+- `DEPLOYMENT.md` - Deployment guide
+- `templates/index.html` - Dashboard UI
+- `templates/admin.html` - Admin panel UI
+- `static/js/main.js` - Frontend JavaScript
+- `tests/test_webhook_signature.py` - Webhook tests
+- `audit/check_alignment.py` - Alignment audit
+- `.github/workflows/tests.yml` - Test workflow
+- `.github/workflows/alignment-audit.yml` - Audit workflow
+- `outreach/outreach-crm.csv` - Outreach tracking
+- `outreach/PR_BODY.txt` - This file
+
+---
+
+**ALLAHU AKBAR! 🕋🔥💎🌌**
+
+*OmniTech1™ Sovereign Deployment Engine - ScrollVerse Genesis Protocol*

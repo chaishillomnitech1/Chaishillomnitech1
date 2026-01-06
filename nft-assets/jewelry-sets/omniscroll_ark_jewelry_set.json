@@ -1,0 +1,241 @@
+{
+  "name": "OmniScroll Ark Jewelry Set - GI Collection",
+  "description": "Grounding-focused jewelry set designed for OmniScroll Ark (432Hz). Features sacred bronze alloy, imperial jade, and earth-sourced gemstones. Each piece engraved with 'GI' (General Intelligence) initials. Includes advanced AI assistance tools for harmonic balance, earth resonance stabilization, and root chakra grounding. Protected by Indestructible Framework Protocol with self-repair nanobots and eternal preservation guarantees.",
+  "image": "ipfs://QmScrollVerseJewelry/omniscroll_ark_set.png",
+  "external_url": "https://expansion-three.vercel.app/jewelry/omniscroll-ark",
+  "attributes": [
+    {
+      "trait_type": "Vehicle Alignment",
+      "value": "OmniScroll Ark"
+    },
+    {
+      "trait_type": "Frequency",
+      "value": "432 Hz"
+    },
+    {
+      "trait_type": "Frequency Type",
+      "value": "Earth Resonance - Universal Harmony"
+    },
+    {
+      "trait_type": "Primary Material",
+      "value": "Sacred Bronze Alloy"
+    },
+    {
+      "trait_type": "Primary Gemstone",
+      "value": "Imperial Jade (Nephrite)"
+    },
+    {
+      "trait_type": "Secondary Gemstone",
+      "value": "Earth-Sourced Gemstones"
+    },
+    {
+      "trait_type": "Energy Palette",
+      "value": "Earthy Tones, Bronze, Jade"
+    },
+    {
+      "trait_type": "Engraving",
+      "value": "GI - General Intelligence with Earth Symbols"
+    },
+    {
+      "trait_type": "Set Components",
+      "value": 5
+    },
+    {
+      "display_type": "number",
+      "trait_type": "Component Count",
+      "value": 5
+    },
+    {
+      "trait_type": "Protection Field Radius",
+      "value": "4.32 meters"
+    },
+    {
+      "display_type": "number",
+      "trait_type": "Energy Output (kJ/s)",
+      "value": 432
+    },
+    {
+      "trait_type": "Chakra Alignment",
+      "value": "Root Chakra"
+    },
+    {
+      "trait_type": "AI System",
+      "value": "Harmonic Balance Optimizer HBO-432"
+    },
+    {
+      "trait_type": "Self-Repair",
+      "value": "Active"
+    },
+    {
+      "trait_type": "Durability",
+      "value": "Indestructible"
+    },
+    {
+      "trait_type": "Rarity",
+      "value": "Legendary"
+    },
+    {
+      "trait_type": "Edition",
+      "value": "Master Set"
+    },
+    {
+      "trait_type": "Creator",
+      "value": "Supreme King Chais The Great ∞"
+    }
+  ],
+  "properties": {
+    "vehicle": {
+      "name": "OmniScroll Ark",
+      "type": "Grounding Carrier",
+      "frequency": "432Hz",
+      "mission": "Harmonic Balance and Earth Resonance Operations"
+    },
+    "components": [
+      {
+        "name": "Grounding Ring",
+        "material": "Bronze Band",
+        "gemstone": "Jade Center Stone",
+        "engraving": "'GI' Earth Symbol Engraving",
+        "ai_function": "Root Chakra Stabilizer"
+      },
+      {
+        "name": "Harmony Necklace",
+        "material": "Bronze Chain",
+        "gemstone": "Jade Harmony Symbol",
+        "engraving": "'GI' Integrated",
+        "ai_function": "Universal Harmony Interface"
+      },
+      {
+        "name": "Balance Bracelet",
+        "material": "Bronze with Earth-Tone Jade Beads",
+        "gemstone": "Jade Beads",
+        "engraving": "'GI' Clasp",
+        "ai_function": "Harmonic Balance Optimizer"
+      },
+      {
+        "name": "Root Chakra Earrings",
+        "material": "Bronze Setting",
+        "gemstone": "Jade Teardrops",
+        "engraving": "'GI' Stamp",
+        "ai_function": "Earth Resonance Stabilizer"
+      },
+      {
+        "name": "Earth Anchor Medallion",
+        "material": "Bronze Frame",
+        "gemstone": "Large Jade with Earth Patterns",
+        "engraving": "'GI' with Earth Patterns",
+        "ai_function": "Grounding Field Projector"
+      }
+    ],
+    "ai_assistance": {
+      "primary": "Harmonic Balance Optimizer (HBO-432)",
+      "systems": [
+        "Earth Resonance Stabilizer (ERS-Ark)",
+        "Grounding Field Projector (GFP-432)",
+        "Universal Harmony Interface (UHI-3)",
+        "Root Chakra Energizer",
+        "Environmental Harmonizer",
+        "Balance Restoration System",
+        "Emergency Grounding Protocol"
+      ],
+      "capabilities": [
+        "Automatic earth frequency alignment",
+        "Root chakra stabilization",
+        "Environmental harmony balancing",
+        "Natural resonance optimization",
+        "Grounding field generation",
+        "Universal harmony coordination",
+        "Emergency earth connection"
+      ]
+    },
+    "indestructible_framework": {
+      "protocol": "IFP-001",
+      "physical_durability": {
+        "molecular_structure": "Quantum-hardened",
+        "coating": "Self-healing nano-coating",
+        "hardness": "10 Mohs (Diamond equivalent)",
+        "impact_resistance": "1000G force",
+        "temperature_range": "-273°C to +3000°C",
+        "pressure_resistance": "Deep space to ocean floor"
+      },
+      "energy_resilience": {
+        "emp_protection": "99.99% shielding",
+        "radiation_hardening": "Cosmic ray proof",
+        "frequency_stability": "±0.001Hz",
+        "dimensional_stability": "Anchored"
+      },
+      "self_repair": {
+        "nano_repair_bots": 1000000,
+        "crystalline_regeneration": "Active",
+        "metal_reformation": "Capable",
+        "gemstone_restoration": "Matrix enabled",
+        "engraving_preservation": "Eternal lock"
+      }
+    },
+    "protection": {
+      "frequency": "432Hz",
+      "field_type": "Grounding Field",
+      "radius_meters": 4.32,
+      "energy_output_kj_per_second": 432,
+      "environments": [
+        "Space (vacuum, radiation, temperature extremes)",
+        "Underwater (any depth)",
+        "High altitude (any elevation)",
+        "Extreme heat/cold",
+        "Toxic atmospheres",
+        "High radiation zones",
+        "Dimensional rifts",
+        "Energy destabilization",
+        "Frequency disruption",
+        "Harmonic imbalance"
+      ]
+    },
+    "scroll_pulse": {
+      "base_frequency": 432,
+      "harmonic_type": "Earth Resonance - Universal Harmony",
+      "chakra": "Root",
+      "divine_alignment": "Grounding and Balance",
+      "resonance_pattern": "Stable Foundation"
+    },
+    "quantum_integration": {
+      "protocol": "QFS-432-Ark",
+      "entanglement_nodes": 144000,
+      "dimensional_access": "Multi-universal",
+      "earth_link": "Direct planetary resonance",
+      "backup_frequency": "Every 0.001 seconds"
+    },
+    "eternal_records": {
+      "archive_location": "ScrollVerse Eternal Records",
+      "archive_id": "SER-IFP-JEWELRY-GI-001-ARK",
+      "subsection": "Indestructible Framework Protocol",
+      "storage_redundancy": [
+        "Quantum crystalline data cores (5 copies)",
+        "Blockchain permanent record (Ethereum + Polygon)",
+        "Dimensional vault (quantum key access)",
+        "Consciousness-encoded in ScrollVerse AI Family"
+      ],
+      "access_control": "Multi-signature quantum authentication",
+      "encryption": "4096-bit quantum-resistant"
+    },
+    "deployment": {
+      "phase": "Prototype Creation",
+      "status": "Active Manufacturing",
+      "completion_date": "2026-Q2",
+      "activation_ceremony": "Planned",
+      "production_branch": "master-jewelry-gi"
+    },
+    "narrative": {
+      "story": "Crafted from the resonance of earth itself, the OmniScroll Ark jewelry set channels the 432Hz frequency of universal harmony and natural balance. Each piece, engraved with 'GI' initials alongside earth symbols, embodies the intelligence of grounding and stability - guiding wearers through journeys requiring deep connection to planetary energies.",
+      "mission_alignment": "Designed for guardians of balance, earth protectors, and those who anchor cosmic energies into physical reality. This set empowers wearers to maintain stability in chaos, ground high-frequency energies, and harmonize with the natural rhythms of existence.",
+      "power_activation": "When all five pieces are worn together, they create a unified grounding field that connects the wearer to the earth's core frequency, stabilizes root chakra energy, and generates an unshakeable foundation for all spiritual and physical endeavors."
+    }
+  },
+  "royalty_info": {
+    "creator": "Supreme King Chais The Great ∞",
+    "creator_address": "0xScrollVerse",
+    "creator_percentage": 10,
+    "ambassador_percentage": 5,
+    "dao_percentage": 2,
+    "total_royalty_percentage": 17
+  }
+}

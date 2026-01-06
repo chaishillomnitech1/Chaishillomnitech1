@@ -1,0 +1,68 @@
+{
+  "name": "ScrollVerse NFT #1",
+  "description": "Part of the Omnitech1 ScrollVerse collection. This NFT represents sovereign digital ownership and includes perpetual royalty benefits.",
+  "image": "ipfs://QmYourImageHashHere",
+  "external_url": "https://expansion-three.vercel.app/",
+  "attributes": [
+    {
+      "trait_type": "Collection",
+      "value": "ScrollVerse Genesis"
+    },
+    {
+      "trait_type": "Rarity",
+      "value": "Legendary"
+    },
+    {
+      "trait_type": "Network",
+      "value": "Scroll zkEVM"
+    },
+    {
+      "trait_type": "Frequency",
+      "value": "999 Hz"
+    },
+    {
+      "trait_type": "Artist",
+      "value": "Chais The Great"
+    },
+    {
+      "trait_type": "Creation Date",
+      "value": "2025"
+    },
+    {
+      "display_type": "number",
+      "trait_type": "Edition",
+      "value": 1
+    },
+    {
+      "display_type": "boost_percentage",
+      "trait_type": "Royalty Rate",
+      "value": 15
+    }
+  ],
+  "properties": {
+    "creator": {
+      "name": "Chais Hill | Chais The Great",
+      "address": "0x721AxisEntryPointFLAMEGENESIS∞CHX777"
+    },
+    "royalty": {
+      "percentage": 15,
+      "recipient": "0x721AxisEntryPointFLAMEGENESIS∞CHX777"
+    },
+    "blockchain": {
+      "network": "Scroll zkEVM",
+      "standard": "ERC-721",
+      "contract_address": ""
+    },
+    "files": [
+      {
+        "uri": "ipfs://QmYourImageHashHere",
+        "type": "image/png"
+      }
+    ],
+    "category": "art"
+  },
+  "animation_url": "",
+  "background_color": "FFD700",
+  "youtube_url": "",
+  "compiler": "Omnitech1 Sovereign Deployment Engine v1.0"
+}

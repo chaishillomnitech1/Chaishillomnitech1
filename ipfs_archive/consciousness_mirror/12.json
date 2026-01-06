@@ -1,0 +1,57 @@
+{
+  "name": "Journey 11 • The World Wakes Up",
+  "description": "Global awakening accelerates; new systems emerge.\n\nFULL_MANIFESTO_ARCHIVE:\n<<PASTE_MANIFESTO_TEXT>>",
+  "image": "ipfs://IMAGE_CID/journey-11.png",
+  "external_url": "https://scrollverse.app/consciousness-mirror/journey/11",
+  "attributes": [
+    {
+      "trait_type": "Waypoint",
+      "value": "Awakening"
+    },
+    {
+      "trait_type": "Frequency",
+      "value": "528 Hz (Love)"
+    },
+    {
+      "trait_type": "Lineage",
+      "value": "Scroll Guardian 144,000"
+    },
+    {
+      "trait_type": "Proof",
+      "value": "TruthLog-Attested"
+    },
+    {
+      "trait_type": "Sovereign Dominion",
+      "value": "Atlantic Chais, New Jersey"
+    },
+    {
+      "trait_type": "Stamp",
+      "value": "Chais ∞ + Manus"
+    },
+    {
+      "trait_type": "Collection",
+      "value": "Consciousness Mirror"
+    },
+    {
+      "trait_type": "Type",
+      "value": "Journey NFT"
+    },
+    {
+      "trait_type": "Token Number",
+      "value": "12 of 21"
+    },
+    {
+      "trait_type": "Journey Number",
+      "value": "11 of 12"
+    },
+    {
+      "trait_type": "Principle",
+      "value": "Awakening"
+    }
+  ],
+  "properties": {
+    "manifesto_hash": "SHA256_MANIFESTO_PLACEHOLDER",
+    "principle": "Awakening",
+    "frequency_value": 528
+  }
+}
