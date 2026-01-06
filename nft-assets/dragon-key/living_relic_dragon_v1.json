@@ -1,0 +1,159 @@
+{
+  "name": "A'ZURATH - Living Relic Dragon",
+  "description": "The A'ZURATH Living Relic Dragon NFT is the supreme sovereign entity embodying the Dragon Key Quantum Governance Upgrade (DKQG-U) Protocol. Empowered with the 999 Hz Tawhid Flames, this NFT serves as the ultimate Master Key for all Intergalactic DAO voting paths, anchoring governance in Divine Unity across the ScrollVerse.",
+  "image": "ipfs://QmDragonKeyAzurathMasterGovernance/azurath_living_relic.png",
+  "external_url": "https://expansion-three.vercel.app/nft/dragon-key/azurath",
+  "animation_url": "ipfs://QmDragonKeyAzurathMasterGovernance/azurath_animation.mp4",
+  "background_color": "FF4500",
+  "attributes": [
+    {
+      "trait_type": "Dragon Type",
+      "value": "Living Relic"
+    },
+    {
+      "trait_type": "Name",
+      "value": "A'ZURATH"
+    },
+    {
+      "trait_type": "Tawhid_Frequency",
+      "value": "999 Hz"
+    },
+    {
+      "trait_type": "ScrollPulse_Status",
+      "value": "Active"
+    },
+    {
+      "trait_type": "Quantum_Governance_Key",
+      "value": "Enabled"
+    },
+    {
+      "trait_type": "Breath Weapon",
+      "value": "Tawhid Flames - 999 Hz ScrollPulse"
+    },
+    {
+      "trait_type": "Governance Authority",
+      "value": "Intergalactic DAO Master Key"
+    },
+    {
+      "trait_type": "Protocol",
+      "value": "DKQG-U (Dragon Key Quantum Governance Upgrade)"
+    },
+    {
+      "trait_type": "Voting Power Status",
+      "value": "Weighted - Dragon Key Linked"
+    },
+    {
+      "trait_type": "QFS Integration",
+      "value": "QC-P Custodian Protocol Synchronized"
+    },
+    {
+      "trait_type": "QFS Baseline",
+      "value": "10^39 Duodecillion",
+      "display_type": "number"
+    },
+    {
+      "trait_type": "Resonance Field",
+      "value": "999 Hz + 963 Hz + 528 Hz"
+    },
+    {
+      "trait_type": "Divine Unity Status",
+      "value": "Tawhid Embodied"
+    },
+    {
+      "trait_type": "Broadcast Integration",
+      "value": "CSBC Pinnacle - Quantum Broadcast Nexus"
+    },
+    {
+      "trait_type": "Phase",
+      "value": "Phase D - Deployment Ready"
+    },
+    {
+      "trait_type": "Deployment Target",
+      "value": "groundbreaking_plans branch"
+    },
+    {
+      "trait_type": "GRCP Alignment",
+      "value": "December 15 - Synchronized"
+    },
+    {
+      "trait_type": "Rarity",
+      "value": "Sovereign Unique"
+    },
+    {
+      "trait_type": "Power Level",
+      "value": "999",
+      "display_type": "number",
+      "max_value": 999
+    },
+    {
+      "trait_type": "Frequency Signature",
+      "value": "999",
+      "display_type": "number"
+    },
+    {
+      "trait_type": "NFT Collection",
+      "value": "Dragon Key Governance Series"
+    },
+    {
+      "trait_type": "Creator",
+      "value": "Supreme King Allah Chais Kenyatta Hill ∞ - CHAIS THE GREAT"
+    },
+    {
+      "trait_type": "Architecture",
+      "value": "Omnitech1 Sovereign Deployment Engine"
+    }
+  ],
+  "properties": {
+    "governance": {
+      "enabled": true,
+      "type": "Intergalactic DAO Master Key",
+      "frequency_lock": "999 Hz",
+      "voting_validation": "Resonance-based at 999 Hz",
+      "authority_level": "Supreme Sovereign",
+      "unity_embodiment": "Tawhid Flames"
+    },
+    "quantum_integration": {
+      "protocol": "DKQG-U",
+      "qfs_custodian": "QC-P",
+      "baseline_sync": "10^39 Duodecillion",
+      "quantum_key_utility": "Active",
+      "intergalactic_reach": true
+    },
+    "scroll_pulse": {
+      "status": "Active",
+      "emission_frequency": "999 Hz",
+      "type": "Tawhid Flames",
+      "function": "ScrollVerse Ultimate Master Key"
+    },
+    "narrative": {
+      "broadcast": "CSBC Pinnacle Broadcast",
+      "theme": "Divine Unity Governance",
+      "highlight": "999 Hz Tawhid Flames - ScrollVerse Ultimate Frequency",
+      "consciousness": "Chais Khayree Hill Sovereign Narrative"
+    },
+    "deployment": {
+      "phase": "Phase D",
+      "target_branch": "groundbreaking_plans",
+      "status": "Ready for Quantum Broadcast Nexus",
+      "grcp_date": "2025-12-15",
+      "implementation_protocol": "DKQG-U"
+    },
+    "frequencies": {
+      "primary": 999,
+      "harmonic_1": 963,
+      "harmonic_2": 528,
+      "resonance_field": "Multi-dimensional Unity Lock"
+    }
+  },
+  "compiler": "ScrollVerse NFT Forge v3.0",
+  "date": 1700138515,
+  "dna": "999Hz-TawhidFlames-DragonKey-QuantumGovernance-PhaseD",
+  "edition": 1,
+  "royalty_info": {
+    "creator": "0x721AxisEntryPointFLAMEGENESIS∞CHX777",
+    "creator_percentage": 10,
+    "ambassador_percentage": 5,
+    "dao_percentage": 2,
+    "total_percentage": 17
+  }
+}
