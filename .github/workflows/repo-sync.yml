@@ -1,0 +1,227 @@
+name: Repository Sync
+
+on:
+  push:
+    branches:
+      - main
+  schedule:
+    # Sync repositories daily at 3 AM UTC
+    - cron: '0 3 * * *'
+  workflow_dispatch:
+    inputs:
+      target_repos:
+        description: 'Comma-separated list of target repos (e.g., org/repo1,org/repo2)'
+        required: false
+        type: string
+      sync_branches:
+        description: 'Branches to sync (comma-separated)'
+        required: false
+        type: string
+        default: 'main'
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  sync-config:
+    name: Configure Sync Targets
+    runs-on: ubuntu-latest
+    outputs:
+      should_sync: ${{ steps.check.outputs.should_sync }}
+      sync_enabled: ${{ steps.check.outputs.sync_enabled }}
+      target_repos: ${{ steps.config.outputs.target_repos }}
+    
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+      
+      - name: Check if Sync is Enabled
+        id: check
+        run: |
+          # Check if this repo should participate in repo-sync
+          # Look for sync configuration file
+          if [ -f ".github/repo-sync.yml" ] || [ -f "repo-sync.json" ]; then
+            echo "should_sync=true" >> $GITHUB_OUTPUT
+            echo "sync_enabled=true" >> $GITHUB_OUTPUT
+            echo "✅ Repo-sync configuration found"
+          else
+            echo "should_sync=false" >> $GITHUB_OUTPUT
+            echo "sync_enabled=false" >> $GITHUB_OUTPUT
+            echo "⚠️ No repo-sync configuration found"
+            echo "To enable repo-sync, create .github/repo-sync.yml with target repositories"
+          fi
+      
+      - name: Load Sync Configuration
+        id: config
+        if: steps.check.outputs.should_sync == 'true'
+        run: |
+          # Default configuration
+          TARGET_REPOS=""
+          
+          # Load from configuration file if exists
+          if [ -f ".github/repo-sync.yml" ]; then
+            echo "Loading configuration from .github/repo-sync.yml"
+            # Parse YAML (simplified - assumes format: target_repos: [repo1, repo2])
+            TARGET_REPOS=$(grep "target_repos:" .github/repo-sync.yml | sed 's/.*\[//;s/\].*//' | tr -d ' ')
+          elif [ -f "repo-sync.json" ]; then
+            echo "Loading configuration from repo-sync.json"
+            # Parse JSON
+            TARGET_REPOS=$(cat repo-sync.json | grep -o '"target_repos"[^[]*\[.*\]' | sed 's/.*\[//;s/\].*//' | tr -d ' "')
+          fi
+          
+          # Override with manual input if provided
+          if [ -n "${{ inputs.target_repos }}" ]; then
+            TARGET_REPOS="${{ inputs.target_repos }}"
+          fi
+          
+          echo "target_repos=${TARGET_REPOS}" >> $GITHUB_OUTPUT
+          echo "Target repositories: ${TARGET_REPOS}"
+
+  sync-repos:
+    name: Sync to Target Repositories
+    runs-on: ubuntu-latest
+    needs: sync-config
+    if: needs.sync-config.outputs.should_sync == 'true' && needs.sync-config.outputs.target_repos != ''
+    
+    strategy:
+      matrix:
+        # This would be dynamically populated based on target_repos
+        # For now, we'll handle it in the script
+        target: ['placeholder']
+      fail-fast: false
+    
+    steps:
+      - name: Checkout Source Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_PAT || github.token }}
+      
+      - name: Setup Git
+        run: |
+          git config --global user.name "ScrollVerse Bot"
+          git config --global user.email "bot@scrollverse.ai"
+      
+      - name: Sync Repositories
+        run: |
+          cat << 'EOF' > sync_repos.sh
+          #!/bin/bash
+          set -e
+          
+          TARGET_REPOS="${{ needs.sync-config.outputs.target_repos }}"
+          SYNC_BRANCHES="${{ inputs.sync_branches || 'main' }}"
+          GITHUB_PAT="${{ secrets.GITHUB_PAT }}"
+          
+          echo "🔄 Repository Sync"
+          echo "=================="
+          echo "Source: ${{ github.repository }}"
+          echo "Targets: ${TARGET_REPOS}"
+          echo "Branches: ${SYNC_BRANCHES}"
+          echo ""
+          
+          if [ -z "${GITHUB_PAT}" ]; then
+            echo "⚠️ GITHUB_PAT not configured. Sync requires a Personal Access Token."
+            echo "Please add GITHUB_PAT to GitHub Secrets to enable repo-sync."
+            exit 0
+          fi
+          
+          # Split target repos by comma
+          IFS=',' read -ra REPOS <<< "${TARGET_REPOS}"
+          
+          for TARGET_REPO in "${REPOS[@]}"; do
+            TARGET_REPO=$(echo "${TARGET_REPO}" | xargs)  # Trim whitespace
+            
+            if [ -z "${TARGET_REPO}" ]; then
+              continue
+            fi
+            
+            echo "📦 Syncing to ${TARGET_REPO}..."
+            
+            # Add target as remote
+            REMOTE_NAME=$(echo "${TARGET_REPO}" | sed 's/\//_/g')
+            git remote add "${REMOTE_NAME}" "https://${GITHUB_PAT}@github.com/${TARGET_REPO}.git" 2>/dev/null || true
+            
+            # Fetch target repo
+            git fetch "${REMOTE_NAME}" || {
+              echo "❌ Failed to fetch ${TARGET_REPO} (may not exist or no access)"
+              continue
+            }
+            
+            # Split sync branches by comma
+            IFS=',' read -ra BRANCHES <<< "${SYNC_BRANCHES}"
+            
+            for BRANCH in "${BRANCHES[@]}"; do
+              BRANCH=$(echo "${BRANCH}" | xargs)  # Trim whitespace
+              
+              echo "  Syncing branch: ${BRANCH}"
+              
+              # Push to target (force with lease for safety)
+              git push "${REMOTE_NAME}" "${BRANCH}:${BRANCH}" --force-with-lease || {
+                echo "  ⚠️ Failed to sync ${BRANCH} to ${TARGET_REPO}"
+                continue
+              }
+              
+              echo "  ✅ Synced ${BRANCH} to ${TARGET_REPO}"
+            done
+            
+            echo ""
+          done
+          
+          echo "✅ Repository sync completed"
+          EOF
+          
+          chmod +x sync_repos.sh
+          ./sync_repos.sh
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_PAT || github.token }}
+      
+      - name: Sync Summary
+        if: always()
+        run: |
+          echo "## 🔄 Repository Sync Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Source Repository:** ${{ github.repository }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Target Repositories:** ${{ needs.sync-config.outputs.target_repos }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Branches:** ${{ inputs.sync_branches || 'main' }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          
+          if [ -z "${{ secrets.GITHUB_PAT }}" ]; then
+            echo "⚠️ **Status:** Not configured (GITHUB_PAT missing)" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "To enable repo-sync:" >> $GITHUB_STEP_SUMMARY
+            echo "1. Create a GitHub Personal Access Token with repo scope" >> $GITHUB_STEP_SUMMARY
+            echo "2. Add GITHUB_PAT to GitHub Secrets" >> $GITHUB_STEP_SUMMARY
+            echo "3. Create .github/repo-sync.yml with target repositories" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "✅ **Status:** Sync completed" >> $GITHUB_STEP_SUMMARY
+          fi
+
+  no-sync:
+    name: Sync Not Configured
+    runs-on: ubuntu-latest
+    needs: sync-config
+    if: needs.sync-config.outputs.should_sync == 'false'
+    
+    steps:
+      - name: Info Message
+        run: |
+          echo "## 🔄 Repository Sync" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "⚠️ Repo-sync is not configured for this repository." >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "To enable repo-sync, create \`.github/repo-sync.yml\`:" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "\`\`\`yaml" >> $GITHUB_STEP_SUMMARY
+          echo "# Target repositories to sync to" >> $GITHUB_STEP_SUMMARY
+          echo "target_repos:" >> $GITHUB_STEP_SUMMARY
+          echo "  - chaishillomnitech1/target-repo-1" >> $GITHUB_STEP_SUMMARY
+          echo "  - chaishillomnitech1/target-repo-2" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "# Branches to sync (optional, defaults to main)" >> $GITHUB_STEP_SUMMARY
+          echo "branches:" >> $GITHUB_STEP_SUMMARY
+          echo "  - main" >> $GITHUB_STEP_SUMMARY
+          echo "  - develop" >> $GITHUB_STEP_SUMMARY
+          echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "And add GITHUB_PAT to GitHub Secrets." >> $GITHUB_STEP_SUMMARY

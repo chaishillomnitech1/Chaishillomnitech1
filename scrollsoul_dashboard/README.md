@@ -16,6 +16,35 @@
 
 The ScrollSoul Dashboard is a **React-based interactive UI portal** that serves as the primary interface for ScrollVerse ecosystem interactions. This dashboard provides real-time metrics, wallet integration, NFT management, and divine frequency alignment tools.
 
+## 🚀 **NEW: GENESIS COIN PUBLIC PORTAL**
+
+The Genesis Coin Public Portal has been integrated into the ScrollSoul Dashboard, providing:
+
+- **Real-Time Tokenomics Display**: Live tracking of total supply, circulating supply, and current valuation
+- **Active Node Monitoring**: Real-time visualization of all active nodes in the OmniTech1 network
+- **Secure Web3 Integration**: MetaMask wallet connection with full security protocols
+- **Network Health Metrics**: Visual indicators for network performance and status
+- **User Holdings Dashboard**: Personal balance and passive income tracking for connected wallets
+- **Divine Frequency Alignment**: 963Hz + 528Hz + 144,000Hz resonance integration
+
+### Quick Start
+
+```bash
+# Install dependencies
+npm install
+
+# Configure environment
+cp .env.example .env
+
+# Start development server
+npm start
+
+# Build for production
+npm run build
+```
+
+See [DEPLOYMENT.md](./DEPLOYMENT.md) for complete deployment instructions.
+
 ---
 
 ## 🌌 **DASHBOARD FEATURES**

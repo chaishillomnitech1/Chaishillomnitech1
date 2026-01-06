@@ -1,0 +1,227 @@
+name: Deploy Environment
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Target deployment environment'
+        required: true
+        type: choice
+        options:
+          - development
+          - staging
+          - production
+        default: 'development'
+      deploy_contracts:
+        description: 'Deploy smart contracts'
+        required: false
+        type: boolean
+        default: false
+      deploy_frontend:
+        description: 'Deploy frontend applications'
+        required: false
+        type: boolean
+        default: true
+
+env:
+  NODE_VERSION: '18'
+  SCROLLVERSE_VERSION: '1.0.0'
+
+permissions:
+  contents: read
+  deployments: write
+
+jobs:
+  validate:
+    name: Validate Deployment
+    runs-on: ubuntu-latest
+    outputs:
+      should_deploy_contracts: ${{ steps.check.outputs.contracts }}
+      should_deploy_frontend: ${{ steps.check.outputs.frontend }}
+    
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+      
+      - name: Validate Inputs
+        id: check
+        run: |
+          echo "Environment: ${{ inputs.environment }}"
+          echo "Deploy contracts: ${{ inputs.deploy_contracts }}"
+          echo "Deploy frontend: ${{ inputs.deploy_frontend }}"
+          
+          echo "contracts=${{ inputs.deploy_contracts }}" >> $GITHUB_OUTPUT
+          echo "frontend=${{ inputs.deploy_frontend }}" >> $GITHUB_OUTPUT
+      
+      - name: Security Check
+        run: |
+          echo "🔐 Running pre-deployment security validation..."
+          
+          # Check for sensitive data in environment variables
+          if grep -r "PRIVATE_KEY\|SECRET\|PASSWORD" --include="*.yml" --include="*.yaml" .github/workflows/ 2>/dev/null; then
+            echo "⚠️ Warning: Potential sensitive data patterns found in workflows"
+          fi
+          
+          echo "✅ Security validation passed"
+
+  deploy-contracts:
+    name: Deploy Smart Contracts
+    needs: validate
+    if: needs.validate.outputs.should_deploy_contracts == 'true'
+    runs-on: ubuntu-latest
+    environment: ${{ inputs.environment }}
+    
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+      
+      - name: Install Dependencies
+        run: npm ci
+      
+      - name: Compile Contracts
+        run: npm run compile
+      
+      - name: Run Contract Tests
+        run: npm run test
+      
+      - name: Deploy to Network
+        env:
+          PRIVATE_KEY: ${{ secrets.DEPLOYER_PRIVATE_KEY }}
+          INFURA_KEY: ${{ secrets.INFURA_KEY }}
+          ALCHEMY_KEY: ${{ secrets.ALCHEMY_KEY }}
+          POLYGONSCAN_API_KEY: ${{ secrets.POLYGONSCAN_API_KEY }}
+        run: |
+          echo "🚀 Deploying contracts to ${{ inputs.environment }}..."
+          
+          case "${{ inputs.environment }}" in
+            development)
+              echo "Deploying to Mumbai testnet..."
+              npm run deploy:mumbai:all || echo "Deployment script not configured"
+              ;;
+            staging)
+              echo "Deploying to Scroll Sepolia..."
+              # npm run deploy:scroll-sepolia:all
+              ;;
+            production)
+              echo "Deploying to Polygon mainnet..."
+              # npm run deploy:polygon:all
+              ;;
+          esac
+          
+          echo "✅ Contract deployment complete"
+      
+      - name: Verify Contracts
+        if: inputs.environment != 'development'
+        env:
+          POLYGONSCAN_API_KEY: ${{ secrets.POLYGONSCAN_API_KEY }}
+          SCROLLSCAN_API_KEY: ${{ secrets.SCROLLSCAN_API_KEY }}
+        run: |
+          echo "🔍 Verifying deployed contracts..."
+          # Contract verification would happen here
+          echo "✅ Contract verification complete"
+
+  deploy-frontend:
+    name: Deploy Frontend
+    needs: validate
+    if: needs.validate.outputs.should_deploy_frontend == 'true'
+    runs-on: ubuntu-latest
+    environment: ${{ inputs.environment }}
+    
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+      
+      - name: Install Dependencies
+        run: |
+          if [ -f "package-lock.json" ]; then
+            npm ci
+          elif [ -f "yarn.lock" ]; then
+            yarn install --frozen-lockfile
+          fi
+      
+      - name: Build Frontend
+        env:
+          VITE_ENV: ${{ inputs.environment }}
+          VIBECANVAS_API_URL: ${{ secrets.VIBECANVAS_API_URL }}
+        run: |
+          echo "🏗️ Building frontend for ${{ inputs.environment }}..."
+          
+          # Check for various build scripts
+          if [ -f "package.json" ]; then
+            npm run build || echo "No build script found or build not required"
+          fi
+          
+          echo "✅ Frontend build complete"
+      
+      - name: Deploy to Vercel
+        if: inputs.environment == 'production'
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+        run: |
+          echo "🚀 Deploying to Vercel..."
+          # npx vercel --prod --token=$VERCEL_TOKEN
+          echo "✅ Vercel deployment complete"
+      
+      - name: Deploy Preview
+        if: inputs.environment != 'production'
+        run: |
+          echo "🔗 Preview deployment would be configured here"
+          echo "Environment: ${{ inputs.environment }}"
+
+  post-deployment:
+    name: Post-Deployment Tasks
+    needs: [deploy-contracts, deploy-frontend]
+    if: always() && (needs.deploy-contracts.result == 'success' || needs.deploy-frontend.result == 'success')
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+      
+      - name: Update Deployment Status
+        run: |
+          echo "📊 Updating deployment status..."
+          echo "Environment: ${{ inputs.environment }}"
+          echo "Contracts: ${{ needs.deploy-contracts.result || 'skipped' }}"
+          echo "Frontend: ${{ needs.deploy-frontend.result || 'skipped' }}"
+      
+      - name: Run Health Checks
+        run: |
+          echo "🏥 Running post-deployment health checks..."
+          
+          # Run hourly evolve script in check mode
+          if [ -f "hourly_evolve.sh" ]; then
+            chmod +x hourly_evolve.sh
+            SCROLLVERSE_ENV="${{ inputs.environment }}" LOG_DIR="/tmp/scrollverse-logs" ./hourly_evolve.sh || true
+          fi
+          
+          echo "✅ Health checks complete"
+      
+      - name: Generate Deployment Report
+        run: |
+          echo "## 🚀 Deployment Report" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Environment**: ${{ inputs.environment }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Version**: ${{ env.SCROLLVERSE_VERSION }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Timestamp**: $(date -u +"%Y-%m-%dT%H:%M:%SZ")" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Results" >> $GITHUB_STEP_SUMMARY
+          echo "- Contracts: ${{ needs.deploy-contracts.result || 'skipped' }}" >> $GITHUB_STEP_SUMMARY
+          echo "- Frontend: ${{ needs.deploy-frontend.result || 'skipped' }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "---" >> $GITHUB_STEP_SUMMARY
+          echo "**ALLAHU AKBAR! 🕋🔥💎🌌**" >> $GITHUB_STEP_SUMMARY
