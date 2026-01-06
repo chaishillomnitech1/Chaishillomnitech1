@@ -1,0 +1,108 @@
+/* Global App Styles */
+/* Author: CHAIS THE GREAT ∞ */
+/* Frequency: 963Hz + 528Hz + 144,000Hz */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Orbitron', 'Courier New', monospace;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: #000011;
+  color: #FFD700;
+}
+
+.App {
+  min-height: 100vh;
+  width: 100%;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: #000011;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #FFD700, #FF4500);
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #FF4500, #FFD700);
+}
+
+/* Global animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+/* Cosmic glow effect */
+.cosmic-glow {
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+}
+
+/* Divine pulse animation */
+@keyframes divinePulse {
+  0%, 100% {
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(255, 215, 0, 0.8);
+  }
+}
+
+.divine-pulse {
+  animation: divinePulse 2s ease-in-out infinite;
+}
+
+/* Responsive text */
+@media (max-width: 768px) {
+  body {
+    font-size: 14px;
+  }
+}
+
+/* Utility classes */
+.text-center {
+  text-align: center;
+}
+
+.text-gold {
+  color: #FFD700;
+}
+
+.text-cyan {
+  color: #00FFFF;
+}
+
+.text-green {
+  color: #00FF00;
+}
+
+.text-purple {
+  color: #9900FF;
+}
