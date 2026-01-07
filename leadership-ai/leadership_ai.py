@@ -25,11 +25,20 @@ class LeadershipAI:
     def load_knowledge_base(self):
         """Load existing knowledge base or create default"""
         if os.path.exists(self.knowledge_base_path):
-            with open(self.knowledge_base_path, 'r') as f:
-                data = json.load(f)
-                self.leaders = data.get('leaders', {})
-                self.strategies = data.get('strategies', {})
-                self.decision_patterns = data.get('decision_patterns', {})
+            try:
+                with open(self.knowledge_base_path, 'r') as f:
+                    data = json.load(f)
+                    self.leaders = data.get('leaders', {})
+                    self.strategies = data.get('strategies', {})
+                    self.decision_patterns = data.get('decision_patterns', {})
+            except json.JSONDecodeError as e:
+                print(f"Warning: Knowledge base file is corrupted: {e}")
+                print("Initializing with default knowledge...")
+                self._initialize_default_knowledge()
+                self.save_knowledge_base()
+            except Exception as e:
+                print(f"Error loading knowledge base: {e}")
+                self._initialize_default_knowledge()
         else:
             self._initialize_default_knowledge()
             self.save_knowledge_base()

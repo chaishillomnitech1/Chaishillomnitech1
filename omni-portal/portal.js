@@ -18,7 +18,7 @@ let particles = [];
 document.addEventListener('DOMContentLoaded', () => {
     initializeCanvas();
     initializeControls();
-    initializeParticles();
+    // Particles are initialized in initializeCanvas after canvas is sized
     animate();
     loadPortalState();
 });
@@ -31,6 +31,11 @@ function initializeCanvas() {
     ctx = canvas.getContext('2d');
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
+    
+    // Re-initialize particles after canvas is sized
+    if (canvas.width > 0 && canvas.height > 0) {
+        initializeParticles();
+    }
 }
 
 function resizeCanvas() {
@@ -42,6 +47,11 @@ function resizeCanvas() {
 // Particle system
 function initializeParticles() {
     particles = [];
+    // Ensure canvas has dimensions before initializing particles
+    if (!canvas || canvas.width === 0 || canvas.height === 0) {
+        return;
+    }
+    
     for (let i = 0; i < 100; i++) {
         particles.push({
             x: Math.random() * canvas.width,
