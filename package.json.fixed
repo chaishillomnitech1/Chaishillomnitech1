@@ -1,18 +1,13 @@
 {
-  "name": "scrollverse-genesis-protocol",
-  "version": "2.0.0",
-  "description": "ScrollVerse Genesis Protocol - Phase 2 Enhancement System",
   "name": "scrollverse-sovereignty",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Omnitech1 Sovereign Deployment Engine - ScrollVerse Sovereignty Infrastructure",
   "author": "Supreme King Chais The Great ∞",
   "license": "CC-BY-NC-SA-4.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/chaishillomnitech1/Chaishillomnitech1"
-  "name": "scrollverse-genesis-protocol",
-  "version": "1.1.0",
-  "description": "ScrollVerse Genesis Protocol - Quantum Ritual Deployment System with Sacred Certification IPFS Integration",
+  },
   "main": "index.js",
   "scripts": {
     "compile": "hardhat compile",
@@ -216,13 +211,6 @@
     "test:throwing-stones": "hardhat test test/ThrowingStonesFractionalNFT.test.js",
     "generate:ai-remixes": "node scripts/ai_remix_pipeline.js",
     "genesis:phase1": "npm run generate:ai-remixes && npm run deploy:ethereum:throwing-stones"
-    "genesis:phase1": "npm run generate:ai-remixes && npm run deploy:ethereum:throwing-stones",
-    "systems:frequency": "node systems/self-sustaining/frequency-to-output-converter.js",
-    "systems:feedback": "node systems/self-sustaining/auto-feedback-circuit-963hz.js",
-    "systems:goals": "node systems/self-sustaining/growth-goals-tracker.js",
-    "report:growth": "npm run systems:frequency && npm run systems:feedback && npm run systems:goals",
-    "check:alerts": "node systems/self-sustaining/auto-feedback-circuit-963hz.js | grep -A 10 'ALERTS'",
-    "update:systems": "echo 'Updating all self-sustaining systems...' && npm run systems:frequency && npm run systems:feedback && npm run systems:goals"
   },
   "keywords": [
     "scrollverse",
@@ -245,7 +233,7 @@
   },
   "engines": {
     "node": ">=18.0.0",
-    "npm": ">=9.0.0"
+    "npm": ">=9.0.0",
     "nft",
     "token",
     "polygon",
