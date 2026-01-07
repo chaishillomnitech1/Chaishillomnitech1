@@ -120,7 +120,10 @@ contract ImperialPerpetuityEngine is Ownable, ReentrancyGuard, Pausable {
         );
         
         // Calculate revenue based on frequency and resonance
-        revenueGenerated = (frequencyLevel * frequencyResonanceLevel * revenueConversionRate) / 10000;
+        // Using safe calculation to prevent overflow: divide early to keep numbers manageable
+        // Formula: (frequency * resonance / 10000) * conversionRate
+        uint256 scaledFrequency = (frequencyLevel * frequencyResonanceLevel) / 10000;
+        revenueGenerated = scaledFrequency * revenueConversionRate;
         
         // Add any ETH sent with the transaction
         if (msg.value > 0) {

@@ -230,6 +230,7 @@ contract ThroneFrequencyBroadcast is Ownable, Pausable {
      * @notice Update global coherence level based on all nodes
      */
     function _updateGlobalCoherence() internal {
+        // If no nodes registered, maintain current coherence level
         if (activeNodes.length == 0) {
             return;
         }
@@ -245,12 +246,15 @@ contract ThroneFrequencyBroadcast is Ownable, Pausable {
             }
         }
         
+        // Update coherence only if there are active nodes
         if (activeNodeCount > 0) {
             uint256 oldLevel = globalCoherenceLevel;
             globalCoherenceLevel = totalCoherence / activeNodeCount;
             
             emit GlobalCoherenceUpdated(oldLevel, globalCoherenceLevel, block.timestamp);
         }
+        // If all nodes were deactivated, coherence remains at last calculated level
+        // This ensures continuity and prevents undefined states
     }
     
     /**

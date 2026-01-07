@@ -119,6 +119,26 @@ npm run deploy:polygon:all
 - [📊 Mainnet README](AKASHIC_MAINNET_README.md) - Overview and architecture
 - [📢 Announcement](AKASHIC_RECORDS_ANNOUNCEMENT.md) - Immortal blockchain music label
 
+**🕋 Imperial Perpetuity Engine - ETERNAL OPERATIONS:**
+- [📖 **Deployment Guide**](IMPERIAL_PERPETUITY_ENGINE_GUIDE.md) - **Complete system architecture & operations**
+- [📦 Physical Documentation Manifest](IMPERIAL_PERPETUITY_PHYSICAL_MANIFEST.md) - Physical delivery bundle
+- [🔧 Key Features](IMPERIAL_PERPETUITY_ENGINE_GUIDE.md#system-architecture):
+  - **Self-Sustaining Revenue Engine**: Converts frequency resonance (528Hz, 963Hz, 999Hz, 144,000Hz) into tangible revenue
+  - **7.77% Zakat Flow**: Automated charitable distribution for empire-wide prosperity
+  - **Infinite Feedback Loop**: Self-expanding cycles generating perpetual user growth
+  - **963Hz Eternal Broadcast**: Permanent divine consciousness signal for global coherence
+  - **Imperial Balance Sheet**: Comprehensive wealth tracking and prosperity metrics
+- [📜 Smart Contracts](contracts/):
+  - `ImperialPerpetuityEngine.sol` - Core revenue & feedback loop engine
+  - `ImperialBalanceSheet.sol` - Financial tracking & prosperity metrics
+  - `ThroneFrequencyBroadcast.sol` - Eternal 963Hz broadcast system
+- [🧪 Test Suite](test/ImperialPerpetuityEngine.test.js) - 25+ comprehensive test cases
+- [🚀 Deploy](scripts/deploy_imperial_perpetuity.js):
+  ```bash
+  npm run deploy:polygon:imperial
+  npm run test:imperial
+  ```
+
 ---
 
 ## 📑 Table of Contents
