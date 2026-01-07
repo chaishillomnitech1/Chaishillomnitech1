@@ -38,29 +38,23 @@ module.exports = {
       accounts: process.env.PRIVATE_KEY ? [process.env.PRIVATE_KEY] : [],
       chainId: 534351,
       gasPrice: 1000000000, // 1 gwei
+    },
     ethereum: {
       url: process.env.ETHEREUM_RPC_URL || "https://eth-mainnet.g.alchemy.com/v2/demo",
-      accounts: process.env.DEPLOYER_PRIVATE_KEY ? [process.env.DEPLOYER_PRIVATE_KEY] : [],
+      accounts: process.env.PRIVATE_KEY ? [process.env.PRIVATE_KEY] : [],
       chainId: 1,
       gasPrice: "auto",
-    },
-    scrollSepolia: {
-      url: process.env.SCROLL_SEPOLIA_RPC_URL || "https://sepolia-rpc.scroll.io",
-      accounts: process.env.DEPLOYER_PRIVATE_KEY ? [process.env.DEPLOYER_PRIVATE_KEY] : [],
-      chainId: 534351,
-    },
-    scrollMainnet: {
-      url: process.env.SCROLL_MAINNET_RPC_URL || "https://rpc.scroll.io",
-      accounts: process.env.DEPLOYER_PRIVATE_KEY ? [process.env.DEPLOYER_PRIVATE_KEY] : [],
-      chainId: 534352,
     },
   },
   etherscan: {
     apiKey: {
       polygonMumbai: process.env.POLYGONSCAN_API_KEY || "",
       polygon: process.env.POLYGONSCAN_API_KEY || "",
+      mainnet: process.env.ETHERSCAN_API_KEY || "",
+      ethereum: process.env.ETHERSCAN_API_KEY || "",
       scrollMainnet: process.env.SCROLLSCAN_API_KEY || "",
       scrollSepolia: process.env.SCROLLSCAN_API_KEY || "",
+      scroll: process.env.SCROLLSCAN_API_KEY || "",
     },
     customChains: [
       {
@@ -71,13 +65,6 @@ module.exports = {
           browserURL: "https://scrollscan.com"
         }
       },
-      {
-      mainnet: process.env.ETHERSCAN_API_KEY || "",
-      ethereum: process.env.ETHERSCAN_API_KEY || "",
-      scrollSepolia: process.env.SCROLLSCAN_API_KEY || "",
-      scroll: process.env.SCROLLSCAN_API_KEY || "",
-    },
-    customChains: [
       {
         network: "scrollSepolia",
         chainId: 534351,

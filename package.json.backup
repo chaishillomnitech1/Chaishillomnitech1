@@ -215,6 +215,7 @@
     "deploy:polygon:throwing-stones": "hardhat run scripts/deploy_throwing_stones_fractional.js --network polygon",
     "test:throwing-stones": "hardhat test test/ThrowingStonesFractionalNFT.test.js",
     "generate:ai-remixes": "node scripts/ai_remix_pipeline.js",
+    "genesis:phase1": "npm run generate:ai-remixes && npm run deploy:ethereum:throwing-stones"
     "genesis:phase1": "npm run generate:ai-remixes && npm run deploy:ethereum:throwing-stones",
     "systems:frequency": "node systems/self-sustaining/frequency-to-output-converter.js",
     "systems:feedback": "node systems/self-sustaining/auto-feedback-circuit-963hz.js",
