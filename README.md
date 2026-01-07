@@ -36,6 +36,7 @@ npm run deploy:polygon:all
 
 **New here?** → Start with the [Quick Start Guide](QUICKSTART.md) (5 minutes!)  
 **Want to contribute?** → Read the [Onboarding Guide](ONBOARDING.md) first  
+**Setting up?** → Configure [GitHub Secrets](GITHUB_SECRETS_SETUP.md) for deployment  
 **Repository owner:** @chaishillomnitech1 (primary codeowner for all components)
 
 ---
