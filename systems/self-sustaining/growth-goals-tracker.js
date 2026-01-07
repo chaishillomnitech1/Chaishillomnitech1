@@ -253,11 +253,16 @@ class GrowthGoalsTracker {
 
     // Project completion date based on current growth rates
     const userMetrics = this.goals.investorAppeal.metrics;
-    if (userMetrics.userGrowthRate > 0 && this.goals.users.current < this.goals.users.target) {
-      const usersNeeded = this.goals.users.target - this.goals.users.current;
-      const weeksNeeded = usersNeeded / (this.goals.users.current * (userMetrics.userGrowthRate / 100));
-      const projectedDate = new Date(now.getTime() + weeksNeeded * 7 * 24 * 60 * 60 * 1000);
-      this.goals.timeline.projectedCompletion = projectedDate.toISOString();
+    const usersNeeded = this.goals.users.target - this.goals.users.current;
+    
+    // Only calculate if we have positive growth and users remaining
+    if (userMetrics.userGrowthRate > 0 && usersNeeded > 0 && this.goals.users.current > 0) {
+      const weeklyGrowth = this.goals.users.current * (userMetrics.userGrowthRate / 100);
+      if (weeklyGrowth > 0) {
+        const weeksNeeded = usersNeeded / weeklyGrowth;
+        const projectedDate = new Date(now.getTime() + weeksNeeded * 7 * 24 * 60 * 60 * 1000);
+        this.goals.timeline.projectedCompletion = projectedDate.toISOString();
+      }
     }
   }
 

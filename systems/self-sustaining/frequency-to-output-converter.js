@@ -9,8 +9,31 @@
 const fs = require('fs');
 const path = require('path');
 
-// Load frequency configuration
-const FREQUENCY_CONFIG = require('../../frequency_config.json');
+// Load frequency configuration with error handling
+let FREQUENCY_CONFIG;
+try {
+  FREQUENCY_CONFIG = require('../../frequency_config.json');
+} catch (error) {
+  console.warn('⚠️  Could not load frequency_config.json, using defaults');
+  FREQUENCY_CONFIG = {
+    frequencies: {
+      primary: {
+        dna_healing: { hz: 528 },
+        pineal_activation: { hz: 963 }
+      },
+      secondary: {
+        crown_sovereignty: { hz: 999 },
+        nur_pulse: { hz: 144000 }
+      }
+    },
+    protection_levels: {
+      STANDARD: {},
+      ENHANCED: {},
+      SOVEREIGN: {},
+      ETERNAL: {}
+    }
+  };
+}
 
 class FrequencyToOutputConverter {
   constructor() {

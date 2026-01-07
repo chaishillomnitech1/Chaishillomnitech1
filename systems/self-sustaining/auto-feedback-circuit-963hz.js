@@ -192,10 +192,15 @@ class AutoFeedbackCircuit963Hz {
     };
 
     // GitHub health score
+    const totalWorkflows = this.metrics.github.workflows.successful + this.metrics.github.workflows.failed;
+    const workflowSuccessRate = totalWorkflows > 0 
+      ? (this.metrics.github.workflows.successful / totalWorkflows) * 40 
+      : 0;
+    
     const githubScore = Math.min(
       ((this.metrics.github.commits / 100) * 30 +
        (this.metrics.github.pullRequests / 20) * 30 +
-       (this.metrics.github.workflows.successful / (this.metrics.github.workflows.successful + this.metrics.github.workflows.failed || 1)) * 40) || 0,
+       workflowSuccessRate) || 0,
       100
     );
 
