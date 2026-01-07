@@ -127,6 +127,23 @@ contract UnityVoteDAO is Ownable, ReentrancyGuard, Pausable {
     /// @notice Treasury balance tracking
     uint256 public treasuryBalance;
     
+    // ============ Security Features ============
+    
+    /// @notice Cooldown period between join attempts (default: 1 day)
+    uint256 public joinCooldown;
+    
+    /// @notice Mapping of address to last join attempt timestamp
+    mapping(address => uint256) public lastJoinAttempt;
+    
+    /// @notice Whitelist enabled flag
+    bool public whitelistEnabled;
+    
+    /// @notice Mapping of whitelisted addresses
+    mapping(address => bool) public whitelist;
+    
+    /// @notice Maximum members allowed (0 = no limit)
+    uint256 public maxMembers;
+    
     // ============ Events ============
     
     event ProposalCreated(
@@ -159,6 +176,14 @@ contract UnityVoteDAO is Ownable, ReentrancyGuard, Pausable {
     event TreasuryDeposit(address indexed depositor, uint256 amount);
     
     event TreasuryWithdrawal(address indexed recipient, uint256 amount);
+    
+    event WhitelistUpdated(address indexed account, bool status);
+    
+    event WhitelistEnabledChanged(bool enabled);
+    
+    event JoinCooldownUpdated(uint256 newCooldown);
+    
+    event MaxMembersUpdated(uint256 newMaxMembers);
     
     // ============ Modifiers ============
     
@@ -193,19 +218,43 @@ contract UnityVoteDAO is Ownable, ReentrancyGuard, Pausable {
         governanceToken = IERC20(_governanceToken);
         proposalThreshold = _proposalThreshold;
         quorumBasisPoints = _quorumBasisPoints;
+        
+        // Initialize security parameters
+        joinCooldown = 1 days;
+        whitelistEnabled = false;
+        maxMembers = 0; // No limit by default
     }
     
     // ============ External Functions ============
     
     /**
      * @notice Join the DAO as a voting member
-     * @dev Requires holding governance tokens above threshold
+     * @dev Requires holding governance tokens above threshold and passing security checks
      */
     function joinDAO() external nonReentrant whenNotPaused {
         require(!members[msg.sender].isActive, "UnityVoteDAO: Already a member");
         
+        // Whitelist check
+        if (whitelistEnabled) {
+            require(whitelist[msg.sender], "UnityVoteDAO: Not whitelisted");
+        }
+        
+        // Cooldown check - prevent spam joining
+        require(
+            block.timestamp >= lastJoinAttempt[msg.sender] + joinCooldown,
+            "UnityVoteDAO: Join cooldown not elapsed"
+        );
+        
+        // Maximum members check
+        if (maxMembers > 0) {
+            require(totalMembers < maxMembers, "UnityVoteDAO: Maximum members reached");
+        }
+        
         uint256 balance = governanceToken.balanceOf(msg.sender);
         require(balance > 0, "UnityVoteDAO: Must hold governance tokens");
+        
+        // Update last join attempt timestamp
+        lastJoinAttempt[msg.sender] = block.timestamp;
         
         members[msg.sender] = Member({
             isActive: true,
@@ -551,6 +600,103 @@ contract UnityVoteDAO is Ownable, ReentrancyGuard, Pausable {
      */
     function unpause() external onlyOwner {
         _unpause();
+    }
+    
+    // ============ Security Admin Functions ============
+    
+    /**
+     * @notice Enable or disable whitelist requirement for joining
+     * @param enabled True to enable whitelist, false to disable
+     */
+    function setWhitelistEnabled(bool enabled) external onlyOwner {
+        whitelistEnabled = enabled;
+        emit WhitelistEnabledChanged(enabled);
+    }
+    
+    /**
+     * @notice Add or remove address from whitelist
+     * @param account Address to update
+     * @param status True to whitelist, false to remove
+     */
+    function updateWhitelist(address account, bool status) external onlyOwner {
+        require(account != address(0), "UnityVoteDAO: Invalid address");
+        whitelist[account] = status;
+        emit WhitelistUpdated(account, status);
+    }
+    
+    /**
+     * @notice Batch update whitelist
+     * @param accounts Array of addresses to update
+     * @param status True to whitelist, false to remove
+     */
+    function batchUpdateWhitelist(address[] calldata accounts, bool status) external onlyOwner {
+        for (uint256 i = 0; i < accounts.length; i++) {
+            require(accounts[i] != address(0), "UnityVoteDAO: Invalid address");
+            whitelist[accounts[i]] = status;
+            emit WhitelistUpdated(accounts[i], status);
+        }
+    }
+    
+    /**
+     * @notice Update join cooldown period
+     * @param newCooldown New cooldown period in seconds
+     */
+    function setJoinCooldown(uint256 newCooldown) external onlyOwner {
+        require(newCooldown <= 30 days, "UnityVoteDAO: Cooldown too long");
+        joinCooldown = newCooldown;
+        emit JoinCooldownUpdated(newCooldown);
+    }
+    
+    /**
+     * @notice Set maximum number of members (0 = no limit)
+     * @param newMaxMembers Maximum members allowed
+     */
+    function setMaxMembers(uint256 newMaxMembers) external onlyOwner {
+        maxMembers = newMaxMembers;
+        emit MaxMembersUpdated(newMaxMembers);
+    }
+    
+    /**
+     * @notice Check if address is whitelisted
+     * @param account Address to check
+     * @return True if whitelisted or whitelist is disabled
+     */
+    function isWhitelisted(address account) external view returns (bool) {
+        if (!whitelistEnabled) {
+            return true;
+        }
+        return whitelist[account];
+    }
+    
+    /**
+     * @notice Check if address can join DAO now
+     * @param account Address to check
+     * @return canJoin True if can join
+     * @return reason Reason if cannot join
+     */
+    function canJoinDAO(address account) external view returns (bool canJoin, string memory reason) {
+        if (members[account].isActive) {
+            return (false, "Already a member");
+        }
+        
+        if (whitelistEnabled && !whitelist[account]) {
+            return (false, "Not whitelisted");
+        }
+        
+        if (block.timestamp < lastJoinAttempt[account] + joinCooldown) {
+            return (false, "Cooldown not elapsed");
+        }
+        
+        if (maxMembers > 0 && totalMembers >= maxMembers) {
+            return (false, "Maximum members reached");
+        }
+        
+        uint256 balance = governanceToken.balanceOf(account);
+        if (balance == 0) {
+            return (false, "Must hold governance tokens");
+        }
+        
+        return (true, "Can join");
     }
     
     /**

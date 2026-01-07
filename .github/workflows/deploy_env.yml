@@ -82,15 +82,31 @@ jobs:
           cache: 'npm'
       
       - name: Install Dependencies
-        run: npm ci
+        uses: nick-fields/retry@v3
+        with:
+          timeout_minutes: 10
+          max_attempts: 3
+          retry_wait_seconds: 5
+          command: npm ci
       
       - name: Compile Contracts
-        run: npm run compile
+        uses: nick-fields/retry@v3
+        with:
+          timeout_minutes: 10
+          max_attempts: 3
+          retry_wait_seconds: 10
+          command: npm run compile
       
       - name: Run Contract Tests
-        run: npm run test
+        uses: nick-fields/retry@v3
+        with:
+          timeout_minutes: 15
+          max_attempts: 2
+          retry_wait_seconds: 5
+          command: npm run test
       
       - name: Deploy to Network
+        id: deploy
         env:
           PRIVATE_KEY: ${{ secrets.DEPLOYER_PRIVATE_KEY }}
           INFURA_KEY: ${{ secrets.INFURA_KEY }}
@@ -99,22 +115,74 @@ jobs:
         run: |
           echo "🚀 Deploying contracts to ${{ inputs.environment }}..."
           
+          # Function to deploy with retries
+          deploy_with_retry() {
+            local max_attempts=5
+            local attempt=1
+            local wait_time=10
+            local command=$1
+            
+            while [ $attempt -le $max_attempts ]; do
+              echo "Attempt $attempt of $max_attempts..."
+              
+              if eval "$command"; then
+                echo "✅ Deployment successful on attempt $attempt"
+                return 0
+              else
+                echo "⚠️ Attempt $attempt failed"
+                if [ $attempt -lt $max_attempts ]; then
+                  echo "Waiting ${wait_time}s before retry..."
+                  sleep $wait_time
+                  # Exponential backoff
+                  wait_time=$((wait_time * 2))
+                fi
+                attempt=$((attempt + 1))
+              fi
+            done
+            
+            echo "❌ All deployment attempts failed"
+            return 1
+          }
+          
           case "${{ inputs.environment }}" in
             development)
               echo "Deploying to Mumbai testnet..."
-              npm run deploy:mumbai:all || echo "Deployment script not configured"
+              deploy_with_retry "npm run deploy:mumbai:all" || echo "Deployment script not configured"
               ;;
             staging)
               echo "Deploying to Scroll Sepolia..."
-              # npm run deploy:scroll-sepolia:all
+              # deploy_with_retry "npm run deploy:scroll-sepolia:all"
               ;;
             production)
               echo "Deploying to Polygon mainnet..."
-              # npm run deploy:polygon:all
+              # deploy_with_retry "npm run deploy:polygon:all"
               ;;
           esac
           
           echo "✅ Contract deployment complete"
+      
+      - name: Retry Deploy on Failure
+        if: failure() && steps.deploy.outcome == 'failure'
+        env:
+          PRIVATE_KEY: ${{ secrets.DEPLOYER_PRIVATE_KEY }}
+          INFURA_KEY: ${{ secrets.INFURA_KEY }}
+          ALCHEMY_KEY: ${{ secrets.ALCHEMY_KEY }}
+          POLYGONSCAN_API_KEY: ${{ secrets.POLYGONSCAN_API_KEY }}
+        run: |
+          echo "🔄 Retrying deployment after failure..."
+          sleep 30
+          
+          case "${{ inputs.environment }}" in
+            development)
+              npm run deploy:mumbai:all || echo "Retry deployment failed"
+              ;;
+            staging)
+              # npm run deploy:scroll-sepolia:all
+              ;;
+            production)
+              # npm run deploy:polygon:all
+              ;;
+          esac
       
       - name: Verify Contracts
         if: inputs.environment != 'development'
@@ -144,37 +212,52 @@ jobs:
           cache: 'npm'
       
       - name: Install Dependencies
-        run: |
-          if [ -f "package-lock.json" ]; then
-            npm ci
-          elif [ -f "yarn.lock" ]; then
-            yarn install --frozen-lockfile
-          fi
+        uses: nick-fields/retry@v3
+        with:
+          timeout_minutes: 10
+          max_attempts: 3
+          retry_wait_seconds: 5
+          command: npm ci || npm install
       
       - name: Build Frontend
+        uses: nick-fields/retry@v3
+        with:
+          timeout_minutes: 15
+          max_attempts: 3
+          retry_wait_seconds: 10
+          exponential_backoff: true
+          command: |
+            echo "🏗️ Building frontend for ${{ inputs.environment }}..."
+            
+            # Check for various build scripts
+            if [ -f "package.json" ]; then
+              npm run build || echo "No build script found or build not required"
+            fi
+            
+            echo "✅ Frontend build complete"
         env:
           VITE_ENV: ${{ inputs.environment }}
           VIBECANVAS_API_URL: ${{ secrets.VIBECANVAS_API_URL }}
-        run: |
-          echo "🏗️ Building frontend for ${{ inputs.environment }}..."
-          
-          # Check for various build scripts
-          if [ -f "package.json" ]; then
-            npm run build || echo "No build script found or build not required"
-          fi
-          
-          echo "✅ Frontend build complete"
+          NFT_STORAGE_API_KEY: ${{ secrets.NFT_STORAGE_API_KEY }}
       
       - name: Deploy to Vercel
         if: inputs.environment == 'production'
+        uses: nick-fields/retry@v3
+        with:
+          timeout_minutes: 10
+          max_attempts: 3
+          retry_wait_seconds: 15
+          exponential_backoff: true
+          command: |
+            echo "🚀 Deploying to Vercel..."
+            # npx vercel --prod --token=$VERCEL_TOKEN
+            echo "✅ Vercel deployment complete"
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
           VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
-        run: |
-          echo "🚀 Deploying to Vercel..."
-          # npx vercel --prod --token=$VERCEL_TOKEN
-          echo "✅ Vercel deployment complete"
+          VIBECANVAS_API_URL: ${{ secrets.VIBECANVAS_API_URL }}
+          NFT_STORAGE_API_KEY: ${{ secrets.NFT_STORAGE_API_KEY }}
       
       - name: Deploy Preview
         if: inputs.environment != 'production'

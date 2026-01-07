@@ -326,8 +326,103 @@ Before running deployment, verify:
 | **Security** | `SNYK_TOKEN` | For vulnerability scanning |
 | **Security** | `CRDA_KEY` | For dependency analysis |
 | **Security** | `IMAGE_REGISTRY_PASSWORD` | For container registry |
+| **ScrollVerse** | `VIBECANVAS_API_URL` | ✅ VibeCanvas API endpoint for audio/visual integrations |
+| **ScrollVerse** | `NFT_STORAGE_API_KEY` | ✅ NFT.Storage IPFS API key for metadata uploads |
+| **ScrollVerse** | `NPM_TOKEN` | NPM authentication token for private packages |
 
 > 📝 **Note**: See `.env.example` for a complete list with descriptions.
+
+---
+
+## 🎨 **ScrollVerse-Specific Secrets (PR #99)**
+
+### **7. VIBECANVAS_API_URL**
+
+**Description**: API endpoint URL for VibeCanvas audio and visual integrations  
+**Format**: HTTPS URL  
+**Example**: `https://api.vibecanvas.io/v1` or `https://your-custom-endpoint.com`
+
+**Purpose**: Used by vibe-layer.js for audio visualization overlays and frequency-based experiences
+
+**How to Set**:
+1. Obtain your VibeCanvas API endpoint from your VibeCanvas account
+2. Or use your custom API endpoint if self-hosting
+3. Add as repository secret: `VIBECANVAS_API_URL`
+4. Also add as Vercel environment variable for frontend deployments
+
+⚠️ **Note**: Required for fractal crown generator and audio visualization features
+
+---
+
+### **8. NFT_STORAGE_API_KEY**
+
+**Description**: API key for uploading NFT metadata and assets to NFT.Storage IPFS  
+**Format**: Alphanumeric token  
+**Example**: `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...`
+
+**How to Get**:
+1. Visit [nft.storage](https://nft.storage/)
+2. Sign up or log in with your email or GitHub
+3. Go to "API Keys" section
+4. Click "New Key" to generate an API key
+5. Copy the generated key
+
+**Purpose**: Used by metadata_uploader.js for uploading NFT assets and metadata to IPFS
+
+**Usage Example**:
+```bash
+NFT_STORAGE_API_KEY=your_key node metadata_uploader.js --file metadata.json
+```
+
+⚠️ **Note**: Required for NFT metadata uploads and IPFS integration
+
+---
+
+### **9. NPM_TOKEN**
+
+**Description**: NPM authentication token for accessing private npm packages  
+**Format**: NPM token (various formats supported)  
+**Example**: `npm_xxxxxxxxxxxxxxxxxxxxxxxxxxxxx`
+
+**How to Get**:
+1. Log in to [npmjs.com](https://www.npmjs.com/)
+2. Go to Access Tokens in your profile
+3. Click "Generate New Token"
+4. Select "Automation" type (for CI/CD)
+5. Copy the generated token
+
+**Purpose**: 
+- Install private npm packages during CI/CD
+- Publish packages to npm registry (if applicable)
+- Required only if using private npm packages
+
+**Setup in GitHub Actions**:
+The token is automatically used in workflows when installing dependencies.
+
+⚠️ **Note**: Optional unless you're using private npm packages
+
+---
+
+## 🌐 **Vercel Environment Variables**
+
+For frontend deployments via Vercel, also configure these as **Vercel Environment Variables**:
+
+1. Go to your Vercel project settings
+2. Navigate to "Environment Variables"
+3. Add the following variables:
+
+| Variable Name | Value Source | Environment |
+|---------------|-------------|-------------|
+| `VIBECANVAS_API_URL` | Same as GitHub secret | Production, Preview, Development |
+| `NFT_STORAGE_API_KEY` | Same as GitHub secret | Production |
+| `VITE_ENV` | `production` or `development` | Respective environments |
+
+**How to Add**:
+1. Vercel Dashboard → Project → Settings → Environment Variables
+2. Click "Add New"
+3. Enter variable name and value
+4. Select applicable environments (Production, Preview, Development)
+5. Click "Save"
 
 ---
 
