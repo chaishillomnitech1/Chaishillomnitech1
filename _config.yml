@@ -1,3 +1,26 @@
-title: ScrollVerse
+title: ScrollVerse - Omnitech1 Sovereignty Infrastructure
 theme: minima
-description: The Sovereign Grand Mandate Website
+description: The Sovereign Grand Mandate - CHAIS THE GREAT Omni-Portal and Leadership AI
+baseurl: "/Chaishillomnitech1"
+url: "https://chaishillomnitech1.github.io"
+
+# Navigation
+header_pages:
+  - omni-portal/index.html
+  - command-center/index.html
+  - README.md
+
+# Build settings
+markdown: kramdown
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+
+# Exclude from build
+exclude:
+  - node_modules/
+  - contracts/
+  - scripts/
+  - test/
+  - .github/
+  - "*.log"

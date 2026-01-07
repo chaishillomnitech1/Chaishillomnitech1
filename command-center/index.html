@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Command & Knowledge Center - ScrollVerse</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --gold: #FFD700;
+            --purple: #9B59B6;
+            --dark: #0a0a1a;
+            --dark-secondary: #151525;
+            --light: #f0f0f0;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--dark) 0%, var(--dark-secondary) 100%);
+            color: var(--light);
+            min-height: 100vh;
+        }
+        
+        .header {
+            background: rgba(255, 215, 0, 0.1);
+            border-bottom: 2px solid var(--gold);
+            padding: 1.5rem 2rem;
+            text-align: center;
+        }
+        
+        .header h1 {
+            color: var(--gold);
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .header p {
+            color: var(--light);
+            opacity: 0.8;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .nav-tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .tab-btn {
+            padding: 1rem 2rem;
+            background: rgba(255, 215, 0, 0.1);
+            border: 2px solid var(--gold);
+            border-radius: 10px;
+            color: var(--light);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+        
+        .tab-btn:hover {
+            background: rgba(255, 215, 0, 0.2);
+            transform: translateY(-2px);
+        }
+        
+        .tab-btn.active {
+            background: linear-gradient(135deg, var(--gold) 0%, #FFA500 100%);
+            color: var(--dark);
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .search-bar {
+            margin-bottom: 2rem;
+        }
+        
+        .search-input {
+            width: 100%;
+            padding: 1rem;
+            background: rgba(255, 215, 0, 0.1);
+            border: 2px solid var(--gold);
+            border-radius: 10px;
+            color: var(--light);
+            font-size: 1rem;
+        }
+        
+        .search-input::placeholder {
+            color: rgba(240, 240, 240, 0.5);
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .card {
+            background: rgba(255, 215, 0, 0.05);
+            border: 1px solid var(--gold);
+            border-radius: 15px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+        }
+        
+        .card h3 {
+            color: var(--gold);
+            margin-bottom: 0.75rem;
+            font-size: 1.3rem;
+        }
+        
+        .card .meta {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            font-size: 0.85rem;
+            opacity: 0.7;
+        }
+        
+        .card .description {
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+        
+        .card .tags {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .tag {
+            padding: 0.25rem 0.75rem;
+            background: rgba(155, 89, 182, 0.3);
+            border-radius: 15px;
+            font-size: 0.75rem;
+            color: var(--purple);
+        }
+        
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .stat-card {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(155, 89, 182, 0.1));
+            border: 2px solid var(--gold);
+            border-radius: 10px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--gold);
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-label {
+            opacity: 0.8;
+        }
+        
+        .add-btn {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--gold) 0%, #FFA500 100%);
+            border: none;
+            color: var(--dark);
+            font-size: 2rem;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+            transition: all 0.3s ease;
+        }
+        
+        .add-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(255, 215, 0, 0.6);
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal.active {
+            display: flex;
+        }
+        
+        .modal-content {
+            background: var(--dark-secondary);
+            border: 2px solid var(--gold);
+            border-radius: 15px;
+            padding: 2rem;
+            max-width: 600px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        
+        .modal h2 {
+            color: var(--gold);
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--gold);
+        }
+        
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 0.75rem;
+            background: rgba(255, 215, 0, 0.1);
+            border: 1px solid var(--gold);
+            border-radius: 8px;
+            color: var(--light);
+            font-family: inherit;
+        }
+        
+        .form-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+        
+        .form-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: flex-end;
+        }
+        
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--gold) 0%, #FFA500 100%);
+            color: var(--dark);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            border: 2px solid var(--gold);
+            color: var(--gold);
+        }
+        
+        .btn:hover {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1>⚔️ Command & Knowledge Center ⚔️</h1>
+        <p>Leadership Strategies & Historical Knowledge Archive</p>
+    </header>
+
+    <div class="container">
+        <div class="stats">
+            <div class="stat-card">
+                <div class="stat-value" id="totalStrategies">0</div>
+                <div class="stat-label">Leadership Strategies</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="totalLeaders">0</div>
+                <div class="stat-label">Historical Leaders</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="totalInsights">0</div>
+                <div class="stat-label">Insights Cataloged</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="totalCategories">0</div>
+                <div class="stat-label">Categories</div>
+            </div>
+        </div>
+
+        <div class="nav-tabs">
+            <button class="tab-btn active" onclick="switchTab('strategies')">Leadership Strategies</button>
+            <button class="tab-btn" onclick="switchTab('leaders')">Historical Leaders</button>
+            <button class="tab-btn" onclick="switchTab('insights')">Knowledge Insights</button>
+            <button class="tab-btn" onclick="switchTab('analytics')">Analytics</button>
+        </div>
+
+        <div class="search-bar">
+            <input type="text" class="search-input" id="searchInput" placeholder="Search strategies, leaders, insights...">
+        </div>
+
+        <div id="strategies" class="tab-content active">
+            <div class="grid" id="strategiesGrid"></div>
+        </div>
+
+        <div id="leaders" class="tab-content">
+            <div class="grid" id="leadersGrid"></div>
+        </div>
+
+        <div id="insights" class="tab-content">
+            <div class="grid" id="insightsGrid"></div>
+        </div>
+
+        <div id="analytics" class="tab-content">
+            <div id="analyticsContent"></div>
+        </div>
+    </div>
+
+    <button class="add-btn" onclick="openAddModal()">+</button>
+
+    <div id="addModal" class="modal">
+        <div class="modal-content">
+            <h2>Add New Entry</h2>
+            <form id="addForm">
+                <div class="form-group">
+                    <label>Type</label>
+                    <select id="entryType" required>
+                        <option value="strategy">Leadership Strategy</option>
+                        <option value="leader">Historical Leader</option>
+                        <option value="insight">Knowledge Insight</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Title</label>
+                    <input type="text" id="entryTitle" required>
+                </div>
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea id="entryDescription" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Category</label>
+                    <input type="text" id="entryCategory" placeholder="e.g., Military, Governance, Innovation">
+                </div>
+                <div class="form-group">
+                    <label>Tags (comma-separated)</label>
+                    <input type="text" id="entryTags" placeholder="e.g., strategy, leadership, victory">
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" onclick="closeAddModal()">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Add Entry</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="command-center.js"></script>
+</body>
+</html>
