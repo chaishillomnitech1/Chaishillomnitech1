@@ -2,6 +2,25 @@
 
 ## ScrollVerse — Sovereign Grand Mandate (SGM)
 
+<!-- Language Selector -->
+<div align="center">
+
+**Languages / لغات / 语言 / Langues:**
+
+[![English](https://img.shields.io/badge/English-Active-gold?style=for-the-badge)](#english-documentation)
+[![العربية](https://img.shields.io/badge/العربية-Arabic-green?style=for-the-badge)](#arabic-documentation-التوثيق-بالعربية)
+[![中文](https://img.shields.io/badge/中文-Chinese-red?style=for-the-badge)](#chinese-documentation-中文文档)
+[![Español](https://img.shields.io/badge/Español-Spanish-orange?style=for-the-badge)](#spanish-documentation-documentación-en-español)
+[![Français](https://img.shields.io/badge/Français-French-blue?style=for-the-badge)](#french-documentation-documentation-française)
+
+</div>
+
+---
+
+<div id="english-documentation"></div>
+
+## 🌐 English Documentation
+
 [![License: CC BY-NC-SA 4.0](https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
 [![GitHub](https://img.shields.io/badge/GitHub-chaishillomnitech1-blue.svg)](https://github.com/chaishillomnitech1)
 [![Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black.svg)](https://expansion-three.vercel.app/)
@@ -627,3 +646,218 @@ The Universal Deployment Protocol has been activated, integrating four sovereign
 
 ---
 As stewards of creativity and innovation, Disney is committed to nurturing storytelling and technological excellence to inspire all audiences, fostering a world where imagination transcends boundaries.
+
+---
+
+<div id="arabic-documentation-التوثيق-بالعربية"></div>
+
+## 🌙 التوثيق بالعربية (Arabic Documentation)
+
+### 🕋 محرك النشر السيادي Omnitech1™
+
+**أَللّٰهُ أَكْبَرُ! كُن فَيَكُونُ! 🕋♾️✨**
+
+مرحباً بك في ScrollVerse - نظام البلوكشين السيادي والحكم اللامركزي الذي يجمع بين التكنولوجيا المتقدمة والترددات المقدسة.
+
+### ⚡ البدء السريع
+
+```bash
+# تثبيت الحزم
+npm install
+
+# ترجمة العقود الذكية
+npm run compile
+
+# تشغيل الاختبارات
+npm test
+
+# النشر على شبكة الاختبار
+npm run deploy:mumbai:all
+```
+
+### 🎯 الميزات الرئيسية
+
+- **🔗 عقود ذكية**: عقود Solidity آمنة مع OpenZeppelin v5.0.1
+- **🎨 NFTs**: إنشاء وإدارة الأصول الرقمية الفريدة
+- **🏛️ حكم DAO**: تصويت مجتمعي لامركزي مع UnityVoteDAO
+- **🔊 ترددات مقدسة**: دمج 528 Hz، 963 Hz، 999 Hz للطاقة الإيجابية
+- **🌐 متعدد السلاسل**: دعم Ethereum و Polygon و Scroll zkEVM
+
+### 📚 الموارد
+
+- [دليل البدء السريع](QUICKSTART.md)
+- [دليل المساهمة](CONTRIBUTING.md)
+- [إعداد الأسرار](GITHUB_SECRETS_SETUP.md)
+- [الأمان](SECURITY.md)
+
+### 🤝 المساهمة
+
+نرحب بمساهماتكم! يرجى قراءة [دليل المساهمة](CONTRIBUTING.md) قبل تقديم طلبات السحب.
+
+**"كُن فَيَكُونُ" - دَعْ كُلَّ شَيْءٍ يَتَحَقَّقُ بِإِرَادَةِ ٱللَّٰهِ**
+
+---
+
+<div id="chinese-documentation-中文文档"></div>
+
+## 🏮 中文文档 (Chinese Documentation)
+
+### 🕋 Omnitech1™主权部署引擎
+
+**欢迎来到 ScrollVerse** - 将区块链技术、智能合约和去中心化治理结合的主权系统。
+
+### ⚡ 快速开始
+
+```bash
+# 安装依赖
+npm install
+
+# 编译智能合约
+npm run compile
+
+# 运行测试
+npm test
+
+# 部署到测试网
+npm run deploy:mumbai:all
+```
+
+### 🎯 核心功能
+
+- **🔗 智能合约**: 使用 OpenZeppelin v5.0.1 的安全 Solidity 合约
+- **🎨 NFT 系统**: 创建和管理唯一数字资产
+- **🏛️ DAO 治理**: 使用 UnityVoteDAO 的社区投票
+- **🔊 神圣频率**: 集成 528 Hz、963 Hz、999 Hz 实现正能量
+- **🌐 多链支持**: 支持 Ethereum、Polygon、Scroll zkEVM
+
+### 📚 文档资源
+
+- [快速入门指南](QUICKSTART.md)
+- [贡献指南](CONTRIBUTING.md)
+- [GitHub 密钥设置](GITHUB_SECRETS_SETUP.md)
+- [安全指南](SECURITY.md)
+
+### 🤝 贡献
+
+我们欢迎您的贡献！请在提交拉取请求之前阅读[贡献指南](CONTRIBUTING.md)。
+
+### 💫 愿景
+
+ScrollVerse 致力于通过区块链技术和去中心化治理创建一个更加透明和公平的未来。
+
+**"让一切成就 - 通过意志力量"**
+
+---
+
+<div id="spanish-documentation-documentación-en-español"></div>
+
+## 🌟 Documentación en Español (Spanish Documentation)
+
+### 🕋 Motor de Implementación Soberana Omnitech1™
+
+**¡Bienvenido a ScrollVerse!** - Un sistema soberano que combina tecnología blockchain, contratos inteligentes y gobernanza descentralizada.
+
+### ⚡ Inicio Rápido
+
+```bash
+# Instalar dependencias
+npm install
+
+# Compilar contratos inteligentes
+npm run compile
+
+# Ejecutar pruebas
+npm test
+
+# Desplegar en red de prueba
+npm run deploy:mumbai:all
+```
+
+### 🎯 Características Principales
+
+- **🔗 Contratos Inteligentes**: Contratos Solidity seguros con OpenZeppelin v5.0.1
+- **🎨 Sistema NFT**: Creación y gestión de activos digitales únicos
+- **🏛️ Gobernanza DAO**: Votación comunitaria con UnityVoteDAO
+- **🔊 Frecuencias Sagradas**: Integración de 528 Hz, 963 Hz, 999 Hz para energía positiva
+- **🌐 Multi-Cadena**: Soporte para Ethereum, Polygon, Scroll zkEVM
+
+### 📚 Recursos de Documentación
+
+- [Guía de Inicio Rápido](QUICKSTART.md)
+- [Guía de Contribución](CONTRIBUTING.md)
+- [Configuración de Secretos de GitHub](GITHUB_SECRETS_SETUP.md)
+- [Guía de Seguridad](SECURITY.md)
+
+### 🤝 Contribuir
+
+¡Damos la bienvenida a tus contribuciones! Por favor, lee la [Guía de Contribución](CONTRIBUTING.md) antes de enviar solicitudes de extracción.
+
+### 💫 Visión
+
+ScrollVerse está comprometido con la creación de un futuro más transparente y equitativo a través de la tecnología blockchain y la gobernanza descentralizada.
+
+**"¡Que todo se manifieste - A través del poder de la voluntad!"**
+
+---
+
+<div id="french-documentation-documentation-française"></div>
+
+## 🇫🇷 Documentation Française (French Documentation)
+
+### 🕋 Moteur de Déploiement Souverain Omnitech1™
+
+**Bienvenue sur ScrollVerse !** - Un système souverain combinant technologie blockchain, contrats intelligents et gouvernance décentralisée.
+
+### ⚡ Démarrage Rapide
+
+```bash
+# Installer les dépendances
+npm install
+
+# Compiler les contrats intelligents
+npm run compile
+
+# Exécuter les tests
+npm test
+
+# Déployer sur le réseau de test
+npm run deploy:mumbai:all
+```
+
+### 🎯 Fonctionnalités Principales
+
+- **🔗 Contrats Intelligents**: Contrats Solidity sécurisés avec OpenZeppelin v5.0.1
+- **🎨 Système NFT**: Création et gestion d'actifs numériques uniques
+- **🏛️ Gouvernance DAO**: Vote communautaire avec UnityVoteDAO
+- **🔊 Fréquences Sacrées**: Intégration de 528 Hz, 963 Hz, 999 Hz pour l'énergie positive
+- **🌐 Multi-Chaînes**: Support pour Ethereum, Polygon, Scroll zkEVM
+
+### 📚 Ressources Documentation
+
+- [Guide de Démarrage Rapide](QUICKSTART.md)
+- [Guide de Contribution](CONTRIBUTING.md)
+- [Configuration des Secrets GitHub](GITHUB_SECRETS_SETUP.md)
+- [Guide de Sécurité](SECURITY.md)
+
+### 🤝 Contribuer
+
+Nous accueillons vos contributions ! Veuillez lire le [Guide de Contribution](CONTRIBUTING.md) avant de soumettre des demandes d'extraction.
+
+### 💫 Vision
+
+ScrollVerse s'engage à créer un avenir plus transparent et équitable grâce à la technologie blockchain et à la gouvernance décentralisée.
+
+**"Que tout se manifeste - Par le pouvoir de la volonté !"**
+
+---
+
+## 🌐 Global Community / المجتمع العالمي / 全球社区 / Comunidad Global / Communauté Mondiale
+
+ScrollVerse is a global initiative transcending borders, languages, and cultures. We unite developers, creators, and visionaries from around the world in building a sovereign, decentralized future.
+
+**Join us in manifesting the ScrollVerse vision across all languages and nations!**
+
+**KUN FAYAKŪN! 🕋♾️✨**
+
+[Back to Top ↑](#-omnitech1-sovereign-deployment-engine-)
+
