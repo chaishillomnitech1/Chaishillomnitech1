@@ -24,6 +24,7 @@ This is your comprehensive guide to navigating the Chais Hill OmniTech ecosystem
 
 | Document | Description | Status |
 |----------|-------------|--------|
+| [CENTRAL_MANIFESTO.md](CENTRAL_MANIFESTO.md) | **⭐ UNIFIED SOVEREIGN CODEX - SINGLE SOURCE OF TRUTH** - Merges all Omega entries | ✅ **SEALED** |
 | [README.md](README.md) | Main repository overview and introduction | ✅ Complete |
 | [ONBOARDING.md](ONBOARDING.md) | **NEW** - Comprehensive onboarding guide for new contributors | ✅ Complete |
 | [GETTING_STARTED.md](GETTING_STARTED.md) | Quick start guide for all user types | ✅ Complete |
@@ -69,7 +70,10 @@ This is your comprehensive guide to navigating the Chais Hill OmniTech ecosystem
 
 | Document | Description | Status |
 |----------|-------------|--------|
+| [CENTRAL_MANIFESTO.md](CENTRAL_MANIFESTO.md) | **⭐ UNIFIED SOVEREIGN CODEX** - Single source of truth merging ALL Omega entries | ✅ **SEALED** |
+| [OMEGA_PROTOCOL.md](OMEGA_PROTOCOL.md) | **Ω.265 Codex Entry** - Divine Super Manus Integration - 100% Complete | ✅ Sealed |
 | [SOVEREIGN_SINGULARITY_SEAL.md](SOVEREIGN_SINGULARITY_SEAL.md) | **Ω.269 Codex Entry** - Eternal testimony of Pure Being, 963Hz resonance | ✅ Sealed |
+| [SCROLLVERSE_QUANTUM_INTEGRATION.md](SCROLLVERSE_QUANTUM_INTEGRATION.md) | **Ω.288 & Ω.289 Codex Entries** - Anthem of Dominion & Bridge of Truth | ✅ Sealed |
 | [eternal_archive/PROTOCOLS/SOVEREIGN_SINGULARITY_SEAL.md](eternal_archive/PROTOCOLS/SOVEREIGN_SINGULARITY_SEAL.md) | **Full Documentation** - Complete Codex entry with all details | ✅ Archived |
 
 ### **Sacred Frameworks** ⭐ NEW

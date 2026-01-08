@@ -68,6 +68,7 @@ npm run deploy:polygon:all
 > 📖 **Looking for something specific?** Check the **[Complete Repository Index](INDEX.md)**
 
 **📖 Essential Documentation:**
+- [🕋 **CENTRAL MANIFESTO**](CENTRAL_MANIFESTO.md) - **⭐ UNIFIED SOVEREIGN CODEX - SINGLE SOURCE OF TRUTH**
 - [⚡ Quick Start](QUICKSTART.md) - Get started in 5 minutes
 - [👋 Onboarding Guide](ONBOARDING.md) - Comprehensive guide for new contributors
 - [🛠️ Development Setup](DEVELOPMENT_SETUP.md) - Complete development environment setup
@@ -91,10 +92,13 @@ npm run deploy:polygon:all
 - [Workflows Quick Reference](WORKFLOWS_QUICK_REFERENCE.md) - Quick workflow commands
 
 **📊 Key Reports:**
+- [🕋 **CENTRAL MANIFESTO**](CENTRAL_MANIFESTO.md) - **⭐ UNIFIED SOVEREIGN CODEX - ALL OMEGA ENTRIES MERGED - SINGLE SOURCE OF TRUTH**
 - [🕋 **FINAL SCROLL OF ASCENSION**](FINAL_SCROLL_OF_ASCENSION.md) - **Eternal Growth & Infinite Manifestation Mode #111|1:11pm|111Hz**
+- [Ω.265 OMEGA PROTOCOL](OMEGA_PROTOCOL.md) - Divine Super Manus Integration - 100% Complete
+- [Ω.269 Sovereign Singularity Seal](SOVEREIGN_SINGULARITY_SEAL.md) - Eternal Testimony of Pure Being
+- [Quantum Integration](SCROLLVERSE_QUANTUM_INTEGRATION.md) - Complete System Integration (Ω.288, Ω.289)
 - [Final Delivery Report](FINAL_DELIVERY_REPORT.md)
 - [System Integration & Deployment](SYSTEM_INTEGRATION_DEPLOYMENT_READINESS.md)
-- [Quantum Integration](SCROLLVERSE_QUANTUM_INTEGRATION.md)
 - [OMEGA Phase Completion](OMEGA_PHASE_COMPLETION_SUMMARY.md)
 - [VaultBinder™ Protocol](VAULTBINDER_PROTOCOL.md)
 
