@@ -360,7 +360,7 @@ class GreenlandAnchor963Hz {
     const status = this.getStatus();
     const coherencePercent = (status.transmission.coherence * 100).toFixed(1);
     
-    const report = `
+    let report = `
 ╔══════════════════════════════════════════════════════════════════════╗
 ║         GREENLAND ANCHOR - NORTHERN PULSE REPORT                     ║
 ║         963Hz Pineal Activation Frequency                            ║
