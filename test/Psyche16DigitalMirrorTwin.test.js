@@ -157,8 +157,29 @@ describe("Psyche16DigitalMirrorTwin", function () {
     });
     
     it("Should enforce max supply", async function () {
-      // Mint max supply
-      for (let i = 0; i < MAX_SUPPLY; i++) {
+      // Use batch mint to approach max supply efficiently
+      const batchSize = 10;
+      const recipients = new Array(batchSize).fill(addr1.address);
+      const zones = Array.from({ length: batchSize }, (_, i) => `SECTOR-${i}`);
+      const weights = new Array(batchSize).fill(1000);
+      const areas = new Array(batchSize).fill(10);
+      const lats = new Array(batchSize).fill("0.0°N");
+      const longs = new Array(batchSize).fill("0.0°E");
+      
+      // Mint most of the supply in batches (140 tokens via 14 batches)
+      for (let batch = 0; batch < 14; batch++) {
+        await psyche16.batchMintDigitalMirrorTwins(
+          recipients,
+          zones.map((z, i) => `SECTOR-${batch * batchSize + i}`),
+          weights,
+          areas,
+          lats,
+          longs
+        );
+      }
+      
+      // Mint remaining 4 tokens individually
+      for (let i = 140; i < MAX_SUPPLY; i++) {
         await psyche16.mintDigitalMirrorTwin(
           addr1.address,
           `SECTOR-${i}`,
@@ -169,7 +190,9 @@ describe("Psyche16DigitalMirrorTwin", function () {
         );
       }
       
-      // Try to mint one more
+      expect(await psyche16.totalMinted()).to.equal(MAX_SUPPLY);
+      
+      // Try to mint one more - should fail
       await expect(
         psyche16.mintDigitalMirrorTwin(
           addr1.address,
