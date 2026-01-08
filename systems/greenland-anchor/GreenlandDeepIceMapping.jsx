@@ -197,7 +197,7 @@ const GreenlandDeepIceMapping = () => {
               </div>
             </div>
             <div className="total-amplification">
-              <strong>Total Amplification:</strong> 7.204x
+              <strong>Total Amplification:</strong> 7.305x
             </div>
           </div>
         </div>

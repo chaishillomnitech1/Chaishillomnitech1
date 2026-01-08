@@ -119,7 +119,7 @@ describe('GreenlandDeepIceMapping Component', () => {
 
     test('should display total amplification', () => {
       render(<GreenlandDeepIceMapping />);
-      expect(screen.getByText(/Total Amplification.*7\.204x/i)).toBeInTheDocument();
+      expect(screen.getByText(/Total Amplification.*7\.305x/i)).toBeInTheDocument();
     });
   });
 
