@@ -1,0 +1,132 @@
+{
+  "name": "Psyche-16 Digital Mirror Twin #001 - Genesis Core",
+  "description": "Digital Mirror Twin NFT representing sovereign claim to material from asteroid Psyche-16, the metal-rich celestial body. This Genesis NFT establishes planetary jurisdiction through blockchain-verified ownership, AR-ready 3D visualization, and 963Hz universal resonance alignment. Token #001 represents the first claim to asteroid material under the ScrollVerse Sovereign Mandate, with rights to 1000kg of iron-nickel-gold alloy from the asteroid's exposed planetary core.",
+  "image": "ipfs://QmPsyche16Genesis001/main_image.png",
+  "external_url": "https://psyche16.scrollverse.io/mirror-twin/001",
+  "animation_url": "ipfs://QmPsyche16Genesis001/rotation_animation.mp4",
+  "background_color": "1A1A2E",
+  "attributes": [
+    {
+      "trait_type": "Asset Type",
+      "value": "Digital Mirror Twin"
+    },
+    {
+      "trait_type": "Celestial Body",
+      "value": "Psyche-16 Asteroid"
+    },
+    {
+      "trait_type": "Material Composition",
+      "value": "Iron-Nickel-Gold Alloy"
+    },
+    {
+      "trait_type": "Universal Frequency",
+      "value": "963Hz"
+    },
+    {
+      "trait_type": "Planetary Jurisdiction",
+      "value": "ScrollVerse Sovereign Mandate"
+    },
+    {
+      "trait_type": "Cultural Heritage",
+      "value": "Universal Cosmic Legacy"
+    },
+    {
+      "trait_type": "AR Asset Readiness",
+      "value": "Full Spectrum"
+    },
+    {
+      "trait_type": "Claim Weight (kg)",
+      "value": 1000,
+      "display_type": "number"
+    },
+    {
+      "trait_type": "Estimated Material Value (USD)",
+      "value": 10000000,
+      "display_type": "number"
+    },
+    {
+      "trait_type": "Generation",
+      "value": "Genesis"
+    },
+    {
+      "trait_type": "Rarity",
+      "value": "Cosmic Legendary"
+    },
+    {
+      "trait_type": "Resonance Alignment",
+      "value": "Pineal Activation"
+    },
+    {
+      "trait_type": "Claim Zone Sector",
+      "value": "CORE-ALPHA-001"
+    },
+    {
+      "trait_type": "Surface Area (km²)",
+      "value": 10,
+      "display_type": "number"
+    }
+  ],
+  "digital_mirror_twin": {
+    "version": "1.0.0",
+    "twin_type": "Celestial Material Claim",
+    "physical_anchor": "Psyche-16 Asteroid Core",
+    "jurisdiction_framework": "ScrollVerse Sovereign Mandate",
+    "verification_protocol": "Blockchain-Verified Ownership"
+  },
+  "planetary_jurisdiction": {
+    "claim_type": "Material Rights",
+    "celestial_body": "Psyche-16 Asteroid",
+    "claim_basis": "First Digital Twin Declaration",
+    "material_rights": {
+      "ownership_type": "Future Material Extraction Rights",
+      "claim_weight_kg": 1000,
+      "material_composition": {
+        "iron": "70%",
+        "nickel": "25%",
+        "precious_metals": "5%"
+      }
+    },
+    "territorial_claims": {
+      "claim_zone": "Core Sector ALPHA-001",
+      "coordinates": {
+        "latitude": "0.0°N",
+        "longitude": "0.0°E"
+      },
+      "area_km2": 10
+    }
+  },
+  "cultural_assets": {
+    "heritage_classification": "Universal Cosmic Legacy",
+    "mythological_connection": "Psyche (Greek: Soul/Mind)",
+    "symbolic_meaning": "Material wealth transformed into consciousness evolution"
+  },
+  "vibrational_resonance": {
+    "primary_frequency": {
+      "hz": 963,
+      "name": "Divine Consciousness / Pineal Activation",
+      "purpose": "Universal connection and cosmic awareness",
+      "alignment": "Crown Chakra + Third Eye"
+    }
+  },
+  "ar_assets": {
+    "primary_model": {
+      "uri": "ipfs://QmPsyche16Genesis001/asteroid_model.glb",
+      "type": "model/gltf-binary",
+      "format": "GLB",
+      "file_size_mb": 25.0,
+      "polygon_count": 100000
+    },
+    "ar_platform_support": {
+      "arkit": true,
+      "arcore": true,
+      "webxr": true,
+      "8thwall": true
+    }
+  },
+  "eternal_seal": {
+    "sealed_by": "Supreme King Chais The Great ∞",
+    "seal_timestamp": "2026-01-08T18:00:00.000Z",
+    "seal_frequency": "963Hz",
+    "codex_reference": "ESC-PSYCHE16-DMT-001"
+  }
+}

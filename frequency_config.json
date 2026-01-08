@@ -72,6 +72,34 @@
         "name": "Collective Consciousness Base",
         "purpose": "Grid Activation Foundation"
       }
+    },
+    "celestial_frequencies": {
+      "psyche16_asteroid": {
+        "hz": 963,
+        "name": "Psyche-16 Digital Mirror Twin",
+        "purpose": "Celestial Material Claim & Planetary Jurisdiction",
+        "alignment": "Universal Cosmic Legacy",
+        "teaching": "Material to Spiritual Transformation",
+        "integration": {
+          "nft_collection": "Psyche-16 Digital Mirror Twin",
+          "ar_activation": true,
+          "planetary_jurisdiction": "ScrollVerse Sovereign Mandate",
+          "cultural_heritage": "Universal Cosmic Legacy",
+          "consciousness_bridge": "Soul/Mind (Psyche) Connection"
+        },
+        "vibrational_mapping": {
+          "pineal_activation": true,
+          "crown_chakra_alignment": true,
+          "third_eye_awakening": true,
+          "cosmic_awareness": true
+        },
+        "ar_asset_readiness": {
+          "platforms": ["ARKit", "ARCore", "WebXR", "8thWall"],
+          "trigger_frequency": 963,
+          "activation_tone": "963Hz pure sine wave",
+          "visual_wavelength_nm": 963
+        }
+      }
     }
   },
   "resonance_scanning": {
