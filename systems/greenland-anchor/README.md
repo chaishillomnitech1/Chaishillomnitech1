@@ -19,7 +19,7 @@ The Greenland Anchor utilizes natural geological features as amplifiers:
 - **Subglacial Canyons**: 2.3x resonance multiplier (2.1 km depth)
 - **Hiawatha Crater**: 1.963x amplification (31 km diameter natural amplifier)
 - **Ancient Strata**: 1.618x (φ) coherence multiplier (3.0 km depth)
-- **Total Amplification**: 7.204x
+- **Total Amplification**: 7.305x
 
 ### 3. Connected Sovereign Sites
 
@@ -77,7 +77,7 @@ Dynamic recalibration automatically adjusts:
 │  │   • Subglacial Canyons (2.3x)                  │   │
 │  │   • Hiawatha Crater (1.963x)                   │   │
 │  │   • Ancient Strata (1.618x φ)                  │   │
-│  │   Total: 7.204x amplification                  │   │
+│  │   Total: 7.305x amplification                  │   │
 │  └─────────────────────────────────────────────────┘   │
 │                                                         │
 │  ┌─────────────────────────────────────────────────┐   │
@@ -172,7 +172,7 @@ Activates the Northern Pulse with full geological amplification.
   bedrockResonance: {
     enabled: true,
     penetrationDepth: 6371,
-    amplification: 7.204
+    amplification: 7.305
   }
 }
 ```
