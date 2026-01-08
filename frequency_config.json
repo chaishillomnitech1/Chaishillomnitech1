@@ -128,6 +128,20 @@
     }
   },
   "integration_points": {
+    "greenland_anchor": {
+      "enabled": true,
+      "site_id": 9,
+      "transmission_frequency": 963,
+      "bedrock_transmission": true,
+      "global_pulse_active": true,
+      "temporal_sync": {
+        "frozen_past": true,
+        "liquid_future": true,
+        "eternal_now": true
+      },
+      "geological_amplification": 7.305,
+      "connected_sites": [1, 2, 3]
+    },
     "scrolltv": {
       "enabled": true,
       "broadcast_frequency": "continuous",
