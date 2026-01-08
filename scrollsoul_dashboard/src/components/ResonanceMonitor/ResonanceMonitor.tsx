@@ -88,7 +88,8 @@ const ResonanceMonitor: React.FC = () => {
   const initializeAudioContext = useCallback(() => {
     if (audioContext) return;
 
-    const ctx = new (window.AudioContext || (window as any).webkitAudioContext)();
+    const AudioContextClass = window.AudioContext || (window as typeof window & { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
+    const ctx = new AudioContextClass();
     setAudioContext(ctx);
 
     // Create analyser node for frequency analysis
@@ -210,6 +211,19 @@ const ResonanceMonitor: React.FC = () => {
   );
 
   /**
+   * Calculate coherence level from metrics
+   */
+  const calculateCoherenceLevel = (
+    avgAmplitude: number,
+    stability: number,
+    resonanceAlignment: number
+  ): number => {
+    return Math.round(
+      ((avgAmplitude / 255 + stability / 100 + resonanceAlignment / 100) / 3) * 100
+    );
+  };
+
+  /**
    * Analyze frequency spectrum and calculate coherence
    */
   const analyzeSpectrum = useCallback(() => {
@@ -235,11 +249,11 @@ const ResonanceMonitor: React.FC = () => {
       // Calculate resonance alignment (how many frequencies are active)
       const resonanceAlignment = (activeFreqs.length / frequencies.length) * 100;
 
-      // Calculate overall coherence level
-      const coherenceLevel = (avgAmplitude / 255 + stability / 100 + resonanceAlignment / 100) / 3 * 100;
+      // Calculate overall coherence level using extracted function
+      const coherenceLevel = calculateCoherenceLevel(avgAmplitude, stability, resonanceAlignment);
 
       setCoherence({
-        level: Math.round(coherenceLevel),
+        level: coherenceLevel,
         stability: Math.round(stability),
         resonanceAlignment: Math.round(resonanceAlignment),
         lastUpdate: Date.now(),
