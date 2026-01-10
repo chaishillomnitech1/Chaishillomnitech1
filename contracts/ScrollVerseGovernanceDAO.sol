@@ -171,18 +171,24 @@ contract ScrollVerseGovernanceDAO is Ownable, ReentrancyGuard, Pausable {
     
     constructor(
         address initialOwner,
-        address _revenueSplitter
+        address _revenueSplitter,
+        uint256 _votingDelay,
+        uint256 _votingPeriod,
+        uint256 _proposalThreshold,
+        uint256 _quorumThreshold,
+        uint256 _timelockDelay
     ) Ownable(initialOwner) {
         revenueSplitter = IPharaohRevenueSplitter(_revenueSplitter);
         sovereignVetoEnabled = true;
         
-        // Default parameters
+        // Set governance parameters from constructor for network-specific configuration
+        // These can be adjusted later via updateParameters() governance function
         params = GovernanceParameters({
-            votingDelay: 1,                    // 1 block (~12 seconds)
-            votingPeriod: 50400,               // ~7 days (assuming 12s blocks)
-            proposalThreshold: 100,            // Min 100 CW to propose
-            quorumThreshold: 1000,             // 10% quorum (1000/10000)
-            timelockDelay: 2 days              // 2 day delay before execution
+            votingDelay: _votingDelay,                // Blocks before voting starts
+            votingPeriod: _votingPeriod,              // Blocks for voting (~7 days default)
+            proposalThreshold: _proposalThreshold,    // Min CW to propose
+            quorumThreshold: _quorumThreshold,        // Min votes needed (basis points)
+            timelockDelay: _timelockDelay             // Delay before execution
         });
     }
     
@@ -404,11 +410,20 @@ contract ScrollVerseGovernanceDAO is Ownable, ReentrancyGuard, Pausable {
     
     /**
      * @dev Cache total contribution weight (gas optimization)
+     * Iterates through all beneficiaries to calculate total active contribution weight
      */
     function cacheWeights() external {
-        // This would iterate through all beneficiaries in a real implementation
-        // For now, it's a placeholder
-        totalContributionWeight = 10000; // Example total
+        // Note: In production, consider limiting the number of beneficiaries
+        // or using an off-chain calculation with merkle proofs for very large sets
+        address[] memory beneficiaries = revenueSplitter.getAllBeneficiaries();
+        
+        uint256 totalWeight = 0;
+        for (uint256 i = 0; i < beneficiaries.length; i++) {
+            uint256 weight = getContributionWeight(beneficiaries[i]);
+            totalWeight += weight;
+        }
+        
+        totalContributionWeight = totalWeight;
         lastWeightUpdate = block.timestamp;
         
         emit WeightsCached(totalContributionWeight);

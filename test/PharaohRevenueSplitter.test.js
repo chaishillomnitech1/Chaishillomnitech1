@@ -126,7 +126,7 @@ describe("PharaohRevenueSplitter - Shared Prosperity Protocol Tests", function (
       
       await expect(
         splitter.addBeneficiary(beneficiary2.address, 1000, 0, 50)
-      ).to.be.revertedWithCustomError(splitter, "InvalidShare");
+      ).to.be.revertedWithCustomError(splitter, "InvalidShareExceedsMaximum");
     });
     
     it("Should update beneficiary share", async function () {

@@ -182,8 +182,8 @@ contract PharaohRevenueSplitter is Ownable, ReentrancyGuard, Pausable {
     error InvalidBeneficiary();
     error BeneficiaryAlreadyExists();
     error BeneficiaryNotFound();
-    error InvalidShare();
-    error TotalSharesExceeded();
+    error InvalidShareZero();
+    error InvalidShareExceedsMaximum();
     error NoRevenueToDistribute();
     error InsufficientApprovals();
     error NotApprover();
@@ -211,9 +211,13 @@ contract PharaohRevenueSplitter is Ownable, ReentrancyGuard, Pausable {
     
     /**
      * @dev Modifier for operations requiring multi-sig approval
+     * Logs when sovereign override is used for transparency
      */
     modifier requiresApproval(bytes32 operationHash) {
-        if (!sovereignOverrideEnabled || msg.sender != owner()) {
+        if (sovereignOverrideEnabled && msg.sender == owner()) {
+            // TRANSPARENCY: Log when owner bypasses multi-sig using sovereign override
+            _logAudit("SovereignOverrideUsed", abi.encode(operationHash, "Owner bypassed multi-sig approval"));
+        } else {
             if (operationApprovalCount[operationHash] < requiredApprovals) {
                 revert InsufficientApprovals();
             }
@@ -249,7 +253,16 @@ contract PharaohRevenueSplitter is Ownable, ReentrancyGuard, Pausable {
         zakatTreasury = _zakatTreasury;
         requiredApprovals = _requiredApprovals;
         timeLockDelay = _timeLockDelay;
-        sovereignOverrideEnabled = true; // Owner can bypass governance initially
+        
+        // Sovereign Override is enabled by default to allow initial setup
+        // IMPORTANT: This allows the owner to bypass multi-sig governance
+        // RECOMMENDATION: Disable this after initial setup is complete by calling toggleSovereignOverride()
+        // SECURITY: When enabled, owner can:
+        //   - Bypass approval requirements for time-locked operations
+        //   - Make changes without waiting for multi-sig consensus
+        // USE CASES: Emergency response, critical security fixes, initial configuration
+        // TRANSPARENCY: All override usage is logged via audit trail
+        sovereignOverrideEnabled = true;
         
         // Add owner as first approver
         isApprover[initialOwner] = true;
@@ -291,8 +304,11 @@ contract PharaohRevenueSplitter is Ownable, ReentrancyGuard, Pausable {
         if (beneficiaries[account].account != address(0)) {
             revert BeneficiaryAlreadyExists();
         }
-        if (share == 0 || totalShares + share > BASIS_POINTS - ZAKAT_BPS) {
-            revert InvalidShare();
+        if (share == 0) {
+            revert InvalidShareZero();
+        }
+        if (totalShares + share > BASIS_POINTS - ZAKAT_BPS) {
+            revert InvalidShareExceedsMaximum();
         }
         
         beneficiaries[account] = Beneficiary({
@@ -327,14 +343,14 @@ contract PharaohRevenueSplitter is Ownable, ReentrancyGuard, Pausable {
             revert BeneficiaryNotFound();
         }
         if (newShare == 0) {
-            revert InvalidShare();
+            revert InvalidShareZero();
         }
         
         uint256 oldShare = beneficiaries[account].share;
         uint256 newTotalShares = totalShares - oldShare + newShare;
         
         if (newTotalShares > BASIS_POINTS - ZAKAT_BPS) {
-            revert TotalSharesExceeded();
+            revert InvalidShareExceedsMaximum();
         }
         
         beneficiaries[account].share = newShare;

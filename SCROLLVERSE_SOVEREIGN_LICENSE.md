@@ -458,7 +458,11 @@ This is a binding legal agreement. By using, modifying, or distributing ScrollVe
 
 **License URI**: `https://github.com/chaishillomnitech1/Chaishillomnitech1/SCROLLVERSE_SOVEREIGN_LICENSE.md`
 
-**SPDX Identifier**: `SSL-1.0`
+**SPDX Identifier**: `LicenseRef-SSL-1.0`
+
+**Note**: SSL-1.0 is a custom license identifier. Per SPDX guidelines, custom licenses use the `LicenseRef-` prefix. 
+This license is not registered with SPDX but is uniquely identified within the ScrollVerse ecosystem.
+For SPDX compliance in source files, use: `// SPDX-License-Identifier: LicenseRef-SSL-1.0`
 
 ---
 

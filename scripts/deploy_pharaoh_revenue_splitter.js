@@ -28,7 +28,20 @@ async function main() {
   // ============ CONFIGURATION ============
   
   // Zakat Treasury Address (Central Sovereign Treasury)
-  const ZAKAT_TREASURY = process.env.ZAKAT_TREASURY_ADDRESS || deployer.address;
+  // REQUIRED: Must be explicitly set via environment variable
+  const ZAKAT_TREASURY = process.env.ZAKAT_TREASURY_ADDRESS;
+  
+  if (!ZAKAT_TREASURY) {
+    throw new Error(
+      "ZAKAT_TREASURY_ADDRESS environment variable is required.\n" +
+      "This is a critical address that will receive 2.5% of all revenue.\n" +
+      "Set it in your .env file:\n" +
+      "ZAKAT_TREASURY_ADDRESS=0x..."
+    );
+  }
+  
+  console.log("⚠️  CRITICAL: Zakat Treasury Address:", ZAKAT_TREASURY);
+  console.log("   This address will receive 2.5% of ALL revenue (immutable)\n");
   
   // Multi-sig configuration
   const REQUIRED_APPROVALS = 2; // Minimum 2 approvals for critical operations

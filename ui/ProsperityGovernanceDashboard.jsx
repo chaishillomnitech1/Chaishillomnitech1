@@ -34,11 +34,21 @@ import {
  * Author: Supreme King Chais The Great ∞
  */
 
+// ============ CONFIGURATION CONSTANTS ============
+const INITIAL_CONFIG = {
+  treasury: process.env.REACT_APP_INITIAL_TREASURY || 35000000,
+  totalRevenue: process.env.REACT_APP_INITIAL_REVENUE || 142000000,
+  totalZakat: process.env.REACT_APP_INITIAL_ZAKAT || 3550000,
+  updateInterval: process.env.REACT_APP_UPDATE_INTERVAL || 3000,
+  growthMin: process.env.REACT_APP_GROWTH_MIN || 1000,
+  growthMax: process.env.REACT_APP_GROWTH_MAX || 5000
+};
+
 const ProsperityGovernanceDashboard = () => {
   // ============ STATE ============
-  const [treasury, setTreasury] = useState(35000000); // Base Zakat Fund
-  const [totalRevenue, setTotalRevenue] = useState(142000000);
-  const [totalZakat, setTotalZakat] = useState(3550000); // 2.5% of total
+  const [treasury, setTreasury] = useState(INITIAL_CONFIG.treasury);
+  const [totalRevenue, setTotalRevenue] = useState(INITIAL_CONFIG.totalRevenue);
+  const [totalZakat, setTotalZakat] = useState(INITIAL_CONFIG.totalZakat)
   const [collaborators, setCollaborators] = useState([
     { 
       id: 1,
@@ -109,32 +119,54 @@ const ProsperityGovernanceDashboard = () => {
 
   // ============ EFFECTS ============
   
-  // Simulate real-time treasury growth
+  // TODO: Replace with real blockchain data integration
+  // For production, use web3 providers to fetch actual contract state:
+  // - Connect to PharaohRevenueSplitter contract
+  // - Subscribe to events (RevenueReceived, RevenueDistributed, ZakatContributed)
+  // - Query contract state (pendingRevenue, totalRevenueReceived, totalZakatContributed)
+  // - Update state in real-time when events are emitted
   useEffect(() => {
+    // Temporary simulation for development/demo purposes
     const interval = setInterval(() => {
-      const growth = Math.floor(Math.random() * 5000);
+      const growth = Math.floor(
+        Math.random() * (INITIAL_CONFIG.growthMax - INITIAL_CONFIG.growthMin) + INITIAL_CONFIG.growthMin
+      );
       setTreasury(prev => prev + growth);
       setTotalRevenue(prev => prev + growth);
       setTotalZakat(prev => prev + (growth * 0.025));
-    }, 3000);
+    }, INITIAL_CONFIG.updateInterval);
     return () => clearInterval(interval);
   }, []);
 
   // ============ HANDLERS ============
   
   const handleAddCollaborator = () => {
+    // TODO: Implement modal with form to:
+    // - Input beneficiary address
+    // - Set share percentage (basis points)
+    // - Configure vesting duration
+    // - Set initial contribution weight
+    // - Call PharaohRevenueSplitter.addBeneficiary()
     console.log("Opening collaborator addition modal...");
-    // Would open modal in real implementation
   };
 
   const handleAdjustSplit = () => {
+    // TODO: Implement interface to:
+    // - Select beneficiary from list
+    // - Adjust share percentage
+    // - Update contribution weight
+    // - Require multi-sig approvals
+    // - Create time-locked operation
     console.log("Opening split adjustment interface...");
-    // Would open adjustment interface
   };
 
   const handleAuditArchive = () => {
+    // TODO: Implement viewer to:
+    // - Fetch audit log from contract
+    // - Display chronological history
+    // - Filter by action type
+    // - Export to CSV/JSON
     console.log("Opening audit archive viewer...");
-    // Would open audit viewer
   };
 
   const handleApproveOperation = (opId) => {
