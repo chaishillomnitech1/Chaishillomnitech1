@@ -212,12 +212,22 @@ contract PharaohRevenueSplitter is Ownable, ReentrancyGuard, Pausable {
     /**
      * @dev Modifier for operations requiring multi-sig approval
      * Logs when sovereign override is used for transparency
+     * 
+     * BEHAVIOR:
+     * - If sovereign override is enabled AND caller is owner:
+     *   → Logs the bypass to audit trail
+     *   → Allows operation to proceed without approval check
+     * - Otherwise:
+     *   → Requires sufficient approvals to proceed
+     *   → Reverts with InsufficientApprovals if not met
      */
     modifier requiresApproval(bytes32 operationHash) {
         if (sovereignOverrideEnabled && msg.sender == owner()) {
             // TRANSPARENCY: Log when owner bypasses multi-sig using sovereign override
             _logAudit("SovereignOverrideUsed", abi.encode(operationHash, "Owner bypassed multi-sig approval"));
+            // Bypass approval check - continue execution
         } else {
+            // Standard path: require multi-sig approvals
             if (operationApprovalCount[operationHash] < requiredApprovals) {
                 revert InsufficientApprovals();
             }

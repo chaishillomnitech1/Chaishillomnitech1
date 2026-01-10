@@ -35,6 +35,8 @@ interface IPharaohRevenueSplitter {
         uint256 contributionWeight,
         uint256 lastPaymentTime
     );
+    
+    function getAllBeneficiaries() external view returns (address[] memory);
 }
 
 contract ScrollVerseGovernanceDAO is Ownable, ReentrancyGuard, Pausable {
@@ -411,11 +413,23 @@ contract ScrollVerseGovernanceDAO is Ownable, ReentrancyGuard, Pausable {
     /**
      * @dev Cache total contribution weight (gas optimization)
      * Iterates through all beneficiaries to calculate total active contribution weight
+     * 
+     * WARNING: This function has unbounded gas costs that scale with the number of beneficiaries.
+     * Gas limit considerations:
+     * - ~50-100 beneficiaries: Safe for most networks
+     * - 100-500 beneficiaries: May approach gas limits on some networks
+     * - 500+ beneficiaries: Consider implementing pagination or off-chain calculation
+     * 
+     * Alternative approaches for large beneficiary sets:
+     * - Implement paginated weight calculation with incremental updates
+     * - Use off-chain calculation with merkle proof verification
+     * - Emit events and calculate off-chain, submit total via governance
      */
     function cacheWeights() external {
-        // Note: In production, consider limiting the number of beneficiaries
-        // or using an off-chain calculation with merkle proofs for very large sets
         address[] memory beneficiaries = revenueSplitter.getAllBeneficiaries();
+        
+        // Gas check: Revert if beneficiary count exceeds safe limit
+        require(beneficiaries.length <= 500, "Too many beneficiaries - use paginated approach");
         
         uint256 totalWeight = 0;
         for (uint256 i = 0; i < beneficiaries.length; i++) {

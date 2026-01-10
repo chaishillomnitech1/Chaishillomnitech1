@@ -48,7 +48,7 @@ const ProsperityGovernanceDashboard = () => {
   // ============ STATE ============
   const [treasury, setTreasury] = useState(INITIAL_CONFIG.treasury);
   const [totalRevenue, setTotalRevenue] = useState(INITIAL_CONFIG.totalRevenue);
-  const [totalZakat, setTotalZakat] = useState(INITIAL_CONFIG.totalZakat)
+  const [totalZakat, setTotalZakat] = useState(INITIAL_CONFIG.totalZakat);
   const [collaborators, setCollaborators] = useState([
     { 
       id: 1,
