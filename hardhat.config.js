@@ -45,6 +45,12 @@ module.exports = {
       chainId: 1,
       gasPrice: "auto",
     },
+    sepolia: {
+      url: process.env.SEPOLIA_RPC_URL || "https://sepolia.infura.io/v3/",
+      accounts: process.env.PRIVATE_KEY ? [process.env.PRIVATE_KEY] : [],
+      chainId: 11155111,
+      gasPrice: "auto",
+    },
   },
   etherscan: {
     apiKey: {
@@ -52,6 +58,7 @@ module.exports = {
       polygon: process.env.POLYGONSCAN_API_KEY || "",
       mainnet: process.env.ETHERSCAN_API_KEY || "",
       ethereum: process.env.ETHERSCAN_API_KEY || "",
+      sepolia: process.env.ETHERSCAN_API_KEY || "",
       scrollMainnet: process.env.SCROLLSCAN_API_KEY || "",
       scrollSepolia: process.env.SCROLLSCAN_API_KEY || "",
       scroll: process.env.SCROLLSCAN_API_KEY || "",
