@@ -176,3 +176,11 @@ contract VibeCanvasMerchDrop is Ownable, ReentrancyGuard {
      */
     function redeemMerch(uint256 dropId) external payable nonReentrant {
         MerchDrop storage drop = merchDrops[dropId];
+        require(drop.isActive, "Drop is not active");
+        require(drop.totalSupply > 0, "Drop sold out");
+        // Add redemption logic here (e.g., payment, NFT checks, etc.)
+        drop.totalSupply -= 1;
+        // Emit event for redemption
+        emit MerchRedeemed(dropId, msg.sender, drop.price, "");
+    }
+    }

@@ -80,7 +80,7 @@ contract EternalContractLayer is Ownable, ReentrancyGuard, Pausable {
     struct EternalCovenant {
         uint256 covenantId;
         string name;
-        address covenant owner;
+        address covenantOwner;
         CovenantStatus status;
         uint256 creationTimestamp;
         uint256 activationTimestamp;

@@ -264,17 +264,23 @@ collect_metrics() {
     local disk_usage
     local load_avg
     
-    # Accurate CPU usage calculation using two /proc/stat snapshots
-    read cpu1 idle1 <<< $(awk '/^cpu / {print $2+$3+$4+$5+$6+$7+$8, $5}' /proc/stat)
-    sleep 1
-    read cpu2 idle2 <<< $(awk '/^cpu / {print $2+$3+$4+$5+$6+$7+$8, $5}' /proc/stat)
-    cpu_delta=$((cpu2 - cpu1))
-    idle_delta=$((idle2 - idle1))
-    if [[ "$cpu_delta" -gt 0 ]]; then
-        cpu_usage=$(( (100 * (cpu_delta - idle_delta)) / cpu_delta ))
-    else
-        cpu_usage=0
-    fi
+        # Improved CPU usage calculation: sample /proc/stat twice and compute delta
+        read cpu_a user_a nice_a system_a idle_a iowait_a irq_a softirq_a steal_a rest_a < /proc/stat
+        sleep 0.5
+        read cpu_b user_b nice_b system_b idle_b iowait_b irq_b softirq_b steal_b rest_b < /proc/stat
+        prev_idle=$((idle_a + iowait_a))
+        idle=$((idle_b + iowait_b))
+        prev_non_idle=$((user_a + nice_a + system_a + irq_a + softirq_a + steal_a))
+        non_idle=$((user_b + nice_b + system_b + irq_b + softirq_b + steal_b))
+        prev_total=$((prev_idle + prev_non_idle))
+        total=$((idle + non_idle))
+        totald=$((total - prev_total))
+        idled=$((idle - prev_idle))
+        if [[ $totald -gt 0 ]]; then
+            cpu_usage=$(( (100 * (totald - idled)) / totald ))
+        else
+            cpu_usage=0
+        fi
     mem_usage=$(free | awk '/Mem:/ {printf "%.0f", $3/$2 * 100}' 2>/dev/null || echo "0")
     disk_usage=$(df -h / | awk 'NR==2 {gsub(/%/,""); print $5}' 2>/dev/null || echo "0")
     load_avg=$(cat /proc/loadavg | awk '{print $1}' 2>/dev/null || echo "0")
