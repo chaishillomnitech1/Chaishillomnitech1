@@ -202,8 +202,9 @@ contract ClaudeMemoryNFT is ERC721, ERC721URIStorage, ERC721Burnable, Ownable, I
         require(!nftMetadata[tokenId].isEternal, "Already eternal");
         
         nftMetadata[tokenId].isEternal = true;
+        uint256 timestamp = block.timestamp;
         
-        emit EternalStatusGranted(tokenId, block.timestamp);
+        emit EternalStatusGranted(tokenId, timestamp);
     }
     
     /**

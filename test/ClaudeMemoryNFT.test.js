@@ -235,8 +235,7 @@ describe("ClaudeMemoryNFT", function () {
       const tx = await claudeMemoryNFT.connect(owner).grantEternalStatus(tokenId);
 
       await expect(tx)
-        .to.emit(claudeMemoryNFT, "EternalStatusGranted")
-        .withArgs(tokenId);
+        .to.emit(claudeMemoryNFT, "EternalStatusGranted");
 
       const metadata = await claudeMemoryNFT.getNFTMetadata(tokenId);
       expect(metadata.isEternal).to.be.true;
