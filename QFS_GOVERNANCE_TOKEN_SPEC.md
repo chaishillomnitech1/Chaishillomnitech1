@@ -112,8 +112,10 @@ withdrawStake(amount)
 
 #### Reward Formula
 ```
-Total Reward = Base Reward × (Reputation / 1000) × Type Multiplier
+Total Reward = (Base Reward × Reputation × Type Multiplier) / 1000
 ```
+
+Note: The calculation uses integer division in Solidity, so the formula multiplies first then divides to maintain precision.
 
 #### Validation Type Multipliers
 
@@ -129,17 +131,17 @@ Total Reward = Base Reward × (Reputation / 1000) × Type Multiplier
 
 **Bronze Validator** (300 reputation, transaction verification):
 ```
-Reward = 10 × (300 / 1000) × 1.0 = 3 QFSGOV
+Reward = (10 × 300 × 1.0) / 1000 = 3000 / 1000 = 3 QFSGOV
 ```
 
 **Platinum Validator** (900 reputation, IP certification):
 ```
-Reward = 10 × (900 / 1000) × 2.0 = 18 QFSGOV
+Reward = (10 × 900 × 2.0) / 1000 = 18000 / 1000 = 18 QFSGOV
 ```
 
 **Diamond Validator** (980 reputation, emergency validation):
 ```
-Reward = 10 × (980 / 1000) × 5.0 = 49 QFSGOV
+Reward = (10 × 980 × 5.0) / 1000 = 49000 / 1000 = 49 QFSGOV
 ```
 
 ### 4. Premium Access

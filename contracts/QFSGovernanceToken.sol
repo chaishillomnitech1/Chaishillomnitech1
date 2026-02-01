@@ -252,9 +252,15 @@ contract QFSGovernanceToken is ERC20, ERC20Burnable, ERC20Pausable, Ownable {
         // Update voting power
         uint256 amount = balanceOf(msg.sender);
         if (currentDelegate != address(0)) {
-            votingPower[currentDelegate] -= amount;
+            // Prevent underflow when reducing previous delegate's power
+            if (votingPower[currentDelegate] >= amount) {
+                votingPower[currentDelegate] -= amount;
+            }
         } else {
-            votingPower[msg.sender] -= amount;
+            // Prevent underflow when reducing own voting power
+            if (votingPower[msg.sender] >= amount) {
+                votingPower[msg.sender] -= amount;
+            }
         }
         votingPower[delegatee] += amount;
         
@@ -336,11 +342,28 @@ contract QFSGovernanceToken is ERC20, ERC20Burnable, ERC20Pausable, Ownable {
         super._update(from, to, value);
         
         // Update voting power on transfers
-        if (from != address(0) && delegates[from] == address(0)) {
-            votingPower[from] -= value;
+        if (from != address(0)) {
+            if (delegates[from] == address(0)) {
+                // User has not delegated, reduce their own voting power
+                if (votingPower[from] >= value) {
+                    votingPower[from] -= value;
+                }
+            } else {
+                // User has delegated, reduce delegate's voting power
+                address delegate = delegates[from];
+                if (votingPower[delegate] >= value) {
+                    votingPower[delegate] -= value;
+                }
+            }
         }
-        if (to != address(0) && delegates[to] == address(0)) {
-            votingPower[to] += value;
+        if (to != address(0)) {
+            if (delegates[to] == address(0)) {
+                // Recipient has not delegated, increase their own voting power
+                votingPower[to] += value;
+            } else {
+                // Recipient has delegated, increase delegate's voting power
+                votingPower[delegates[to]] += value;
+            }
         }
     }
     

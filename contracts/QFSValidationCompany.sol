@@ -488,8 +488,9 @@ contract QFSValidationCompany is Ownable, ReentrancyGuard, Pausable {
      */
     function _distributeRewards(address validator) internal {
         uint256 baseReward = 10 ether; // Base reward per validation
-        uint256 reputationMultiplier = validators[validator].reputationScore / 100;
-        uint256 reward = baseReward * reputationMultiplier / 10;
+        // Use higher precision: multiply first, then divide
+        // This avoids intermediate rounding errors
+        uint256 reward = (baseReward * validators[validator].reputationScore) / 1000;
         
         validatorRewards[validator] += reward;
     }
