@@ -3,7 +3,6 @@ pragma solidity ^0.8.20;
 
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
-import "@openzeppelin/contracts/utils/Counters.sol";
 
 /**
  * @title ScrollCommandLogic
@@ -20,7 +19,6 @@ import "@openzeppelin/contracts/utils/Counters.sol";
  * - Multi-frequency resonance tracking (528Hz, 963Hz, 999Hz, 144000Hz)
  */
 contract ScrollCommandLogic is Ownable, ReentrancyGuard {
-    using Counters for Counters.Counter;
     
     // ============ Constants ============
     
@@ -120,7 +118,7 @@ contract ScrollCommandLogic is Ownable, ReentrancyGuard {
     mapping(uint256 => DragonGovernance) public dragons;
     
     /// @notice Command execution counter
-    Counters.Counter private _commandExecutionCounter;
+    uint256 private _commandExecutionCounter;
     
     /// @notice Mapping: Execution ID => Command execution
     mapping(uint256 => CommandExecution) public commandExecutions;
@@ -281,8 +279,7 @@ contract ScrollCommandLogic is Ownable, ReentrancyGuard {
         
         uint256 timingPrecision = calculateTimingPrecision(block.timestamp);
         
-        uint256 executionId = _commandExecutionCounter.current();
-        _commandExecutionCounter.increment();
+        uint256 executionId = _commandExecutionCounter++;
         
         commandExecutions[executionId] = CommandExecution({
             command: _command,
@@ -576,7 +573,7 @@ contract ScrollCommandLogic is Ownable, ReentrancyGuard {
      * @return count Total executions
      */
     function getTotalCommandExecutions() external view returns (uint256) {
-        return _commandExecutionCounter.current();
+        return _commandExecutionCounter;
     }
     
     /**
