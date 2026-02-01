@@ -8,7 +8,7 @@ const hre = require("hardhat");
 
 async function main() {
     console.log("📖 Deploying Storied Legacy NFT...");
-    console.log("=" .repeat(60));
+    console.log("=".repeat(60));
 
     // Get deployer
     const [deployer] = await hre.ethers.getSigners();

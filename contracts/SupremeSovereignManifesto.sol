@@ -99,7 +99,7 @@ contract SupremeSovereignManifesto is
     /// @dev Mapping: Token ID => Evolutionary Breakthrough
     mapping(uint256 => EvolutionaryBreakthrough) public breakthroughs;
     
-    /// @dev Mapping: Commit Hash => Token ID (for uniqueness)
+    /// @dev Mapping: Commit Hash => Token ID + 1 (0 means not tokenized)
     mapping(string => uint256) public commitToTokenId;
     
     /// @dev Mapping: Address => Total Contributions
@@ -211,8 +211,8 @@ contract SupremeSovereignManifesto is
             isSealed: false
         });
         
-        // Map commit to token
-        commitToTokenId[commitHash] = tokenId;
+        // Map commit to token (store tokenId + 1 to distinguish from unmapped)
+        commitToTokenId[commitHash] = tokenId + 1;
         
         // Track contributor
         contributorMilestones[contributor]++;
@@ -333,7 +333,8 @@ contract SupremeSovereignManifesto is
         view 
         returns (uint256) 
     {
-        return commitToTokenId[commitHash];
+        uint256 storedValue = commitToTokenId[commitHash];
+        return storedValue > 0 ? storedValue - 1 : 0;
     }
     
     // ============ ADMIN FUNCTIONS ============
