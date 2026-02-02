@@ -14,7 +14,14 @@
     "test": "hardhat test",
     "deploy:mumbai:imperial": "hardhat run scripts/deploy_imperial_perpetuity.js --network mumbai",
     "deploy:polygon:imperial": "hardhat run scripts/deploy_imperial_perpetuity.js --network polygon",
-    "test:imperial": "hardhat test test/ImperialPerpetuityEngine.test.js"
+    "test:imperial": "hardhat test test/ImperialPerpetuityEngine.test.js",
+    "deploy:sat": "hardhat run scripts/deploy_sat_token.js",
+    "deploy:mumbai:sat": "hardhat run scripts/deploy_sat_token.js --network mumbai",
+    "deploy:polygon:sat": "hardhat run scripts/deploy_sat_token.js --network polygon",
+    "deploy:nexus": "hardhat run scripts/deploy_nexus_codex.js",
+    "deploy:fleet": "hardhat run scripts/deploy_manus_fleet_validator.js",
+    "test:sat": "hardhat test test/SATToken.test.js",
+    "deploy:scrollverse:all": "npm run deploy:sat && npm run deploy:nexus && npm run deploy:fleet"
   },
   "keywords": [
     "scrollverse",
