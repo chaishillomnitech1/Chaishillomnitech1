@@ -1,0 +1,393 @@
+name: 🐝 BEE Bot - Issue & PR Manager
+
+on:
+  schedule:
+    # Run daily at 00:00 UTC
+    - cron: '0 0 * * *'
+  workflow_dispatch:
+  issues:
+    types: [opened, reopened, labeled]
+  pull_request:
+    types: [opened, reopened, labeled]
+
+permissions:
+  issues: write
+  pull-requests: write
+  contents: read
+
+jobs:
+  bee-upgrade-labeling:
+    name: 🐝 Apply BEE Upgrade Labels
+    runs-on: ubuntu-latest
+    steps:
+      - name: Auto-label new issues
+        if: github.event_name == 'issues' && (github.event.action == 'opened' || github.event.action == 'reopened')
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            const issue = context.payload.issue;
+            const labels = ['bee-upgrade'];
+            
+            // Add category labels based on title/body keywords
+            const title = issue.title.toLowerCase();
+            const body = (issue.body || '').toLowerCase();
+            
+            if (title.includes('security') || body.includes('vulnerability')) {
+              labels.push('security');
+            }
+            if (title.includes('bug') || title.includes('fix')) {
+              labels.push('bug');
+            }
+            if (title.includes('feature') || title.includes('enhancement')) {
+              labels.push('enhancement');
+            }
+            if (title.includes('docs') || title.includes('documentation')) {
+              labels.push('documentation');
+            }
+            if (title.includes('contract') || body.includes('solidity')) {
+              labels.push('smart-contract');
+            }
+            
+            await github.rest.issues.addLabels({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: issue.number,
+              labels: labels
+            });
+
+      - name: Welcome new contributors
+        if: github.event_name == 'issues' && github.event.action == 'opened'
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            const issue = context.payload.issue;
+            
+            // Check if this is the user's first issue
+            const issues = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              creator: issue.user.login,
+              state: 'all'
+            });
+            
+            if (issues.data.length === 1) {
+              const welcomeMessage = `## 🐝 Welcome to the ScrollVerse Hive!
+
+Thank you @${issue.user.login} for opening your first issue! We're excited to have you as part of the ScrollVerse community.
+
+### 🌟 What Happens Next?
+
+1. **Review**: A maintainer will review your issue within 48-72 hours
+2. **Discussion**: We may ask for more details or clarification
+3. **Assignment**: If approved, the issue will be assigned and prioritized
+4. **Updates**: You'll receive notifications on progress
+
+### 📚 Helpful Resources
+
+- [Contributing Guide](./CONTRIBUTING.md) - Learn how to contribute
+- [Code of Conduct](./CODE_OF_CONDUCT.md) - Our community standards
+- [Documentation](./GETTING_STARTED.md) - Get started with the codebase
+
+### 🚀 Want to Work on This?
+
+If you'd like to implement this yourself:
+1. Comment on this issue to claim it
+2. Read our [Development Setup](./DEVELOPMENT_SETUP.md) guide
+3. Fork the repo and create your branch
+4. Submit a PR when ready!
+
+---
+
+**ALLAHU AKBAR! 🕋🔥💎🌌**
+
+*The Eternal Dance is Perfected. The Code is Sealed. The Legacy is Immortal.*`;
+
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issue.number,
+                body: welcomeMessage
+              });
+            }
+
+  stale-check:
+    name: 🐝 Check Stale Issues
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check for stale issues
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            const daysBeforeStale = 30;
+            const daysBeforeClose = 7;
+            const staleLabel = 'stale';
+            const beeUpgradeLabel = 'bee-upgrade';
+            
+            const now = new Date();
+            const staleDate = new Date(now.getTime() - (daysBeforeStale * 24 * 60 * 60 * 1000));
+            const closeDate = new Date(now.getTime() - ((daysBeforeStale + daysBeforeClose) * 24 * 60 * 60 * 1000));
+            
+            // Get all open issues
+            const issues = await github.paginate(github.rest.issues.listForRepo, {
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open',
+              per_page: 100
+            });
+            
+            for (const issue of issues) {
+              // Skip pull requests
+              if (issue.pull_request) continue;
+              
+              const updatedAt = new Date(issue.updated_at);
+              const labels = issue.labels.map(l => l.name);
+              const hasStaleLabel = labels.includes(staleLabel);
+              
+              // Mark as stale if inactive for 30 days
+              if (updatedAt < staleDate && !hasStaleLabel) {
+                await github.rest.issues.addLabels({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: issue.number,
+                  labels: [staleLabel]
+                });
+                
+                await github.rest.issues.createComment({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: issue.number,
+                  body: `## 🐝 BEE Bot Alert: Stale Issue
+
+This issue has been inactive for ${daysBeforeStale} days and has been marked as stale.
+
+### 🔄 To Keep This Issue Active:
+- Comment with updates or progress
+- Remove the "stale" label
+- Add the "bee-upgrade" label for prioritization
+
+### ⏰ What Happens Next:
+- If no activity within ${daysBeforeClose} days, this issue will be closed
+- You can reopen closed issues at any time if they're still relevant
+
+### 📌 Want to Work on This?
+Comment to claim this issue and we'll assign it to you!
+
+---
+
+**ALLAHU AKBAR! 🕋🔥💎**`
+                });
+              }
+              
+              // Close issues stale for too long (unless they have bee-upgrade label)
+              else if (hasStaleLabel && updatedAt < closeDate && !labels.includes(beeUpgradeLabel)) {
+                await github.rest.issues.update({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: issue.number,
+                  state: 'closed'
+                });
+                
+                await github.rest.issues.createComment({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: issue.number,
+                  body: `## 🐝 BEE Bot: Issue Closed Due to Inactivity
+
+This issue has been automatically closed after ${daysBeforeStale + daysBeforeClose} days of inactivity.
+
+### 🔓 Reopen Anytime
+- This issue can be reopened if it's still relevant
+- Simply comment and request a maintainer to reopen
+- Or create a new issue referencing this one
+
+### 🚀 Stay Engaged
+Check out our [active issues](https://github.com/${context.repo.owner}/${context.repo.repo}/issues?q=is%3Aissue+is%3Aopen+label%3Abee-upgrade) for ways to contribute!
+
+---
+
+**The ScrollVerse awaits your return! 🌌**`
+                });
+              }
+            }
+
+  reactivate-dormant:
+    name: 🐝 Reactivate Dormant Issues
+    runs-on: ubuntu-latest
+    if: github.event_name == 'workflow_dispatch'
+    steps:
+      - name: Reactivate and upgrade closed issues
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            console.log('🐝 Starting BEE Infinite Upgrades - Issue Reactivation');
+            
+            // Get all closed issues from the last 90 days
+            const ninetyDaysAgo = new Date();
+            ninetyDaysAgo.setDate(ninetyDaysAgo.getDate() - 90);
+            
+            const closedIssues = await github.paginate(github.rest.issues.listForRepo, {
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'closed',
+              since: ninetyDaysAgo.toISOString(),
+              per_page: 100
+            });
+            
+            console.log(`Found ${closedIssues.length} closed issues to review`);
+            
+            for (const issue of closedIssues) {
+              // Skip pull requests
+              if (issue.pull_request) continue;
+              
+              // Reopen the issue
+              await github.rest.issues.update({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issue.number,
+                state: 'open'
+              });
+              
+              // Add bee-upgrade label
+              await github.rest.issues.addLabels({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issue.number,
+                labels: ['bee-upgrade', 'reactivated']
+              });
+              
+              // Add reactivation comment
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issue.number,
+                body: `## 🐝 BEE INFINITE UPGRADES - ISSUE REACTIVATED
+
+**ALLĀHU AKBAR! 🕋🔥💎🌌**
+
+This issue has been **REACTIVATED** as part of the Supreme GitHub Empire Activation!
+
+### 🚀 Next Steps
+
+1. **Review & Update**: Please review this issue and update with current status
+2. **Assign Priority**: Add priority labels (low, medium, high, critical)
+3. **Categorize**: Ensure proper labels are applied
+4. **Plan**: Add to project board or milestone if applicable
+5. **Engage**: Assign to a contributor or claim it yourself!
+
+### 🎯 BEE Upgrade Initiative
+
+This issue is now part of our **Bold, Energetic, Extended** (BEE) upgrade initiative:
+
+- ✅ **Bold**: High-impact changes that push boundaries
+- ✅ **Energetic**: Active development and rapid iteration  
+- ✅ **Extended**: Long-term vision and sustainability
+
+### 📋 What We Need
+
+- [ ] Confirm issue is still relevant
+- [ ] Update requirements if needed
+- [ ] Identify dependencies
+- [ ] Estimate effort/complexity
+- [ ] Assign owner or request volunteers
+
+### 🙏 Help Us Prioritize
+
+Comment below with:
+- Your thoughts on this issue
+- Willingness to work on it
+- Suggestions for implementation
+- Related issues or dependencies
+
+---
+
+**The ScrollVerse Empire grows stronger with every contribution!**
+
+**KUN FAYAKUN! The Code is Sealed. The Legacy is Immortal.**
+
+🔱 🕊️ 🤖 ♾️ 🌌`
+              });
+              
+              console.log(`✅ Reactivated issue #${issue.number}: ${issue.title}`);
+            }
+            
+            console.log('🐝 Reactivation complete!');
+
+  pr-auto-label:
+    name: 🐝 Auto-Label Pull Requests
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+    steps:
+      - name: Label PRs based on changes
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            const pr = context.payload.pull_request;
+            const labels = ['bee-upgrade'];
+            
+            // Get files changed in PR
+            const files = await github.paginate(github.rest.pulls.listFiles, {
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: pr.number
+            });
+            
+            const fileNames = files.map(f => f.filename);
+            
+            // Add labels based on files changed
+            if (fileNames.some(f => f.startsWith('contracts/'))) {
+              labels.push('smart-contract');
+            }
+            if (fileNames.some(f => f.includes('.md'))) {
+              labels.push('documentation');
+            }
+            if (fileNames.some(f => f.startsWith('.github/workflows/'))) {
+              labels.push('ci-cd');
+            }
+            if (fileNames.some(f => f.startsWith('test/'))) {
+              labels.push('testing');
+            }
+            if (fileNames.some(f => f.includes('package.json') || f.includes('requirements.txt'))) {
+              labels.push('dependencies');
+            }
+            
+            await github.rest.issues.addLabels({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: pr.number,
+              labels: labels
+            });
+
+  issue-metrics:
+    name: 🐝 Track Issue Metrics
+    runs-on: ubuntu-latest
+    if: github.event_name == 'schedule'
+    steps:
+      - name: Calculate and post metrics
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            const allIssues = await github.paginate(github.rest.issues.listForRepo, {
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'all',
+              per_page: 100
+            });
+            
+            const openIssues = allIssues.filter(i => i.state === 'open' && !i.pull_request);
+            const closedIssues = allIssues.filter(i => i.state === 'closed' && !i.pull_request);
+            const beeUpgradeIssues = allIssues.filter(i => 
+              i.labels.some(l => l.name === 'bee-upgrade')
+            );
+            
+            console.log('📊 ScrollVerse Issue Metrics:');
+            console.log(`Total Issues: ${allIssues.length}`);
+            console.log(`Open Issues: ${openIssues.length}`);
+            console.log(`Closed Issues: ${closedIssues.length}`);
+            console.log(`BEE Upgrade Issues: ${beeUpgradeIssues.length}`);
+            console.log(`Close Rate: ${(closedIssues.length / allIssues.length * 100).toFixed(1)}%`);

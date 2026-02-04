@@ -52,6 +52,14 @@ Before submitting your PR, please review and check all of the following:
 - [ ] I have checked my code and corrected any misspellings
 - [ ] I have updated the CHANGELOG.md (if applicable)
 
+## 🐝 BEE Upgrade Standards
+
+This PR follows BEE (Bold, Energetic, Extended) standards:
+
+- [ ] **Bold**: Introduces high-impact improvements
+- [ ] **Energetic**: Ready for rapid review and deployment
+- [ ] **Extended**: Considers long-term maintainability
+
 ## 🔐 Security Considerations
 
 - [ ] No sensitive data (API keys, private keys, passwords) included

@@ -48,6 +48,16 @@ Include the following information:
 - We will release a fix as soon as possible
 - We will publicly acknowledge your responsible disclosure (with your permission)
 
+### 5. Bug Bounty Program
+
+We are planning to launch a bug bounty program for critical vulnerabilities. Stay tuned for updates!
+
+**Severity Levels**:
+- 🔴 **Critical**: Immediate threat to funds, data, or system integrity
+- 🟠 **High**: Significant security risk requiring urgent attention
+- 🟡 **Medium**: Security issue with moderate impact
+- 🟢 **Low**: Minor security concern or informational finding
+
 ## 🔒 Security Measures
 
 ### Smart Contracts
