@@ -1,0 +1,305 @@
+name: 🏷️ Label Manager - BEE System
+
+on:
+  workflow_dispatch:
+  schedule:
+    # Run monthly on the 1st at 00:00 UTC
+    - cron: '0 0 1 * *'
+
+permissions:
+  issues: write
+  pull-requests: write
+
+jobs:
+  create-labels:
+    name: 🎨 Create/Update BEE Labels
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create BEE system labels
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            // Define all labels for the BEE system
+            const labels = [
+              // BEE System Labels
+              {
+                name: 'bee-upgrade',
+                color: 'FFD700',
+                description: '🐝 BEE Upgrade Initiative - Bold, Energetic, Extended'
+              },
+              {
+                name: 'reactivated',
+                color: '00FF00',
+                description: '🔄 Issue reactivated from dormant state'
+              },
+              
+              // Priority Labels
+              {
+                name: 'critical',
+                color: 'FF0000',
+                description: '🚨 Critical priority - immediate action required'
+              },
+              {
+                name: 'high-priority',
+                color: 'FF6B6B',
+                description: '🔴 High priority issue'
+              },
+              {
+                name: 'medium-priority',
+                color: 'FFA500',
+                description: '🟠 Medium priority issue'
+              },
+              {
+                name: 'low-priority',
+                color: '90EE90',
+                description: '🟢 Low priority issue'
+              },
+              
+              // Type Labels
+              {
+                name: 'smart-contract',
+                color: '5319E7',
+                description: '⛓️ Smart contract related'
+              },
+              {
+                name: 'frontend',
+                color: '0E8A16',
+                description: '🎨 Frontend/UI related'
+              },
+              {
+                name: 'backend',
+                color: '1D76DB',
+                description: '🔧 Backend/API related'
+              },
+              {
+                name: 'ci-cd',
+                color: '0366D6',
+                description: '🔄 CI/CD pipeline related'
+              },
+              {
+                name: 'dependencies',
+                color: 'E99695',
+                description: '📦 Dependency updates'
+              },
+              {
+                name: 'testing',
+                color: 'BFD4F2',
+                description: '🧪 Testing related'
+              },
+              
+              // Status Labels
+              {
+                name: 'needs-triage',
+                color: 'FBCA04',
+                description: '🔍 Needs initial triage and categorization'
+              },
+              {
+                name: 'needs-investigation',
+                color: 'D4C5F9',
+                description: '🕵️ Requires investigation'
+              },
+              {
+                name: 'in-progress',
+                color: '0052CC',
+                description: '🚧 Work in progress'
+              },
+              {
+                name: 'ready-for-review',
+                color: '00B8D9',
+                description: '👀 Ready for review'
+              },
+              {
+                name: 'blocked',
+                color: 'B60205',
+                description: '🚫 Blocked by external factors'
+              },
+              
+              // Community Labels
+              {
+                name: 'good first issue',
+                color: '7057FF',
+                description: '👋 Good for newcomers'
+              },
+              {
+                name: 'help wanted',
+                color: '008672',
+                description: '🤝 Extra attention needed'
+              },
+              {
+                name: 'question',
+                color: 'D876E3',
+                description: '❓ Further information requested'
+              },
+              {
+                name: 'discussion',
+                color: 'CC317C',
+                description: '💬 Discussion or feedback needed'
+              },
+              
+              // Feature Labels
+              {
+                name: 'nft',
+                color: 'FF1493',
+                description: '🎨 NFT collection related'
+              },
+              {
+                name: 'defi',
+                color: 'FFD700',
+                description: '💰 DeFi feature'
+              },
+              {
+                name: 'governance',
+                color: '8B008B',
+                description: '🏛️ DAO governance related'
+              },
+              {
+                name: 'cross-chain',
+                color: '00CED1',
+                description: '🌉 Cross-chain functionality'
+              },
+              
+              // ScrollVerse Specific
+              {
+                name: 'scrollverse',
+                color: '1E90FF',
+                description: '🌌 ScrollVerse ecosystem'
+              },
+              {
+                name: 'consciousness-mirror',
+                color: 'DA70D6',
+                description: '🪞 Consciousness Mirror NFT project'
+              },
+              {
+                name: 'noor-cities',
+                color: 'FFE4B5',
+                description: '🌆 NŪR Cities of Light project'
+              },
+              {
+                name: 'frequency-protocol',
+                color: '9370DB',
+                description: '🎵 Frequency protocol (963Hz, 528Hz, etc.)'
+              }
+            ];
+
+            console.log(`Creating/updating ${labels.length} labels...`);
+
+            for (const label of labels) {
+              try {
+                // Try to update existing label
+                await github.rest.issues.updateLabel({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  name: label.name,
+                  color: label.color,
+                  description: label.description
+                });
+                console.log(`✅ Updated label: ${label.name}`);
+              } catch (error) {
+                if (error.status === 404) {
+                  // Label doesn't exist, create it
+                  try {
+                    await github.rest.issues.createLabel({
+                      owner: context.repo.owner,
+                      repo: context.repo.repo,
+                      name: label.name,
+                      color: label.color,
+                      description: label.description
+                    });
+                    console.log(`✨ Created label: ${label.name}`);
+                  } catch (createError) {
+                    console.error(`❌ Error creating label ${label.name}:`, createError.message);
+                  }
+                } else {
+                  console.error(`❌ Error updating label ${label.name}:`, error.message);
+                }
+              }
+            }
+
+            console.log('🎉 Label management complete!');
+
+  apply-bee-labels:
+    name: 🐝 Apply BEE Labels to Issues
+    runs-on: ubuntu-latest
+    needs: create-labels
+    if: github.event_name == 'workflow_dispatch'
+    steps:
+      - name: Apply bee-upgrade to all open issues
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            console.log('🐝 Applying BEE upgrade labels to open issues...');
+            
+            const issues = await github.paginate(github.rest.issues.listForRepo, {
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open',
+              per_page: 100
+            });
+            
+            let labeled = 0;
+            
+            for (const issue of issues) {
+              // Skip pull requests
+              if (issue.pull_request) continue;
+              
+              const currentLabels = issue.labels.map(l => l.name);
+              
+              // Add bee-upgrade label if not present
+              if (!currentLabels.includes('bee-upgrade')) {
+                try {
+                  await github.rest.issues.addLabels({
+                    owner: context.repo.owner,
+                    repo: context.repo.repo,
+                    issue_number: issue.number,
+                    labels: ['bee-upgrade']
+                  });
+                  console.log(`✅ Added bee-upgrade to issue #${issue.number}`);
+                  labeled++;
+                } catch (error) {
+                  console.error(`❌ Error labeling issue #${issue.number}:`, error.message);
+                }
+              }
+            }
+            
+            console.log(`🎉 Applied bee-upgrade label to ${labeled} issues!`);
+
+  cleanup-old-labels:
+    name: 🧹 Clean Up Old Labels
+    runs-on: ubuntu-latest
+    needs: create-labels
+    if: github.event_name == 'workflow_dispatch'
+    steps:
+      - name: Remove deprecated labels
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            // List of old/deprecated labels to remove
+            const deprecatedLabels = [
+              'wontfix',
+              'duplicate',
+              'invalid'
+            ];
+            
+            console.log('🧹 Cleaning up deprecated labels...');
+            
+            for (const labelName of deprecatedLabels) {
+              try {
+                await github.rest.issues.deleteLabel({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  name: labelName
+                });
+                console.log(`🗑️ Deleted label: ${labelName}`);
+              } catch (error) {
+                if (error.status === 404) {
+                  console.log(`ℹ️ Label not found: ${labelName}`);
+                } else {
+                  console.error(`❌ Error deleting label ${labelName}:`, error.message);
+                }
+              }
+            }
+            
+            console.log('✨ Cleanup complete!');
