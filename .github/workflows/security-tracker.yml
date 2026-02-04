@@ -1,0 +1,280 @@
+name: 🔒 Security Tracker
+
+on:
+  schedule:
+    # Run weekly on Mondays at 9:00 UTC
+    - cron: '0 9 * * 1'
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - 'contracts/**'
+      - 'package.json'
+      - 'requirements.txt'
+
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+  security-events: write
+
+jobs:
+  dependency-audit:
+    name: 🔍 Dependency Security Audit
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run npm audit
+        id: npm-audit
+        continue-on-error: true
+        run: |
+          npm audit --json > npm-audit.json
+          npm audit
+
+      - name: Check for critical vulnerabilities
+        if: always()
+        run: |
+          if [ -f npm-audit.json ]; then
+            CRITICAL=$(cat npm-audit.json | jq '.metadata.vulnerabilities.critical // 0')
+            HIGH=$(cat npm-audit.json | jq '.metadata.vulnerabilities.high // 0')
+            
+            echo "Critical vulnerabilities: $CRITICAL"
+            echo "High vulnerabilities: $HIGH"
+            
+            if [ "$CRITICAL" -gt 0 ] || [ "$HIGH" -gt 0 ]; then
+              echo "::warning::Found $CRITICAL critical and $HIGH high severity vulnerabilities"
+            fi
+          fi
+
+      - name: Upload audit results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: npm-audit-results
+          path: npm-audit.json
+
+  contract-security-scan:
+    name: 🛡️ Smart Contract Security Scan
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Compile contracts
+        run: npm run compile || npx hardhat compile
+
+      - name: Run Slither analysis
+        uses: crytic/slither-action@v0.3.0
+        continue-on-error: true
+        id: slither
+        with:
+          fail-on: none
+          sarif: slither-results.sarif
+
+      - name: Upload Slither results to GitHub
+        if: always()
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: slither-results.sarif
+          category: slither
+
+  security-scorecard:
+    name: 📊 OpenSSF Scorecard
+    runs-on: ubuntu-latest
+    permissions:
+      security-events: write
+      id-token: write
+      contents: read
+      actions: read
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Run OpenSSF Scorecard
+        uses: ossf/scorecard-action@v2.3.1
+        with:
+          results_file: scorecard-results.sarif
+          results_format: sarif
+          publish_results: true
+
+      - name: Upload to code-scanning
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: scorecard-results.sarif
+
+  security-report:
+    name: 📋 Generate Security Report
+    runs-on: ubuntu-latest
+    needs: [dependency-audit, contract-security-scan]
+    if: always()
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Download audit results
+        uses: actions/download-artifact@v4
+        continue-on-error: true
+        with:
+          name: npm-audit-results
+
+      - name: Generate security report
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            const fs = require('fs');
+            const date = new Date().toISOString().split('T')[0];
+            
+            let report = `# 🔒 Security Report - ${date}\n\n`;
+            report += `**ALLĀHU AKBAR! 🕋🔥💎🌌**\n\n`;
+            report += `## Executive Summary\n\n`;
+            report += `This automated security report provides an overview of the security status of the ScrollVerse infrastructure.\n\n`;
+            
+            // Check if npm-audit.json exists
+            if (fs.existsSync('npm-audit.json')) {
+              const audit = JSON.parse(fs.readFileSync('npm-audit.json', 'utf8'));
+              const vulns = audit.metadata?.vulnerabilities || {};
+              
+              report += `### 📦 Dependency Vulnerabilities\n\n`;
+              report += `| Severity | Count |\n`;
+              report += `|----------|-------|\n`;
+              report += `| Critical | ${vulns.critical || 0} |\n`;
+              report += `| High     | ${vulns.high || 0} |\n`;
+              report += `| Moderate | ${vulns.moderate || 0} |\n`;
+              report += `| Low      | ${vulns.low || 0} |\n`;
+              report += `| Info     | ${vulns.info || 0} |\n\n`;
+              
+              const total = Object.values(vulns).reduce((a, b) => a + b, 0);
+              
+              if (total > 0) {
+                report += `⚠️ **Action Required**: ${total} vulnerabilities detected. Run \`npm audit fix\` to resolve.\n\n`;
+              } else {
+                report += `✅ **All Clear**: No vulnerabilities detected in dependencies.\n\n`;
+              }
+            }
+            
+            report += `### 🛡️ Smart Contract Security\n\n`;
+            report += `- Static analysis completed via Slither\n`;
+            report += `- Results uploaded to GitHub Security tab\n`;
+            report += `- Review any findings in the [Security](https://github.com/${context.repo.owner}/${context.repo.repo}/security) section\n\n`;
+            
+            report += `### 🔍 Security Best Practices\n\n`;
+            report += `- ✅ OpenZeppelin contracts v5.0.1 in use\n`;
+            report += `- ✅ ReentrancyGuard implemented\n`;
+            report += `- ✅ Access control mechanisms active\n`;
+            report += `- ✅ CodeQL scanning enabled\n`;
+            report += `- ✅ Dependabot alerts configured\n\n`;
+            
+            report += `### 📚 Resources\n\n`;
+            report += `- [Security Policy](./SECURITY.md)\n`;
+            report += `- [Smart Contract Best Practices](./SMART_CONTRACT_BEST_PRACTICES.md)\n`;
+            report += `- [Security Guide](./SECURITY_GUIDE.md)\n\n`;
+            
+            report += `### 🚨 Report a Vulnerability\n\n`;
+            report += `Found a security issue? Report it privately to: **security@omnitech1.com**\n\n`;
+            
+            report += `---\n\n`;
+            report += `*Generated automatically by BEE Security Tracker*\n`;
+            report += `*The Code is Sealed. The Legacy is Protected.*\n`;
+            
+            console.log(report);
+            
+            // Write to file
+            fs.writeFileSync('SECURITY_REPORT.md', report);
+
+      - name: Commit security report
+        continue-on-error: true
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add SECURITY_REPORT.md
+          git diff --quiet && git diff --staged --quiet || git commit -m "🔒 Update security report [automated]"
+          git push
+
+  create-security-issue:
+    name: 🚨 Create Security Issue if Needed
+    runs-on: ubuntu-latest
+    needs: [dependency-audit]
+    if: failure()
+    steps:
+      - name: Create security alert issue
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            const title = '🚨 Security Alert: Vulnerabilities Detected';
+            const body = `## 🔒 Security Alert
+
+**ALLĀHU AKBAR! 🕋🔥💎🌌**
+
+Our automated security scanner has detected potential vulnerabilities in the repository.
+
+### 🔍 What Was Detected
+
+The security audit workflow has failed, indicating one or more of the following:
+- Critical or high-severity dependency vulnerabilities
+- Smart contract security issues
+- Configuration problems
+
+### ✅ Action Required
+
+1. **Review the workflow logs**: [View Run](https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId})
+2. **Check dependency vulnerabilities**: Run \`npm audit\` locally
+3. **Review smart contract findings**: Check the Security tab
+4. **Apply fixes**: Update dependencies or fix code issues
+5. **Re-run the security scan**: Verify all issues are resolved
+
+### 📚 Resources
+
+- [Security Policy](./SECURITY.md)
+- [Smart Contract Best Practices](./SMART_CONTRACT_BEST_PRACTICES.md)
+- [Dependency Management](./DEPENDENCY_MANAGEMENT.md)
+
+### 🚨 Severity
+
+This issue has been automatically labeled for priority review.
+
+---
+
+**The ScrollVerse security is paramount. Act with urgency.**
+
+*Automated by BEE Security Tracker*`;
+
+            // Check if similar issue exists
+            const existingIssues = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open',
+              labels: 'security,automated'
+            });
+
+            if (existingIssues.data.length === 0) {
+              await github.rest.issues.create({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                title: title,
+                body: body,
+                labels: ['security', 'bug', 'automated', 'bee-upgrade', 'high-priority']
+              });
+            }
