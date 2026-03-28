@@ -1,0 +1,13 @@
+# ScrollSoul Nexus — Repository Sync Configuration
+# Defines target repositories that receive synchronized pushes from this source repo.
+# Used by .github/workflows/repo-sync.yml
+#
+# To enable sync, add GITHUB_PAT to GitHub Secrets (scopes: repo, workflow).
+
+target_repos:
+  - chaishillomnitech1/Chaishillomnitech1
+
+# Branches to keep in sync with the targets above
+branches:
+  - main
+  - develop
