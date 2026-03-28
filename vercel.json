@@ -51,6 +51,18 @@
   ],
   "rewrites": [
     {
+      "source": "/api/stripe/webhook",
+      "destination": "https://api.scrollverse.com/stripe/webhook"
+    },
+    {
+      "source": "/api/highlevel/webhook",
+      "destination": "https://api.scrollverse.com/highlevel/webhook"
+    },
+    {
+      "source": "/api/nexus/:path*",
+      "destination": "https://api.scrollverse.com/nexus/:path*"
+    },
+    {
       "source": "/api/:path*",
       "destination": "https://api.scrollverse.com/:path*"
     }
