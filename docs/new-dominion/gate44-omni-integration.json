@@ -1,0 +1,45 @@
+{
+  "accession_id": "ND-904-GATE44-OMNI-2026-10-06",
+  "phase_tag": "904",
+  "status": "EVOLVE",
+  "title": "Gate 44:Omni source integration",
+  "creator": "Chais Hill / chaishillomnitech1",
+  "frequency_lock": "963 Hz brand lock (999 Hz is campaign language only, not a measured embed)",
+  "notes": "Integration record only. No claim of live mint, treasury, autonomous X flood, NBA affiliation, or sealed on-chain ledger. Manus host was reachable on 2026-10-06 and labels Sovereignty 9 as a testnet-path collection record.",
+  "sources": [
+    {
+      "source_type": "repo",
+      "title": "chaishillomnitech1 GitHub",
+      "url": "https://github.com/chaishillomnitech1",
+      "status": "READY_FOR_ATLAS",
+      "role": "durable first-party archive"
+    },
+    {
+      "source_type": "catalog",
+      "title": "ScrollVerse Trinity portal",
+      "url": "https://scrollport-xkjtdnvi.manus.space/",
+      "status": "EVOLVE",
+      "role": "front door, third-party host",
+      "observed_claims_to_keep": [
+        "Owner-authored, source-led",
+        "Sovereignty 9 labeled testnet-ready, not an unverified production mint",
+        "No NBA, Knicks, Brunson, or Summer League affiliation"
+      ]
+    },
+    {
+      "source_type": "media",
+      "title": "DeepSeek share",
+      "url": "https://chat.deepseek.com/share/vpip6k8oxjli0krfk1",
+      "status": "RECOVER",
+      "notes": "Fetch blocked. Owner paste required before EVOLVE."
+    },
+    {
+      "source_type": "media",
+      "title": "Google AI Mode share",
+      "url": "https://share.google/aimode/ZAHMNVZObPEiMkKqt",
+      "status": "RECOVER",
+      "notes": "Not ingested. Owner paste required before EVOLVE."
+    }
+  ],
+  "tweet_buffer_rule": "Manual rotation only. No autonomous flood. Independent cultural reference. No NBA affiliation."
+}
