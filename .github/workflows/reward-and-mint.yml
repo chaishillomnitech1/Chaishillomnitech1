@@ -1,4 +1,4 @@
-name: Reward and Mint
+name: Contribution Points (Simulation Only)
 
 on:
   pull_request:
@@ -24,7 +24,7 @@ on:
           - security_fix
           - feature_implementation
       reward_amount:
-        description: 'Reward amount (test tokens)'
+        description: 'Contribution points to record (simulation only; no token transfer)'
         required: false
         type: number
         default: 100
@@ -143,8 +143,8 @@ jobs:
             console.log(`Type: ${contributionType}`);
             console.log(`Amount: ${rewardAmount}`);
 
-  distribute-reward:
-    name: Distribute Reward
+  record-simulated-points:
+    name: Record Simulated Contribution Points
     runs-on: ubuntu-latest
     needs: evaluate-contribution
     if: needs.evaluate-contribution.outputs.should_reward == 'true'
@@ -153,100 +153,40 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
       
-      - name: Setup Node.js 20
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-          cache: 'npm'
-      
-      - name: Install Dependencies
-        run: npm ci || echo "No dependencies to install"
-      
-      - name: Distribute Rewards (Testnet)
+      - name: Record Simulated Contribution Points
         id: distribute
         run: |
-          cat << 'EOF' > distribute_rewards.js
-          const contributor = process.env.CONTRIBUTOR;
-          const contributionType = process.env.CONTRIBUTION_TYPE;
-          const rewardAmount = process.env.REWARD_AMOUNT;
-          const mintEnabled = process.env.REWARDS_MINT_ENABLED === 'true';
-          
-          console.log('🎁 Reward Distribution');
-          console.log('======================');
-          console.log(`Contributor: ${contributor}`);
-          console.log(`Type: ${contributionType}`);
-          console.log(`Amount: ${rewardAmount} CHX tokens`);
-          console.log(`Mint Enabled: ${mintEnabled}`);
-          console.log('');
-          
-          // Check if we have required secrets
-          const hasWallet = process.env.REWARDS_WALLET_ADDRESS && process.env.REWARDS_PRIVATE_KEY;
-          
-          if (!hasWallet) {
-            console.log('⚠️ Rewards not configured (missing REWARDS_WALLET_ADDRESS or REWARDS_PRIVATE_KEY)');
-            console.log('This is a pilot feature. Configure test wallet secrets to enable.');
-            process.exit(0);
-          }
-          
-          if (!mintEnabled) {
-            console.log('⚠️ Reward minting is disabled (REWARDS_MINT_ENABLED=false)');
-            console.log('Set REWARDS_MINT_ENABLED=true to enable testnet rewards.');
-            process.exit(0);
-          }
-          
-          // TODO: Implement actual reward distribution
-          // This would call smart contract methods to:
-          // 1. Mint CHX tokens to contributor wallet
-          // 2. Record contribution in on-chain ledger
-          // 3. Issue commemorative NFT (optional)
-          
-          console.log('✅ Reward distribution simulated (testnet mode)');
-          console.log('');
-          console.log('Production implementation would:');
-          console.log('1. Resolve GitHub username to wallet address');
-          console.log('2. Mint/transfer tokens on testnet');
-          console.log('3. Record transaction hash');
-          console.log('4. Issue commemorative NFT badge');
-          
-          EOF
-          
-          node distribute_rewards.js
-        env:
-          CONTRIBUTOR: ${{ needs.evaluate-contribution.outputs.contributor }}
-          CONTRIBUTION_TYPE: ${{ needs.evaluate-contribution.outputs.contribution_type }}
-          REWARD_AMOUNT: ${{ needs.evaluate-contribution.outputs.reward_amount }}
-          REWARDS_WALLET_ADDRESS: ${{ secrets.REWARDS_WALLET_ADDRESS }}
-          REWARDS_PRIVATE_KEY: ${{ secrets.REWARDS_PRIVATE_KEY }}
-          REWARDS_MINT_ENABLED: ${{ secrets.REWARDS_MINT_ENABLED }}
-      
+          echo "## Simulated Contribution Points" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Contributor:** @${{ needs.evaluate-contribution.outputs.contributor }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Contribution type:** ${{ needs.evaluate-contribution.outputs.contribution_type }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Points:** ${{ needs.evaluate-contribution.outputs.reward_amount }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Execution:** SIMULATED ONLY" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "No wallet signature, RPC call, contract call, mint, transfer, payout, or transaction hash was created." >> $GITHUB_STEP_SUMMARY
+
       - name: Post Reward Notification
         uses: actions/github-script@v7
         with:
           script: |
             const contributor = '${{ needs.evaluate-contribution.outputs.contributor }}';
             const contributionType = '${{ needs.evaluate-contribution.outputs.contribution_type }}';
-            const rewardAmount = '${{ needs.evaluate-contribution.outputs.reward_amount }}';
-            
-            const comment = `## 🎁 Contribution Reward
-            
-            Congratulations @${contributor}! Your contribution has been recognized.
-            
-            **Contribution Type:** ${contributionType.replace(/_/g, ' ')}
-            **Reward:** ${rewardAmount} CHX tokens (testnet)
-            
-            *Note: This is a pilot rewards program using testnet tokens. Production rewards will be distributed on mainnet after full launch.*
-            
-            To claim your reward:
-            1. Ensure your GitHub profile includes your wallet address
-            2. Connect to Polygon Mumbai testnet
-            3. Tokens will be distributed within 24 hours
-            
-            Thank you for your valuable contribution to the ScrollVerse ecosystem! 🙏
-            
+            const points = '${{ needs.evaluate-contribution.outputs.reward_amount }}';
+
+            const comment = `## Contribution Points Recorded
+
+            Congratulations @${contributor} — your contribution has been recorded in the pilot scoring workflow.
+
+            **Contribution type:** ${contributionType.replace(/_/g, ' ')}
+            **Points:** ${points}
+            **Execution:** SIMULATED ONLY
+
+            No CHX tokens were minted or transferred. No wallet was signed, no contract was called, no payout was created, and no transaction hash exists. These points are an internal pilot score, not a token balance, financial asset, or guaranteed payment.
+
             ---
-            
-            **ALLAHU AKBAR! 🕋🔥💎🌌**`;
-            
+
+            ScrollVerse contributor recognition • Simulation only`;
+
             if (context.eventName === 'pull_request') {
               await github.rest.issues.createComment({
                 owner: context.repo.owner,
@@ -262,23 +202,12 @@ jobs:
                 body: comment
               });
             }
-      
+
       - name: Reward Summary
         run: |
-          echo "## 🎁 Reward Distribution Summary" >> $GITHUB_STEP_SUMMARY
+          echo "## Contribution Points Summary" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "**Contributor:** @${{ needs.evaluate-contribution.outputs.contributor }}" >> $GITHUB_STEP_SUMMARY
           echo "**Type:** ${{ needs.evaluate-contribution.outputs.contribution_type }}" >> $GITHUB_STEP_SUMMARY
-          echo "**Amount:** ${{ needs.evaluate-contribution.outputs.reward_amount }} CHX tokens" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          
-          if [ -z "${{ secrets.REWARDS_WALLET_ADDRESS }}" ]; then
-            echo "⚠️ **Status:** Not configured (testnet mode)" >> $GITHUB_STEP_SUMMARY
-            echo "" >> $GITHUB_STEP_SUMMARY
-            echo "To enable rewards, configure these secrets:" >> $GITHUB_STEP_SUMMARY
-            echo "- REWARDS_WALLET_ADDRESS" >> $GITHUB_STEP_SUMMARY
-            echo "- REWARDS_PRIVATE_KEY" >> $GITHUB_STEP_SUMMARY
-            echo "- REWARDS_MINT_ENABLED" >> $GITHUB_STEP_SUMMARY
-          else
-            echo "✅ **Status:** Reward queued for distribution" >> $GITHUB_STEP_SUMMARY
-          fi
+          echo "**Points:** ${{ needs.evaluate-contribution.outputs.reward_amount }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Status:** SIMULATED ONLY — no token mint or transfer" >> $GITHUB_STEP_SUMMARY
