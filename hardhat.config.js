@@ -33,7 +33,7 @@ const networks = {
 // Polygon PoS Amoy (testnet) and Polygon (mainnet) are explicit targets.
 // No retired public Mumbai endpoint or implicit Polygon RPC fallback is used.
 if (process.env.AMOY_RPC_URL) {
-  networks.amoy = {
+  networks.polygonAmoy = {
     url: process.env.AMOY_RPC_URL,
     accounts: deployerAccounts,
     chainId: 80002,
