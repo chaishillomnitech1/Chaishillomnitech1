@@ -1,3 +1,7 @@
+> **Network migration notice — 2026-11-15:** Polygon Mumbai (chain ID 80001) is retired. Mumbai commands and RPC settings in this historical guide must not be executed. The current Polygon testnet is Amoy (chain ID 80002), configured with `AMOY_RPC_URL` and `--network amoy`. See [`docs/POLYGON_AMOY_MIGRATION_RUNBOOK_2026-11-15.md`](docs/POLYGON_AMOY_MIGRATION_RUNBOOK_2026-11-15.md) for the current procedure. Polygon mainnet (137) remains a separate, gated release target.
+
+---
+
 # Testnet Deployment Guide
 
 ## بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ
