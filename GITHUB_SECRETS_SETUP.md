@@ -1,3 +1,5 @@
+# GitHub Secrets Setup
+
 > **Current network status — 2026-11-15:** Polygon Mumbai (80001) is retired. The Mumbai-specific instructions below are preserved as historical reference only; do not configure or use those variables. The current Hardhat explorer-verification alias is `polygonAmoy` (chain ID 80002).
 
 ## Current Polygon Deployment Secrets
@@ -18,7 +20,9 @@ The contributor recognition workflow is simulation-only. It does not require a r
 
 ---
 
-## Historical Mumbai Secret Instructions (Superseded)
+## Legacy GitHub Secrets Guidance (Preserved; network-specific entries superseded)
+
+The following original guidance is retained for provenance. Do not use the old Mumbai RPC variables or public endpoints. Do not export private keys from a browser wallet into ad hoc files; use a secure, access-controlled runtime or secret manager and dedicated deployment signers.
 
 ---
 
