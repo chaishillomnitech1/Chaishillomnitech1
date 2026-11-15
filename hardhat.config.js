@@ -32,7 +32,7 @@ const networks = {
 
 // Polygon PoS Amoy and mainnet are separate, explicitly configured targets.
 if (process.env.AMOY_RPC_URL) {
-  networks.amoy = {
+  networks.polygonAmoy = {
     url: process.env.AMOY_RPC_URL,
     accounts: deployerAccounts,
     chainId: 80002,
