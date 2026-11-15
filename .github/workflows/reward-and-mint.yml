@@ -1,4 +1,4 @@
-name: Reward and Mint
+name: Contribution Points (Simulation Only)
 
 on:
   pull_request:
@@ -143,7 +143,7 @@ jobs:
             console.log(`Type: ${contributionType}`);
             console.log(`Amount: ${rewardAmount}`);
 
-  distribute-reward:
+  record-simulated-points:
     name: Record Simulated Contribution Points
     runs-on: ubuntu-latest
     needs: evaluate-contribution
