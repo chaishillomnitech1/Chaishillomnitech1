@@ -30,7 +30,7 @@ The root repository contains legacy deployment scripts and historical command re
 - Deployment output records contract address, transaction hash, chain ID, block number, compiler settings, and source commit.
 - Verification is performed against the matching Amoy explorer and exact compiler settings.
 
-Run the project's relevant tests and static checks before deployment. The `--network amoy` argument is only valid for scripts that have been reviewed for the current configuration.
+Run the project's relevant tests and static checks before deployment. The `--network polygonAmoy` argument is only valid for scripts that have been reviewed for the current configuration.
 
 ## Mainnet release gate
 
