@@ -1,4 +1,24 @@
-> **Network migration notice — 2026-11-15:** Polygon Mumbai (chain ID 80001) is retired. Mumbai commands and RPC settings in this historical guide must not be executed. The current Polygon testnet is Amoy (chain ID 80002), configured with `AMOY_RPC_URL` and `--network amoy`. See [`docs/POLYGON_AMOY_MIGRATION_RUNBOOK_2026-11-15.md`](docs/POLYGON_AMOY_MIGRATION_RUNBOOK_2026-11-15.md) for the current procedure. Polygon mainnet (137) remains a separate, gated release target.
+> **Current network status — 2026-11-15:** Polygon Mumbai (80001) is retired. The Mumbai-specific instructions below are preserved as historical reference only; do not configure or use those variables. The current Hardhat explorer-verification alias is `polygonAmoy` (chain ID 80002).
+
+## Current Polygon Deployment Secrets
+
+Use these names for current Polygon deployment work. Values belong in GitHub Secrets or a secure runtime, never in tracked files.
+
+| Secret | Purpose |
+|---|---|
+| `AMOY_RPC_URL` | Maintained Polygon Amoy provider endpoint |
+| `POLYGON_RPC_URL` | Maintained Polygon mainnet provider endpoint |
+| `POLYGONSCAN_API_KEY` | Amoy/mainnet source verification |
+| `OWNER_MULTISIG_ADDRESS` | Deployed multisig contract on the selected chain |
+| `KUN_COIN_TREASURY` | Explicit non-zero treasury address |
+| `BASE_URI` | Real IPFS, Arweave, or HTTPS metadata base URI |
+| `MAINNET_RELEASE_CONFIRMATION` | Exact deployment confirmation required by the mainnet preflight |
+
+The contributor recognition workflow is simulation-only. It does not require a reward wallet, private key, rewards RPC, or mint-enable secret and does not create CHX token transfers or payouts.
+
+---
+
+## Historical Mumbai Secret Instructions (Superseded)
 
 ---
 
