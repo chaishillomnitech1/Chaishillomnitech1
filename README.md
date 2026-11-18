@@ -45,7 +45,7 @@
 
 ## 🔗 Every door, one click
 
-**Sites & artifacts:** [Early Coins](https://muse.ai/s/early-coins-rxl6xtx0xryfxyjj/495VrnZsIG3LZKsyazM5bfhDPznJ9T_0Te3L7fRyJvw) · [ScrollVerse Atlas](https://muse.ai/s/super-scrollverse-2-xtd6xtxncxwxuxj5z/0N8UONNtjBhZ0rrNB49dBusGU7KmQf1RYP59B4tVdS8) · [XLVIIIblocks Vault](https://muse.ai/s/xlviiiblocks-vault-axh6xtxnhxe94yxm/5WdPM9alAuJ8cQijBhdCSVvcYJgnqB7IdjPWeG1vUeI) · [ScrollVerse Master File](https://muse.ai/s/scrollverse-master-file-transferable-xbt6xtxng3z33t/iIVzIAufSld8cTi3enBho59DpoyjrVJrzboCt3HYcIc)
+**Sites & artifacts:** [Early Coins](https://muse.ai/s/early-coins-rxl6xtx0xryfxyjj/495VrnZsIG3LZKsyazM5bfhDPznJ9T_0Te3L7fRyJvw) · [ScrollVerse Atlas](https://muse.ai/s/super-scrollverse-2-xtd6xtxncxwxuxj5z/0N8UONNtjBhZ0rrNB49dBusGU7KmQf1RYP59B4tVdS8) · [XLVIIIblocks Vault](https://muse.ai/s/xlviiiblocks-vault-axh6xtxnhxe94yxm/5WdPM9alAuJ8cQijBhdCSVvcYJgnqB7IdjPWeG1vUeI) · [ScrollVerse Master File](https://muse.ai/s/scrollverse-master-file-transferable-xbt6xtxng3z33t/iIVzIAufSld8cTi3enBho59DpoyjrVJrzboCt3HYcIc) · [Omnitech1 AI Infrastructure — Gamma doc](https://gamma.app/docs/Omnitech1-AI-Infrastructure-for-Content-Protection-and-Monetizati-m8bf7mn9b0ezvzu)
 
 **Shop & Web3:** [ScrollVerse Store — 96 products live](https://juv8tg-1n.myshopify.com) · [Pump.fun — @DuneSimpleSock](https://pump.fun/profile/FpxkpRuL6RT5a4P48Wy4FVsRSLdAFsMABMjYKsWvZr64) · [Coinbase](https://www.coinbase.com) · [Solana](https://solana.com)
 
