@@ -55,6 +55,8 @@
 
 **❓ Question Box:** [Ask Chais a question](https://github.com/chaishillomnitech1/early-coins/discussions) — you ask, he answers himself, in public. Everyone can read.
 
+**Join Muse with my invite code L9VEVY — redeem it in Settings > Redeem token within 48 hours of joining.**
+
 ---
 
 <div align="center">
